@@ -6,9 +6,9 @@
             </div>
             <div class="professional__row">
 
-                    <slider :professional_team="professional_team"></slider>
-                    <slider :professional_team="team"></slider>
-                    <slider :professional_team="professional"></slider>
+                    <slider :professional_team="professional_team" :title="'Проектирование и реализация крупных коммерческих объектов '"></slider>
+                    <slider :professional_team="team" :title="'Собственное мебельное производство'"></slider>
+                    <slider :professional_team="professional" :title="'Команда профессионалов, влюбленных в свое дело'"></slider>
 
 
             </div>

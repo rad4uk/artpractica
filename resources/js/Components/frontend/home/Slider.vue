@@ -1,5 +1,9 @@
 <template>
+
     <div class="professional__column">
+        <div class="professional__text">
+            <p>{{this.title}}</p>
+        </div>
         <swiper
         slides-per-view="1"
         :space-between="20"
@@ -14,10 +18,8 @@
         :modules="modules"
         class="professional__slide"
     >
+
         <swiper-slide v-for="(product, idx) in this.professional_team" :key="idx">
-            <div class="professional__text">
-                <p>{{product.title}}</p>
-            </div>
             <div class="professional__image">
                 <img :src="product.imagePath" alt="">
                 <div ref="prev" class="arrow-prev swiper-button-prev arrow">
@@ -71,6 +73,9 @@ export default {
 </script>
 
 <style  lang="scss" scoped>
+.swiper{
+    flex: 0 1 66.666%;
+}
 .professional__slide{
     /*flex: 0 1 66.666%;*/
 }
