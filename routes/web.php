@@ -81,7 +81,10 @@ Route::get('/storage/images/{dir}/{size}/{method}/{file}', [ThumbnailController:
 ////    })->name('dashboard');
 //});
 Route::get('/portfolio/', [PortfolioController::class, 'index'])->name('portfolio');
-Route::get('/project/', [ProjectController::class, 'index'])->name('project');
+Route::get('/portfolio/project-715/', [ProjectController::class, 'index'])->name('project');
+Route::get('/portfolio/project-716/', [ProjectController::class, 'index2'])->name('project');
+Route::get('/portfolio/project-562/', [ProjectController::class, 'index3'])->name('project');
+Route::get('/portfolio/project-788/', [ProjectController::class, 'index4'])->name('project');
 Route::get('/services/', [ServicesController::class, 'index'])->name('services');
 Route::get('/about/', [AboutController::class, 'index'])->name('about');
 Route::get('/contact-us/', ContactController::class)->name('contact');
