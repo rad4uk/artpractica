@@ -21,13 +21,11 @@
                         <p class="contact__form-title">мы на связи</p>
                         <form action="" id="form">
                             <div class="feedback__form-item">
-                                <label for="feedback__form-id">имя</label>
-                                <input type="text" name="name" id="feedback__form-id">
+                                <input type="text" name="name" placeholder="имя" id="feedback__form-id">
                             </div>
 
                             <div class="feedback__form-item">
-                                <label for="feedback__form-phone">телефон</label>
-                                <input type="text" id="feedback__form-phone">
+                                <input type="text" placeholder="телефон" id="feedback__form-phone">
                             </div>
                             <button type="submit" class="buttonShadow">ОБРАТНЫЙ ЗВОНОК</button>
                         </form>

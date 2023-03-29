@@ -34,6 +34,8 @@ export default defineConfig({
 
                 'resources/sass/frontend/about.scss',
                 'resources/js/frontend/about.js',
+
+                'resources/sass/frontend/contact.scss',
             ],
             refresh: [
                 ...refreshPaths,
