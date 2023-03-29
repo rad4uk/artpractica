@@ -17,7 +17,7 @@
                 <div class="equipment__row">
                     <div class="equipment__column">
                         <div class="equipment__image">
-                            <img src="/images/design/img_1.png" alt="">
+                            <img src="../../../../../public/images/design/img_1.png" alt="">
                         </div>
                     </div>
                     <div class="equipment__column">

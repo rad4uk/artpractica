@@ -12,7 +12,7 @@
                     </p>
                 </div>
                 <div class="atelier-furniture-image">
-                    <img src="/images/design/img_3.png" alt="">
+                    <img src="../../../../../public/images/design/img_3.png" alt="">
                 </div>
             </div>
         </div>

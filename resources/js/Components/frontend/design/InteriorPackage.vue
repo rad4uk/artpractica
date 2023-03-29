@@ -36,7 +36,7 @@
 
                     <div class="sectionimage__block">
                         <div class="sectionimage__image">
-                            <img src="/images/design/img.png" alt="">
+                            <img src="../../../../../public/images/design/img.png" alt="">
                         </div>
                     </div>
                     <a href="#form" class="designtext__button">ОСТАВИТЬ ЗАЯВКУ</a>
