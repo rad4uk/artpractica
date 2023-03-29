@@ -1,0 +1,123 @@
+@import "variables";
+.contact {
+    margin-top: 197px;
+    margin-bottom: 120px;
+    @media (max-width: $tablet-media) {
+        margin-top: 147px;
+    }
+    .row{
+        display: flex;
+        flex-direction: column;
+        gap: 60px;
+        justify-content: space-between;
+    }
+
+    &__column:first-child {
+        display: flex;
+        gap: 25px;
+        @media (max-width: $tablet-media) {
+            flex-direction: column;
+        }
+    }
+    &__column:last-child {
+        flex: 0 1 66.666%;
+    }
+    &__column {
+    }
+    &__form {
+        display: flex;
+        flex-direction: column;
+        flex: 0 1 66.666%;
+        form{
+            flex: 0 1 100%;
+            label{
+                @include adaptiv-font(14, 10);
+            }
+            input{
+                @include adaptiv-font(14, 10);
+            }
+        }
+        .feedback__form-item{
+            margin-top: 0;
+            margin-bottom: 33px;
+        }
+        &-title{
+            font-family: 'Montserrat';
+            font-style: normal;
+            font-weight: 400;
+            @include adaptiv-font(25, 14);
+            line-height: 30px;
+            text-transform: uppercase;
+            color: $color-white;
+            margin-bottom: 25px;
+            @media (max-width: $tablet-media) {
+                line-height: 15px;
+            }
+        }
+        button{
+            width: 50%;
+            padding: 15px 0;
+            font-family: 'Montserrat';
+            font-weight: normal;
+            font-size: 18px;
+            line-height: 22px;
+            text-transform: uppercase;
+            color: $color-white;
+            text-align: center;
+            background: $button-color;
+            @media (max-width: $tablet-media) {
+                width: 100%;
+            }
+        }
+    }
+    &__content {
+        display: flex;
+        flex-direction: column;
+        flex: 0 1 33.333%;
+        &-title {
+            font-family: 'Montserrat';
+            font-style: normal;
+            font-weight: 400;
+            @include adaptiv-font(25, 14);
+            line-height: 30px;
+            text-transform: uppercase;
+            color: $color-white;
+            margin-bottom: 25px;
+            @media (max-width: $tablet-media) {
+                line-height: 15px;
+            }
+        }
+
+        &-text {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            font-family: 'Montserrat';
+            font-style: normal;
+            font-weight: 400;
+            @include adaptiv-font(16, 12);
+            line-height: 28px;
+            color: $color-white;
+
+            @media (max-width: $tablet-media) {
+                line-height: 14px;
+                color: rgba(255, 255, 255, 0.7);
+            }
+            a{
+                color: $color-white;
+                @media (max-width: $tablet-media) {
+                    color: rgba(255, 255, 255, 0.7);
+                }
+            }
+        }
+    }
+
+    &__maps {
+        iframe{
+            width: 100%;
+        }
+    }
+}
+
+.buttonShadow {
+}
