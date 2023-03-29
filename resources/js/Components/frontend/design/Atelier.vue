@@ -7,8 +7,11 @@
                 </div>
                 <div class="atelier-furniture-text">
                     <p class="service-text">
-                        МЕБЕЛЬНОЕ ПРОИЗВОДСТВО APFURNITURE.RU
+                        МЕБЕЛЬНОЕ ПРОИЗВОДСТВО <a href="https://apfurniture.ru/" target="_blank">APFURNITURE.RU</a>
+                    </p>
+                    <p class="service-text">
                         Работает с 2017 года. На площади более 1500 кв.м. расположено современное оборудование для выпуска эксклюзивных дизайнерских изделий. Стаж каждого сотрудника - не менее 10 лет. Мы создаем мебель любой сложности от минимализма до классики. Уверены, что качество всегда будет в тренде. Для нас важно, чтобы изделия выглядели эстетично и радовали вас десятилетиями.
+
                     </p>
                 </div>
                 <div class="atelier-furniture-image">
@@ -133,5 +136,8 @@ export default {
 </script>
 
 <style scoped>
-
+.service-text a{
+    color: #ffffff;
+    text-decoration: underline;
+}
 </style>

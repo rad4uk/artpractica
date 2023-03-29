@@ -5,42 +5,11 @@
                 <h1>ВЫБИРАЙТЕ ПРОФЕССИОНАЛОВ</h1>
             </div>
             <div class="professional__row">
-                <div class="professional__column">
-                    <swiper
-                        slides-per-view="1"
-                        :space-between="20"
-                        :navigation="{
-                          prevEl: prev,
-                          nextEl: next,
-                        }"
-                        :loop="true"
-                        :pagination="{ clickable: true }"
-                        @swiper="onSwiper"
-                        @slideChange="onSlideChange"
-                        :modules="modules"
-                        class="professional__slide"
-                    >
-                        <swiper-slide v-for="(product, idx) in this.products" :key="idx">
-                            <div class="professional__text">
-                                <p>{{product.title}}</p>
-                            </div>
-                            <div class="professional__image">
-                                <img :src="product.imagePath" alt="">
-                                <div ref="prev" class="arrow-prev swiper-button-prev arrow">
-                                    <svg class="swiper-button-prev" width="21" height="43" viewBox="0 0 21 43" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M19 2L4 21.5L19 41" stroke="white" stroke-opacity="0.7" stroke-width="5"/>
-                                    </svg>
-                                </div>
-                                <div ref="next" class="arrow-next swiper-button-next arrow">
-                                    <svg class="swiper-button-next" width="21" height="43" viewBox="0 0 21 43" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M19 2L4 21.5L19 41" stroke="white" stroke-opacity="0.7" stroke-width="5"/>
-                                    </svg>
-                                </div>
-                            </div>
-                        </swiper-slide>
-                    </swiper>
 
-                </div>
+                    <slider :professional_team="professional_team"></slider>
+                    <slider :professional_team="team"></slider>
+                    <slider :professional_team="professional"></slider>
+
 
             </div>
         </div>
@@ -50,55 +19,68 @@
 
 <script>
 import { ref } from 'vue';
-import { Swiper, SwiperSlide } from 'swiper/vue';
-import { Navigation, Pagination } from 'swiper';
-import 'swiper/css';
-import 'swiper/css/pagination';
 
+import Slider from "./Slider.vue";
 export default {
     name: "ProfessionalComponent",
+    components: {
+        Slider
+    },
     data: () => {
         return {
-            products: [
+            professional_team: [
                 {
                     'title': 'Проектирование и реализация крупных коммерческих объектов',
                     'imagePath': '/images/img_11.png',
                     'slug': '#'
                 },
                 {
+                    'title': 'Проектирование и реализация крупных коммерческих объектов',
+                    'imagePath': '/images/img_12.png',
+                    'slug': '#'
+                },
+                {
+                    'title': 'Проектирование и реализация крупных коммерческих объектов',
+                    'imagePath': '/images/img_13.png',
+                    'slug': '#'
+                }
+            ],
+            team: [
+                {
                     'title': 'Собственное мебельное производство',
                     'imagePath': '/images/img_12.png',
                     'slug': '#'
                 },
                 {
+                    'title': 'Собственное мебельное производство',
+                    'imagePath': '/images/img_13.png',
+                    'slug': '#'
+                },
+                {
+                    'title': 'Собственное мебельное производство',
+                    'imagePath': '/images/img_11.png',
+                    'slug': '#'
+                },
+            ],
+            professional: [
+                {
                     'title': 'Профессиональная команда дизайнеров',
                     'imagePath': '/images/img_13.png',
+                    'slug': '#'
+                },
+                {
+                    'title': 'Профессиональная команда дизайнеров',
+                    'imagePath': '/images/img_12.png',
+                    'slug': '#'
+                },
+                {
+                    'title': 'Профессиональная команда дизайнеров',
+                    'imagePath': '/images/img_11.png',
                     'slug': '#'
                 }
             ]
         }
     },
-    setup() {
-        const onSwiper = (swiper) => {
-        };
-        const onSlideChange = () => {
-        };
-
-        const prev = ref(null);
-        const next = ref(null);
-        return {
-            onSwiper,
-            onSlideChange,
-            modules: [Navigation, Pagination],
-            prev,
-            next,
-        };
-    },
-    components: {
-        Swiper,
-        SwiperSlide,
-        Pagination
-    }
 }
 </script>
 
