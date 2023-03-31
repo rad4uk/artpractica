@@ -1,5 +1,5 @@
 <template>
-    <a href="#" class="project__item">
+    <a :href="item.slug" class="project__item">
         <div class="project__text">
             <p class="project__title">{{item.title}}</p>
             <p class="project__subtitle">78M2</p>

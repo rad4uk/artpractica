@@ -24,17 +24,18 @@
         <div class="container">
             <div class="project__row">
 {{--                @foreach($posts as $post)--}}
-                <project-item-component :item='@json(['id' => 1, 'title' => 'PROJECT 866', 'preview_image' => asset('images/portfolio/1.png')])'></project-item-component>
-                <project-item-component :item='@json(['id' => 2, 'title' => 'PROJECT 866', 'preview_image' => asset('images/portfolio/2.png')])'></project-item-component>
-                <project-item-component :item='@json(['id' => 3, 'title' => 'PROJECT 866', 'preview_image' => asset('images/portfolio/3.png')])'></project-item-component>
-                <project-item-component :item='@json(['id' => 4, 'title' => 'PROJECT 866', 'preview_image' => asset('images/portfolio/4.png')])'></project-item-component>
-                <project-item-component :item='@json(['id' => 5, 'title' => 'PROJECT 866', 'preview_image' => asset('images/portfolio/5.png')])'></project-item-component>
-                <project-item-component :item='@json(['id' => 6, 'title' => 'PROJECT 866', 'preview_image' => asset('images/portfolio/6.png')])'></project-item-component>
-                <project-item-component :item='@json(['id' => 7, 'title' => 'PROJECT 866', 'preview_image' => asset('images/portfolio/7.png')])'></project-item-component>
-                <project-item-component :item='@json(['id' => 8, 'title' => 'PROJECT 866', 'preview_image' => asset('images/portfolio/8.png')])'></project-item-component>
-                <project-item-component :item='@json(['id' => 9, 'title' => 'PROJECT 866', 'preview_image' => asset('images/portfolio/9.png')])'></project-item-component>
-                <project-item-component :item='@json(['id' => 10, 'title' => 'PROJECT 866', 'preview_image' => asset('images/portfolio/10.png')])'></project-item-component>
-                <project-item-component :item='@json(['id' => 11, 'title' => 'PROJECT 866', 'preview_image' => asset('images/portfolio/11.png')])'></project-item-component>
+                <project-item-component :item='@json(['slug' => route('project1'), 'title' => 'PROJECT 715', 'preview_image' => asset('images/project/img_28.png')])'></project-item-component>
+                <project-item-component :item='@json(['slug' => route('project2'), 'title' => 'PROJECT 716', 'preview_image' => asset('images/project/img_49.png')])'></project-item-component>
+                <project-item-component :item='@json(['slug' => route('project3'), 'title' => 'PROJECT 562', 'preview_image' => asset('images/project/img_62.png')])'></project-item-component>
+                <project-item-component :item='@json(['slug' => route('project4'), 'title' => 'PROJECT 788', 'preview_image' => asset('images/project/img_70.png')])'></project-item-component>
+
+                <project-item-component :item='@json(['slug' => '#', 'title' => 'PROJECT 866', 'preview_image' => asset('images/portfolio/5.png')])'></project-item-component>
+{{--                <project-item-component :item='@json(['id' => 6, 'title' => 'PROJECT 866', 'preview_image' => asset('images/portfolio/6.png')])'></project-item-component>--}}
+{{--                <project-item-component :item='@json(['id' => 7, 'title' => 'PROJECT 866', 'preview_image' => asset('images/portfolio/7.png')])'></project-item-component>--}}
+{{--                <project-item-component :item='@json(['id' => 8, 'title' => 'PROJECT 866', 'preview_image' => asset('images/portfolio/8.png')])'></project-item-component>--}}
+{{--                <project-item-component :item='@json(['id' => 9, 'title' => 'PROJECT 866', 'preview_image' => asset('images/portfolio/9.png')])'></project-item-component>--}}
+{{--                <project-item-component :item='@json(['id' => 10, 'title' => 'PROJECT 866', 'preview_image' => asset('images/portfolio/10.png')])'></project-item-component>--}}
+{{--                <project-item-component :item='@json(['id' => 11, 'title' => 'PROJECT 866', 'preview_image' => asset('images/portfolio/11.png')])'></project-item-component>--}}
 
 {{--                @endforeach--}}
             </div>
