@@ -9,12 +9,13 @@
                     </picture>
                 </a>
             </div>
+
             <nav class="header__nav">
                 <ul class="header__nav-list">
-                    <li><a href="{{route('portfolio')}}">портфолио</a></li>
-                    <li><a href="{{route('services')}}">услуги</a></li>
-                    <li><a href="{{route('about')}}">о нас</a></li>
-                    <li><a href="{{route('contact')}}">контакты</a></li>
+                    <li><a href="{{route('portfolio')}}" class="{{(Route::currentRouteName() === 'portfolio') ? 'active' : ''}}">портфолио</a></li>
+                    <li><a href="{{route('services')}}" class="{{(Route::currentRouteName() === 'services') ? 'active' : ''}}">услуги</a></li>
+                    <li><a href="{{route('about')}}" class="{{(Route::currentRouteName() === 'about') ? 'active' : ''}}">о нас</a></li>
+                    <li><a href="{{route('contact')}}" class="{{(Route::currentRouteName() === 'contact') ? 'active' : ''}}">контакты</a></li>
                 </ul>
                 <div class="header__nav-mobile-nav">
                     <div class="header__nav-mobile-line"></div>
