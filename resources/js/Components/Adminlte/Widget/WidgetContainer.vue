@@ -1,88 +1,145 @@
 <template>
     <div class="widget-container">
-        <div v-for="(widget, index) in widgets" :key="index"
-             draggable="true"
-             @dragstart="onDragStart(index)"
-             @dragover.prevent="onDragOver(index)"
-             @drop="onDrop(index)"
-        >
-            <component :is="widget.type"
-                       :index="index"
-                       :text="widget.text"
-                       :file="widget.file"
-                       :file1="widget.file1"
-                       :file2="widget.file2"
-                       :onWidgetSort="onWidgetSort"
-            ></component>
+        <div class="section1">
+            <h1>Section 1</h1>
+            <div class="drop-zone"
+                 @drop="onDrop"
+                 @dragover.prevent
+                 @dragenter.prevent
+            >
+                <div class="item"
+                     v-for="(widget, index) in this.getEmptyWidgets()"
+                     draggable="true"
+                     @dragstart="dragItemStart($event, index)"
+                     @drop="dropItem($event, index)"
+                     @dragover.prevent
+                >
+                    <component :is="widget.component"
+                               :title="widget.title"
+                               :index="index"
+                    ></component>
+                    <button class="btn btn-danger" @click="removeToEmptyWidget(index)">-</button>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="section2">
+            <h1>Section 2</h1>
+
+            <div
+                class="draggable"
+                draggable="true"
+                @dragstart="onDragStart($event, widget)"
+                v-for="(widget, index) in this.getWidgets()"
+            >
+                <component :is="widget.component"
+                           :title="widget.title"
+                           :index="index"
+                ></component>
+                <button class="btn btn-success" @click="addToEmptyWidget(widget)">+</button>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
-import { reactive } from 'vue';
-import SingleWidget from './SingleWidget.vue';
-import DoubleWidget from './DoubleWidget.vue';
+
+import {adminProjectStore} from "@/store/adminlte/projectStore";
 
 export default {
-    components: {
-        SingleWidget,
-        DoubleWidget
+    name: 'WidgetContainer',
+    setup() {
+        const projectStore = adminProjectStore()
+
+        return {projectStore}
     },
-    props: {
-        widgets: Array,
-        onWidgetSort: Function
-    },
-    setup(props) {
-        let draggingWidgetIndex = null;
-        let hoverWidgetIndex = null;
+    methods: {
+        getEmptyWidgets(){
+            return this.projectStore.getEmptyWidgets
+        },
+        getWidgets(){
+            return this.projectStore.getWidgets
+        },
+        addToEmptyWidget(widget) {
+            this.projectStore.setToEmptyWidget(widget)
+        },
+        removeToEmptyWidget(index) {
+            this.projectStore.removeToEmptyWidget(index)
+        },
+        onDragStart(event, widget) {
+            event.dataTransfer.dropEffect = 'move'
+            event.dataTransfer.effectAllowed = 'move'
+            event.dataTransfer.setData("text/plain", widget.id.toString());
+        },
+        onDrop(event) {
+            const widgetId = parseInt(event.dataTransfer.getData("text/plain"));
 
-        const widgets = reactive([
-            { type: 'SingleWidget', text: '', file: null },
-            { type: 'DoubleWidget', text: '', file1: null, file2: null }
-        ]);
+            this.projectStore.onDrop(widgetId)
 
-        const onWidgetSort = (fromIndex, toWidget) => {
-            widgets.splice(fromIndex, 1);
-            widgets.splice(fromIndex > toIndex ? toIndex : toIndex - 1, 0, toWidget);
-        };
-
-        const onDragStart = index => {
-            draggingWidgetIndex = index;
-        };
-
-        const onDragOver = index => {
-            hoverWidgetIndex = index;
-        };
-
-        const onDrop = index => {
-            const toIndex = hoverWidgetIndex > draggingWidgetIndex ? index : index - 1;
-            onWidgetSort(draggingWidgetIndex, toIndex);
-            draggingWidgetIndex = null;
-            hoverWidgetIndex = null;
-        };
-
-        return {
-            widgets, onWidgetSort, onDragStart, onDragOver, onDrop
-        };
+        },
+        dragItemStart(event, index) {
+            event.dataTransfer.effectAllowed = 'move';
+            this.projectStore.dragItemStart(index)
+        },
+        dropItem(event, index) {
+            event.preventDefault();
+            this.projectStore.dropItem(index)
+        },
     }
-};
-</script>
 
+}
+</script>
 <style>
 .widget-container {
+    width: 50%;
+    /*height: 600px;*/
+    border: 1px solid darkgreen;
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
-.widget-container .single-widget,
-.widget-container .double-widget {
-    margin: 10px;
+.widget-container .section1, .section2 {
+    width: 100%;
     padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background-color: #fff;
+    margin-bottom: 20px;
+    border: 1px solid darkgreen;
+    background: #0c84ff;
 }
 
+.drop-zone {
+    min-height: 150px;
+    padding-bottom: 50px;
+}
 
+.drop-zone .item {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 10px;
+}
+
+.drop-zone .item div {
+    flex: 0 1 90%;
+    background: #ffffff;
+}
+
+.drop-zone .item .btn {
+    flex: 0 1 10%;
+}
+
+.draggable {
+    margin-bottom: 10px;
+    display: flex;
+    gap: 20px;
+}
+
+.draggable div {
+    background: #ffffff;
+    flex: 0 1 90%;
+}
+
+.draggable .btn {
+    flex: 0 1 10%;
+}
 </style>

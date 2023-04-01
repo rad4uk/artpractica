@@ -1,4 +1,5 @@
 import {createApp} from 'vue'
+import { createPinia } from 'pinia'
 import LogoutComponent from '@/Components/Adminlte/LogoutComponent.vue'
 import Portfolio from '@/Components/Adminlte/Widget/Portfolio.vue'
 import WidgetContainer from '@/Components/Adminlte/Widget/WidgetContainer.vue'
@@ -9,4 +10,5 @@ const app = createApp({
         'widget-container': WidgetContainer
     }
 });
+app.use(createPinia())
 app.mount("#app")
