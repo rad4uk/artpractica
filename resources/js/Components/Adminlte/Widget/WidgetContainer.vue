@@ -22,6 +22,7 @@
                 </div>
 
             </div>
+            <button class="btn btn-success" @click="this.save()">save</button>
         </div>
 
         <div class="section2">
@@ -40,13 +41,13 @@
                 <button class="btn btn-success" @click="addToEmptyWidget(widget)">+</button>
             </div>
         </div>
+
     </div>
 </template>
 
 <script>
 
 import {adminProjectStore} from "@/store/adminlte/projectStore";
-
 export default {
     name: 'WidgetContainer',
     setup() {
@@ -54,7 +55,17 @@ export default {
 
         return {projectStore}
     },
+    data: () => {
+      return {
+
+      }
+    },
     methods: {
+        save(){
+            this.projectStore.getEmptyWidgets.forEach(item => {
+                console.log(item)
+            })
+        },
         getEmptyWidgets(){
             return this.projectStore.getEmptyWidgets
         },
@@ -74,9 +85,11 @@ export default {
         },
         onDrop(event) {
             const widgetId = parseInt(event.dataTransfer.getData("text/plain"));
-
-            this.projectStore.onDrop(widgetId)
-
+            this.projectStore.getWidgets.filter(item => {
+                if(item.id === widgetId){
+                    this.projectStore.onDrop(item)
+                }
+            })
         },
         dragItemStart(event, index) {
             event.dataTransfer.effectAllowed = 'move';
