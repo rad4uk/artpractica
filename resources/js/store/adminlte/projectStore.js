@@ -3,6 +3,7 @@ import Widget1 from "../../Components/Adminlte/Widget/Widget1.vue";
 import Widget2 from "../../Components/Adminlte/Widget/Widget2.vue";
 import Widget3 from "../../Components/Adminlte/Widget/Widget3.vue";
 import {markRaw} from "vue";
+import {ref} from "vue";
 export const adminProjectStore = defineStore('projectStore', {
     state: () => ({
         dragItem: null,
@@ -11,18 +12,32 @@ export const adminProjectStore = defineStore('projectStore', {
         widgets: [
             {
                 id: 1,
+                name: 'widget1',
                 component: markRaw(Widget1),
                 title: 'Загрузить одно фото',
+                data: {
+                    text: '',
+                    files: [],
+                }
             },
             {
                 id: 2,
+                name: 'widget2',
                 component: markRaw(Widget2),
                 title: 'Загрузить два фото',
+                data: {
+                    text: null,
+                    files: [],
+                }
             },
             {
                 id: 3,
+                name: 'widget3',
                 component: markRaw(Widget3),
                 title: 'Заголовок к секции',
+                data: {
+                    title: null
+                }
             },
         ],
     }),
@@ -38,11 +53,27 @@ export const adminProjectStore = defineStore('projectStore', {
         }
     },
     actions: {
-        setEmptyWidgetData(index, data){
-            this.emptyWidgets[index].data = data
+        setTitleInEmptyWidgetData(index, text){
+          this.emptyWidgets[index].data.text = text
         },
-        setToEmptyWidget(widget){
-            this.emptyWidgets.push(widget)
+        setFileInEmptyWidgetData(index, file){
+            this.emptyWidgets[index].data.files.push(file)
+        },
+        setOneFileInEmptyWidgetData(index, file){
+            this.emptyWidgets[index].data.files[0] = file
+        },
+        setEmptyWidgetData(index, file){
+            this.emptyWidgets[index].data.files.push(file)
+        },
+        setEmptyWidgetFileByIndex(index, file, fileIndex){
+            if (this.emptyWidgets[index].data){
+                if(this.emptyWidgets[index].data[0].files){
+                    this.emptyWidgets[index].data[0].files[fileIndex] = file
+                }
+            }
+        },
+        setToEmptyWidget(newWidget){
+            this.emptyWidgets.push(newWidget)
         },
         removeToEmptyWidget(index){
             this.emptyWidgets.splice(index, 1);
@@ -57,20 +88,8 @@ export const adminProjectStore = defineStore('projectStore', {
             this.dragItemIndex = null;
             this.dragItem = null;
         },
-        onDrop(widget){
-            // this.widgets.filter(item => {
-            //     if (item.id === widgetId) {
-            //         item.store = useAdminProjectStore()
-            //         this.emptyWidgets.push(item)
-            //     }
-            // })
-            // widget.store = useAdminProjectStore()
-            let newData = {
-                'id': widget.id,
-                'title': widget.title,
-                'component': widget.component,
-            }
-            this.emptyWidgets.push(newData)
+        onDrop(newWidget){
+            this.emptyWidgets.push(newWidget)
         }
 
     }

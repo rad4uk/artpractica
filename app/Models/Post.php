@@ -17,7 +17,8 @@ class Post extends Model
         'slug',
         'category_id',
         'status',
-        'preview_image'
+        'preview_image',
+        'body'
     ];
 
     public function postImages()

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\Api\CategoryController;
 use App\Http\Controllers\Admin\Api\CategoryGalleryController;
 use App\Http\Controllers\Admin\Api\ImageController;
+use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\PortfolioController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -41,3 +42,8 @@ Route::prefix('category')->group(function (){
 
 
 Route::get('portfolio/next/posts/{offset}', [PortfolioController::class, 'getNextPosts']);
+
+
+Route::prefix('project')->group(function (){
+    Route::post('/new', [PostController::class, 'new']);
+});

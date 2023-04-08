@@ -8,7 +8,7 @@ use App\Interfaces\PostRepositoryInterface;
 use App\Models\Category;
 use App\Models\Post;
 use App\Repositories\PostRepository;
-use App\Services\PostService;
+use App\Services\Admin\PostService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -16,7 +16,8 @@ use Illuminate\Support\Facades\Storage;
 class PostController extends Controller
 {
     public function __construct(
-        private readonly PostRepositoryInterface $postRepository
+        private readonly PostRepositoryInterface $postRepository,
+        private readonly PostService             $postService
     )
     {
 
@@ -29,12 +30,25 @@ class PostController extends Controller
         ]);
     }
 
-    public function new()
+    public function new(Request $request)
     {
+//        dd($request->request->all());
         $categories = Category::with('childrenRecursive')
             ->whereNull('parent_id')
             ->get();
 
+        if ($request->isMethod('POST')) {
+            $requestData = $request->request->all();
+            $filesData = $request->files->all();
+            $widgetData = $this->postService->matchingRequestData(
+                $request->request->all(),
+                $request->files->all()
+            );
+
+            $this->postService->createPost($requestData['formData'], $widgetData, $filesData['formData']['file']);
+
+            return response('',201);
+        }
         return view('adminlte.post.new', [
             'categories' => $categories,
         ]);
@@ -62,7 +76,6 @@ class PostController extends Controller
         $this->postRepository->create($postService->getDetails());
 
         return redirect(route('admin_post_index'), 303);
-
 
 
 //        return view('adminlte.post.new', [

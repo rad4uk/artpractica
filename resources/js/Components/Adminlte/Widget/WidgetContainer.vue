@@ -8,15 +8,16 @@
                  @dragenter.prevent
             >
                 <div class="item"
-                     v-for="(widget, index) in this.getEmptyWidgets()"
+                     v-for="(widget, index) in this.getEmptyWidgets"
                      draggable="true"
                      @dragstart="dragItemStart($event, index)"
                      @drop="dropItem($event, index)"
                      @dragover.prevent
                 >
-                    <component :is="widget.component"
+                    <component :is="this.getMarkRowComponent(widget.component)"
                                :title="widget.title"
                                :index="index"
+                               :is_type="'section1'"
                     ></component>
                     <button class="btn btn-danger" @click="removeToEmptyWidget(index)">-</button>
                 </div>
@@ -32,11 +33,12 @@
                 class="draggable"
                 draggable="true"
                 @dragstart="onDragStart($event, widget)"
-                v-for="(widget, index) in this.getWidgets()"
+                v-for="(widget, index) in this.getWidgets"
             >
-                <component :is="widget.component"
+                <component :is="this.getMarkRowComponent(widget.component)"
                            :title="widget.title"
                            :index="index"
+                           :is_type="'section2'"
                 ></component>
                 <button class="btn btn-success" @click="addToEmptyWidget(widget)">+</button>
             </div>
@@ -48,6 +50,8 @@
 <script>
 
 import {adminProjectStore} from "@/store/adminlte/projectStore";
+import _ from 'lodash';
+import {markRaw} from "vue";
 export default {
     name: 'WidgetContainer',
     setup() {
@@ -61,19 +65,56 @@ export default {
       }
     },
     methods: {
-        save(){
+        getMarkRowComponent(component){
+            return markRaw(component);
+        },
+        async save(){
+            let formData = new FormData()
+
+            const emptyWidgets = this.projectStore.getEmptyWidgets;
+            for (let i = 0; i < emptyWidgets.length; i++) {
+
+                const widgetName = emptyWidgets[i].name;
+                const widgetData = emptyWidgets[i].data;
+
+                const keys = Object.keys(widgetData);
+                for (const key of keys) {
+                    const value = widgetData[key];
+
+                    if (Array.isArray(value)) {
+                        for (const file of value) {
+                            formData.append(`${i}_${widgetName}[${key}][]`, file);
+                        }
+                    } else {
+                        formData.append(`${i}_${widgetName}[${key}]`, value);
+                    }
+                }
+
+            }
+
+            formData.forEach((item, index) => {
+
+                // console.log(index, item)
+            })
+            try {
+                const response = await axios.post('/api/project/new', formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                })
+                console.log(response.data)
+            } catch (error) {
+                console.error(error)
+            }
+
             this.projectStore.getEmptyWidgets.forEach(item => {
                 console.log(item)
             })
         },
-        getEmptyWidgets(){
-            return this.projectStore.getEmptyWidgets
-        },
-        getWidgets(){
-            return this.projectStore.getWidgets
-        },
+
         addToEmptyWidget(widget) {
-            this.projectStore.setToEmptyWidget(widget)
+            const newWidget = _.cloneDeep(widget)
+            this.projectStore.setToEmptyWidget(newWidget)
         },
         removeToEmptyWidget(index) {
             this.projectStore.removeToEmptyWidget(index)
@@ -87,7 +128,8 @@ export default {
             const widgetId = parseInt(event.dataTransfer.getData("text/plain"));
             this.projectStore.getWidgets.filter(item => {
                 if(item.id === widgetId){
-                    this.projectStore.onDrop(item)
+                    let newWidget = _.cloneDeep(item)
+                    this.projectStore.onDrop(newWidget)
                 }
             })
         },
@@ -99,11 +141,22 @@ export default {
             event.preventDefault();
             this.projectStore.dropItem(index)
         },
+    },
+    computed: {
+        getEmptyWidgets: function (){
+            return this.projectStore.getEmptyWidgets
+        },
+        getWidgets: function (){
+            return this.projectStore.getWidgets;
+        },
     }
 
 }
 </script>
 <style>
+.widgets{
+    flex: 0 1 90%;
+}
 .widget-container {
     width: 50%;
     /*height: 600px;*/
@@ -133,7 +186,6 @@ export default {
 }
 
 .drop-zone .item div {
-    flex: 0 1 90%;
     background: #ffffff;
 }
 
@@ -147,7 +199,7 @@ export default {
     gap: 20px;
 }
 
-.draggable div {
+.draggable .widgets {
     background: #ffffff;
     flex: 0 1 90%;
 }

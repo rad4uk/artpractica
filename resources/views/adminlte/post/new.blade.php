@@ -46,55 +46,55 @@
                                 </button>
                             </div>
                         </div>
-                        <form action="{{route('admin_post_new')}}" method="POST" enctype="multipart/form-data">
-                            @csrf
-                            <div class="card-body">
-                                <div class="form-group">
-                                    <label for="inputStatus">Родительская категория</label>
-                                    <select id="inputStatus" name='parent' class="form-control custom-select">
-                                        <option value="-1">Нет</option>
-                                        @foreach($categories as $cat)
-                                            <option value="{{$cat->id}}">{{$cat->title}}</option>
-                                            @if(count($cat->childrenRecursive) > 0)
-                                                @include('adminlte.category.parts.option', ['childrens' => $cat->childrenRecursive, 'count' => 3])
-                                            @endif
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputName">Заголовок</label>
-                                    <input type="text" id="inputName" name="title" class="form-control" value="{{ old('title') }}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputDescription">Описание</label>
-                                    <textarea id="inputDescription" name="description" class="form-control" rows="4" placeholder="начните вводить текст">{{ old('description') }}</textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputDescription">Фото проекта</label>
-                                    <div class="custom-file">
-                                        <input type="file" name="preview_image" class="custom-file-input" id="validatedCustomFile" required>
-                                        <label class="custom-file-label" for="validatedCustomFile">Выберите файл...</label>
-    {{--                                    <div class="invalid-feedback">Example invalid custom file feedback</div>--}}
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputUrl">Ссылка (должна быть уникальной)</label>
-                                    <input type="text" id="inputUrl" name="slug" class="form-control" value="{{ old('slug') }}">
-                                </div>
-                                <div class="form-group form-check-inline">
-                                    <label class="form-check-label">
-                                        <input type="checkbox" name="status" class="form-check-input">Опубликовать
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="row m-lg-3">
-                                <div class="col-12">
-                                    {{--                    <a href="#" class="btn btn-secondary">Cancel</a>--}}
-                                    <input type="submit" value="Добавить" class="btn btn-success float-left">
-                                </div>
-                            </div>
-                        </form>
-
+{{--                        <form action="{{route('admin_post_new')}}" method="POST" enctype="multipart/form-data">--}}
+{{--                            @csrf--}}
+{{--                            <div class="card-body">--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <label for="inputStatus">Родительская категория</label>--}}
+{{--                                    <select id="inputStatus" name='parent' class="form-control custom-select">--}}
+{{--                                        <option value="-1">Нет</option>--}}
+{{--                                        @foreach($categories as $cat)--}}
+{{--                                            <option value="{{$cat->id}}">{{$cat->title}}</option>--}}
+{{--                                            @if(count($cat->childrenRecursive) > 0)--}}
+{{--                                                @include('adminlte.category.parts.option', ['childrens' => $cat->childrenRecursive, 'count' => 3])--}}
+{{--                                            @endif--}}
+{{--                                        @endforeach--}}
+{{--                                    </select>--}}
+{{--                                </div>--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <label for="inputName">Заголовок</label>--}}
+{{--                                    <input type="text" id="inputName" name="title" class="form-control" value="{{ old('title') }}">--}}
+{{--                                </div>--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <label for="inputDescription">Описание</label>--}}
+{{--                                    <textarea id="inputDescription" name="description" class="form-control" rows="4" placeholder="начните вводить текст">{{ old('description') }}</textarea>--}}
+{{--                                </div>--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <label for="inputDescription">Фото проекта</label>--}}
+{{--                                    <div class="custom-file">--}}
+{{--                                        <input type="file" name="preview_image" class="custom-file-input" id="validatedCustomFile" required>--}}
+{{--                                        <label class="custom-file-label" for="validatedCustomFile">Выберите файл...</label>--}}
+{{--    --}}{{--                                    <div class="invalid-feedback">Example invalid custom file feedback</div>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <label for="inputUrl">Ссылка (должна быть уникальной)</label>--}}
+{{--                                    <input type="text" id="inputUrl" name="slug" class="form-control" value="{{ old('slug') }}">--}}
+{{--                                </div>--}}
+{{--                                <div class="form-group form-check-inline">--}}
+{{--                                    <label class="form-check-label">--}}
+{{--                                        <input type="checkbox" name="status" class="form-check-input">Опубликовать--}}
+{{--                                    </label>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                            <div class="row m-lg-3">--}}
+{{--                                <div class="col-12">--}}
+{{--                                    --}}{{--                    <a href="#" class="btn btn-secondary">Cancel</a>--}}
+{{--                                    <input type="submit" value="Добавить" class="btn btn-success float-left">--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </form>--}}
+                        <new-form-component :action='@json(route('admin_post_new'))' :categories='@json($categories)'></new-form-component>
                     </div>
                     @if ($errors->any())
                         <div class="alert alert-danger">

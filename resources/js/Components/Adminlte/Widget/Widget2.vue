@@ -1,8 +1,45 @@
 <template>
-    <div>
-        <h3>Виджет 2</h3>
-        <input type="file" @change="addFile(0)">
-        <input type="file" @change="addFile(1)">
+    <div class="widget2 widgets">
+        <h3>{{this.title}}</h3>
+        <div class="widget2__container" v-if="this.is_type === 'section1'">
+            <div class="widget2__container-item">
+                <label class="input-file">
+                    <input type="file" @change="addFile($event, 0)">
+                    <span v-if="this.file1 !== null">{{ this.file1.name }}</span>
+                    <span v-else>Выберите файл</span>
+                </label>
+                <img class="widget2__container-item-img" v-if="this.file1 !== null" :src="this.getFileUrl(this.file1)"  alt="">
+            </div>
+
+            <div class="widget2__container-item">
+                <label class="input-file">
+                    <input type="file" @change="addFile($event, 1)">
+                    <span v-if="this.file2 !== null">{{ this.file2.name }}</span>
+                    <span v-else>Выберите файл</span>
+                </label>
+                <img class="widget2__container-item-img" v-if="this.file2 !== null" :src="this.getFileUrl(this.file2)"  alt="">
+
+            </div>
+        </div>
+
+        <div class="widget2__container" v-else>
+            <div class="widget2__container-item">
+                <label class="input-file">
+                    <input type="file" disabled>
+                    <span>Выберите файл</span>
+                </label>
+            </div>
+
+            <div class="widget2__container-item">
+                <label class="input-file">
+                    <input type="file" disabled>
+                    <span>Выберите файл</span>
+                </label>
+            </div>
+        </div>
+       <div class="widget2__item">
+           <textarea v-model="textareaValue" class="widget2__item-textarea"></textarea>
+       </div>
 <!--        <ul>-->
 <!--            <li v-for="(file, index) in value" :key="index">-->
 <!--                {{ file.name }} <button @click="removeFile(index)">Удалить</button>-->
@@ -12,26 +49,158 @@
 </template>
 
 <script>
+import {adminProjectStore} from "@/store/adminlte/projectStore";
 export default {
     name: 'Widget2',
-    props: {
-        value: {
-            type: Array,
-            default: () => [],
-        },
+    props: ['index', 'title', 'is_type'],
+    data: () => {
+      return {
+          textareaValue: '',
+          file1: null,
+          file2: null
+      }
+    },
+    setup() {
+        const projectStore = adminProjectStore()
+        return {projectStore};
+    },
+    mounted() {
+        if(this.is_type === 'section1'){
+            this.file1 = this.getFileInStore(0)
+            this.file2 = this.getFileInStore(1)
+        }
     },
     methods: {
-        addFile(index, evt) {
-            const file = evt.target.files[0];
-            const files = [...this.value];
-            files[index] = file;
-            this.$emit('input', files);
+        getFileUrl(file) {
+            if (typeof window !== 'undefined') {
+                return URL.createObjectURL(file)
+            }
+            return ''
+        },
+        getFileInStore(fileIndex){
+            const widget =  this.projectStore.getEmptyWidgetByIndex(this.index);
+            if (typeof(widget.data) != "undefined" && widget.data !== null){
+                if (typeof(widget.data[0].files) != "undefined" && widget.data[0].files !== null){
+                    return widget.data[0].files[fileIndex]
+                }
+            }
+            return null;
+        },
+        addFile(event, fileIndex) {
+            const file = event.target.files[0];
+            const widget = this.projectStore.getEmptyWidgetByIndex(this.index)
+            if (fileIndex === 0){
+                this.file1 = file
+            }else{
+                this.file2 = file
+            }
+            if (widget.data){
+                if (widget.data[0].files){
+                    this.projectStore.setEmptyWidgetFileByIndex(this.index, file, fileIndex)
+                }
+            }else{
+                this.projectStore.setEmptyWidgetData(this.index, this.formingData(file))
+            }
         },
         removeFile(index) {
             const files = [...this.value];
             files.splice(index, 1);
             this.$emit('input', files);
         },
-    },
+        formingData(file){
+            return [
+                {
+                    files: [file],
+                    text: this.textareaValue
+                }
+            ]
+        }
+    }
 };
 </script>
+<style lang="scss" scoped>
+.widget2{
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    &__item{
+        &-textarea{
+            width: 100%;
+        }
+    }
+    &__container{
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        &-item{
+            position: relative;
+            flex: 0 1 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            max-height: 200px;
+            min-height: 200px;
+            &-img{
+                position: absolute;
+                object-fit: cover;
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+
+}
+
+.input-file {
+    position: relative;
+    z-index: 2;
+    display: inline-block;
+}
+.input-file span {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    outline: none;
+    text-decoration: none;
+    font-size: 14px;
+    vertical-align: middle;
+    color: rgb(255 255 255);
+    text-align: center;
+    border-radius: 4px;
+    background-color: #419152;
+    line-height: 22px;
+    height: 40px;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    border: none;
+    margin: 0;
+    transition: background-color 0.2s;
+}
+.input-file input[type=file] {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+    display: block;
+    width: 0;
+    height: 0;
+}
+
+/* Focus */
+.input-file input[type=file]:focus + span {
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
+
+/* Hover/active */
+.input-file:hover span {
+    background-color: #59be6e;
+}
+.input-file:active span {
+    background-color: #2E703A;
+}
+
+/* Disabled */
+.input-file input[type=file]:disabled + span {
+    background-color: #eee;
+}
+</style>
