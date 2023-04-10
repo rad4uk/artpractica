@@ -64,16 +64,16 @@ class PostController extends Controller
 
         $filesPath = Storage::disk('public')->putFileAs('/images', $image, $fileName);
 
-        $postService = new PostService(
-            $validated['title'],
-            $validated['description'],
-            ($validated['parent'] == -1) ? null : $validated['parent'],
-            $validated['slug'],
-            ($request->status === 'on') ? 1 : 0,
-            url('/storage/' . $filesPath)
-        );
+//        $postService = new PostService(
+//            $validated['title'],
+//            $validated['description'],
+//            ($validated['parent'] == -1) ? null : $validated['parent'],
+//            $validated['slug'],
+//            ($request->status === 'on') ? 1 : 0,
+//            url('/storage/' . $filesPath)
+//        );
 
-        $this->postRepository->create($postService->getDetails());
+//        $this->postRepository->create($this->postService->getDetails());
 
         return redirect(route('admin_post_index'), 303);
 

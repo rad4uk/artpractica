@@ -2,13 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
-    public function index()
+
+    public function index(string $slug)
     {
-        return view('frontend/page/project');
+        $project = Post::where('slug', $slug)->firstOrFail();
+
+        return view('frontend/project/project', [
+            'post' => $project,
+            'body' => json_decode($project->body)
+        ]);
     }
     public function index2()
     {

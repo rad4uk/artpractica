@@ -2,8 +2,10 @@ import { defineStore } from 'pinia'
 import Widget1 from "../../Components/Adminlte/Widget/Widget1.vue";
 import Widget2 from "../../Components/Adminlte/Widget/Widget2.vue";
 import Widget3 from "../../Components/Adminlte/Widget/Widget3.vue";
+import Widget4 from "../../Components/Adminlte/Widget/Widget4.vue";
+import Widget5 from "../../Components/Adminlte/Widget/Widget5.vue";
 import {markRaw} from "vue";
-import {ref} from "vue";
+
 export const adminProjectStore = defineStore('projectStore', {
     state: () => ({
         dragItem: null,
@@ -11,10 +13,19 @@ export const adminProjectStore = defineStore('projectStore', {
         emptyWidgets: [],
         widgets: [
             {
+                id: 4,
+                name: 'widget4',
+                component: markRaw(Widget4),
+                title: 'Заголовок',
+                data: {
+                    title: null
+                }
+            },
+            {
                 id: 1,
                 name: 'widget1',
                 component: markRaw(Widget1),
-                title: 'Загрузить одно фото',
+                title: 'Прямоугольное изображение',
                 data: {
                     text: '',
                     files: [],
@@ -24,7 +35,7 @@ export const adminProjectStore = defineStore('projectStore', {
                 id: 2,
                 name: 'widget2',
                 component: markRaw(Widget2),
-                title: 'Загрузить два фото',
+                title: 'Два изображение шириной 30% на 70% с описанием',
                 data: {
                     text: null,
                     files: [],
@@ -34,9 +45,20 @@ export const adminProjectStore = defineStore('projectStore', {
                 id: 3,
                 name: 'widget3',
                 component: markRaw(Widget3),
-                title: 'Заголовок к секции',
+                title: 'Два изображение шириной 50% на 50% с описанием',
                 data: {
-                    title: null
+                    text: null,
+                    files: [],
+                }
+            },
+            {
+                id: 5,
+                name: 'widget5',
+                component: markRaw(Widget5),
+                title: 'Квадратное изображение с описанием',
+                data: {
+                    text: null,
+                    files: [],
                 }
             },
         ],
@@ -53,8 +75,11 @@ export const adminProjectStore = defineStore('projectStore', {
         }
     },
     actions: {
-        setTitleInEmptyWidgetData(index, text){
-          this.emptyWidgets[index].data.text = text
+        setTitleInEmptyWidgetData(index, title){
+          this.emptyWidgets[index].data.title = title
+        },
+        setTextInEmptyWidgetData(index, text){
+            this.emptyWidgets[index].data.text = text
         },
         setFileInEmptyWidgetData(index, file){
             this.emptyWidgets[index].data.files.push(file)

@@ -20,18 +20,23 @@ class PostService
     {
         $data = [];
         foreach ($requestData['widgets'] as $key => $requestItem) {
+            $data[$key]['type'] = 'frontend';
             foreach ($requestItem as $itemKey => $itemValue) {
-                $data[$key][$itemKey] = $itemValue;
+                $data[$key]['data']['name'] = $itemKey;
+                foreach ($itemValue as $valueKey => $value){
+                    $data[$key]['data'][$valueKey] = $value;
+                }
             }
 
         }
+
         foreach ($widgetAllFiles['widgets'] as $widgetKey => $widgetItem) {
             foreach ($widgetItem as $widgetFileKey => $widgetFiles){
                 if (isset($widgetFiles['files'])) {
                     foreach ($widgetFiles['files'] as $file) {
                         $fileName = time() . '_' . $file->getClientOriginalName();
                         $this->saveFile($file, $fileName);
-                        $data[$widgetKey][$widgetFileKey]['files'][] = $fileName;
+                        $data[$widgetKey]['data']['files'][] = $fileName;
                     }
                 }
             }
@@ -43,9 +48,9 @@ class PostService
     public function createPost(array $formData, array $widgetData, UploadedFile $file)
     {
         $fileName = time() . '_' . $file->getClientOriginalName();
+        $this->saveFile($file, $fileName);
         $formData['preview_image'] = $fileName;
         $formData['body'] = json_encode($widgetData);
-//        dd($formData);
         $this->postRepository->create($formData);
     }
 

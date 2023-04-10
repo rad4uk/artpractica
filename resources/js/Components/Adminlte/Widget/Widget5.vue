@@ -28,7 +28,7 @@
 import {adminProjectStore} from "@/store/adminlte/projectStore";
 
 export default {
-    name: 'Widget1',
+    name: 'Widget5',
     props: ['index', 'title', 'is_type'],
     data: () => {
         return {

@@ -66,54 +66,62 @@ export default {
     },
     mounted() {
         if(this.is_type === 'section1'){
-            this.file1 = this.getFileInStore(0)
-            this.file2 = this.getFileInStore(1)
+            let widgetData = this.getDataInStore()
+
+            const fileLength = widgetData.files.length
+            console.log(fileLength,widgetData.files)
+            if (fileLength > 0){
+                if (widgetData.files[0]){
+                    this.file1 = widgetData.files[0]
+                }
+                if (widgetData.files[1]){
+                    this.file2 = widgetData.files[1]
+                }
+            }
+
+            this.textareaValue = widgetData.text
         }
     },
     methods: {
+        getDataInStore(){
+            const widget =  this.projectStore.getEmptyWidgetByIndex(this.index);
+            return widget.data;
+        },
         getFileUrl(file) {
             if (typeof window !== 'undefined') {
                 return URL.createObjectURL(file)
             }
             return ''
         },
-        getFileInStore(fileIndex){
-            const widget =  this.projectStore.getEmptyWidgetByIndex(this.index);
-            if (typeof(widget.data) != "undefined" && widget.data !== null){
-                if (typeof(widget.data[0].files) != "undefined" && widget.data[0].files !== null){
-                    return widget.data[0].files[fileIndex]
-                }
-            }
-            return null;
-        },
+        // getFileInStore(){
+        //     const widget =  this.projectStore.getEmptyWidgetByIndex(this.index);
+        //     const fileLength = widget.data.files.length
+        //     if (fileLength > 0){
+        //         if (fileLength === 1){
+        //             return widget.data.files[0]
+        //         }
+        //         if (fileLength === 2){
+        //             return widget.data.files[1]
+        //         }
+        //     }
+        //
+        //     return null;
+        // },
         addFile(event, fileIndex) {
             const file = event.target.files[0];
-            const widget = this.projectStore.getEmptyWidgetByIndex(this.index)
+
             if (fileIndex === 0){
                 this.file1 = file
+                this.projectStore.setFileInEmptyWidgetData(this.index, file)
             }else{
                 this.file2 = file
-            }
-            if (widget.data){
-                if (widget.data[0].files){
-                    this.projectStore.setEmptyWidgetFileByIndex(this.index, file, fileIndex)
-                }
-            }else{
-                this.projectStore.setEmptyWidgetData(this.index, this.formingData(file))
+                this.projectStore.setFileInEmptyWidgetData(this.index, file)
             }
         },
-        removeFile(index) {
-            const files = [...this.value];
-            files.splice(index, 1);
-            this.$emit('input', files);
-        },
-        formingData(file){
-            return [
-                {
-                    files: [file],
-                    text: this.textareaValue
-                }
-            ]
+    },
+    watch: {
+        textareaValue(newValue){
+            this.projectStore.setTextInEmptyWidgetData(this.index, newValue)
         }
     }
 };
@@ -135,18 +143,24 @@ export default {
         gap: 10px;
         &-item{
             position: relative;
-            flex: 0 1 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             max-height: 200px;
             min-height: 200px;
+            border: 1px dashed black;
             &-img{
                 position: absolute;
                 object-fit: cover;
                 width: 100%;
                 height: 100%;
             }
+        }
+        &-item:first-child{
+            flex: 0 1 30%;
+        }
+        &-item:last-child{
+            flex: 0 1 70%;
         }
     }
 
