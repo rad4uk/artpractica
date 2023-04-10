@@ -327,8 +327,9 @@
     </div>
 
     <div class="project-wrapper">
+{{--        {{dd($body)}}--}}
         @foreach($body as $widget)
-            @include('frontend.project.widgets.' . $widget->data->name, ['widget' => $widget])
+            @include('frontend.project.widgets.' . $widget->name, ['widget' => $widget])
         @endforeach
 {{--        <div class="project-widget1">--}}
 {{--            <div class="container">--}}

@@ -2,16 +2,23 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exceptions\WidgetNotFoundException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\PostCreateRequest;
+use App\Http\Requests\Admin\PostNewRequest;
 use App\Interfaces\PostRepositoryInterface;
 use App\Models\Category;
 use App\Models\Post;
 use App\Repositories\PostRepository;
 use App\Services\Admin\PostService;
 use Carbon\Carbon;
+use Illuminate\Contracts\Routing\ResponseFactory;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class PostController extends Controller
 {
@@ -30,9 +37,8 @@ class PostController extends Controller
         ]);
     }
 
-    public function new(Request $request)
+    public function new(PostNewRequest $request): Response|ResponseFactory|View|Factory
     {
-//        dd($request->request->all());
         $categories = Category::with('childrenRecursive')
             ->whereNull('parent_id')
             ->get();
@@ -44,10 +50,20 @@ class PostController extends Controller
                 $request->request->all(),
                 $request->files->all()
             );
+            try {
+                $postData = $this->postService->setPostData(
+                    $requestData['formData'],
+                    $filesData['formData'],
+                    json_encode($this->postService->setWidgetsData($widgetData))
+                );
+            }catch (\RuntimeException $exception){
+                return response($exception->getMessage(), 422);
+            }
 
-            $this->postService->createPost($requestData['formData'], $widgetData, $filesData['formData']['file']);
 
-            return response('',201);
+            $this->postRepository->create($postData);
+
+            return response('', 201);
         }
         return view('adminlte.post.new', [
             'categories' => $categories,

@@ -1,7 +1,7 @@
 <template>
     <div class="widget-container">
         <div class="section1">
-            <h1>Section 1</h1>
+            <h2>Перетащите или добавьте виджеты</h2>
             <div class="drop-zone"
                  @drop="onDrop"
                  @dragover.prevent
@@ -16,6 +16,7 @@
                 >
                     <component :is="this.getMarkRowComponent(widget.component)"
                                :title="widget.title"
+                               :name="widget.name"
                                :index="index"
                                :is_type="'section1'"
                     ></component>
@@ -27,7 +28,7 @@
         </div>
 
         <div class="section2">
-            <h1>Section 2</h1>
+            <h2>Виджеты</h2>
 
             <div
                 class="draggable"
@@ -37,6 +38,7 @@
             >
                 <component :is="this.getMarkRowComponent(widget.component)"
                            :title="widget.title"
+                           :name="widget.name"
                            :index="index"
                            :is_type="'section2'"
                 ></component>
@@ -160,7 +162,7 @@ export default {
 .widget-container {
     width: 50%;
     /*height: 600px;*/
-    border: 1px solid darkgreen;
+    /*border: 1px solid darkgreen;*/
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -170,8 +172,8 @@ export default {
     width: 100%;
     padding: 10px;
     margin-bottom: 20px;
-    border: 1px solid darkgreen;
-    background: #0c84ff;
+    border: 1px dashed #28a745;
+    /*background: #0c84ff;*/
 }
 
 .drop-zone {

@@ -26,7 +26,7 @@
                 <label for="inputDescription">Фото проекта</label>
                 <div class="custom-file">
                     <input type="file" name="preview_image" class="custom-file-input" id="validatedCustomFile"
-                           @change="addFile" required>
+                           @change="addPreviewFile" required>
                     <label class="custom-file-label" for="validatedCustomFile">Выберите файл...</label>
                 </div>
             </div>
@@ -77,7 +77,7 @@ export default {
             urlValue: '',
             categoryValue: -1,
             statusValue: false,
-            file: null
+            preview_file: null
         }
     },
     methods: {
@@ -109,8 +109,8 @@ export default {
 
             return false;
         },
-        addFile(event) {
-            this.file = event.target.files[0];
+        addPreviewFile(event) {
+            this.preview_file = event.target.files[0];
         },
         async save() {
 
@@ -122,7 +122,7 @@ export default {
                 formData.append('formData[title]', this.titleValue)
                 formData.append('formData[description]', this.descriptionValue)
                 formData.append('formData[slug]', this.urlValue)
-                formData.append('formData[file]', this.file)
+                formData.append('formData[preview_file]', this.preview_file)
                 formData.append('formData[status]', this.statusValue ? 1 : 0)
                 const emptyWidgets = this.projectStore.getEmptyWidgets;
                 for (let i = 0; i < emptyWidgets.length; i++) {
@@ -155,7 +155,11 @@ export default {
                         window.location.href = "/admin/post";
                     }
                 } catch (error) {
-                    this.errors.push(error)
+                    if (error.response.data.message){
+                        this.errors.push(error.response.data.message)
+                    }else{
+                        this.errors.push(error.response.data)
+                    }
                 }
             }
         },

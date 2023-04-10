@@ -1,6 +1,6 @@
 <template>
     <div class="widget4 widgets">
-        <h3>{{ this.title }}</h3>
+        <h3>{{ this.title + ' (' + this.name + ')'}}</h3>
         <input type="text" v-model="inputValue" placeholder="Введите текст">
     </div>
 </template>
@@ -9,7 +9,7 @@
 import {adminProjectStore} from "@/store/adminlte/projectStore";
 export default {
     name: "Widget4",
-    props: ['title', 'index', 'is_type'],
+    props: ['title', 'index', 'is_type', 'name'],
     data: () => {
         return {
             inputValue: ''

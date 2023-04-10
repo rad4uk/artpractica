@@ -1,6 +1,6 @@
 <template>
     <div class="widget2 widgets">
-        <h3>{{this.title}}</h3>
+        <h3>{{this.title + ' (' + this.name + ')'}}</h3>
         <div class="widget2__container" v-if="this.is_type === 'section1'">
             <div class="widget2__container-item">
                 <label class="input-file">
@@ -52,7 +52,7 @@
 import {adminProjectStore} from "@/store/adminlte/projectStore";
 export default {
     name: 'Widget2',
-    props: ['index', 'title', 'is_type'],
+    props: ['index', 'title', 'is_type', 'name'],
     data: () => {
       return {
           textareaValue: '',

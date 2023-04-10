@@ -13,15 +13,6 @@ export const adminProjectStore = defineStore('projectStore', {
         emptyWidgets: [],
         widgets: [
             {
-                id: 4,
-                name: 'widget4',
-                component: markRaw(Widget4),
-                title: 'Заголовок',
-                data: {
-                    title: null
-                }
-            },
-            {
                 id: 1,
                 name: 'widget1',
                 component: markRaw(Widget1),
@@ -49,6 +40,15 @@ export const adminProjectStore = defineStore('projectStore', {
                 data: {
                     text: null,
                     files: [],
+                }
+            },
+            {
+                id: 4,
+                name: 'widget4',
+                component: markRaw(Widget4),
+                title: 'Заголовок',
+                data: {
+                    title: null
                 }
             },
             {
