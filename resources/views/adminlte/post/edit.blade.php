@@ -1,13 +1,13 @@
 @extends('adminlte.layout.adminlte')
 
-@section('styles')
+@push('styles')
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{asset('adminlte/plugins/fontawesome-free/css/all.min.css')}}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{asset('adminlte/dist/css/adminlte.min.css')}}">
-@endsection;
+@endpush
 
 @section('content')
     <!-- Content Wrapper. Contains page content -->
@@ -22,7 +22,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{route('admin_home_index')}}">Главная</a></li>
-                            <li class="breadcrumb-item"><a href="{{route('admin_page_index')}}">Все страницы</a></li>
+                            <li class="breadcrumb-item"><a href="{{route('admin_post_index')}}">Все проекты</a></li>
                             <li class="breadcrumb-item active">Project Edit</li>
                         </ol>
                     </div>
@@ -33,6 +33,11 @@
         <!-- Main content -->
         <section class="content">
             <div class="row">
+                <widget-container
+                    :type_admin_page='@json('edit')'
+                    :widgets='@json($body)'
+                    :file_dir='@json($post->getDirPath())'
+                ></widget-container>
                 <div class="col-md-6">
                     <div class="card card-primary">
                         <div class="card-header">
@@ -44,111 +49,54 @@
                                 </button>
                             </div>
                         </div>
-                        <form action="{{route('admin_page_edit', $page->id)}}" method="POST">
-                            @csrf
-                            <div class="card-body">
-                                <div class="form-group">
-                                    <label for="inputName">Заголовок</label>
-                                    <input type="text" id="inputName" name="title" class="form-control" value="{{$page->title}}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputDescription">Описание</label>
-                                    <textarea id="inputDescription" name="description" class="form-control" rows="4">{{$page->description}}</textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputUrl">Ссылка</label>
-                                    <input type="text" id="inputUrl" name="pageUrl" class="form-control" value="{{$page->url}}">                                </div>
+                        <update-form-component
+                            :post='@json($post)'
+                            :categories='@json($categories)'
+                        ></update-form-component>
+{{--                        <form action="{{route('admin_post_edit', $post->id)}}" method="POST">--}}
+{{--                            @csrf--}}
+{{--                            <div class="card-body">--}}
 {{--                                <div class="form-group">--}}
-{{--                                    <label for="inputStatus">Status</label>--}}
-{{--                                    <select id="inputStatus" class="form-control custom-select">--}}
-{{--                                        <option disabled>Select one</option>--}}
-{{--                                        <option>On Hold</option>--}}
-{{--                                        <option>Canceled</option>--}}
-{{--                                        <option selected>Success</option>--}}
+{{--                                    <label for="inputStatus">Родительская категория</label>--}}
+{{--                                    <select id="inputStatus" name='parent' class="form-control custom-select">--}}
+{{--                                        <option value="-1">Нет</option>--}}
 {{--                                    </select>--}}
 {{--                                </div>--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <label for="inputName">Заголовок</label>--}}
+{{--                                    <input type="text" id="inputName" name="title" class="form-control" value="{{$post->title}}">--}}
+{{--                                </div>--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <label for="inputDescription">Описание</label>--}}
+{{--                                    <textarea id="inputDescription" name="description" class="form-control" rows="4">{{$post->description}}</textarea>--}}
+{{--                                </div>--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <label for="inputUrl">Ссылка</label>--}}
+{{--                                    <input type="text" id="inputUrl" name="pageUrl" class="form-control" value="{{$post->slug}}">--}}
+{{--                                </div>--}}
 
-                            </div>
-                            <div class="row m-lg-3">
-                                <div class="col-12">
-                                    {{--                    <a href="#" class="btn btn-secondary">Cancel</a>--}}
-                                    <input type="submit" value="сохранить" class="btn btn-success float-left">
-                                </div>
-                            </div>
-                        </form>
-
-                        <!-- /.card-body -->
+{{--                            </div>--}}
+{{--                            <div class="row m-lg-3">--}}
+{{--                                <div class="col-12">--}}
+{{--                                    <input type="submit" value="сохранить" class="btn btn-success float-left">--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </form>--}}
                     </div>
-                    <!-- /.card -->
-                </div>
-                <div class="col-md-6">
-                    <!-- /.card -->
-                    <div class="card card-info">
-                        <div class="card-header">
-                            <h3 class="card-title">Изображения</h3>
-
-                            <div class="card-tools">
-                                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                                    <i class="fas fa-minus"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="card-body p-0">
-                            <table class="table">
-                                <thead>
-                                <tr>
-                                    <th>Название</th>
-                                    <th>Размер</th>
-                                    <th></th>
-                                </tr>
-                                </thead>
-                                <tbody>
-
-                                <tr>
-                                    <td>Functional-requirements.docx</td>
-                                    <td>49.8005 kb</td>
-                                    <td class="text-right py-0 align-middle">
-                                        <div class="btn-group btn-group-sm">
-                                            <a href="#" class="btn btn-info"><i class="fas fa-eye"></i></a>
-                                            <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
-                                        </div>
-                                    </td>
-                                <tr>
-                                    <td>UAT.pdf</td>
-                                    <td>28.4883 kb</td>
-                                    <td class="text-right py-0 align-middle">
-                                        <div class="btn-group btn-group-sm">
-                                            <a href="#" class="btn btn-info"><i class="fas fa-eye"></i></a>
-                                            <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
-                                        </div>
-                                    </td>
-                                </tr>
-
-
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- /.card-body -->
-                    </div>
-                    <!-- /.card -->
                 </div>
             </div>
 
         </section>
-        <!-- /.content -->
     </div>
-    <!-- /.content-wrapper -->
 @endsection
 
-@section('scripts')
+@push('scripts')
     <!-- jQuery -->
     <script src="{{asset('adminlte/plugins/jquery/jquery.min.js')}}"></script>
     <!-- Bootstrap 4 -->
     <script src="{{asset('adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
     <!-- AdminLTE App -->
     <script src="{{asset('adminlte/dist/js/adminlte.min.js')}}"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="{{asset('adminlte/dist/js/demo.js')}}"></script>
 
     @vite('resources/js/adminlte/project.js')
-@endsection
+@endpush

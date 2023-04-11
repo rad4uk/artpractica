@@ -1,10 +1,4 @@
 import { defineStore } from 'pinia'
-import Widget1 from "../../Components/Adminlte/Widget/Widget1.vue";
-import Widget2 from "../../Components/Adminlte/Widget/Widget2.vue";
-import Widget3 from "../../Components/Adminlte/Widget/Widget3.vue";
-import Widget4 from "../../Components/Adminlte/Widget/Widget4.vue";
-import Widget5 from "../../Components/Adminlte/Widget/Widget5.vue";
-import {markRaw} from "vue";
 
 export const adminProjectStore = defineStore('projectStore', {
     state: () => ({
@@ -14,9 +8,9 @@ export const adminProjectStore = defineStore('projectStore', {
         widgets: [
             {
                 id: 1,
-                name: 'widget1',
-                component: markRaw(Widget1),
-                title: 'Прямоугольное изображение',
+                name: 'Widget1',
+                // component: markRaw(Widget1),
+                widgetTitle: 'Прямоугольное изображение',
                 data: {
                     text: '',
                     files: [],
@@ -24,9 +18,9 @@ export const adminProjectStore = defineStore('projectStore', {
             },
             {
                 id: 2,
-                name: 'widget2',
-                component: markRaw(Widget2),
-                title: 'Два изображение шириной 30% на 70% с описанием',
+                name: 'Widget2',
+                // component: markRaw(Widget2),
+                widgetTitle: 'Два изображение шириной 30% на 70% с описанием',
                 data: {
                     text: null,
                     files: [],
@@ -34,9 +28,9 @@ export const adminProjectStore = defineStore('projectStore', {
             },
             {
                 id: 3,
-                name: 'widget3',
-                component: markRaw(Widget3),
-                title: 'Два изображение шириной 50% на 50% с описанием',
+                name: 'Widget3',
+                // component: markRaw(Widget3),
+                widgetTitle: 'Два изображение шириной 50% на 50% с описанием',
                 data: {
                     text: null,
                     files: [],
@@ -44,18 +38,18 @@ export const adminProjectStore = defineStore('projectStore', {
             },
             {
                 id: 4,
-                name: 'widget4',
-                component: markRaw(Widget4),
-                title: 'Заголовок',
+                name: 'Widget4',
+                // component: markRaw(Widget4),
+                widgetTitle: 'Заголовок',
                 data: {
                     title: null
                 }
             },
             {
                 id: 5,
-                name: 'widget5',
-                component: markRaw(Widget5),
-                title: 'Квадратное изображение с описанием',
+                name: 'Widget5',
+                // component: markRaw(Widget5),
+                widgetTitle: 'Квадратное изображение с описанием',
                 data: {
                     text: null,
                     files: [],

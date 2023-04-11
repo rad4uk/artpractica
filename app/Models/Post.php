@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
-    public string $previewImagePath = '/storage/images/project/';
+    private string $previewImagePath = '/storage/images/project/';
 
     use HasFactory;
     use HasThumbnail;
@@ -22,6 +22,16 @@ class Post extends Model
         'preview_image',
         'body'
     ];
+
+    public function getFullImagePath(string $imageName): string
+    {
+        return asset($this->previewImagePath . $imageName);
+    }
+
+    public function getDirPath(): string
+    {
+        return asset($this->previewImagePath);
+    }
 
     public function postImages()
     {

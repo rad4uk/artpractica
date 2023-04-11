@@ -8,13 +8,11 @@ class Widget5 implements \JsonSerializable
 {
     private ?string $text = null;
     private string $fileName;
-    private string $type;
     private string $name;
 
     public function __construct(array $data)
     {
-        $this->type = $data['type'];
-        $this->name = $data['data']['name'];
+        $this->name = $data['name'];
 
         if (!isset($data['data']['files']) || count($data['data']['files']) < 1){
             throw new WidgetFileNotFoundException(sprintf('В %s не загруженно изображение', $this->name));

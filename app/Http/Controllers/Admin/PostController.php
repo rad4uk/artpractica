@@ -46,20 +46,22 @@ class PostController extends Controller
         if ($request->isMethod('POST')) {
             $requestData = $request->request->all();
             $filesData = $request->files->all();
-            $widgetData = $this->postService->matchingRequestData(
+            $adminWidgetData = $this->postService->matchingRequestData(
                 $request->request->all(),
                 $request->files->all()
             );
+            $frontendWidgetData = $this->postService->setWidgetsData($adminWidgetData['admin']);
             try {
                 $postData = $this->postService->setPostData(
                     $requestData['formData'],
                     $filesData['formData'],
-                    json_encode($this->postService->setWidgetsData($widgetData))
+                    json_encode(
+                        array_merge($frontendWidgetData, $adminWidgetData)
+                    )
                 );
-            }catch (\RuntimeException $exception){
+            } catch (\RuntimeException $exception) {
                 return response($exception->getMessage(), 422);
             }
-
 
             $this->postRepository->create($postData);
 
@@ -99,9 +101,19 @@ class PostController extends Controller
 //        ]);
     }
 
-    public function update()
+    public function update(int $postId)
     {
+        $categories = Category::with('childrenRecursive')
+            ->whereNull('parent_id')
+            ->get();
+        $post = $this->postRepository->findById($postId);
+        $post->preview_image = $post->getFullImagePath($post->preview_image);
 
+        return view('adminlte.post.edit', [
+            'categories' => $categories,
+            'post' => $post,
+            'body' => json_decode($post->body)->admin,
+        ]);
     }
 
     public function delete()

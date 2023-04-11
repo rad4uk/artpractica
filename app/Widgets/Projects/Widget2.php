@@ -8,13 +8,11 @@ class Widget2 implements \JsonSerializable
 {
     private ?string $text = null;
     private array $files;
-    private string $type;
     private string $name;
 
     public function __construct(array $data)
     {
-        $this->type = $data['type'];
-        $this->name = $data['data']['name'];
+        $this->name = $data['name'];
         if (!isset($data['data']['files']) || count($data['data']['files']) < 2){
             throw new WidgetFileNotFoundException(sprintf('В %s количество изображений должно ровняться двум', $this->name));
         }
@@ -42,7 +40,6 @@ class Widget2 implements \JsonSerializable
             $data['text'] = $this->text;
         }
         return array_merge([
-            'type' => $this->type,
             'name' => $this->name,
             'files' => $this->files
         ], $data);

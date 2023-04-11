@@ -24,7 +24,7 @@ class PostNewRequest extends FormRequest
     public function rules()
     {
         return [
-            'formData.categoryId' => 'required',
+            'formData.category_id' => 'required',
             'formData.title' => 'string|required',
             'formData.description' => 'string|required',
             'formData.slug' => 'string|required|unique:posts,slug',

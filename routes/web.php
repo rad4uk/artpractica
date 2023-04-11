@@ -80,12 +80,12 @@ Route::get('/storage/images/{dir}/{size}/{method}/{file}', [ThumbnailController:
 ////        return view('dashboard');
 ////    })->name('dashboard');
 //});
-Route::get('/portfolio/', [PortfolioController::class, 'index'])->name('portfolio');
+Route::get('/portfolio', [PortfolioController::class, 'index'])->name('portfolio');
 Route::get('/portfolio/{slug}/', [ProjectController::class, 'index'])->name('project1');
-//Route::get('/portfolio/project-715/', [ProjectController::class, 'index'])->name('project1');
-//Route::get('/portfolio/project-716/', [ProjectController::class, 'index2'])->name('project2');
-//Route::get('/portfolio/project-562/', [ProjectController::class, 'index3'])->name('project3');
-//Route::get('/portfolio/project-788/', [ProjectController::class, 'index4'])->name('project4');
+Route::get('/portfolio/project-715/', [ProjectController::class, 'index'])->name('project1');
+Route::get('/portfolio/project-716/', [ProjectController::class, 'index2'])->name('project2');
+Route::get('/portfolio/project-562/', [ProjectController::class, 'index3'])->name('project3');
+Route::get('/portfolio/project-788/', [ProjectController::class, 'index4'])->name('project4');
 Route::get('/services/', [ServicesController::class, 'index'])->name('services');
 Route::get('/about/', [AboutController::class, 'index'])->name('about');
 Route::get('/contact-us/', ContactController::class)->name('contact');

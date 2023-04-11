@@ -14,7 +14,7 @@ class ProjectController extends Controller
 
         return view('frontend/project/project', [
             'post' => $project,
-            'body' => json_decode($project->body)
+            'body' => json_decode($project->body)->frontend
         ]);
     }
     public function index2()

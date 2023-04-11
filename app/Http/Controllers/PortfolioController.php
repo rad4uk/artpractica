@@ -21,6 +21,7 @@ class PortfolioController extends Controller
         $category = $this->categoryRepository->firstOrFail(6);
 //        dd($category->posts[0]->makeThumbnail('345x320','fit'));
         $posts = $this->postThumbnailService->addThumbnailInList($category->posts, '570X650');
+//        dd($category, $posts);
         return view('frontend/page/portfolio', [
             'category' => $category,
             'posts' => $posts

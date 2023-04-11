@@ -57,7 +57,6 @@
 <script>
 import {adminProjectStore} from "@/store/adminlte/projectStore";
 import OptionComponent from "./OptionComponent.vue";
-
 export default {
     name: "CreateFormComponent",
     props: ['action', 'categories'],
@@ -66,7 +65,6 @@ export default {
     },
     setup() {
         const projectStore = adminProjectStore()
-
         return {projectStore}
     },
     data: () => {
@@ -77,7 +75,9 @@ export default {
             urlValue: '',
             categoryValue: -1,
             statusValue: false,
-            preview_file: null
+            preview_file: null,
+            testComponent: null,
+
         }
     },
     methods: {
@@ -113,22 +113,27 @@ export default {
             this.preview_file = event.target.files[0];
         },
         async save() {
-
             if (this.checkForm()) {
 
                 const widgetsFormName = 'widgets'
                 let formData = new FormData()
-                formData.append('formData[categoryId]', this.categoryValue)
+                formData.append('formData[category_id]', this.categoryValue)
                 formData.append('formData[title]', this.titleValue)
                 formData.append('formData[description]', this.descriptionValue)
                 formData.append('formData[slug]', this.urlValue)
                 formData.append('formData[preview_file]', this.preview_file)
                 formData.append('formData[status]', this.statusValue ? 1 : 0)
                 const emptyWidgets = this.projectStore.getEmptyWidgets;
+
                 for (let i = 0; i < emptyWidgets.length; i++) {
 
+                    const widgetId = emptyWidgets[i].id;
                     const widgetName = emptyWidgets[i].name;
+                    const widgetTitle = emptyWidgets[i].widgetTitle;
                     const widgetData = emptyWidgets[i].data;
+                    formData.append(`${widgetsFormName}[${i}][id]`, widgetId);
+                    formData.append(`${widgetsFormName}[${i}][name]`, widgetName);
+                    formData.append(`${widgetsFormName}[${i}][widgetTitle]`, widgetTitle);
 
                     const keys = Object.keys(widgetData);
                     for (const key of keys) {
@@ -136,10 +141,10 @@ export default {
 
                         if (Array.isArray(value)) {
                             for (const file of value) {
-                                formData.append(`${widgetsFormName}[${i}][${widgetName}][${key}][]`, file);
+                                formData.append(`${widgetsFormName}[${i}][data][${key}][]`, file);
                             }
                         } else {
-                            formData.append(`${widgetsFormName}[${i}][${widgetName}][${key}]`, value);
+                            formData.append(`${widgetsFormName}[${i}][data][${key}]`, value);
                         }
                     }
 

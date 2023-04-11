@@ -14,8 +14,8 @@
                      @drop="dropItem($event, index)"
                      @dragover.prevent
                 >
-                    <component :is="this.getMarkRowComponent(widget.component)"
-                               :title="widget.title"
+                    <component :is="widget.name"
+                               :title="widget.widgetTitle"
                                :name="widget.name"
                                :index="index"
                                :is_type="'section1'"
@@ -24,7 +24,7 @@
                 </div>
 
             </div>
-<!--            <button class="btn btn-success" @click="this.save()">save</button>-->
+            <!--            <button class="btn btn-success" @click="this.save()">save</button>-->
         </div>
 
         <div class="section2">
@@ -36,8 +36,8 @@
                 @dragstart="onDragStart($event, widget)"
                 v-for="(widget, index) in this.getWidgets"
             >
-                <component :is="this.getMarkRowComponent(widget.component)"
-                           :title="widget.title"
+                <component :is="widget.name"
+                           :title="widget.widgetTitle"
                            :name="widget.name"
                            :index="index"
                            :is_type="'section2'"
@@ -52,25 +52,56 @@
 <script>
 
 import {adminProjectStore} from "@/store/adminlte/projectStore";
+import Widget1 from "@/Components/Adminlte/Widget/Widget1.vue";
+import Widget2 from "@/Components/Adminlte/Widget/Widget2.vue";
+import Widget3 from "@/Components/Adminlte/Widget/Widget3.vue";
+import Widget4 from "@/Components/Adminlte/Widget/Widget4.vue";
+import Widget5 from "@/Components/Adminlte/Widget/Widget5.vue";
+
 import _ from 'lodash';
-import {markRaw} from "vue";
+
 export default {
     name: 'WidgetContainer',
+    props: ['type_admin_page', 'widgets', 'file_dir'],
+    components: {
+        Widget1,
+        Widget2,
+        Widget3,
+        Widget4,
+        Widget5
+    },
+    beforeMount() {
+        if (this.type_admin_page === 'edit') {
+            this.addWidgetInEmptyData(this.widgets)
+        }
+    },
     setup() {
         const projectStore = adminProjectStore()
 
         return {projectStore}
     },
     data: () => {
-      return {
-
-      }
+        return {}
     },
     methods: {
-        getMarkRowComponent(component){
-            return markRaw(component);
+        async addWidgetInEmptyData(widgets) {
+            await Promise.all(widgets.map(async (widget) => {
+                if (widget.data.files) {
+                    await Promise.all(widget.data.files.map(async (fileName, index) => {
+                        widget.data.files[index] = await this.fetchFile(this.file_dir, fileName)
+                    }))
+                    this.projectStore.setToEmptyWidget(widget)
+                }
+            }))
         },
-        async save(){
+        async fetchFile(dirPath, fileName) {
+            return await fetch(dirPath + '/' + fileName)
+                .then(response => response.blob())
+                .then(blob => {
+                    return new File([blob], fileName, {type: blob.type})
+                })
+        },
+        async save() {
             let formData = new FormData()
 
             const emptyWidgets = this.projectStore.getEmptyWidgets;
@@ -129,7 +160,7 @@ export default {
         onDrop(event) {
             const widgetId = parseInt(event.dataTransfer.getData("text/plain"));
             this.projectStore.getWidgets.filter(item => {
-                if(item.id === widgetId){
+                if (item.id === widgetId) {
                     let newWidget = _.cloneDeep(item)
                     this.projectStore.onDrop(newWidget)
                 }
@@ -145,10 +176,10 @@ export default {
         },
     },
     computed: {
-        getEmptyWidgets: function (){
+        getEmptyWidgets: function () {
             return this.projectStore.getEmptyWidgets
         },
-        getWidgets: function (){
+        getWidgets: function () {
             return this.projectStore.getWidgets;
         },
     }
@@ -156,9 +187,10 @@ export default {
 }
 </script>
 <style>
-.widgets{
+.widgets {
     flex: 0 1 90%;
 }
+
 .widget-container {
     width: 50%;
     /*height: 600px;*/

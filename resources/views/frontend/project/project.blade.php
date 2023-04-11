@@ -293,7 +293,7 @@
             <div class="row">
                 <h1 class="project-preview__title">{{$post->title}}</h1>
                 <div class="project-preview__container">
-                    <img src="{{asset($post->previewImagePath . $post->preview_image)}}" alt="" class="project-preview__container-img">
+                    <img src="{{asset($post->getFullImagePath($post->preview_image))}}" alt="" class="project-preview__container-img">
                 </div>
             </div>
             <div class="row">
