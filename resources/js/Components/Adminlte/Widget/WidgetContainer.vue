@@ -24,7 +24,7 @@
                 </div>
 
             </div>
-            <button class="btn btn-success" @click="this.save()">save</button>
+<!--            <button class="btn btn-success" @click="this.save()">save</button>-->
         </div>
 
         <div class="section2">

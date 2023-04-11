@@ -4,7 +4,7 @@
 
         <div class="widget1__item widget1-container" v-if="this.is_type === 'section1'">
             <label class="input-file">
-                <input class="widget1__item-input" type="file" @change="addFile">
+                <input class="widget1__item-input" type="file" ref="fileInput" @change="addFile">
                 <span v-if="this.file !== null">{{ this.file.name }}</span>
                 <span v-else>Выберите файл</span>
             </label>
@@ -33,7 +33,7 @@ export default {
     data: () => {
         return {
             textareaValue: '',
-            file: null
+            file: null,
         }
     },
     setup() {
@@ -63,6 +63,7 @@ export default {
         },
         addFile(evt) {
             const file = evt.target.files[0];
+            console.log(JSON.stringify(evt.target.files[0]))
             this.file = file
             this.projectStore.setOneFileInEmptyWidgetData(this.index, file)
         },

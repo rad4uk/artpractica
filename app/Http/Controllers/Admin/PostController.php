@@ -37,7 +37,7 @@ class PostController extends Controller
         ]);
     }
 
-    public function new(PostNewRequest $request): Response|ResponseFactory|View|Factory
+    public function new(Request $request): Response|ResponseFactory|View|Factory
     {
         $categories = Category::with('childrenRecursive')
             ->whereNull('parent_id')
