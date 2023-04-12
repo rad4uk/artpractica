@@ -96,7 +96,11 @@
 {{--                                </div>--}}
 {{--                            </div>--}}
 {{--                        </form>--}}
-                        <new-form-component :action='@json(route('admin_post_new'))' :categories='@json($categories)'></new-form-component>
+                        <new-form-component
+                            :action='@json(route('admin_post_new'))'
+                            :categories='@json($categories)'
+                            :type_admin_page='@json('new')'
+                        ></new-form-component>
                     </div>
                     @if ($errors->any())
                         <div class="alert alert-danger">

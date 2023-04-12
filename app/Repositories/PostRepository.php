@@ -44,4 +44,12 @@ class PostRepository implements PostRepositoryInterface
         return Post::where(['status' => 1, 'category_id' => $catId])
             ->offset($offset)->limit($limit)->get();
     }
+
+    public function updateOrCreate(string $slug, array $details)
+    {
+        return Post::updateOrCreate(
+            ['slug' => $slug],
+            $details
+        );
+    }
 }

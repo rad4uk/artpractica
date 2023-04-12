@@ -49,39 +49,13 @@
                                 </button>
                             </div>
                         </div>
-                        <update-form-component
+                        <new-form-component
+                            :action='@json(route('admin_post_new'))'
+                            :type_admin_page='@json('edit')'
                             :post='@json($post)'
                             :categories='@json($categories)'
-                        ></update-form-component>
-{{--                        <form action="{{route('admin_post_edit', $post->id)}}" method="POST">--}}
-{{--                            @csrf--}}
-{{--                            <div class="card-body">--}}
-{{--                                <div class="form-group">--}}
-{{--                                    <label for="inputStatus">Родительская категория</label>--}}
-{{--                                    <select id="inputStatus" name='parent' class="form-control custom-select">--}}
-{{--                                        <option value="-1">Нет</option>--}}
-{{--                                    </select>--}}
-{{--                                </div>--}}
-{{--                                <div class="form-group">--}}
-{{--                                    <label for="inputName">Заголовок</label>--}}
-{{--                                    <input type="text" id="inputName" name="title" class="form-control" value="{{$post->title}}">--}}
-{{--                                </div>--}}
-{{--                                <div class="form-group">--}}
-{{--                                    <label for="inputDescription">Описание</label>--}}
-{{--                                    <textarea id="inputDescription" name="description" class="form-control" rows="4">{{$post->description}}</textarea>--}}
-{{--                                </div>--}}
-{{--                                <div class="form-group">--}}
-{{--                                    <label for="inputUrl">Ссылка</label>--}}
-{{--                                    <input type="text" id="inputUrl" name="pageUrl" class="form-control" value="{{$post->slug}}">--}}
-{{--                                </div>--}}
-
-{{--                            </div>--}}
-{{--                            <div class="row m-lg-3">--}}
-{{--                                <div class="col-12">--}}
-{{--                                    <input type="submit" value="сохранить" class="btn btn-success float-left">--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </form>--}}
+                            :file_dir='@json($post->getDirPath())'
+                        ></new-form-component>
                     </div>
                 </div>
             </div>

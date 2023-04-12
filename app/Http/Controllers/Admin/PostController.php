@@ -63,7 +63,7 @@ class PostController extends Controller
                 return response($exception->getMessage(), 422);
             }
 
-            $this->postRepository->create($postData);
+            $this->postRepository->updateOrCreate($requestData['formData']['slug'], $postData);
 
             return response('', 201);
         }
@@ -107,7 +107,6 @@ class PostController extends Controller
             ->whereNull('parent_id')
             ->get();
         $post = $this->postRepository->findById($postId);
-        $post->preview_image = $post->getFullImagePath($post->preview_image);
 
         return view('adminlte.post.edit', [
             'categories' => $categories,

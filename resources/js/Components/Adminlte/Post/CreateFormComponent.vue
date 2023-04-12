@@ -42,7 +42,7 @@
         </div>
         <div class="row m-lg-3">
             <div class="col-12">
-                <input type="submit" value="Добавить" class="btn btn-success float-left" @click.prevent="this.save()">
+                <input type="submit" value="Сохранить" class="btn btn-success float-left" @click.prevent="this.save()">
             </div>
         </div>
     </form>
@@ -57,9 +57,10 @@
 <script>
 import {adminProjectStore} from "@/store/adminlte/projectStore";
 import OptionComponent from "./OptionComponent.vue";
+
 export default {
     name: "CreateFormComponent",
-    props: ['action', 'categories'],
+    props: ['action', 'categories', 'type_admin_page', 'post', 'file_dir'],
     components: {
         OptionComponent
     },
@@ -76,11 +77,26 @@ export default {
             categoryValue: -1,
             statusValue: false,
             preview_file: null,
-            testComponent: null,
-
+        }
+    },
+    async beforeMount() {
+        if (this.type_admin_page === 'edit') {
+            this.titleValue = this.post.title
+            this.descriptionValue = this.post.description
+            this.urlValue = this.post.slug
+            this.categoryValue = this.post.category_id
+            this.statusValue = this.post.status === 1
+            this.preview_file = await this.fetchFile(this.file_dir, this.post.preview_image)
         }
     },
     methods: {
+        async fetchFile(fileDir, fileName) {
+            return await fetch(fileDir + '/' + fileName)
+                .then(response => response.blob())
+                .then(blob => {
+                    return new File([blob], fileName, {type: blob.type});
+                });
+        },
         closeAlert(errorIndex) {
             this.errors.splice(errorIndex, 1);
         },
