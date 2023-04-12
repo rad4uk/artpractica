@@ -6,28 +6,29 @@
 
 @section('content')
     <section class="content">
-        <div class="screen">
+        <preview-component></preview-component>
+{{--        <div class="screen">--}}
 {{--            <div class="screen__image ibg">--}}
-            <div class="screen__image">
-                <picture>
+{{--            <div class="screen__image">--}}
+{{--                <picture>--}}
 {{--                    <source srcset="/media/cc0-images/surfer-240-200.jpg" media="(min-width: 600px)">--}}
 {{--                    <source srcset="{{asset('images/mainImage_1560.webp')}}" media="(min-width: 1560px)">--}}
-                    <img src="{{asset('images/mainImg.webp')}}" alt="">
-                </picture>
-            </div>
-            <div class="screen__wrapper">
-                <div class="screen__body">
-                    <p class="screen__subtitle">Мы с вами от зарождения проекта до его реализации</p>
-                    <h1 class="screen__title">СТУДИЯ <br>ДИЗАЙнА ИНТЕРЬЕРА ПОЛНОГО ЦИКЛА</h1>
-                    <div class="screen__button">
-                        <button>
-                            ОБСУДИТЬ ПРОЕКТ
-                        </button>
-                    </div>
-                </div>
+{{--                    <img src="{{asset('images/mainImg.webp')}}" alt="">--}}
+{{--                </picture>--}}
+{{--            </div>--}}
+{{--            <div class="screen__wrapper">--}}
+{{--                <div class="screen__body">--}}
+{{--                    <p class="screen__subtitle">Мы с вами от зарождения проекта до его реализации</p>--}}
+{{--                    <h1 class="screen__title">СТУДИЯ <br>ДИЗАЙнА ИНТЕРЬЕРА ПОЛНОГО ЦИКЛА</h1>--}}
+{{--                    <div class="screen__button">--}}
+{{--                        <button>--}}
+{{--                            ОБСУДИТЬ ПРОЕКТ--}}
+{{--                        </button>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
 
-            </div>
-        </div>
+{{--            </div>--}}
+{{--        </div>--}}
         <div class="about">
             <div class="container">
                 <div class="about__title">

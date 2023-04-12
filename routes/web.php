@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ImageController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\ConsultationController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\HomeController;
@@ -89,3 +90,5 @@ Route::get('/portfolio/project-788/', [ProjectController::class, 'index4'])->nam
 Route::get('/services/', [ServicesController::class, 'index'])->name('services');
 Route::get('/about/', [AboutController::class, 'index'])->name('about');
 Route::get('/contact-us/', ContactController::class)->name('contact');
+
+Route::post('/consultation/send', ConsultationController::class);

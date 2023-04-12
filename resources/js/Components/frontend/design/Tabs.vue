@@ -160,7 +160,9 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+@import "@root/sass/frontend/variables.scss";
+
 .container{
     position: relative;
 }
@@ -188,7 +190,7 @@ export default {
     }
     .tabs__row{
         /*display: none;*/
-        border: 1px solid rgba(189, 170, 135, 1);
+        border: 1px solid $mobile-border-color;
         border-top: 0;
     }
     .tabs-active{

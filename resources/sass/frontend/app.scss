@@ -64,6 +64,7 @@ input:-webkit-autofill:focus {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+        flex: 0 1 100%;
         margin: 0 -15px;
         @media (max-width: $tablet-media) {
             flex-direction: column;
@@ -146,7 +147,7 @@ input:-webkit-autofill:focus {
             //        bottom: 5px;
             //    }
             //}
-            input{
+            input, textarea{
                 padding-bottom: 8px;
                 outline: none;
                 background: rgba(16, 14, 12, 1);
@@ -162,7 +163,8 @@ input:-webkit-autofill:focus {
                     padding-bottom: 5px;
                 }
             }
-            input::placeholder{
+
+            input::placeholder, textarea::placeholder{
                 color: rgba(255, 255, 255, 0.7);
             }
         }
