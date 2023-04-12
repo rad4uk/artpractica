@@ -258,20 +258,7 @@
                 </div>
             </div>
         </div>
-        <div class="discuss">
-            <div class="discuss__screen">
-                <img lazy v-lazy="{ src: '{{ asset('images/img_10.png') }}' }" alt="">
-            </div>
-            <div class="discuss__wrapper">
-                <div class="discuss__content">
-                    <div class="discuss__title">
-                        <h1>Хотите обсудить проект? Давайте начнём</h1>
-                    </div>
-                    <button class="discuss__button">Оставить заявку</button>
-                </div>
-
-            </div>
-        </div>
+        <discuss-component :image_path='@json(asset('images/img_10.png'))'></discuss-component>
 
         <professional-component></professional-component>
 

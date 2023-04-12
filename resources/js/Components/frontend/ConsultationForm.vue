@@ -90,6 +90,11 @@ export default {
             } catch (error) {
                 this.message = error.response.data
                 this.isMessage = true
+            }finally {
+                setTimeout(() => {
+                    this.message = ''
+                    this.isMessage = false
+                }, 5000);
             }
         },
         setDefaultValue(){
