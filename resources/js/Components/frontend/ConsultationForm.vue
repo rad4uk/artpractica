@@ -8,7 +8,11 @@
                     </div>
 
                     <div class="feedback__form-item" :class="{ 'has-error': phoneField.error && !phoneField.value }">
-                        <input type="text" id="feedback__form-phone" v-model="phoneField.value" placeholder="телефон">
+                        <input type="text" id="feedback__form-phone"
+                               v-model="phoneField.value"
+                               ref="field"
+                               placeholder="телефон"
+                        >
                     </div>
                     <div class="feedback__form-item feedback__form-textarea">
                         <textarea id="feedback__form-text" v-model="textField.value" placeholder="комментарий" rows="3"></textarea>
@@ -17,7 +21,7 @@
                             @click.prevent="this.sendConsultation()"
                     >ОБРАТНЫЙ ЗВОНОК</button>
 
-                    <div v-if="isMessage" class="popup-message">
+                    <div v-show="isMessage" class="popup-message">
                         <p class="success">
                             {{this.message}}
                         </p>
@@ -35,11 +39,17 @@
 
 <script>
 import axios from "axios";
+import Inputmask from "inputmask";
 
 export default {
     name: "ConsultationForm",
+    props: {
+        mask: {type: String},
+    },
     data: () => {
         return {
+            maskRussia: "+7 (999) 999-99-99",
+            maskedField: "",
             message: '',
             isMessage: false,
             errors: [],
@@ -56,6 +66,10 @@ export default {
                 error: false
             },
         }
+    },
+    mounted() {
+        this.maskedField = new Inputmask(this.maskRussia);
+        this.maskedField.mask(this.$refs.field);
     },
     methods: {
         submitForm() {
@@ -90,11 +104,6 @@ export default {
             } catch (error) {
                 this.message = error.response.data
                 this.isMessage = true
-            }finally {
-                setTimeout(() => {
-                    this.message = ''
-                    this.isMessage = false
-                }, 5000);
             }
         },
         setDefaultValue(){
@@ -110,6 +119,13 @@ export default {
 </script>
 
 <style scoped>
+.feedback__form{
+    gap: 45px;
+}
+.feedback__form form{
+    margin-bottom: 0;
+}
+
 .popup-message{
     margin-top: 45px;
     display: flex;
