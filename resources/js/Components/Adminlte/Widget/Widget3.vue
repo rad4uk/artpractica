@@ -111,10 +111,10 @@ export default {
 
             if (fileIndex === 0){
                 this.file1 = file
-                this.projectStore.setFileInEmptyWidgetData(this.index, file)
+                this.projectStore.setFileInEmptyWidgetData(this.index, fileIndex, file)
             }else{
                 this.file2 = file
-                this.projectStore.setFileInEmptyWidgetData(this.index, file)
+                this.projectStore.setFileInEmptyWidgetData(this.index, fileIndex, file)
             }
         },
     },

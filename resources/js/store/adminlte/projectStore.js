@@ -75,8 +75,8 @@ export const adminProjectStore = defineStore('projectStore', {
         setTextInEmptyWidgetData(index, text){
             this.emptyWidgets[index].data.text = text
         },
-        setFileInEmptyWidgetData(index, file){
-            this.emptyWidgets[index].data.files.push(file)
+        setFileInEmptyWidgetData(index, fileIndex, file){
+            this.emptyWidgets[index].data.files[fileIndex] = file
         },
         setOneFileInEmptyWidgetData(index, file){
             this.emptyWidgets[index].data.files[0] = file

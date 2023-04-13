@@ -37,11 +37,49 @@ class PostController extends Controller
         ]);
     }
 
-    public function new(Request $request): Response|ResponseFactory|View|Factory
+    public function create(Request $request): Response|ResponseFactory|View|Factory
     {
         $categories = Category::with('childrenRecursive')
             ->whereNull('parent_id')
             ->get();
+        if ($request->isMethod('POST')) {
+            $requestData = $request->request->all();
+            $filesData = $request->files->all();
+            $adminWidgetData = $this->postService->matchingRequestData(
+                $request->request->all(),
+                $request->files->all()
+            );
+            $frontendWidgetData = $this->postService->setWidgetsData($adminWidgetData['admin']);
+            try {
+                $postData = $this->postService->setPostData(
+                    $requestData['formData'],
+                    $filesData['formData'],
+                    json_encode(
+                        array_merge($frontendWidgetData, $adminWidgetData)
+                    )
+                );
+            } catch (\RuntimeException $exception) {
+                return response($exception->getMessage(), 422);
+            }
+
+            $this->postRepository->create($postData);
+
+            return response('', 201);
+        }
+        return view('adminlte.post.new', [
+            'categories' => $categories,
+        ]);
+    }
+
+    public function update(
+        Request $request,
+        int $postId
+    )
+    {
+        $categories = Category::with('childrenRecursive')
+            ->whereNull('parent_id')
+            ->get();
+        $post = $this->postRepository->findById($postId);
 
         if ($request->isMethod('POST')) {
             $requestData = $request->request->all();
@@ -63,50 +101,10 @@ class PostController extends Controller
                 return response($exception->getMessage(), 422);
             }
 
-            $this->postRepository->updateOrCreate($requestData['formData']['slug'], $postData);
+            $this->postRepository->update($postId, $postData);
 
             return response('', 201);
         }
-        return view('adminlte.post.new', [
-            'categories' => $categories,
-        ]);
-    }
-
-    public function create(PostCreateRequest $request)
-    {
-        $validated = $request->validated();
-
-        $image = $request->files->get('preview_image');
-
-        $fileName = time() . '_' . $image->getClientOriginalName();
-
-        $filesPath = Storage::disk('public')->putFileAs('/images', $image, $fileName);
-
-//        $postService = new PostService(
-//            $validated['title'],
-//            $validated['description'],
-//            ($validated['parent'] == -1) ? null : $validated['parent'],
-//            $validated['slug'],
-//            ($request->status === 'on') ? 1 : 0,
-//            url('/storage/' . $filesPath)
-//        );
-
-//        $this->postRepository->create($this->postService->getDetails());
-
-        return redirect(route('admin_post_index'), 303);
-
-
-//        return view('adminlte.post.new', [
-//            'categories' => $categories
-//        ]);
-    }
-
-    public function update(int $postId)
-    {
-        $categories = Category::with('childrenRecursive')
-            ->whereNull('parent_id')
-            ->get();
-        $post = $this->postRepository->findById($postId);
 
         return view('adminlte.post.edit', [
             'categories' => $categories,

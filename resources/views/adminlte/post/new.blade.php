@@ -97,7 +97,7 @@
 {{--                            </div>--}}
 {{--                        </form>--}}
                         <new-form-component
-                            :action='@json(route('admin_post_new'))'
+                            :action='@json(route('admin_post_create'))'
                             :categories='@json($categories)'
                             :type_admin_page='@json('new')'
                         ></new-form-component>

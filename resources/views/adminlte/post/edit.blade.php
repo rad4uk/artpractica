@@ -50,7 +50,7 @@
                             </div>
                         </div>
                         <new-form-component
-                            :action='@json(route('admin_post_new'))'
+                            :action='@json(route('admin_post_edit', $post->id))'
                             :type_admin_page='@json('edit')'
                             :post='@json($post)'
                             :categories='@json($categories)'

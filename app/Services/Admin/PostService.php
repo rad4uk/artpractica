@@ -4,6 +4,7 @@ namespace App\Services\Admin;
 
 use App\Enums\ProjectWidgetEnum;
 use App\Exceptions\WidgetNotFoundException;
+use App\ValueObjects\Files;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
@@ -55,8 +56,14 @@ class PostService
          */
         $previewImage = $filesData['preview_file'];
         $this->saveFile($filesData['preview_file']);
+        $files = new Files();
+        foreach ($filesData['apartment_images'] as $image){
+            $this->saveFile($image);
+            $files->setFile($image);
+        }
         return array_merge($formData, [
             'preview_image' => $previewImage->getClientOriginalName(),
+            'apartment_images' => json_encode($files),
             'body' => $body
         ]);
     }

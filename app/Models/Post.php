@@ -20,6 +20,7 @@ class Post extends Model
         'category_id',
         'status',
         'preview_image',
+        'apartment_images',
         'body'
     ];
 

@@ -32,7 +32,7 @@
             <div class="container-fluid">
                 <div class="row mb-3">
                     <div class="col-12" style="display: flex;justify-content: right">
-                        <a href="{{route('admin_post_new')}}" class="btn btn-success">Добавить проект</a>
+                        <a href="{{route('admin_post_create')}}" class="btn btn-success">Добавить проект</a>
                     </div>
                 </div>
             </div>
@@ -86,17 +86,6 @@
                                 <td>
                                     {{$post->description}}
                                 </td>
-
-                                {{--                            <td>--}}
-                                {{--                                <ul class="list-inline">--}}
-                                {{--                                    @foreach($category->images as $image)--}}
-                                {{--                                    <li class="list-inline-item">--}}
-                                {{--                                        <img alt="{{$image->alt}}" src="{{$image->path}}" style="width: 2.5rem">--}}
-                                {{--                                    </li>--}}
-                                {{--                                        @break;--}}
-                                {{--                                    @endforeach--}}
-                                {{--                                </ul>--}}
-                                {{--                            </td>--}}
 
                                 <td>
                                     <a href="{{$post->slug}}">{{$post->slug}}</a>

@@ -31,6 +31,15 @@
                 </div>
             </div>
             <div class="form-group">
+                <label for="inputDescription">Фотографии планировки</label>
+                <div class="custom-file">
+                    <input type="file" name="apartment_images" multiple class="custom-file-input" id="validatedCustomFile"
+                           @change="addedApartmentsImages"
+                           required>
+                    <label class="custom-file-label" for="validatedCustomFile">Выберите файлы...</label>
+                </div>
+            </div>
+            <div class="form-group">
                 <label for="inputUrl">Ссылка (должна быть уникальной)</label>
                 <input type="text" id="inputUrl" name="slug" v-model="urlValue" class="form-control">
             </div>
@@ -68,6 +77,9 @@ export default {
         const projectStore = adminProjectStore()
         return {projectStore}
     },
+    mounted() {
+        console.log(this.action)
+    },
     data: () => {
         return {
             errors: [],
@@ -77,6 +89,7 @@ export default {
             categoryValue: -1,
             statusValue: false,
             preview_file: null,
+            apartment_images: []
         }
     },
     async beforeMount() {
@@ -90,6 +103,13 @@ export default {
         }
     },
     methods: {
+        addedApartmentsImages(event){
+            this.apartment_images = [];
+            const files =  event.target.files;
+            for (let i = 0; i < files.length; i++) {
+                this.apartment_images.push(files[i])
+            }
+        },
         async fetchFile(fileDir, fileName) {
             return await fetch(fileDir + '/' + fileName)
                 .then(response => response.blob())
@@ -118,6 +138,9 @@ export default {
             if (this.file === null) {
                 this.errors.push('Вы забыли добавить фото проекта.');
             }
+            if (this.apartment_images.length === 0){
+                this.errors.push('Вы забыли добавить фотографии планировки');
+            }
 
             if (!this.errors.length) {
                 return true;
@@ -139,6 +162,13 @@ export default {
                 formData.append('formData[slug]', this.urlValue)
                 formData.append('formData[preview_file]', this.preview_file)
                 formData.append('formData[status]', this.statusValue ? 1 : 0)
+
+                if (this.apartment_images.length > 0){
+                    this.apartment_images.forEach( (file) => {
+                        formData.append('formData[apartment_images][]', file)
+                    })
+                }
+
                 const emptyWidgets = this.projectStore.getEmptyWidgets;
 
                 for (let i = 0; i < emptyWidgets.length; i++) {
@@ -167,7 +197,7 @@ export default {
                 }
 
                 try {
-                    const response = await axios.post('/api/project/new', formData, {
+                    const response = await axios.post(this.action, formData, {
                         headers: {
                             'Content-Type': 'multipart/form-data'
                         }
