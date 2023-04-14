@@ -91,7 +91,7 @@ export default {
 
 <style lang="scss" scoped>
 .project-scheme img{
-    object-fit: cover;
+    object-fit: contain;
 }
 .apartment__swiper{
     display: flex;
