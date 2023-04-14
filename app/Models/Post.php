@@ -24,6 +24,11 @@ class Post extends Model
         'body'
     ];
 
+    public function additionalPostsToMany()
+    {
+        return $this->belongsToMany(Post::class, 'posts_posts', 'post_source', 'post_target');
+    }
+
     public function getFullImagePath(string $imageName): string
     {
         return asset($this->previewImagePath . $imageName);

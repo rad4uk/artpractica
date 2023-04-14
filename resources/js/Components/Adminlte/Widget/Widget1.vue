@@ -43,7 +43,6 @@ export default {
     mounted() {
         if(this.is_type === 'section1'){
             let widgetData = this.getDataInStore()
-            // console.log(widgetData.files)
             if (widgetData.files.length > 0){
                 this.file = widgetData.files[0]
             }
@@ -64,7 +63,6 @@ export default {
         },
         addFile(evt) {
             const file = evt.target.files[0];
-            console.log(JSON.stringify(evt.target.files[0]))
             this.file = file
             this.projectStore.setOneFileInEmptyWidgetData(this.index, file)
         },

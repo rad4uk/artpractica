@@ -14,6 +14,17 @@ class PostRepository implements PostRepositoryInterface
         return Post::orderBy('updated_at', 'DESC')->get();
     }
 
+    public function additionalPostsPublishList(int $excludedPostId = 0)
+    {
+        $post = Post::where('status', 1)->orderBy('updated_at', 'DESC');
+        if ($excludedPostId){
+            $post->where('id', '!=', $excludedPostId);
+        }
+        return $post;
+    }
+
+
+
     public function findById(int $postId)
     {
         return Post::query()->findOrFail($postId);

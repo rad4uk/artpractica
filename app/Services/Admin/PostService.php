@@ -61,6 +61,7 @@ class PostService
             $this->saveFile($image);
             $files->setFile($image);
         }
+        unset($formData['additionalPosts']);
         return array_merge($formData, [
             'preview_image' => $previewImage->getClientOriginalName(),
             'apartment_images' => json_encode($files),

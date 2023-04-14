@@ -53,6 +53,8 @@
                             :action='@json(route('admin_post_edit', $post->id))'
                             :type_admin_page='@json('edit')'
                             :post='@json($post)'
+                            :all_additional_posts='@json($posts)'
+                            :additional_posts='@json($additionalPosts)'
                             :categories='@json($categories)'
                             :file_dir='@json($post->getDirPath())'
                         ></new-form-component>

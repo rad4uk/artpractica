@@ -91,7 +91,7 @@
                                     <a href="{{$post->slug}}">{{$post->slug}}</a>
                                 </td>
                                 <td class="project-actions text-right">
-                                    <a class="btn btn-primary btn-sm" href="#">
+                                    <a class="btn btn-primary btn-sm" target="_blank" href="{{route('admin_post_preview', $post->id)}}">
                                         <i class="fas fa-folder">
                                         </i>
                                         View

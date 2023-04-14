@@ -45,6 +45,7 @@ Route::prefix('admin')->middleware([
 
     Route::prefix('post')->group(function (){
         Route::get('/', [PostController::class, 'index'])->name('admin_post_index');
+        Route::get('/{id}/preview', [PostController::class, 'preview'])->name('admin_post_preview');
         Route::any('/create', [PostController::class, 'create'])->name('admin_post_create');
         Route::any('/{id}/edit', [PostController::class, 'update'])->name('admin_post_edit');
         Route::post('/{id}/delete', [PostController::class, 'delete'])->name('admin_post_delete');
@@ -82,7 +83,7 @@ Route::get('/storage/images/{dir}/{size}/{method}/{file}', [ThumbnailController:
 //});
 Route::get('/portfolio', [PortfolioController::class, 'index'])->name('portfolio');
 Route::get('/portfolio/{slug}/', [ProjectController::class, 'index'])->name('project1');
-Route::get('/portfolio/project-715/', [ProjectController::class, 'index'])->name('project1');
+Route::get('/portfolio/project-715/', [ProjectController::class, 'index'])->name('project5');
 Route::get('/portfolio/project-716/', [ProjectController::class, 'index2'])->name('project2');
 Route::get('/portfolio/project-562/', [ProjectController::class, 'index3'])->name('project3');
 Route::get('/portfolio/project-788/', [ProjectController::class, 'index4'])->name('project4');

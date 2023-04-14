@@ -40,6 +40,15 @@
                 </div>
             </div>
             <div class="form-group">
+                <label>Дополнительные проекты</label>
+                <select multiple="" class="form-control" v-model="additionalPostsValue">
+                    <option v-for="(post, idx) in this.all_additional_posts"
+                            :key="idx"
+                            :value="post.id"
+                    >{{post.title}}</option>
+                </select>
+            </div>
+            <div class="form-group">
                 <label for="inputUrl">Ссылка (должна быть уникальной)</label>
                 <input type="text" id="inputUrl" name="slug" v-model="urlValue" class="form-control">
             </div>
@@ -57,7 +66,9 @@
     </form>
     <div v-if="errors.length" class="row m-lg-3">
         <ul class="error-list">
-            <li v-for="(error, index) in errors" class="error-list__item alert alert-warning">{{ error }}<span
+            <li v-for="(error, index) in errors"
+                class="error-list__item alert alert-warning"
+            >{{ error }}<span
                 @click="closeAlert(index)">x</span></li>
         </ul>
     </div>
@@ -69,7 +80,15 @@ import OptionComponent from "./OptionComponent.vue";
 
 export default {
     name: "CreateFormComponent",
-    props: ['action', 'categories', 'type_admin_page', 'post', 'file_dir'],
+    props: [
+        'action',
+        'categories',
+        'type_admin_page',
+        'post',
+        'file_dir',
+        'additional_posts',
+        'all_additional_posts',
+    ],
     components: {
         OptionComponent
     },
@@ -78,11 +97,15 @@ export default {
         return {projectStore}
     },
     mounted() {
-        console.log(this.action)
+        this.additional_posts.forEach( item => {
+            this.additionalPostsValue.push(item.id)
+        })
+        console.log(this.post.apartment_images)
     },
     data: () => {
         return {
             errors: [],
+            additionalPostsValue: [],
             titleValue: '',
             descriptionValue: '',
             urlValue: '',
@@ -100,12 +123,27 @@ export default {
             this.categoryValue = this.post.category_id
             this.statusValue = this.post.status === 1
             this.preview_file = await this.fetchFile(this.file_dir, this.post.preview_image)
+            const apartment_images = JSON.parse(this.post.apartment_images)
+            if (apartment_images.length > 0){
+                await this.setApartmentImages(apartment_images)
+            }
+            // this.additional_posts.forEach((item) => {
+            //     this.additionalPostsValue.push(item.id)
+            // })
         }
     },
     methods: {
+        async setApartmentImages(images){
+            await Promise.all(
+                images.map( async (fileName) => {
+                    let file = await this.fetchFile(this.file_dir, fileName)
+                    this.apartment_images.push(file)
+                })
+            )
+        },
         addedApartmentsImages(event){
             this.apartment_images = [];
-            const files =  event.target.files;
+            const files = event.target.files;
             for (let i = 0; i < files.length; i++) {
                 this.apartment_images.push(files[i])
             }
@@ -166,6 +204,12 @@ export default {
                 if (this.apartment_images.length > 0){
                     this.apartment_images.forEach( (file) => {
                         formData.append('formData[apartment_images][]', file)
+                    })
+                }
+                // console
+                if (this.additionalPostsValue.length > 0) {
+                    this.additionalPostsValue.forEach( (postId) => {
+                        formData.append('formData[additionalPosts][]', postId)
                     })
                 }
 

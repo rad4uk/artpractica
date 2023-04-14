@@ -25,6 +25,10 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+.project__image{
+    img{
+        object-fit: cover;
+    }
+}
 </style>

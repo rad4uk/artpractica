@@ -37,23 +37,35 @@ class PostController extends Controller
         ]);
     }
 
+    public function preview(int $postId)
+    {
+        $project = Post::where('id', $postId)->firstOrFail();
+
+        return view('frontend/project/project', [
+            'post' => $project,
+            'body' => json_decode($project->body)->frontend
+        ]);
+    }
+
     public function create(Request $request): Response|ResponseFactory|View|Factory
     {
         $categories = Category::with('childrenRecursive')
             ->whereNull('parent_id')
             ->get();
+        $posts = $this->postRepository->additionalPostsPublishList()->get();
         if ($request->isMethod('POST')) {
             $requestData = $request->request->all();
-            $filesData = $request->files->all();
-            $adminWidgetData = $this->postService->matchingRequestData(
-                $request->request->all(),
-                $request->files->all()
-            );
+            $allFilesData = $request->files->all();
+
+            $formData = $requestData['formData'];
+            $filesData = $allFilesData['formData'];
+
+            $adminWidgetData = $this->postService->matchingRequestData($requestData, $allFilesData);
             $frontendWidgetData = $this->postService->setWidgetsData($adminWidgetData['admin']);
             try {
                 $postData = $this->postService->setPostData(
-                    $requestData['formData'],
-                    $filesData['formData'],
+                    $formData,
+                    $filesData,
                     json_encode(
                         array_merge($frontendWidgetData, $adminWidgetData)
                     )
@@ -61,38 +73,42 @@ class PostController extends Controller
             } catch (\RuntimeException $exception) {
                 return response($exception->getMessage(), 422);
             }
-
-            $this->postRepository->create($postData);
+            $post = $this->postRepository->create($postData);
+            if (isset($formData['additionalPosts']) && count($formData['additionalPosts']) > 0) {
+                $post->additionalPostsToMany()->attach($formData['additionalPosts']);
+            }
 
             return response('', 201);
         }
         return view('adminlte.post.new', [
             'categories' => $categories,
+            'posts' => $posts,
         ]);
     }
 
-    public function update(
-        Request $request,
-        int $postId
-    )
+    public function update(Request $request, int $postId): Response|ResponseFactory|View|Factory
     {
         $categories = Category::with('childrenRecursive')
             ->whereNull('parent_id')
             ->get();
         $post = $this->postRepository->findById($postId);
 
+        $posts = $this->postRepository->additionalPostsPublishList($postId)->get();
+
         if ($request->isMethod('POST')) {
             $requestData = $request->request->all();
-            $filesData = $request->files->all();
-            $adminWidgetData = $this->postService->matchingRequestData(
-                $request->request->all(),
-                $request->files->all()
-            );
+            $allFilesData = $request->files->all();
+
+            $formData = $requestData['formData'];
+            $filesData = $allFilesData['formData'];
+
+
+            $adminWidgetData = $this->postService->matchingRequestData($requestData, $allFilesData);
             $frontendWidgetData = $this->postService->setWidgetsData($adminWidgetData['admin']);
             try {
                 $postData = $this->postService->setPostData(
-                    $requestData['formData'],
-                    $filesData['formData'],
+                    $formData,
+                    $filesData,
                     json_encode(
                         array_merge($frontendWidgetData, $adminWidgetData)
                     )
@@ -102,6 +118,10 @@ class PostController extends Controller
             }
 
             $this->postRepository->update($postId, $postData);
+            if (isset($formData['additionalPosts']) && count($formData['additionalPosts']) > 0) {
+                $post->additionalPostsToMany()->sync($formData['additionalPosts']);
+            }
+
 
             return response('', 201);
         }
@@ -109,6 +129,8 @@ class PostController extends Controller
         return view('adminlte.post.edit', [
             'categories' => $categories,
             'post' => $post,
+            'posts' => $posts,
+            'additionalPosts' => $post->additionalPostsToMany()->get(),
             'body' => json_decode($post->body)->admin,
         ]);
     }
