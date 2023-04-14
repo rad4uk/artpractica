@@ -93,20 +93,6 @@ export default {
             }
             return ''
         },
-        // getFileInStore(){
-        //     const widget =  this.projectStore.getEmptyWidgetByIndex(this.index);
-        //     const fileLength = widget.data.files.length
-        //     if (fileLength > 0){
-        //         if (fileLength === 1){
-        //             return widget.data.files[0]
-        //         }
-        //         if (fileLength === 2){
-        //             return widget.data.files[1]
-        //         }
-        //     }
-        //
-        //     return null;
-        // },
         addFile(event, fileIndex) {
             const file = event.target.files[0];
 

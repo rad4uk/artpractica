@@ -285,6 +285,9 @@
                         </a>
                     </li>
                     @foreach($categories as $cat)
+                        @if($cat['id'] === 1)
+                            @continue
+                        @endif
                         <li class="tabs__list-item">
                             <a href="{{$cat['slug']}}">
                                 {{$cat['title']}}

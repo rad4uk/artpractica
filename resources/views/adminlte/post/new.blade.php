@@ -100,6 +100,7 @@
                             :action='@json(route('admin_post_create'))'
                             :categories='@json($categories)'
                             :type_admin_page='@json('new')'
+                            :all_additional_posts='@json($posts)'
                             :posts='@json($posts)'
                         ></new-form-component>
                     </div>

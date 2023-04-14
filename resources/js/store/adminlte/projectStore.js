@@ -22,7 +22,7 @@ export const adminProjectStore = defineStore('projectStore', {
                 // component: markRaw(Widget2),
                 widgetTitle: 'Два изображение шириной 30% на 70% с описанием',
                 data: {
-                    text: null,
+                    text: '',
                     files: [],
                 }
             },
@@ -32,7 +32,7 @@ export const adminProjectStore = defineStore('projectStore', {
                 // component: markRaw(Widget3),
                 widgetTitle: 'Два изображение шириной 50% на 50% с описанием',
                 data: {
-                    text: null,
+                    text: '',
                     files: [],
                 }
             },
@@ -42,7 +42,7 @@ export const adminProjectStore = defineStore('projectStore', {
                 // component: markRaw(Widget4),
                 widgetTitle: 'Заголовок',
                 data: {
-                    title: null
+                    title: ''
                 }
             },
             {
@@ -51,7 +51,7 @@ export const adminProjectStore = defineStore('projectStore', {
                 // component: markRaw(Widget5),
                 widgetTitle: 'Квадратное изображение с описанием',
                 data: {
-                    text: null,
+                    text: '',
                     files: [],
                 }
             },
