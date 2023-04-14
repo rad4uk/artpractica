@@ -82,7 +82,8 @@ Route::get('/storage/images/{dir}/{size}/{method}/{file}', [ThumbnailController:
 ////    })->name('dashboard');
 //});
 Route::get('/portfolio', [PortfolioController::class, 'index'])->name('portfolio');
-Route::get('/portfolio/{slug}/', [ProjectController::class, 'index'])->name('projects');
+Route::get('/portfolio/{categorySlug}/', [PortfolioController::class, 'categories'])->name('categories');
+Route::get('/portfolio/project/{slug}/', [ProjectController::class, 'index'])->name('projects');
 Route::get('/portfolio/project-715/', [ProjectController::class, 'index'])->name('project5');
 Route::get('/portfolio/project-716/', [ProjectController::class, 'index2'])->name('project2');
 Route::get('/portfolio/project-562/', [ProjectController::class, 'index3'])->name('project3');

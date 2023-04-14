@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Interfaces\PostRepositoryInterface;
+use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -14,9 +15,14 @@ class ProjectController extends Controller
     {
     }
 
+
+
+
     public function index(string $slug)
     {
         $project = Post::where('slug', $slug)->firstOrFail();
+//        $categories = Category::where('status', 1)->limit(5)->get();
+//        dd($categories);
         $apartmentImages = [];
         foreach (json_decode($project->apartment_images) as $imageName){
             $apartmentImages[] = $project->getFullImagePath($imageName);

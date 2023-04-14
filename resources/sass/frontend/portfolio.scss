@@ -18,6 +18,9 @@
         line-height: 22px;
         color: $color-white;
         padding: 5px 0;
+        a{
+            color: $color-white;
+        }
     }
     .active{
         font-family: 'Montserrat';

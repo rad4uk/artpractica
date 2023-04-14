@@ -332,7 +332,6 @@
         :apartment_images='@json($apartmentImages)'
         :preview_image='@json(asset($post->getFullImagePath($post->preview_image)))'
     >
-
     </preview-component>
 
     <div class="project-wrapper">
@@ -340,11 +339,12 @@
             @include('frontend.project.widgets.' . $widget->name, ['widget' => $widget])
         @endforeach
     </div>
-
-    <post-slider-component
-        :posts='@json($additionalPostsData)'
-    >
-    </post-slider-component>
+    @if(count($additionalPostsData) > 0)
+        <post-slider-component
+            :posts='@json($additionalPostsData)'
+        >
+        </post-slider-component>
+    @endif
 
     <feedback-component></feedback-component>
 @endsection
