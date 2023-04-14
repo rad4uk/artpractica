@@ -306,6 +306,9 @@
             color: $color-white;
             padding-bottom: 9px;
             border-bottom: 1px solid #403432;
+            a{
+                color: $color-white;
+            }
         }
         .active{
             border-bottom: 3px solid #403432;

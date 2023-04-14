@@ -17,14 +17,13 @@
                                 Все объекты
                             </a>
                         @endif
-
                     </li>
                     @foreach($categories as $cat)
                         @if($cat['id'] === 1)
                             @continue
                         @else
                             @if($category->id === $cat['id'])
-                                <li class="tabs__item">
+                                <li class="tabs__item active">
                                     {{$cat['title']}}
                                 </li>
                             @else
