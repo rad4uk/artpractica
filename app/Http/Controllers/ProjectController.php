@@ -25,8 +25,8 @@ class ProjectController extends Controller
         $additionalPosts = $project->additionalPostsToMany()->get();
         foreach ($additionalPosts as $key => $post){
             $additionalPostsData[$key]['title'] = $post->title;
-            $additionalPostsData[$key]['preview_image'] =$project->getFullImagePath($post->preview_image);
-            $additionalPostsData[$key]['slug'] = route('project1', $post->slug);
+            $additionalPostsData[$key]['preview_image'] = $project->getFullImagePath($post->preview_image);
+            $additionalPostsData[$key]['slug'] = route('projects', $post->slug);
         }
         return view('frontend/project/project', [
             'post' => $project,

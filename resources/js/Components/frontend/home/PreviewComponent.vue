@@ -2,7 +2,7 @@
     <div class="screen">
         <div class="screen__image">
             <picture>
-                <img src="/images/mainImg.webp" alt="">
+                <img :src="this.preview_image" alt="">
             </picture>
         </div>
         <div class="screen__wrapper">
@@ -26,6 +26,7 @@ import { homeStore } from "../../../store/frontemd/homeStore.js";
 import ConsultationPopupComponent from "../ConsultationPopupComponent.vue";
 export default {
     name: "PreviewComponent",
+    props: ['preview_image'],
     components: {
         ConsultationPopupComponent
     },

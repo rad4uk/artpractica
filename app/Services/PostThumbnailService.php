@@ -12,18 +12,18 @@ class PostThumbnailService
     const METHOD = 'fit';
     const DIR = 'size';
 
-    public function addThumbnailInList(Collection $posts, string $size): array
+    public function addThumbnailInList(Collection $posts, string $size = '570x650'): array
     {
         $items = [];
         foreach ($posts as $key => $post){
             $items[$key]['id'] = $post->id;
             $items[$key]['title'] = $post->title;
             $items[$key]['description'] = $post->description;
-            $items[$key]['slug'] = $post->slug;
+            $items[$key]['slug'] = route('projects', $post->slug);
             $items[$key]['preview_image'] = route('thumbnail', [
                 'dir' => 'size',
                 'method' => 'fit',
-                'size' => '570x650',
+                'size' => $size,
                 'file' => File::basename($post->preview_image)
             ]);
         }

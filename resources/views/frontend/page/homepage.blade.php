@@ -6,7 +6,9 @@
 
 @section('content')
     <section class="content">
-        <preview-component></preview-component>
+        <preview-component
+            :preview_image='@json(asset('images/mainImg.webp'))'
+        ></preview-component>
 {{--        <div class="screen">--}}
 {{--            <div class="screen__image ibg">--}}
 {{--            <div class="screen__image">--}}

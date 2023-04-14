@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
-    private string $previewImagePath = '/storage/images/project/';
+    public string $previewImagePath = '/storage/images/project/';
 
     use HasFactory;
     use HasThumbnail;

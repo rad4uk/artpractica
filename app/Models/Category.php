@@ -49,7 +49,7 @@ class Category extends Model
         return $this
             ->hasMany(Post::class, 'category_id')
             ->where(['status' => 1])
-            ->limit(10)
+            ->limit(20)
             ;
     }
 
