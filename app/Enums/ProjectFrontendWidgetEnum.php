@@ -8,7 +8,7 @@ use App\Widgets\Projects\Widget2;
 use App\Widgets\Projects\Widget3;
 use App\Widgets\Projects\Widget4;
 
-enum ProjectWidgetEnum: string
+enum ProjectFrontendWidgetEnum: string
 {
     case Widget1 = Widget1::class;
     case Widget2 = Widget2::class;
@@ -18,10 +18,10 @@ enum ProjectWidgetEnum: string
     public static function getWidgetClass(string $widgetName): string
     {
         return match ($widgetName) {
-            ProjectWidgetEnum::Widget1->name => ProjectWidgetEnum::Widget1->value,
-            ProjectWidgetEnum::Widget2->name => ProjectWidgetEnum::Widget2->value,
-            ProjectWidgetEnum::Widget3->name => ProjectWidgetEnum::Widget3->value,
-            ProjectWidgetEnum::Widget4->name => ProjectWidgetEnum::Widget4->value,
+            ProjectFrontendWidgetEnum::Widget1->name => ProjectFrontendWidgetEnum::Widget1->value,
+            ProjectFrontendWidgetEnum::Widget2->name => ProjectFrontendWidgetEnum::Widget2->value,
+            ProjectFrontendWidgetEnum::Widget3->name => ProjectFrontendWidgetEnum::Widget3->value,
+            ProjectFrontendWidgetEnum::Widget4->name => ProjectFrontendWidgetEnum::Widget4->value,
             default => throw new WidgetNotFoundException(sprintf('Ошибка, виджет %s не найден', $widgetName))
         };
     }

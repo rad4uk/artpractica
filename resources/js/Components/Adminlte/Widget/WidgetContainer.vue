@@ -90,9 +90,11 @@ export default {
                     await Promise.all(widget.data.files.map(async (fileName, index) => {
                         widget.data.files[index] = await this.fetchFile(this.file_dir, fileName)
                     }))
-                    this.projectStore.setToEmptyWidget(widget)
                 }
             }))
+            widgets.map( widget => {
+                this.projectStore.setToEmptyWidget(widget)
+            })
         },
         async fetchFile(dirPath, fileName) {
             return await fetch(dirPath + '/' + fileName)

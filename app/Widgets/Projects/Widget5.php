@@ -6,7 +6,7 @@ use App\Exceptions\WidgetFileNotFoundException;
 
 class Widget5 implements \JsonSerializable
 {
-    private ?string $text = null;
+    private string $text = '';
     private string $fileName;
     private string $name;
 
@@ -34,14 +34,10 @@ class Widget5 implements \JsonSerializable
 
     public function jsonSerialize(): array
     {
-        $data = [];
-        if ($this->text !== null){
-            $data['text'] = $this->text;
-        }
-        return array_merge([
-            'type' => $this->type,
+        return[
             'name' => $this->name,
+            'text' => $this->text,
             'file' => $this->fileName
-        ], $data);
+        ];
     }
 }

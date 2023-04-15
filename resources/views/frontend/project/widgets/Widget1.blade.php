@@ -4,7 +4,7 @@
             <div class="project-widget1__container">
                 <img src="{{asset('/storage/images/project/' . $widget->file)}}" alt="" class="project-widget1__container-img">
             </div>
-            @if(isset($widget->text))
+            @if(isset($widget->text) && mb_strlen($widget->text) > 0)
                 <p class="project-widget1-text">
                     {{$widget->text}}
                 </p>

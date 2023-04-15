@@ -97,10 +97,11 @@ export default {
         return {projectStore}
     },
     mounted() {
-        this.additional_posts.forEach( item => {
-            this.additionalPostsValue.push(item.id)
-        })
-        console.log(this.post.apartment_images)
+        if (this.type_admin_page === 'edit'){
+            this.additional_posts.forEach( item => {
+                this.additionalPostsValue.push(item.id)
+            })
+        }
     },
     data: () => {
         return {
@@ -206,7 +207,7 @@ export default {
                         formData.append('formData[apartment_images][]', file)
                     })
                 }
-                // console
+
                 if (this.additionalPostsValue.length > 0) {
                     this.additionalPostsValue.forEach( (postId) => {
                         formData.append('formData[additionalPosts][]', postId)

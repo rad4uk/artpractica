@@ -40,9 +40,34 @@ class PostController extends Controller
     public function preview(int $postId)
     {
         $project = Post::where('id', $postId)->firstOrFail();
+        $categories = Category::where(['parent_id' => 1, 'status' => 1])
+            ->orWhere(['id' => 1, 'status' => 1])
+            ->get();
+
+        $apartmentImages = [];
+        foreach (json_decode($project->apartment_images) as $imageName){
+            $apartmentImages[] = $project->getFullImagePath($imageName);
+        }
+        $additionalPostsData = [];
+        $additionalPosts = $project->additionalPostsToMany()->get();
+        foreach ($additionalPosts as $key => $post){
+            $additionalPostsData[$key]['title'] = $post->title;
+            $additionalPostsData[$key]['preview_image'] = $project->getFullImagePath($post->preview_image);
+            $additionalPostsData[$key]['slug'] = route('projects', $post->slug);
+        }
+
+        $categoriesData = [];
+        foreach ($categories as $key => $categoryItem){
+            $categoriesData[$key]['id'] = $categoryItem->id;
+            $categoriesData[$key]['title'] = $categoryItem->title;
+            $categoriesData[$key]['slug'] = route('categories', $categoryItem->slug);
+        }
 
         return view('frontend/project/project', [
             'post' => $project,
+            'apartmentImages' => $apartmentImages,
+            'additionalPostsData' => $additionalPostsData,
+            'categories' => $categoriesData,
             'body' => json_decode($project->body)->frontend
         ]);
     }
@@ -54,20 +79,22 @@ class PostController extends Controller
             ->get();
         $posts = $this->postRepository->additionalPostsPublishList()->get();
         if ($request->isMethod('POST')) {
+//            dd($request->request->all());
             $requestData = $request->request->all();
             $allFilesData = $request->files->all();
 
             $formData = $requestData['formData'];
             $filesData = $allFilesData['formData'];
 
-            $adminWidgetData = $this->postService->matchingRequestData($requestData, $allFilesData);
-            $frontendWidgetData = $this->postService->setWidgetsData($adminWidgetData['admin']);
+            $widgetData = $this->postService->matchingRequestData($requestData, $allFilesData);
+            $objectsWidgetData = $this->postService->setWidgetsData($widgetData['data']);
+//            dd($objectsWidgetData);
             try {
                 $postData = $this->postService->setPostData(
                     $formData,
                     $filesData,
                     json_encode(
-                        array_merge($frontendWidgetData, $adminWidgetData)
+                        array_merge($objectsWidgetData)
                     )
                 );
             } catch (\RuntimeException $exception) {
@@ -88,6 +115,7 @@ class PostController extends Controller
 
     public function update(Request $request, int $postId): Response|ResponseFactory|View|Factory
     {
+
         $categories = Category::with('childrenRecursive')
             ->whereNull('parent_id')
             ->get();
@@ -102,15 +130,15 @@ class PostController extends Controller
             $formData = $requestData['formData'];
             $filesData = $allFilesData['formData'];
 
+            $widgetData = $this->postService->matchingRequestData($requestData, $allFilesData);
+            $objectsWidgetData = $this->postService->setWidgetsData($widgetData['data']);
 
-            $adminWidgetData = $this->postService->matchingRequestData($requestData, $allFilesData);
-            $frontendWidgetData = $this->postService->setWidgetsData($adminWidgetData['admin']);
             try {
                 $postData = $this->postService->setPostData(
                     $formData,
                     $filesData,
                     json_encode(
-                        array_merge($frontendWidgetData, $adminWidgetData)
+                        array_merge($objectsWidgetData)
                     )
                 );
             } catch (\RuntimeException $exception) {

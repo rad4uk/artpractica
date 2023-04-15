@@ -8,7 +8,7 @@
                 </div>
                 @endforeach
             </div>
-            @if(isset($widget->text))
+            @if(isset($widget->text) && mb_strlen($widget->text) > 0)
                 <p class="project-widget2-text">
                     {{$widget->text}}
                 </p>

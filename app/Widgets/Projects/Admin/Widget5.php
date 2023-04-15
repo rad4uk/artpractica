@@ -1,18 +1,21 @@
 <?php
 
-namespace App\Widgets\Projects;
+namespace App\Widgets\Projects\Admin;
 
 use App\Exceptions\WidgetFileNotFoundException;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-class Widget1 implements \JsonSerializable
+class Widget5 implements \JsonSerializable
 {
+    private int $id;
+    private string $widgetTitle;
+    private string $name;
     private string $text = '';
     private string $fileName;
-    private string $name;
 
     public function __construct(array $data)
     {
+        $this->id = $data['id'];
+        $this->widgetTitle = $data['widgetTitle'];
         $this->name = $data['name'];
 
         if (!isset($data['data']['files']) || count($data['data']['files']) < 1){
@@ -23,11 +26,6 @@ class Widget1 implements \JsonSerializable
         if (isset($data['data']['text']) && mb_strlen($data['data']['text']) > 0){
             $this->text = $data['data']['text'];
         }
-//        dd([
-//            'name' => $this->name,
-//            'text' => $this->text,
-//            'file' => $this->fileName
-//        ]);
     }
 
     /**
@@ -41,9 +39,13 @@ class Widget1 implements \JsonSerializable
     public function jsonSerialize(): array
     {
         return [
+            'id' => $this->id,
+            'widgetTitle' => $this->widgetTitle,
             'name' => $this->name,
-            'text' => $this->text,
-            'file' => $this->fileName
+            'data' => [
+                'text' => $this->text,
+                'files' => [$this->fileName]
+            ]
         ];
     }
 }

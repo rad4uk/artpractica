@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Interfaces\CategoryRepositoryInterface;
 use App\Interfaces\PostRepositoryInterface;
 use App\Models\Category;
+use App\Models\Post;
 use App\Services\PostThumbnailService;
 
 class PortfolioController extends Controller
@@ -55,8 +56,10 @@ class PortfolioController extends Controller
         $categories = Category::where(['parent_id' => 1, 'status' => 1])
             ->orWhere(['id' => 1, 'status' => 1])
             ->get();
+        $publishPosts = Post::where('status', 1)->get();
+
         $posts = [];
-        foreach ($category->posts as $key => $post){
+        foreach ($publishPosts as $key => $post){
             $posts[$key]['id'] = $post->id;
             $posts[$key]['title'] = $post->title;
             $posts[$key]['slug'] = route('projects', $post->slug);

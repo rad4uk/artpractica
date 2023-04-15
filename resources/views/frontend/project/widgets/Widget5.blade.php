@@ -7,7 +7,7 @@
                 </div>
             </div>
         </div>
-        @if(isset($widget->text))
+        @if(isset($widget->text) && mb_strlen($widget->text) > 0)
             <p class="project-widget5-text">
                 {{$widget->text}}
             </p>

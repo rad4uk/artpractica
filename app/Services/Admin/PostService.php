@@ -2,7 +2,8 @@
 
 namespace App\Services\Admin;
 
-use App\Enums\ProjectWidgetEnum;
+use App\Enums\ProjectAdminWidgetEnum;
+use App\Enums\ProjectFrontendWidgetEnum;
 use App\Exceptions\WidgetNotFoundException;
 use App\ValueObjects\Files;
 use Illuminate\Support\Facades\Storage;
@@ -21,7 +22,7 @@ class PostService
         }
         foreach ($requestData['widgets'] as $key => $widget) {
             foreach ($widget as $widgetKey => $widgetValue) {
-                $data['admin'][$key][$widgetKey] = $widgetValue;
+                $data['data'][$key][$widgetKey] = $widgetValue;
             }
         }
 
@@ -32,7 +33,7 @@ class PostService
                      * @var UploadedFile $file
                      */
                     $this->saveFile($file);
-                    $data['admin'][$widgetKey]['data']['files'][] = $file->getClientOriginalName();
+                    $data['data'][$widgetKey]['data']['files'][] = $file->getClientOriginalName();
                 }
             }
         }
@@ -44,9 +45,14 @@ class PostService
     {
         return [
             'frontend' => array_map(static function ($widget) {
-                $widgetClassName = ProjectWidgetEnum::getWidgetClass($widget['name']);
+                $widgetClassName = ProjectFrontendWidgetEnum::getWidgetClass($widget['name']);
                 return new $widgetClassName($widget);
-            }, $dataWidgets)];
+            }, $dataWidgets),
+            'admin' => array_map(static function ($widget) {
+                $widgetClassName = ProjectAdminWidgetEnum::getWidgetClass($widget['name']);
+                return new $widgetClassName($widget);
+            }, $dataWidgets)
+        ];
     }
 
     public function setPostData(array $formData, array $filesData, string $body): array

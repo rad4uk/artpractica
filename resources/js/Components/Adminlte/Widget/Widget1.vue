@@ -46,6 +46,7 @@ export default {
             if (widgetData.files.length > 0){
                 this.file = widgetData.files[0]
             }
+
             this.textareaValue = widgetData.text
         }
     },
