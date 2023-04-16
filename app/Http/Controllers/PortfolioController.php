@@ -62,6 +62,7 @@ class PortfolioController extends Controller
         foreach ($publishPosts as $key => $post){
             $posts[$key]['id'] = $post->id;
             $posts[$key]['title'] = $post->title;
+            $posts[$key]['square'] = $post->square;
             $posts[$key]['slug'] = route('projects', $post->slug);
             $posts[$key]['preview_image'] = asset($post->previewImagePath . $post->preview_image);
         }

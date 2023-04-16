@@ -2,7 +2,7 @@
     <a :href="item.slug" class="project__item">
         <div class="project__text">
             <p class="project__title">{{item.title}}</p>
-            <p class="project__subtitle">78M2</p>
+            <p class="project__subtitle">{{item.square + 'M2'}}</p>
         </div>
         <div class="project__image">
             <img
@@ -21,7 +21,10 @@
 <script>
 export default {
     name: "ProjectItem",
-    props: ['item']
+    props: ['item'],
+    mounted() {
+        console.log(this.item)
+    }
 }
 </script>
 
