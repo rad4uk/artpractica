@@ -13,7 +13,7 @@
 <body>
     <div class="wrapper" id="app">
         @include('frontend.partials.__header')
-
+{{--        <header-component></header-component>--}}
         @yield('content')
 
         @include('frontend.partials.__footer')

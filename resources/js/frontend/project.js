@@ -6,6 +6,7 @@ import ProjectItemComponent from '@/Components/frontend/portfolio/ProjectItem.vu
 import FeedbackComponent from '@/Components/frontend/FeedbackComponent.vue'
 import PostSlider from '@/Components/frontend/project/PostSlider.vue'
 import PreviewComponent from '@/Components/frontend/project/PreviewComponent.vue'
+import HeaderComponent from "@/Components/frontend/HeaderComponent.vue";
 
 const app = createApp({
     components: {
@@ -13,6 +14,7 @@ const app = createApp({
         'feedback-component': FeedbackComponent,
         'post-slider-component': PostSlider,
         'preview-component': PreviewComponent,
+        'header-component': HeaderComponent,
     }
 });
 app.use(VueLazyLoad, {

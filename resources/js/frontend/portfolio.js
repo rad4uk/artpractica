@@ -5,6 +5,7 @@ import VueLazyLoad from 'vue3-lazyload';
 import ProjectComponent from '@/Components/frontend/portfolio/Project.vue';
 import ProjectItemComponent from '@/Components/frontend/portfolio/ProjectItem.vue';
 import FeedbackComponent from '@/Components/frontend/FeedbackComponent.vue'
+import HeaderComponent from "@/Components/frontend/HeaderComponent.vue";
 
 
 const app = createApp({
@@ -12,6 +13,7 @@ const app = createApp({
         'project-component': ProjectComponent,
         'project-item-component': ProjectItemComponent,
         'feedback-component': FeedbackComponent,
+        'header-component': HeaderComponent,
     }
 });
 app.use(VueLazyLoad, {
