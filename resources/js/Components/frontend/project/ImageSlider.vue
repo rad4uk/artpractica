@@ -72,9 +72,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.project-scheme img{
-    object-fit: contain;
-}
+
 .apartment__swiper{
     display: flex;
     flex-direction: column-reverse;
