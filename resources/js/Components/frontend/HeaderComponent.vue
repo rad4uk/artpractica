@@ -6,8 +6,8 @@
                 <div class="header__logo">
                     <a href="/">
                         <picture>
-                            <source srcset="/images/logo-88-24.png" media="(max-width: 768px)">
-                            <img src="/images/logo-172-47.png" alt="">
+                            <source :srcset="this.images[0]" media="(max-width: 768px)">
+                            <img :src="this.images[1]" alt="">
                         </picture>
                     </a>
                 </div>
@@ -53,7 +53,7 @@
 <script>
 export default {
     name: "HeaderComponent",
-    props: ['portfolio', 'services', 'about', 'contact'],
+    props: ['portfolio', 'services', 'about', 'contact', 'images'],
     data: () => {
         return {
             menuIsActive: false

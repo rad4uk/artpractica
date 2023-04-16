@@ -33,4 +33,5 @@
     :services='@json(['slug' => route('services'), 'class' => Route::currentRouteName() === 'services'])'
     :about='@json(['slug' => route('about'), 'class' => Route::currentRouteName() === 'about'])'
     :contact='@json(['slug' => route('contact'), 'class' => Route::currentRouteName() === 'contact'])'
+    :images='@json([asset('/images/logo-88-24.png'), asset('/images/logo-172-47.png')])'
 ></header-component>

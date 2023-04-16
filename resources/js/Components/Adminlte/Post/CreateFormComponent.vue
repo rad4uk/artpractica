@@ -49,6 +49,10 @@
                 </select>
             </div>
             <div class="form-group">
+                <label for="inputName">Площадь</label>
+                <input type="number" name="title" v-model="squareValue" class="form-control">
+            </div>
+            <div class="form-group">
                 <label for="inputUrl">Ссылка (должна быть уникальной)</label>
                 <input type="text" id="inputUrl" name="slug" v-model="urlValue" class="form-control">
             </div>
@@ -109,6 +113,7 @@ export default {
             additionalPostsValue: [],
             titleValue: '',
             descriptionValue: '',
+            squareValue: null,
             urlValue: '',
             categoryValue: -1,
             statusValue: false,
@@ -120,6 +125,7 @@ export default {
         if (this.type_admin_page === 'edit') {
             this.titleValue = this.post.title
             this.descriptionValue = this.post.description
+            this.squareValue = this.post.square
             this.urlValue = this.post.slug
             this.categoryValue = this.post.category_id
             this.statusValue = this.post.status === 1
@@ -181,6 +187,14 @@ export default {
                 this.errors.push('Вы забыли добавить фотографии планировки');
             }
 
+            if (this.squareValue === null || this.squareValue.length === 0){
+                this.errors.push('Вы забыли указать площадь');
+            }
+
+            if (this.additionalPostsValue.length === 1){
+                this.errors.push('Количество дополнительных проектов должно быть больше одного');
+            }
+
             if (!this.errors.length) {
                 return true;
             }
@@ -198,6 +212,7 @@ export default {
                 formData.append('formData[category_id]', this.categoryValue)
                 formData.append('formData[title]', this.titleValue)
                 formData.append('formData[description]', this.descriptionValue)
+                formData.append('formData[square]', this.squareValue)
                 formData.append('formData[slug]', this.urlValue)
                 formData.append('formData[preview_file]', this.preview_file)
                 formData.append('formData[status]', this.statusValue ? 1 : 0)
