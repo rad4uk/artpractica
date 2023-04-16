@@ -42,5 +42,5 @@
 @endsection
 
 @push('scripts')
-{{--    @vite(['resources/js/frontend/design.js'])--}}
+    @vite(['resources/js/frontend/contact.js'])
 @endpush
