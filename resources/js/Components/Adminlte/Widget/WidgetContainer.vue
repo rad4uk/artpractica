@@ -13,6 +13,7 @@
                      @dragstart="dragItemStart($event, index)"
                      @drop="dropItem($event, index)"
                      @dragover.prevent
+                     :key="widget.id"
                 >
                     <component :is="widget.name"
                                :title="widget.widgetTitle"
@@ -63,6 +64,11 @@ import _ from 'lodash';
 export default {
     name: 'WidgetContainer',
     props: ['type_admin_page', 'widgets', 'file_dir'],
+    data: () => {
+        return {
+            counter: 0
+        }
+    },
     components: {
         Widget1,
         Widget2,
@@ -75,15 +81,18 @@ export default {
             this.addWidgetInEmptyData(this.widgets)
         }
     },
+    mounted() {
+
+    },
     setup() {
         const projectStore = adminProjectStore()
 
         return {projectStore}
     },
-    data: () => {
-        return {}
-    },
     methods: {
+        generateId() {
+            return ++this.counter
+        },
         async addWidgetInEmptyData(widgets) {
             await Promise.all(widgets.map(async (widget) => {
                 if (widget.data.files) {
@@ -126,11 +135,6 @@ export default {
                 }
 
             }
-
-            formData.forEach((item, index) => {
-
-                // console.log(index, item)
-            })
             try {
                 const response = await axios.post('/api/project/new', formData, {
                     headers: {
@@ -169,6 +173,7 @@ export default {
             })
         },
         dragItemStart(event, index) {
+            // console.log('drag start index - ' + index)
             event.dataTransfer.effectAllowed = 'move';
             this.projectStore.dragItemStart(index)
         },
@@ -179,7 +184,12 @@ export default {
     },
     computed: {
         getEmptyWidgets: function () {
-            return this.projectStore.getEmptyWidgets
+            return this.projectStore.getEmptyWidgets.map(widget => {
+                return {
+                    ...widget,
+                    id: this.generateId()
+                }
+            })
         },
         getWidgets: function () {
             return this.projectStore.getWidgets;

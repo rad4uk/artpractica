@@ -69,7 +69,6 @@ export default {
             let widgetData = this.getDataInStore()
 
             const fileLength = widgetData.files.length
-            console.log(fileLength,widgetData.files)
             if (fileLength > 0){
                 if (widgetData.files[0]){
                     this.file1 = widgetData.files[0]
