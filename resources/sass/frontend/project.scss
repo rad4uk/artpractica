@@ -320,16 +320,12 @@
 }
 
 .project-preview {
-    margin-bottom: 50px;
     .container {
         display: flex;
         flex-direction: column;
     }
     .row:first-child{
         margin-bottom: 40px;
-    }
-    .row:nth-child(2){
-        margin-bottom: 30px;
     }
     &__title {
         display: inline-block;
