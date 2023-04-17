@@ -4,23 +4,31 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
             data-accordion="false">
 
+{{--            <li class="nav-item">--}}
+{{--                <a href="{{route('admin_gallery_index')}}" class="nav-link">--}}
+{{--                    <i class="nav-icon far fa-images"></i>--}}
+{{--                    <p>--}}
+{{--                        Галлерея--}}
+{{--                    </p>--}}
+{{--                </a>--}}
+{{--            </li>--}}
+
+{{--            <li class="nav-item">--}}
+{{--                <a href="pages/mailbox/mailbox.html" class="nav-link">--}}
+{{--                    <i class="nav-icon far fa-envelope"></i>--}}
+{{--                    <p>--}}
+{{--                        Письма--}}
+{{--                    </p>--}}
+{{--                </a>--}}
+{{--            </li>--}}
+
             <li class="nav-item">
-                <a href="{{route('admin_gallery_index')}}" class="nav-link">
-                    <i class="nav-icon far fa-images"></i>
-                    <p>
-                        Галлерея
-                    </p>
+                <a href="{{route('admin_services_index')}}" class="nav-link">
+                    <i class="nav-icon fas fa-book"></i>
+                    <p>Услуги</p>
                 </a>
             </li>
 
-            <li class="nav-item">
-                <a href="pages/mailbox/mailbox.html" class="nav-link">
-                    <i class="nav-icon far fa-envelope"></i>
-                    <p>
-                        Письма
-                    </p>
-                </a>
-            </li>
             <li class="nav-item">
                 <a href="{{route('admin_post_index')}}" class="nav-link">
                     <i class="nav-icon fas fa-book"></i>
@@ -35,12 +43,12 @@
                 </a>
             </li>
 
-            <li class="nav-item">
-                <a href="{{route('admin_page_index')}}" class="nav-link">
-                    <i class="nav-icon fas fa-book"></i>
-                    <p>Страницы</p>
-                </a>
-            </li>
+{{--            <li class="nav-item">--}}
+{{--                <a href="{{route('admin_page_index')}}" class="nav-link">--}}
+{{--                    <i class="nav-icon fas fa-book"></i>--}}
+{{--                    <p>Страницы</p>--}}
+{{--                </a>--}}
+{{--            </li>--}}
         </ul>
     </nav>
 

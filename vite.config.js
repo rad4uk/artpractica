@@ -16,6 +16,7 @@ export default defineConfig({
                 'resources/js/adminlte/project.js',
                 'resources/js/adminlte/category.js',
                 'resources/js/adminlte/page.js',
+                'resources/js/adminlte/service.js',
 
 
                 'resources/sass/frontend/app.scss',
