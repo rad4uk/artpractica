@@ -98,8 +98,10 @@ Route::get('/portfolio/project-716/', [ProjectController::class, 'index2'])->nam
 Route::get('/portfolio/project-562/', [ProjectController::class, 'index3'])->name('project3');
 Route::get('/portfolio/project-788/', [ProjectController::class, 'index4'])->name('project4');
 
-Route::get('/services/', [ServicesController::class, 'index'])->name('services');
 Route::get('/about/', [AboutController::class, 'index'])->name('about');
 Route::get('/contact-us/', ContactController::class)->name('contact');
 
 Route::post('/consultation/send', ConsultationController::class);
+
+Route::get('/services/', ServicesController::class)->name('services');
+Route::get('/services/{slug}', [ServicesController::class, 'show'])->name('service');

@@ -66,10 +66,10 @@
 
 <script>
 import {adminServicesStore} from "@/store/adminlte/servicesStore";
-import { watch } from 'vue';
 
 export default {
     name: "FirstTemplateComponent",
+    props: ['template_data', 'service', 'file_dir'],
     data() {
         return {
             itemIndex: null,
@@ -84,15 +84,11 @@ export default {
         return {servicesStore}
     },
     mounted() {
-        const currentTemplate = this.servicesStore.getCurrentTemplate
-        if (currentTemplate !== null && currentTemplate.name === 'firstTemplate'){
+        if (this.service && this.service.name === 'firstTemplate') {
+            this.titleValue = this.template_data.first_section_title
+            this.items = this.template_data.first_section_description
             this.on = true
         }
-    },
-    created() {
-        watch(() => this.items, (newValue, oldValue) => {
-            console.log('items have changed:', newValue);
-        });
     },
     methods: {
         setTemplate(isActive){

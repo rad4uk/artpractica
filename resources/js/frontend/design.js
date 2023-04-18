@@ -1,14 +1,17 @@
 import {createApp} from 'vue'
 
-import DesignTabs from '@/Components/frontend/design/Tabs.vue'
+import Services from '@/Components/frontend/design/Services.vue'
 import HeaderComponent from "@/Components/frontend/HeaderComponent.vue";
+import FeedbackComponent from '@/Components/frontend/FeedbackComponent.vue'
+
 
 import VueLazyLoad from "vue3-lazyload";
 
 const app = createApp({
     components: {
-        'design-tabs': DesignTabs,
+        'services-component': Services,
         'header-component': HeaderComponent,
+        'feedback-component': FeedbackComponent,
     }
 });
 app.use(VueLazyLoad, {

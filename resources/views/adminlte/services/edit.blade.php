@@ -22,8 +22,8 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{route('admin_home_index')}}">Главная</a></li>
-                            <li class="breadcrumb-item"><a href="{{route('admin_post_index')}}">Все проекты</a></li>
-                            <li class="breadcrumb-item active">Project Edit</li>
+                            <li class="breadcrumb-item"><a href="{{route('admin_services_index')}}">Все услуги</a></li>
+                            <li class="breadcrumb-item active">Services Edit</li>
                         </ol>
                     </div>
                 </div>
@@ -33,11 +33,6 @@
         <!-- Main content -->
         <section class="content">
             <div class="row">
-                <widget-container
-                    :type_admin_page='@json('edit')'
-                    :widgets='@json($body)'
-                    :file_dir='@json($post->getDirPath())'
-                ></widget-container>
                 <div class="col-md-6">
                     <div class="card card-primary">
                         <div class="card-header">
@@ -49,19 +44,20 @@
                                 </button>
                             </div>
                         </div>
-                        <new-form-component
-                            :action='@json(route('admin_post_edit', $post->id))'
-                            :type_admin_page='@json('edit')'
-                            :post='@json($post)'
-                            :all_additional_posts='@json($posts)'
-                            :additional_posts='@json($additionalPosts)'
+
+                        <form-component
+                            :action='@json(route('admin_services_edit', $service->id))'
+                            :is_type_page='@json('edit')'
                             :categories='@json($categories)'
-                            :file_dir='@json($post->getDirPath())'
-                        ></new-form-component>
+                            :template_data='{{$templateData}}'
+                            :service='@json($service)'
+                            :file_dir='@json($service->getDirPath())'
+                        ></form-component>
+
                     </div>
+
                 </div>
             </div>
-
         </section>
     </div>
 @endsection
@@ -74,5 +70,5 @@
     <!-- AdminLTE App -->
     <script src="{{asset('adminlte/dist/js/adminlte.min.js')}}"></script>
 
-    @vite('resources/js/adminlte/project.js')
+    @vite('resources/js/adminlte/service.js')
 @endpush

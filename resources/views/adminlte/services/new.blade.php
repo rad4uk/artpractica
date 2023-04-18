@@ -45,7 +45,10 @@
                             </div>
                         </div>
 
-                        <form-component></form-component>
+                        <form-component
+                            :action='@json(route('admin_services_create'))'
+                            :categories='@json($categories)'
+                        ></form-component>
 
                     </div>
 

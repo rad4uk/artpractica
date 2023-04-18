@@ -32,7 +32,7 @@
             <div class="container-fluid">
                 <div class="row mb-3">
                     <div class="col-12" style="display: flex;justify-content: right">
-                        <a href="{{route('admin_services_create')}}" class="btn btn-success">Добавить проект</a>
+                        <a href="{{route('admin_services_create')}}" class="btn btn-success">Добавить услугу</a>
                     </div>
                 </div>
             </div>

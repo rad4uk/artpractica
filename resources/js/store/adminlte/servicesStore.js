@@ -19,9 +19,13 @@ export const adminServicesStore = defineStore('servicesStore', {
         },
         thirdTemplate: {
             name: 'thirdTemplate',
-            first_section_title: '',
-            first_section_description: '',
-            first_section_image: null,
+
+            second_section_title: '',
+            second_section_description: '',
+            second_section_image: null,
+
+            first_section_description: [],
+
             third_section_title: '',
             third_section_description: '',
             third_section_images: [],
@@ -42,6 +46,12 @@ export const adminServicesStore = defineStore('servicesStore', {
         },
     },
     actions: {
+        setEditPageTemplate(templateData) {
+            this[templateData.name] = templateData
+            this.currentTemplate = this[templateData.name]
+        },
+
+
         setCurrentTemplate(template){
             this.currentTemplate = template
         },
@@ -50,7 +60,51 @@ export const adminServicesStore = defineStore('servicesStore', {
         },
         setFirstTemplateFirstSectionDescription(data){
             this.firstTemplate.first_section_description = data
-        }
+        },
+        setSecondTemplateFirstSectionDescription(data){
+            this.secondTemplate.first_section_description = data
+        },
+        setSecondTemplateSecondSectionTitle(value){
+            this.secondTemplate.second_section_title = value
+        },
+        setSecondTemplateSecondSectionImage(file){
+            this.secondTemplate.second_section_image = file
+        },
+        setSecondTemplateSecondSectionDescription(value){
+            this.secondTemplate.second_section_description = value
+        },
+        setSecondTemplateThirdSectionTitle(value){
+            this.secondTemplate.third_section_title = value
+        },
+        setSecondTemplateThirdSectionDescription(value){
+            this.secondTemplate.third_section_description = value
+        },
+
+
+        setThirdTemplateSecondSectionTitle(value){
+            this.thirdTemplate.second_section_title = value
+        },
+        setThirdTemplateSecondSectionDescription(value){
+            this.thirdTemplate.second_section_description = value
+        },
+
+        setThirdTemplateSecondSectionImage(file){
+            this.thirdTemplate.second_section_image = file
+        },
+        setThirdTemplateFirstSectionDescription(data){
+            this.thirdTemplate.first_section_description = data
+        },
+        setThirdTemplateThirdSectionTitle(value){
+            this.thirdTemplate.third_section_title = value
+        },
+        setThirdTemplateThirdSectionDescription(value){
+            this.thirdTemplate.third_section_description = value
+        },
+        setThirdTemplateThirdSectionImages(files){
+            this.thirdTemplate.third_section_images = files
+        },
+
+
     }
 
 })

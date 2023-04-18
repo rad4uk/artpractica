@@ -3,18 +3,22 @@
         <form action="">
             <div class="form-group">
                 <label for="inputName">Загаловок к первой секции</label>
-                <input type="text" id="inputName" name="subtitle" class="form-control" value="">
+                <input type="text" id="inputName" name="subtitle" class="form-control" v-model="second_section_title">
             </div>
 
             <div class="form-group">
                 <label for="inputDescription">Описание к первой секции</label>
-                <textarea id="inputDescription" name="description" class="form-control" rows="4" placeholder="начните вводить текст"></textarea>
+                <textarea id="inputDescription" name="description" class="form-control" rows="4"
+                          v-model="second_section_description"
+                          placeholder="начните вводить текст"></textarea>
             </div>
 
             <div class="form-group">
                 <label for="inputDescription">Фото к первой секции</label>
                 <div class="custom-file">
-                    <input type="file" name="apartment_images" class="custom-file-input" id="validatedCustomFile" required>
+                    <input type="file" name="apartment_images"
+                           @change="this.addedSecondSectionImage"
+                           class="custom-file-input" id="validatedCustomFile" required>
                     <label class="custom-file-label" for="validatedCustomFile">Выберите файл</label>
                 </div>
             </div>
@@ -37,7 +41,7 @@
                             >
                                 <div class="form-group col-11" >
                                     <div class="form-group">
-                                        <label>Заголово</label>
+                                        <label>Заголовок</label>
                                         <input type="text" class="form-control" v-model="item.input" placeholder="">
                                     </div>
                                     <div class="form-group">
@@ -67,20 +71,30 @@
 
             <div class="form-group">
                 <label for="inputName">Загаловок ко второй секции</label>
-                <input type="text" id="inputName" name="subtitle" class="form-control" value="">
+                <input type="text" id="inputName" name="subtitle" class="form-control" v-model="third_section_title">
             </div>
 
             <div class="form-group">
                 <label for="inputDescription">Описание ко второй секции</label>
-                <textarea id="inputDescription" name="description" class="form-control" rows="4" placeholder="начните вводить текст"></textarea>
+                <textarea id="inputDescription" name="description" class="form-control" rows="4"
+                          v-model="third_section_description"
+                          placeholder="начните вводить текст"></textarea>
             </div>
 
             <div class="form-group">
                 <label for="inputDescription">Изображение ко второй секции (выберите 3 изображения)</label>
                 <div class="custom-file">
-                    <input type="file" name="apartment_images" multiple class="custom-file-input" id="validatedCustomFile" required>
+                    <input type="file" name="apartment_images" multiple
+                           @change="this.addedThirdSectionFiles"
+                           class="custom-file-input" id="validatedCustomFile" required>
                     <label class="custom-file-label" for="validatedCustomFile">Выберите файлы</label>
                 </div>
+            </div>
+
+            <div class="form-group form-check-inline">
+                <label class="form-check-label">
+                    <input type="checkbox" name="status" class="form-check-input" v-model="on" @change="this.setTemplate(this.on)">Выбрать текущий шаблон
+                </label>
             </div>
         </form>
     </div>
@@ -88,22 +102,111 @@
 </template>
 
 <script>
-
+import {adminServicesStore} from "@/store/adminlte/servicesStore";
 export default {
     name: "ThirdTemplateComponent",
+    props: ['template_data', 'service', 'file_dir'],
     data() {
         return {
+            second_section_title: '',
+            second_section_description: '',
+
+            third_section_title: '',
+            third_section_description: '',
+
+            itemIndex: null,
+            on: false,
             items: [],
         };
     },
+    async mounted() {
+        if (this.service && this.service.name === 'thirdTemplate') {
+            this.second_section_title = this.template_data.second_section_title
+            this.second_section_description = this.template_data.second_section_description
+
+            this.third_section_title = this.template_data.third_section_title
+            this.third_section_description = this.template_data.third_section_description
+
+            const file = await this.fetchFile(this.file_dir, this.template_data.second_section_image)
+            this.servicesStore.setThirdTemplateSecondSectionImage(file)
+            let images = []
+            this.template_data.third_section_images.map(async (imageName) => {
+                let image = await this.fetchFile(this.file_dir, imageName)
+                images.push(image)
+            })
+            this.servicesStore.setThirdTemplateThirdSectionImages(images)
+
+            this.items = this.template_data.first_section_description
+
+            this.on = true
+        }
+    },
+    setup() {
+        const servicesStore = adminServicesStore()
+
+        return {servicesStore}
+    },
     methods: {
+        async fetchFile(dirPath, fileName) {
+            return await fetch(`${dirPath}/${fileName}`)
+                .then(response => response.blob())
+                .then(blob => new File([blob], fileName, { type: blob.type }));
+        },
+        addedSecondSectionImage(event){
+            this.servicesStore.setThirdTemplateSecondSectionImage(event.target.files[0])
+        },
+        addedThirdSectionFiles(event){
+            let newFiles = []
+            const files = event.target.files
+            for (let i = 0; i < files.length; i++) {
+                newFiles.push(files[i])
+            }
+            this.servicesStore.setThirdTemplateThirdSectionImages(newFiles)
+        },
+        setTemplate(isActive){
+            if (isActive){
+                const template = this.servicesStore.getThirdTemplate
+                this.servicesStore.setCurrentTemplate(template)
+            }else{
+                this.servicesStore.setCurrentTemplate(null)
+            }
+        },
         addInputAndTextarea() {
             this.items.push({ input: "", textarea: "" });
+            if (this.itemIndex !== null || this.items.length > 0){
+                this.itemIndex++
+            }
         },
         removeInputAndTextarea(index){
             this.items.splice(index,1);
+            if (this.itemIndex !== null && this.items.length > 0){
+                this.itemIndex--
+            }else{
+                this.itemIndex = null
+            }
         }
     },
+    watch: {
+        itemIndex(value){
+            if (value !== null){
+                this.servicesStore.setThirdTemplateFirstSectionDescription(this.items)
+            }else{
+                this.servicesStore.setThirdTemplateFirstSectionDescription([])
+            }
+        },
+        second_section_title(value){
+            this.servicesStore.setThirdTemplateSecondSectionTitle(value)
+        },
+        second_section_description(value){
+            this.servicesStore.setThirdTemplateSecondSectionDescription(value)
+        },
+        third_section_title(value){
+            this.servicesStore.setThirdTemplateThirdSectionTitle(value)
+        },
+        third_section_description(value){
+            this.servicesStore.setThirdTemplateThirdSectionDescription(value)
+        },
+    }
 }
 </script>
 

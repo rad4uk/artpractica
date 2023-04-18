@@ -15,9 +15,21 @@
         </div>
         <div class="card-body">
             <div class="tab-content" id="custom-tabs-three-tabContent">
-                <first-template-component></first-template-component>
-                <second-template-component></second-template-component>
-                <third-template-component></third-template-component>
+                <first-template-component
+                    :template_data="this.template_data"
+                    :file_dir="this.file_dir"
+                    :service="this.service"
+                ></first-template-component>
+                <second-template-component
+                    :template_data="this.template_data"
+                    :file_dir="this.file_dir"
+                    :service="this.service"
+                ></second-template-component>
+                <third-template-component
+                    :template_data="this.template_data"
+                    :file_dir="this.file_dir"
+                    :service="this.service"
+                ></third-template-component>
             </div>
         </div>
     </div>
@@ -29,6 +41,7 @@ import SecondTemplateComponent from "./SecondTemplateComponent.vue";
 import ThirdTemplateComponent from "./ThirdTemplateComponent.vue";
 export default {
     name: "MainTemplateComponent",
+    props: ['template_data', 'service', 'file_dir'],
     components: {
         FirstTemplateComponent,
         SecondTemplateComponent,
