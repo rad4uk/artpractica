@@ -9,28 +9,6 @@
         <preview-component
             :preview_image='@json(asset('images/mainImg.webp'))'
         ></preview-component>
-{{--        <div class="screen">--}}
-{{--            <div class="screen__image ibg">--}}
-{{--            <div class="screen__image">--}}
-{{--                <picture>--}}
-{{--                    <source srcset="/media/cc0-images/surfer-240-200.jpg" media="(min-width: 600px)">--}}
-{{--                    <source srcset="{{asset('images/mainImage_1560.webp')}}" media="(min-width: 1560px)">--}}
-{{--                    <img src="{{asset('images/mainImg.webp')}}" alt="">--}}
-{{--                </picture>--}}
-{{--            </div>--}}
-{{--            <div class="screen__wrapper">--}}
-{{--                <div class="screen__body">--}}
-{{--                    <p class="screen__subtitle">Мы с вами от зарождения проекта до его реализации</p>--}}
-{{--                    <h1 class="screen__title">СТУДИЯ <br>ДИЗАЙнА ИНТЕРЬЕРА ПОЛНОГО ЦИКЛА</h1>--}}
-{{--                    <div class="screen__button">--}}
-{{--                        <button>--}}
-{{--                            ОБСУДИТЬ ПРОЕКТ--}}
-{{--                        </button>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-
-{{--            </div>--}}
-{{--        </div>--}}
         <div class="about">
             <div class="container">
                 <div class="about__title">
@@ -39,11 +17,7 @@
                     </h1>
                 </div>
                 <div class="about__row">
-                    <div class="about__column">
-{{--                        <a href="#" class="about__column-subtitle">подробнее о нас</a>--}}
-                    </div>
-
-
+                    <div class="about__column"></div>
                     <div class="about__column">
                         <div class="about__column-text">
                             <div class="about__column-item">
@@ -73,6 +47,7 @@
                 </div>
             </div>
         </div>
+        @if(count($additionalCategoriesData) === 4):
         <div class="interiors">
             <div class="container">
                 <div class="interiors__title">
@@ -83,12 +58,12 @@
                         <div class="interiors__item">
                             <div class="interiors__item-content">
                                 <div class="interiors__item-title">
-                                    <p>Квартиры</p>
+                                    <p>{{$additionalCategoriesData[0]['title']}}</p>
                                 </div>
-                                <div class="interiors__item-image">
+                                <a href="{{$additionalCategoriesData[0]['slug']}}" class="interiors__item-image">
 
-                                    <img lazy v-lazy="{ src: '{{ asset('images/img_3.png') }}' }" alt="">
-                                </div>
+                                    <img lazy v-lazy="{ src: '{{$additionalCategoriesData[0]['image']}}' }" alt="">
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -97,11 +72,11 @@
                             <div class="interiors__item">
                                 <div class="interiors__item-content">
                                     <div class="interiors__item-title">
-                                        <p>Коттеджы</p>
+                                        <p>{{$additionalCategoriesData[1]['title']}}</p>
                                     </div>
-                                    <div class="interiors__item-image">
-                                        <img lazy v-lazy="{ src: '{{ asset('images/img_4.png') }}' }" alt="">
-                                    </div>
+                                    <a href="{{$additionalCategoriesData[1]['slug']}}" class="interiors__item-image">
+                                        <img lazy v-lazy="{ src: '{{$additionalCategoriesData[1]['image']}}' }" alt="">
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -109,21 +84,21 @@
                             <div class="interiors__item">
                                 <div class="interiors__item-content">
                                     <div class="interiors__item-title">
-                                        <p>Коммерческие объекты</p>
+                                        <p>{{$additionalCategoriesData[2]['title']}}</p>
                                     </div>
-                                    <div class="interiors__item-image">
-                                        <img lazy v-lazy="{ src: '{{ asset('images/img_5.png') }}' }" alt="">
-                                    </div>
+                                    <a href="{{$additionalCategoriesData[2]['slug']}}" class="interiors__item-image">
+                                        <img lazy v-lazy="{ src: '{{$additionalCategoriesData[2]['image']}}' }" alt="">
+                                    </a>
                                 </div>
                             </div>
                             <div class="interiors__item">
                                 <div class="interiors__item-content">
                                     <div class="interiors__item-title">
-                                        <p>Ландшафты и террасы</p>
+                                        <p>{{$additionalCategoriesData[3]['title']}}</p>
                                     </div>
-                                    <div class="interiors__item-image">
-                                        <img lazy v-lazy="{ src: '{{ asset('images/img_6.png') }}' }" alt="">
-                                    </div>
+                                    <a href="{{$additionalCategoriesData[3]['slug']}}" class="interiors__item-image">
+                                        <img lazy v-lazy="{ src: '{{$additionalCategoriesData[3]['image']}}' }" alt="">
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -131,6 +106,7 @@
                 </div>
             </div>
         </div>
+        @endif
         <div class="services">
             <div class="container">
                 <div class="services__title">

@@ -14,11 +14,11 @@ class Page extends Model
         'description',
         'slug',
         'created_at',
-        'updated_at'
+        'updated_at',
     ];
 
-    public function pageImages()
+    public function categories(int $limit = 4)
     {
-        return $this->hasMany(PageImage::class, 'page_id', 'id');
+        return $this->hasMany(Category::class)->limit($limit);
     }
 }

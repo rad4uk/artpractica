@@ -88,6 +88,6 @@ class CategoryService
             $buf = $buf->parentRecursive;
             $slug[] = $buf->slug;
         }
-        return env('APP_URL') . '/' . implode('/',array_reverse($slug)) . '/';
+        return env('APP_URL') . '/' . implode('/', array_reverse($slug)) . '/';
     }
 }

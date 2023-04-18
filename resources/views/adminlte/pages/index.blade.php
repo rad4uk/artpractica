@@ -1,13 +1,13 @@
 @extends('adminlte.layout.adminlte')
 
-@section('styles')
+@push('styles')
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{asset('adminlte/plugins/fontawesome-free/css/all.min.css')}}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{asset('adminlte/dist/css/adminlte.min.css')}}">
-@endsection;
+@endpush
 
 @section('content')
     <div class="content-wrapper">
@@ -66,9 +66,6 @@
                             <th style="width: 30%">
                                 Описание
                             </th>
-                            <th>
-                                Изображения
-                            </th>
                             <th style="width: 8%" class="text-center">
                                 Ссылка
                             </th>
@@ -88,19 +85,10 @@
                             <td>
                                 {{$page->description}}
                             </td>
-                            <td>
-                                <ul class="list-inline">
-                                    @foreach($page->images as $image)
-                                    <li class="list-inline-item">
-                                        <img alt="{{$image->alt}}" src="{{$image->path}}" style="width: 2.5rem">
-                                    </li>
-                                        @break;
-                                    @endforeach
-                                </ul>
-                            </td>
+
 
                             <td>
-                                <a href="{{$page->url}}">{{$page->url}}</a>
+                                <a href="{{$page->slug}}">{{$page->slug}}</a>
                             </td>
                             <td class="project-actions text-right">
                                 <a class="btn btn-primary btn-sm" href="#">
@@ -131,19 +119,17 @@
         </section>
         <!-- /.content -->
     </div>
-@endsection;
+@endsection
 
-@section('scripts')
+@push('scripts')
     <!-- jQuery -->
     <script src="{{asset('adminlte/plugins/jquery/jquery.min.js')}}"></script>
     <!-- Bootstrap 4 -->
     <script src="{{asset('adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
     <!-- AdminLTE App -->
     <script src="{{asset('adminlte/dist/js/adminlte.min.js')}}"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="{{asset('adminlte/dist/js/demo.js')}}"></script>
 
     @vite('resources/js/adminlte/page.js')
 
-@endsection
+@endpush
 

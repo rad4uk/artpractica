@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
+    public string $dirImagePath = '/storage/images/categories/';
+
     use HasFactory;
 
     protected $table = 'categories';
@@ -17,7 +19,20 @@ class Category extends Model
         'title',
         'status',
         'description',
+        'page_image',
+        'page_id',
+        'page_sort',
     ];
+
+    public function getDirPath(): string
+    {
+        return asset($this->dirImagePath);
+    }
+
+    public function getFilePath(string $fileName): string
+    {
+        return asset($this->dirImagePath . $fileName);
+    }
 
     public function parent()
     {
@@ -37,11 +52,6 @@ class Category extends Model
     public function childrenRecursive()
     {
         return $this->children()->with('childrenRecursive');
-    }
-
-    public function categoryImages()
-    {
-        return $this->hasMany(CategoryImage::class,'category_id','id')->with('image');
     }
 
     public function posts()

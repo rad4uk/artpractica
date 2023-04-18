@@ -1,13 +1,13 @@
 @extends('adminlte.layout.adminlte')
 
-@section('styles')
+@push('styles')
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{asset('adminlte/plugins/fontawesome-free/css/all.min.css')}}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{asset('adminlte/dist/css/adminlte.min.css')}}">
-@endsection;
+@endpush
 
 @section('content')
     <!-- Content Wrapper. Contains page content -->
@@ -44,7 +44,7 @@
                                 </button>
                             </div>
                         </div>
-                        <form action="{{route('admin_page_new')}}" method="POST">
+                        <form action="{{route('admin_page_new')}}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="card-body">
                                 <div class="form-group">
@@ -57,21 +57,16 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="inputUrl">Ссылка (должна быть уникальной)</label>
-                                    <input type="text" id="inputUrl" name="pageUrl" class="form-control" value="{{env('APP_URL')}}">                                </div>
-                                {{--                                <div class="form-group">--}}
-                                {{--                                    <label for="inputStatus">Status</label>--}}
-                                {{--                                    <select id="inputStatus" class="form-control custom-select">--}}
-                                {{--                                        <option disabled>Select one</option>--}}
-                                {{--                                        <option>On Hold</option>--}}
-                                {{--                                        <option>Canceled</option>--}}
-                                {{--                                        <option selected>Success</option>--}}
-                                {{--                                    </select>--}}
-                                {{--                                </div>--}}
-
+                                    <input type="text" id="inputUrl" name="slug" class="form-control" value="">
+                                </div>
+                                <div class="form-group form-check-inline">
+                                    <label class="form-check-label">
+                                        <input type="checkbox" name="status" class="form-check-input">Опубликовать
+                                    </label>
+                                </div>
                             </div>
                             <div class="row m-lg-3">
                                 <div class="col-12">
-                                    {{--                    <a href="#" class="btn btn-secondary">Cancel</a>--}}
                                     <input type="submit" value="Добавить" class="btn btn-success float-left">
                                 </div>
                             </div>
@@ -89,16 +84,14 @@
     <!-- /.content-wrapper -->
 @endsection;
 
-@section('scripts')
+@push('scripts')
     <!-- jQuery -->
     <script src="{{asset('adminlte/plugins/jquery/jquery.min.js')}}"></script>
     <!-- Bootstrap 4 -->
     <script src="{{asset('adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
     <!-- AdminLTE App -->
     <script src="{{asset('adminlte/dist/js/adminlte.min.js')}}"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="{{asset('adminlte/dist/js/demo.js')}}"></script>
 
     @vite('resources/js/adminlte/page.js')
-@endsection
+@endpush
 

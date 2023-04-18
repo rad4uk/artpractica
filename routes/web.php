@@ -68,10 +68,12 @@ Route::prefix('admin')->middleware([
 
     Route::prefix('categories')->group(function (){
         Route::get('/', [CategoryController::class, 'index'])->name('admin_category_index');
+        Route::get('/{id}/preview', [CategoryController::class, 'preview'])->name('admin_category_preview');
+
         Route::get('/new', [CategoryController::class, 'new'])->name('admin_category_new');
-        Route::post('/new', [CategoryController::class, 'create'])->name('admin_category_create');
+        Route::post('/create', [CategoryController::class, 'create'])->name('admin_category_create');
         Route::get('/{id}/edit', [CategoryController::class, 'edit'])->name('admin_category_edit');
-        Route::post('/{id}/edit', [CategoryController::class, 'update'])->name('admin_category_update');
+        Route::post('/{id}/update', [CategoryController::class, 'update'])->name('admin_category_update');
     });
 
 });

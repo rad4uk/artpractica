@@ -4,15 +4,9 @@ namespace App\Repositories;
 
 use App\Interfaces\CategoryRepositoryInterface;
 use App\Models\Category;
-use App\Models\CategoryImage;
 
 class CategoryRepository implements CategoryRepositoryInterface
 {
-    public function __construct(
-        private readonly Category $categoryModel
-    )
-    {
-    }
 
     public function firstOrFail(int $categoryId)
     {
@@ -21,7 +15,7 @@ class CategoryRepository implements CategoryRepositoryInterface
 
     public function list()
     {
-        return Category::orderBy('updated_at', 'DESC')->with('parent', 'categoryImages')->get();
+        return Category::orderBy('updated_at', 'DESC')->with('parent')->get();
     }
 
     public function findById(int $catId)
@@ -55,10 +49,6 @@ class CategoryRepository implements CategoryRepositoryInterface
         return Category::where('id', $catId)->with('children')->first();
     }
 
-    public function categoryImages()
-    {
-        return $this->categoryModel->hasMany(CategoryImage::class,'category_id','id')->with('image');
-    }
 
     public function getCategoryTree(){
         return Category::with('childrenRecursive')
@@ -68,11 +58,6 @@ class CategoryRepository implements CategoryRepositoryInterface
 
     public function getParentCategoryAndImages(int $catId)
     {
-        return Category::where('id', $catId)->with('parentRecursive', 'categoryImages')->first();
-    }
-
-    public function getCategoryImages(int $catId)
-    {
-        return CategoryImage::where('category_id', $catId)->with('image')->get();
+        return Category::where('id', $catId)->with('parentRecursive')->first();
     }
 }

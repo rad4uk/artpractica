@@ -17,7 +17,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Project Edit</h1>
+                        <h1>Category Edit</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -44,7 +44,7 @@
                                 </button>
                             </div>
                         </div>
-                        <form action="{{route('admin_category_new')}}" method="POST">
+                        <form action="{{route('admin_category_create')}}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="card-body">
                                 <div class="form-group">
@@ -59,10 +59,9 @@
                                     <label for="inputUrl">Ссылка</label>
                                     <input type="text" id="inputUrl" name="slug" class="form-control" value="">
                                 </div>
-                                {{--                                <category-form-select :categories='@json($categories)'></category-form-select>--}}
                                 <div class="form-group">
                                     <label for="inputStatus">Родительская категория</label>
-                                    <select id="inputStatus" name='parent' class="form-control custom-select">
+                                    <select id="inputStatus" name='parent_id' class="form-control custom-select">
                                         <option value="-1">Нет</option>
                                         @foreach($categories as $cat)
                                             <option value="{{$cat->id}}">{{$cat->title}}</option>
@@ -77,10 +76,58 @@
                                         <input type="checkbox" name="status" class="form-check-input">Опубликовать
                                     </label>
                                 </div>
+
+                                <div class="tab-pane fade active show" id="custom-tabs-three-home" role="tabpanel"
+                                     aria-labelledby="custom-tabs-three-home-tab">
+
+                                    <div class="card card-blue card-outline collapsed-card">
+                                        <div class="card-header">
+                                            <h3 class="card-title">Отображение на главной</h3>
+                                            <div class="card-tools">
+                                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                                    <i class="fa fa-plus"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="card-body" style="display: none;">
+                                            <div class="form-group collection-wrapper">
+                                                <div class="secondSectionDescription" id="secondSectionDescription">
+                                                    <div class="row collection-row">
+                                                        <div class="form-group" style="width: 100%">
+                                                            <label for="inputDescription">Изображение</label>
+                                                            <div class="custom-file">
+                                                                <input type="file" name="page_image" class="custom-file-input" id="validatedCustomFile">
+                                                                <label class="custom-file-label" for="validatedCustomFile">Выберите файл</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group" style="width: 100%">
+                                                            <label for="inputStatus">Выберите страницу</label>
+                                                            <select id="inputStatus" name='page_id' class="form-control custom-select">
+                                                                <option value="-1">Нет</option>
+                                                                @foreach($pages as $page)
+                                                                    <option value="{{$page->id}}">{{$page->title}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group" style="width: 100%">
+                                                            <label for="inputName">Порядок сортировки</label>
+                                                            <input type="number" id="inputName" name="page_sort" class="form-control" value="">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
                             </div>
+
+
+
+
                             <div class="row m-lg-3">
                                 <div class="col-12">
-                                    {{--                    <a href="#" class="btn btn-secondary">Cancel</a>--}}
                                     <input type="submit" value="сохранить" class="btn btn-success float-left">
                                 </div>
                             </div>

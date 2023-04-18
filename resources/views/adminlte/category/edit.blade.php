@@ -24,7 +24,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{route('admin_home_index')}}">Главная</a></li>
-                            <li class="breadcrumb-item"><a href="{{route('admin_page_index')}}">Все категории</a></li>
+                            <li class="breadcrumb-item"><a href="{{route('admin_category_index')}}">Все категории</a></li>
                             <li class="breadcrumb-item active">категория</li>
                         </ol>
                     </div>
@@ -46,7 +46,7 @@
                                 </button>
                             </div>
                         </div>
-                        <form action="{{route('admin_category_edit', $category->id)}}" method="POST">
+                        <form action="{{route('admin_category_update', $category->id)}}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="card-body">
                                 <div class="form-group">
@@ -60,10 +60,9 @@
                                 <div class="form-group">
                                     <label for="inputUrl">Ссылка</label>
                                     <input type="text" id="inputUrl" name="slug" class="form-control" value="{{$category->slug}}">                                </div>
-{{--                                <category-select :categories='@json($categories)'></category-select>--}}
                                 <div class="form-group">
                                     <label for="inputStatus">Родительская категория</label>
-                                    <select id="inputStatus" name='parent' class="form-control custom-select">
+                                    <select id="inputStatus" name='parent_id' class="form-control custom-select">
                                         <option value="-1">Нет</option>
                                         @foreach($categories as $cat)
                                             <option value="{{$cat->id}}" {{($cat->id === $category->parent_id) ? 'selected' : ''}}>{{$cat->title}}</option>
@@ -78,14 +77,58 @@
                                         <input type="checkbox" name="status" class="form-check-input" {{($category->status == 1) ? 'checked' : ''}}>Опубликовать
                                     </label>
                                 </div>
-                                <div style="display: flex; flex-direction: column">
-                                    <div>Полная ссылка</div>
-                                    <div><a href="{{$slug}}">{{$slug}}</a></div>
+
+                                <div class="tab-pane fade active show" id="custom-tabs-three-home" role="tabpanel"
+                                     aria-labelledby="custom-tabs-three-home-tab">
+
+                                    <div class="card card-blue card-outline collapsed-card">
+                                        <div class="card-header">
+                                            <h3 class="card-title">Отображение на главной</h3>
+                                            <div class="card-tools">
+                                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                                    <i class="fa fa-plus"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="card-body" style="display: none;">
+                                            <div class="form-group collection-wrapper">
+                                                <div class="secondSectionDescription" id="secondSectionDescription">
+                                                    <div class="row collection-row">
+                                                        <div class="form-group" style="width: 100%">
+                                                            <label for="inputDescription">Изображение</label>
+                                                            <div class="custom-file">
+                                                                <input type="file" name="page_image" class="custom-file-input" id="validatedCustomFile">
+                                                                <label class="custom-file-label" for="validatedCustomFile">Выберите файл</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group" style="width: 100%">
+                                                            <label for="inputStatus">Выберите страницу</label>
+                                                            <select id="inputStatus" name='page_id' class="form-control custom-select">
+                                                                <option value="-1">Нет</option>
+                                                                @foreach($pages as $page)
+                                                                    @if($category->page_id === $page->id)
+                                                                        <option value="{{$page->id}}" selected>{{$page->title}}</option>
+                                                                    @else
+                                                                        <option value="{{$page->id}}">{{$page->title}}</option>
+                                                                    @endif
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group" style="width: 100%">
+                                                            <label for="inputName">Порядок сортировки</label>
+                                                            <input type="number" id="inputName" name="page_sort" class="form-control" value="{{$category->page_sort}}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
                                 </div>
+
                             </div>
                             <div class="row m-lg-3">
                                 <div class="col-12">
-                                    {{--                    <a href="#" class="btn btn-secondary">Cancel</a>--}}
                                     <input type="submit" value="сохранить" class="btn btn-success float-left">
                                 </div>
                             </div>
@@ -95,76 +138,7 @@
                     </div>
                     <!-- /.card -->
                 </div>
-                <div class="col-md-6">
-                    <!-- /.card -->
-                    <div class="card card-info">
-                        <div class="card-header">
-                            <h3 class="card-title">Изображения</h3>
-
-                            <div class="card-tools">
-                                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                                    <i class="fas fa-minus"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="card-body p-0">
-                            <table class="table">
-                                <thead>
-                                <tr>
-                                    <th>Название</th>
-                                    <th>Размер</th>
-                                    <th></th>
-                                </tr>
-                                </thead>
-                                <tbody>
-
-                                <tr>
-                                    <td>Functional-requirements.docx</td>
-                                    <td>49.8005 kb</td>
-                                    <td class="text-right py-0 align-middle">
-                                        <div class="btn-group btn-group-sm">
-                                            <a href="#" class="btn btn-info"><i class="fas fa-eye"></i></a>
-                                            <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
-                                        </div>
-                                    </td>
-                                <tr>
-                                    <td>UAT.pdf</td>
-                                    <td>28.4883 kb</td>
-                                    <td class="text-right py-0 align-middle">
-                                        <div class="btn-group btn-group-sm">
-                                            <a href="#" class="btn btn-info"><i class="fas fa-eye"></i></a>
-                                            <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
-                                        </div>
-                                    </td>
-                                </tr>
-
-
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- /.card-body -->
-                    </div>
-                    <!-- /.card -->
-                </div>
             </div>
-            <category-image :category='@json($category)'></category-image>
-{{--            <div class="row category">--}}
-{{--                <div class="col-12 category__images" style="display: flex; flex-direction: row; flex-wrap: wrap">--}}
-{{--                    @foreach($category->categoryImages as $image)--}}
-{{--                    <div class="col-sm-3 category__images-item">--}}
-{{--                        <img src="{{$image->image->path}}" alt="{{$image->image->alt}}">--}}
-{{--                        <button class='btn btn-info btn-sm'>--}}
-{{--                            <i class="fas fa-pencil-alt"></i>--}}
-{{--                            Изменить--}}
-{{--                        </button>--}}
-{{--                        <button class="btn btn-danger btn-sm">--}}
-{{--                            <i class="fas fa-trash"></i>--}}
-{{--                            Удалить--}}
-{{--                        </button>--}}
-{{--                    </div>--}}
-{{--                    @endforeach--}}
-{{--                </div>--}}
-{{--            </div>--}}
         </section>
         <!-- /.content -->
     </div>

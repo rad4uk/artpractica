@@ -119,7 +119,7 @@
         </section>
         <!-- /.content -->
     </div>
-@endsection;
+@endsection
 
 @push('scripts')
     <!-- jQuery -->
