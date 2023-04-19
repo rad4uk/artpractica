@@ -48,6 +48,7 @@
                         <form-component
                             :action='@json(route('admin_services_create'))'
                             :categories='@json($categories)'
+                            :pages='@json($pages)'
                         ></form-component>
 
                     </div>

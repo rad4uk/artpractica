@@ -19,6 +19,11 @@ class Page extends Model
 
     public function categories(int $limit = 4)
     {
-        return $this->hasMany(Category::class)->limit($limit);
+        return $this->hasMany(Category::class)->orderBy('page_sort', 'ASC')->limit($limit);
+    }
+
+    public function services(int $limit = 3)
+    {
+        return $this->hasMany(Service::class)->orderBy('page_sort', 'ASC')->limit($limit);
     }
 }

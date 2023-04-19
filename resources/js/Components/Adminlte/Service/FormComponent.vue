@@ -49,6 +49,61 @@
         :file_dir="this.file_dir"
         :service="this.service"
     ></main-template-component>
+
+    <div class="tab-pane fade active show card-body" id="custom-tabs-three-home" role="tabpanel"
+         aria-labelledby="custom-tabs-three-home-tab">
+
+        <div class="card card-blue card-outline collapsed-card">
+            <div class="card-header">
+                <h3 class="card-title">Отображение на главной</h3>
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                        <i class="fa fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body" style="display: none;">
+                <div class="form-group collection-wrapper">
+                    <div class="secondSectionDescription" id="secondSectionDescription">
+                        <div class="row collection-row">
+                            <div class="form-group" style="width: 100%">
+                                <label for="inputDescription">Изображение</label>
+                                <div class="custom-file">
+                                    <input type="file" name="page_image" class="custom-file-input" id="validatedCustomFile"
+                                           @change="this.addedPageImage"
+                                    >
+                                    <label class="custom-file-label" for="validatedCustomFile">Выберите файл</label>
+                                </div>
+                            </div>
+                            <div class="form-group" style="width: 100%">
+                                <label for="inputDescription">Описание</label>
+                                <ckeditor :editor="editor" v-model="pageDescription" :config="editorConfig"></ckeditor>
+                            </div>
+                            <div class="form-group" style="width: 100%">
+                                <label for="inputStatus">Выберите страницу</label>
+                                <select id="inputStatus" name='page_id' v-model="pageId" class="form-control custom-select">
+                                    <option value="-1">Нет</option>
+                                    <option
+                                        v-for="page in this.pages"
+                                        :value="page.id"
+                                    >{{page.title}}</option>
+                                </select>
+                            </div>
+                            <div class="form-group" style="width: 100%">
+                                <label for="inputName">Порядок сортировки</label>
+                                <input type="number" id="inputName" name="page_sort" v-model="pageSort" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
     <div class="row m-lg-3">
         <div class="col-12">
             <input type="submit" value="Сохранить" class="btn btn-success float-left"
@@ -83,7 +138,8 @@ export default {
         'is_type_page',
         'template_data',
         'service',
-        'file_dir'
+        'file_dir',
+        'pages'
     ],
     setup() {
         const servicesStore = adminServicesStore()
@@ -104,6 +160,10 @@ export default {
     },
     data() {
         return {
+            pageDescription: '',
+            pageId: -1,
+            page_image: '',
+            pageSort: '',
             status: false,
             category_id: null,
             title: '',
@@ -169,6 +229,18 @@ export default {
             formData.append('formData[preview_image]', this.preview_image)
             formData.append('formData[status]', this.status ? 1 : 0)
 
+            // if(this.page_image !== null){
+                formData.append('formData[page_image]', this.page_image)
+            // }
+            // if(this.pageDescription.length > 0){
+                formData.append('formData[page_description]', this.pageDescription)
+            // }
+
+            // if(this.pageDescription.length > 0){
+                formData.append('formData[page_id]', this.pageId)
+            // }
+            formData.append('formData[page_sort]', this.pageSort)
+
             const templateFormData = this.getTemplateFormData(templateData, formData)
 
             try {
@@ -220,8 +292,11 @@ export default {
         },
         addedPreviewImage(event){
             this.preview_image = event.target.files[0];
+        },
+        addedPageImage(event){
+            this.page_image = event.target.files[0];
         }
-    }
+    },
 }
 </script>
 

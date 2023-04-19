@@ -25,9 +25,10 @@ class PortfolioController extends Controller
             ->where('id','!=', 1)
             ->firstOrFail();
         $categories = Category::where(['parent_id' => 1, 'status' => 1])
-            ->orWhere(['id' => 1, 'status' => 1])
+            ->orWhere('id', 1)
             ->get();
         $posts = [];
+
         foreach ($category->posts as $key => $post){
             $posts[$key]['id'] = $post->id;
             $posts[$key]['title'] = $post->title;
@@ -55,7 +56,7 @@ class PortfolioController extends Controller
         $category = $this->categoryRepository->firstOrFail(1);
 //        $posts = $this->postThumbnailService->addThumbnailInList($category->posts, '570X650');
         $categories = Category::where(['parent_id' => 1, 'status' => 1])
-            ->orWhere(['id' => 1, 'status' => 1])
+            ->orWhere('id', 1)
             ->get();
         $publishPosts = Post::where('status', 1)->get();
 

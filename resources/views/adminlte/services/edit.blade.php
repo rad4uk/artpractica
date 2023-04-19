@@ -52,6 +52,7 @@
                             :template_data='{{$templateData}}'
                             :service='@json($service)'
                             :file_dir='@json($service->getDirPath())'
+                            :pages='@json($pages)'
                         ></form-component>
 
                     </div>

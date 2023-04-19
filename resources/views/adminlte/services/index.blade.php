@@ -84,7 +84,7 @@
                                     {{$post->title}}
                                 </td>
                                 <td>
-                                    {{$post->description}}
+                                    {!! $post->description !!}
                                 </td>
 
                                 <td>
@@ -119,7 +119,7 @@
         </section>
         <!-- /.content -->
     </div>
-@endsection;
+@endsection
 
 @push('scripts')
     <!-- jQuery -->

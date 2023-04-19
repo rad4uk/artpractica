@@ -33,9 +33,15 @@ class ServicesController extends Controller
     public function show(string $slug)
     {
         $service = Service::where(['slug' => $slug, 'status' => 1])->firstOrFail();
-//        dd($service);
-        return view('frontend/page/service', [
-            'service' => $service
+        $services = Service::where('status', 1)->limit(3)->get();
+        $servicesData = [];
+        foreach ($services as $key => $item){
+            $servicesData[$key] = $this->servicesService->generateData($item);
+        }
+        $serviceData = $this->servicesService->generateData($service);
+        return view('frontend/services/index', [
+            'services' => $servicesData,
+            'service' => $serviceData
         ]);
     }
 }

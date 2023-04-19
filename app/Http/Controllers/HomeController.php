@@ -17,10 +17,9 @@ class HomeController extends Controller
     }
     public function index()
     {
-        $categories = $this->categoryRepository->list();
-
-        $homePage = Page::where('id', 1)->with('categories')->firstOrFail();
+        $homePage = Page::where('id', 1)->with('categories', 'services')->firstOrFail();
         $additionalCategoriesData = [];
+        $additionalServicesData = [];
 
         foreach ($homePage->categories as $key => $category){
             $additionalCategoriesData[$key]['title'] = $category->title;
@@ -28,6 +27,16 @@ class HomeController extends Controller
             $additionalCategoriesData[$key]['slug'] = route('categories', $category->slug);
         }
 
-        return view('frontend/page/homepage', ['additionalCategoriesData' => $additionalCategoriesData]);
+        foreach ($homePage->services as $key => $service){
+            $additionalServicesData[$key]['title'] = $service->title;
+            $additionalServicesData[$key]['description'] = $service->page_description;
+            $additionalServicesData[$key]['image'] = $service->getFilePath($service->page_image);
+            $additionalServicesData[$key]['slug'] = route('service', $service->slug);
+        }
+
+        return view('frontend/page/homepage', [
+            'additionalCategoriesData' => $additionalCategoriesData,
+            'additionalServiceData' => $additionalServicesData,
+        ]);
     }
 }
