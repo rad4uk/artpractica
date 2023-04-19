@@ -18,7 +18,7 @@
                      :class="{active: checkTab(item.slug, item.name)}"
                 >
                     <p class="tabs__item-text">
-                        {{item.title}}
+                        {{item.tab_title !== null ? item.tab_title : item.title}}
                     </p>
                 </div>
 

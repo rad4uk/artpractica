@@ -18,6 +18,10 @@
                 <input type="text" id="inputName" name="title" class="form-control" v-model="title">
             </div>
             <div class="form-group">
+                <label for="inputName">Заголовок для меню</label>
+                <input type="text" id="inputName" name="tab_title" class="form-control" v-model="tab_title">
+            </div>
+            <div class="form-group">
                 <label for="inputDescription">Описание</label>
                 <ckeditor :editor="editor" v-model="description" :config="editorConfig"></ckeditor>
             </div>
@@ -147,7 +151,6 @@ export default {
         return {servicesStore}
     },
     async mounted() {
-        // console.log(this.template_data)
         if (this.is_type_page === 'edit'){
             this.servicesStore.setEditPageTemplate(this.template_data)
             this.category_id = this.service.category_id
@@ -156,10 +159,26 @@ export default {
             this.slug = this.service.slug
             this.preview_image = await this.fetchFile(this.file_dir, this.service.preview_image)
             this.status = this.service.status
+            this.tab_title = this.service.tab_title
+
+            if (this.service.page_description !== null) {
+                this.pageDescription = this.service.page_description
+            }
+            if (this.service.page_sort !== null) {
+                this.pageSort = this.service.page_sort
+            }
+            if (this.service.page_id !== null) {
+                this.pageId = this.service.page_id
+            }
+            if (this.service.page_image !== null){
+                this.page_image = await this.fetchFile(this.file_dir, this.service.page_image)
+            }
+
         }
     },
     data() {
         return {
+            tab_title: '',
             pageDescription: '',
             pageId: -1,
             page_image: '',
@@ -224,21 +243,14 @@ export default {
             let formData = new FormData()
             formData.append('formData[category_id]', this.category_id)
             formData.append('formData[title]', this.title)
+            formData.append('formData[tab_title]', this.tab_title)
             formData.append('formData[description]', this.description)
             formData.append('formData[slug]', this.slug)
             formData.append('formData[preview_image]', this.preview_image)
             formData.append('formData[status]', this.status ? 1 : 0)
-
-            // if(this.page_image !== null){
-                formData.append('formData[page_image]', this.page_image)
-            // }
-            // if(this.pageDescription.length > 0){
-                formData.append('formData[page_description]', this.pageDescription)
-            // }
-
-            // if(this.pageDescription.length > 0){
-                formData.append('formData[page_id]', this.pageId)
-            // }
+            formData.append('formData[page_image]', this.page_image)
+            formData.append('formData[page_description]', this.pageDescription)
+            formData.append('formData[page_id]', this.pageId)
             formData.append('formData[page_sort]', this.pageSort)
 
             const templateFormData = this.getTemplateFormData(templateData, formData)

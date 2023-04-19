@@ -28,7 +28,7 @@ class HomeController extends Controller
         }
 
         foreach ($homePage->services as $key => $service){
-            $additionalServicesData[$key]['title'] = $service->title;
+            $additionalServicesData[$key]['title'] = $service->tab_title ?? $service->title;
             $additionalServicesData[$key]['description'] = $service->page_description;
             $additionalServicesData[$key]['image'] = $service->getFilePath($service->page_image);
             $additionalServicesData[$key]['slug'] = route('service', $service->slug);

@@ -59,9 +59,6 @@ export default {
             menuIsActive: false
         }
     },
-    mounted() {
-      console.log(this.portfolio)
-    },
     methods: {
         openMenu(){
             this.menuIsActive = !this.menuIsActive

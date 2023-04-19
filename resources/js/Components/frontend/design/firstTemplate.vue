@@ -128,9 +128,6 @@
 export default {
     name: "firstTemplate",
     props: ['data'],
-    mounted() {
-        console.log(this.data)
-    }
 }
 </script>
 

@@ -55,6 +55,7 @@ class ServicesService
     public function generateData(Service $service): array
     {
         $servicesData['title'] = $service->title;
+        $servicesData['tab_title'] = $service->tab_title;
         $servicesData['description'] = $service->description;
         $servicesData['preview_image'] = $service->getFilePath($service->preview_image);
         $servicesData['first_section_description'] = $service->first_section_description !== null ? json_decode($service->first_section_description) : null;
