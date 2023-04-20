@@ -39,7 +39,8 @@ Route::prefix('admin')->middleware([
 
     Route::prefix('pages')->group(function (){
         Route::get('/', [PageController::class, 'index'])->name('admin_page_index');
-        Route::any('/new', [PageController::class, 'create'])->name('admin_page_new');
+        Route::get('/new', [PageController::class, 'new'])->name('admin_page_new');
+        Route::post('/create', [PageController::class, 'create'])->name('admin_page_create');
         Route::any('/{id}/edit', [PageController::class, 'update'])->name('admin_page_edit');
         Route::post('/{id}/delete', [PageController::class, 'update'])->name('admin_page_delete');
     });

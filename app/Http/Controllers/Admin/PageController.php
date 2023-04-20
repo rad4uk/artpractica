@@ -33,6 +33,12 @@ class PageController extends Controller
         return view('adminlte/pages/new');
     }
 
+    public function new()
+    {
+
+        return view('adminlte.pages.new');
+    }
+
     public function update(UpdateRequest $request, int $pageId)
     {
         $page = $this->pageRepository->findById($pageId);

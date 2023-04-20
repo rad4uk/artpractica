@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="{{asset('adminlte/plugins/fontawesome-free/css/all.min.css')}}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{asset('adminlte/dist/css/adminlte.min.css')}}">
+{{--    <link rel="stylesheet" href="{{asset('adminlte/plugins/dropzone/min/dropzone.min.css')}}">--}}
 @endpush
 
 @section('content')
@@ -17,7 +18,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Project Edit</h1>
+                        <h1>Page New</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -30,67 +31,21 @@
             </div><!-- /.container-fluid -->
         </section>
 
-        <!-- Main content -->
-        <section class="content">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="card card-primary">
-                        <div class="card-header">
-                            <h3 class="card-title">Основное</h3>
-
-                            <div class="card-tools">
-                                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                                    <i class="fas fa-minus"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <form action="{{route('admin_page_new')}}" method="POST" enctype="multipart/form-data">
-                            @csrf
-                            <div class="card-body">
-                                <div class="form-group">
-                                    <label for="inputName">Заголовок</label>
-                                    <input type="text" id="inputName" name="title" class="form-control" value="">
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputDescription">Описание</label>
-                                    <textarea id="inputDescription" name="description" class="form-control" rows="4" placeholder="начните вводить текст"></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputUrl">Ссылка (должна быть уникальной)</label>
-                                    <input type="text" id="inputUrl" name="slug" class="form-control" value="">
-                                </div>
-                                <div class="form-group form-check-inline">
-                                    <label class="form-check-label">
-                                        <input type="checkbox" name="status" class="form-check-input">Опубликовать
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="row m-lg-3">
-                                <div class="col-12">
-                                    <input type="submit" value="Добавить" class="btn btn-success float-left">
-                                </div>
-                            </div>
-                        </form>
-
-                        <!-- /.card-body -->
-                    </div>
-                    <!-- /.card -->
-                </div>
-            </div>
-
-        </section>
-        <!-- /.content -->
+        <new-component></new-component>
     </div>
     <!-- /.content-wrapper -->
-@endsection;
+@endsection
 
 @push('scripts')
     <!-- jQuery -->
     <script src="{{asset('adminlte/plugins/jquery/jquery.min.js')}}"></script>
+
+{{--    <script src="{{asset('adminlte/plugins/dropzone/min/dropzone.min.js')}}"></script>--}}
     <!-- Bootstrap 4 -->
     <script src="{{asset('adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
     <!-- AdminLTE App -->
     <script src="{{asset('adminlte/dist/js/adminlte.min.js')}}"></script>
+
 
     @vite('resources/js/adminlte/page.js')
 @endpush
