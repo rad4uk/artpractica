@@ -1,6 +1,7 @@
 @extends('layouts.main', [
     'metaTitle' => $homePage->meta_title ?? '',
-    'metaDescription' => $homePage->meta_description ?? ''
+    'metaDescription' => $homePage->meta_description ?? '',
+    'canonical' => route('home'),
 ])
 
 @push('styles')
@@ -211,18 +212,20 @@
                 <div class="profit__row">
                     <div class="profit__column"></div>
                     <div class="profit__column">
-                        @foreach($secondSectionData->items as $item)
-                        <div class="profit__item">
-                            <div class="profit__subtitle">
-                                <p>{{$item->input}}</p>
+                        @if(isset($secondSectionData->items))
+                            @foreach($secondSectionData->items as $item)
+                            <div class="profit__item">
+                                <div class="profit__subtitle">
+                                    <p>{{$item->input}}</p>
+                                </div>
+                                <div class="profit__text">
+                                    <p>
+                                        {{$item->textarea}}
+                                    </p>
+                                </div>
                             </div>
-                            <div class="profit__text">
-                                <p>
-                                    {{$item->textarea}}
-                                </p>
-                            </div>
-                        </div>
-                        @endforeach
+                            @endforeach
+                        @endif
                     </div>
 
                 </div>

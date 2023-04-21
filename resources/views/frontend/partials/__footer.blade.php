@@ -4,25 +4,51 @@
             <div class="footer__column">
                 <div class="footer__item">
                     <ul class="footer__list">
-                        <li class="footer__link"><a href="#">Главная</a></li>
-                        <li class="footer__link"><a href="#">Портфолио</a></li>
-                        <li class="footer__link"><a href="#">Услуги</a></li>
+                        <li class="footer__link">
+                            @if(Route::currentRouteName() === 'home')
+                                Главная
+                            @else
+                                <a href="{{route('home')}}">Главная</a>
+                            @endif
+                        </li>
+                        <li class="footer__link">
+                            @if(Route::currentRouteName() === 'portfolio')
+                                Портфолио
+                            @else
+                                <a href="{{route('portfolio')}}">Портфолио</a>
+                            @endif
+                        </li>
+                        <li class="footer__link">
+                            @if(Route::currentRouteName() === 'services')
+                                Услуги
+                            @else
+                                <a href="{{route('services')}}">Услуги</a>
+                            @endif
+                        </li>
                         <li class="footer__link"><a href="#">Наш магазин</a></li>
                     </ul>
                 </div>
                 <div class="footer__item">
                     <ul class="footer__list">
-                        <li class="footer__link"><a href="#">Квартиры</a></li>
-                        <li class="footer__link"><a href="#">Коттеджи</a></li>
-                        <li class="footer__link"><a href="#">Коммерческие объекты</a></li>
-                        <li class="footer__link"><a href="#">Ландшафты и террасы</a></li>
+                        <li class="footer__link">
+                            <a href="{{route('categories', 'kvartiry')}}">Квартиры</a>
+                        </li>
+                        <li class="footer__link">
+                            <a href="{{route('categories', 'kottedzhi')}}">Коттеджи</a>
+                        </li>
+                        <li class="footer__link">
+                            <a href="{{route('categories', 'kommercheskie-obekty')}}">Коммерческие объекты</a>
+                        </li>
+                        <li class="footer__link">
+                            <a href="{{route('categories', 'landshafty-i-terrasy')}}">Ландшафты и террасы</a>
+                        </li>
                     </ul>
                 </div>
             </div>
             <div class="footer__column">
                 <div class="footer__item">
                     <ul class="footer__list">
-                        <li class="footer__link"><a href="#">Контакты</a></li>
+                        <li class="footer__link"><a href="{{route('contact')}}">Контакты</a></li>
                         <li class="footer__link"><a href="#">8 920 213 4222</a></li>
                     </ul>
                 </div>

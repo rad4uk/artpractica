@@ -6,15 +6,15 @@
             </div>
             <div class="professional__row">
                 <slider
-                    v-if="this.sliders_data.firstSliderData"
+                    v-if="this.sliders_data && this.sliders_data.firstSliderData"
                     :data="this.sliders_data.firstSliderData"
                 ></slider>
                 <slider
-                    v-if="this.sliders_data.secondSliderData"
+                    v-if="this.sliders_data && this.sliders_data.secondSliderData"
                     :data="this.sliders_data.secondSliderData"
                 ></slider>
                 <slider
-                    v-if="this.sliders_data.thirdSliderData"
+                    v-if="this.sliders_data && this.sliders_data.thirdSliderData"
                     :data="this.sliders_data.thirdSliderData"
                 >
                 </slider>

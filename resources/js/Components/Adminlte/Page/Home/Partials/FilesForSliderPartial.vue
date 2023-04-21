@@ -64,8 +64,7 @@ export default {
                 this.title = this.data.title
             }
             let images = []
-
-            if (this.data.files.length > 0){
+            if (this.data && this.data.files && this.data.files.length > 0){
                 for (let i = 0; i < this.data.files.length; i++) {
                     let imageName = this.data.files[i]
                     let image = await this.fetchFile(this.dir_path, imageName)

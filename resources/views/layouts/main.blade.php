@@ -7,7 +7,7 @@
     <link rel="icon" href="{{asset('favicon.ico')}}">
     <title>{{$metaTitle ?? 'Студия дизайна Artpractica'}}</title>
     <meta name="description" content="{{$metaDescription ?? ''}}">
-
+    <link rel="canonical" href="{{$canonical ?? ''}}">
     @vite(['resources/js/app.js', 'resources/sass/frontend/app.scss'])
     @stack('styles')
 </head>

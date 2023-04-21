@@ -37,10 +37,12 @@ class HomeController extends Controller
         $firstSectionData = json_decode($homePage->first_section_data);
         $secondSectionData = json_decode($homePage->second_section_data);
         $slidersData = json_decode($homePage->sliders_data);
-        foreach ($slidersData as $slider){
-            if (count($slider->files) > 0){
-                foreach ($slider->files as $key => $file){
-                    $slider->files[$key] = $homePage->getFilePath($file);
+        if ($slidersData !== null){
+            foreach ($slidersData as $slider){
+                if (count($slider->files) > 0){
+                    foreach ($slider->files as $key => $file){
+                        $slider->files[$key] = $homePage->getFilePath($file);
+                    }
                 }
             }
         }
