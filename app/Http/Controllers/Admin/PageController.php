@@ -6,12 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Page\UpdateRequest;
 use App\Models\Page;
 use App\Repositories\PageRepository;
+use App\Services\Admin\HomePageService;
 use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
     public function __construct(
-        private readonly PageRepository $pageRepository
+        private readonly PageRepository $pageRepository,
+        private readonly HomePageService $homePageService
     )
     {
     }
@@ -25,10 +27,15 @@ class PageController extends Controller
 
     public function create(Request $request)
     {
+        $slidersData = $this->homePageService->setSliderData(
+            $request->request->all(),
+            $request->files->all()
+        );
         if ($request->isMethod('POST')){
             $details = $request->request->all();
+            $details['sliders_data'] = json_encode($slidersData);
             $this->pageRepository->create($details);
-            return redirect(route('admin_page_index'), 303);
+            return response('', 201);
         }
         return view('adminlte/pages/new');
     }
@@ -39,16 +46,26 @@ class PageController extends Controller
         return view('adminlte.pages.new');
     }
 
-    public function update(UpdateRequest $request, int $pageId)
+    public function update(Request $request, int $pageId)
     {
         $page = $this->pageRepository->findById($pageId);
-
+//        dd($page);
         if($request->isMethod('POST')){
+            $slidersData = $this->homePageService->setSliderData(
+                $request->request->all(),
+                $request->files->all()
+            );
             $details = $request->request->all();
+            $details['sliders_data'] = json_encode($slidersData);
+            unset($details['firstSliderData']);
+            unset($details['secondSliderData']);
+            unset($details['thirdSliderData']);
             $this->pageRepository->update($pageId, $details);
-            return redirect(route('admin_page_index'), 303);
+            return response('', 201);
         }
-        return view('adminlte.pages.edit', ['page' => $page]);
+        return view('adminlte.pages.edit', [
+            'page' => $page
+        ]);
     }
 
     public function delete(Request $request)

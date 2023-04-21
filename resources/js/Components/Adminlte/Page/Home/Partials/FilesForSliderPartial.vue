@@ -19,7 +19,7 @@
                             <div class="form-container">
                                 <div class="form-group slider-title">
                                     <label for="inputName">Заголовок</label>
-                                    <input type="text" id="inputName" class="form-control">
+                                    <input type="text" id="inputName" v-model="title" class="form-control">
                                 </div>
                                 <div class="form-group form-slider">
                                     <h1>Загрузка файлов</h1>
@@ -37,21 +37,44 @@
     </div>
 
 
-
 </template>
 
 <script>
 
 import Dropzone from "dropzone";
+import {adminHomePageStore} from "@/store/adminlte/homePageStore";
 
 export default {
     name: "FilesForSliderPartial",
-    components: {
-    },
+    props: ['slider_object_name', 'is_type_page', 'data', 'dir_path'],
+    components: {},
     data() {
         return {
-            files: []
+            title: ''
         };
+    },
+    setup() {
+        const homePageStore = adminHomePageStore()
+
+        return {homePageStore}
+    },
+    async beforeMount() {
+        if (this.is_type_page === 'edit'){
+            if (this.data !== null){
+                this.title = this.data.title
+            }
+            let images = []
+
+            if (this.data.files.length > 0){
+                for (let i = 0; i < this.data.files.length; i++) {
+                    let imageName = this.data.files[i]
+                    let image = await this.fetchFile(this.dir_path, imageName)
+                    this.dropzone.addFile(image)
+                    images.push(image)
+                }
+
+            }
+        }
     },
     mounted() {
         this.dropzone = new Dropzone(this.$refs.dropzone, {
@@ -75,16 +98,16 @@ export default {
                 '<div class="dz-error-mark"><span>✘</span></div>' +
                 '<div class="dz-remove"><button data-dz-remove class="btn btn-danger">Удалить</button></div>' +
                 '</div>',
-            init: function() {
+            init: function () {
                 const self = this;
-                this.on("addedfile", function(file) {
+                this.on("addedfile", function (file) {
                     self.files.push(file);
-                    file.previewElement.querySelector("[data-dz-remove]").addEventListener("click", function() {
+                    file.previewElement.querySelector("[data-dz-remove]").addEventListener("click", function () {
                         self.removeFile(file);
                     });
                 });
-                this.on("removedfile", function(file) {
-                    const index = self.files.findIndex(function(item) {
+                this.on("removedfile", function (file) {
+                    const index = self.files.findIndex(function (item) {
                         return item.name === file.name && item.size === file.size && item.type === file.type;
                     });
                     if (index !== -1) {
@@ -95,12 +118,14 @@ export default {
         });
 
         this.dropzone.on("addedfile", file => {
-            this.files.push(file);
+            this.homePageStore.setSliderFilesDataByName(this.slider_object_name, file)
         });
         this.dropzone.on("removedfile", file => {
-            this.files.forEach((item, index) => {
+            const sliderData = this.homePageStore.getSliderDataByName(this.slider_object_name)
+
+            sliderData.files.forEach((item, index) => {
                 if (item.name === file.name && item.size === file.size && item.type === file.type) {
-                    this.files.splice(index, 1)
+                    this.homePageStore.removeSliderFilesDataByIndex(this.slider_object_name, index)
                 }
             });
         });
@@ -109,6 +134,16 @@ export default {
         uploadFiles() {
             this.dropzone.processQueue();
         },
+        async fetchFile(dirPath, fileName) {
+            return await fetch(`${dirPath}/${fileName}`)
+                .then(response => response.blob())
+                .then(blob => new File([blob], fileName, { type: blob.type }));
+        },
+    },
+    watch: {
+        title(newValue){
+            this.homePageStore.setSliderTitleDataByName(this.slider_object_name, newValue)
+        }
     }
 }
 </script>
@@ -129,8 +164,9 @@ export default {
     flex-wrap: wrap;
     gap: 10px;
 }
-.dz-message{
-    .dz-button{
+
+.dz-message {
+    .dz-button {
         color: #fff;
         background-color: #28a745;
         border-color: #28a745;
@@ -147,44 +183,50 @@ export default {
         font-size: 1rem;
         line-height: 1.5;
         border-radius: 0.25rem;
-        transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+        transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
     }
 }
 
-.form-container{
+.form-container {
     display: flex;
     flex-direction: column;
     flex: 0 1 100%;
 }
-.form-slider{
+
+.form-slider {
     width: 100%;
 }
-.slider-title{
+
+.slider-title {
     width: 100%;
 }
-.dz-clickable{
+
+.dz-clickable {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     gap: 10px;
-    .dz-default{
+
+    .dz-default {
         flex: 0 1 100%;
         width: 100%;
         margin-bottom: 20px;
     }
 
 }
-.dz-success-mark{
-    height: 0;
-}
-.dz-error-mark{
+
+.dz-success-mark {
     height: 0;
 }
 
-.dz-preview{
+.dz-error-mark {
+    height: 0;
+}
 
-    .dz-image{
-        img{
+.dz-preview {
+
+    .dz-image {
+        img {
             //width: 100%;
             //height: 100%;
         }

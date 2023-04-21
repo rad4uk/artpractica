@@ -7,15 +7,34 @@ use Illuminate\Database\Eloquent\Model;
 
 class Page extends Model
 {
+    public string $dirPath;
+
     use HasFactory;
 
     protected $fillable = [
         'title',
         'description',
         'slug',
+        'first_section_data',
+        'second_section_data',
+        'sliders_data',
+        'meta_title',
+        'meta_description',
         'created_at',
         'updated_at',
     ];
+
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+
+        $this->dirPath = config('files-path.homePage.storageImagePath');
+    }
+
+    public function getDirPath(): string
+    {
+        return asset($this->dirPath);
+    }
 
     public function categories(int $limit = 4)
     {

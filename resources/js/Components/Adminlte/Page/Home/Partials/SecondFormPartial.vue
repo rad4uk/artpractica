@@ -17,7 +17,7 @@
                             <div class="row collection-row">
                                 <div class="form-group form-title-container">
                                     <label for="inputName">Заголовок</label>
-                                    <input type="text" id="inputName" class="form-control">
+                                    <input type="text" id="inputName" v-model="title" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -62,13 +62,32 @@
 </template>
 
 <script>
+import {adminHomePageStore} from "@/store/adminlte/homePageStore";
 export default {
     name: "SecondFormPartial",
+    props: ['is_type_page', 'data'],
+    mounted() {
+
+        if (this.is_type_page === 'edit'){
+            const data = JSON.parse(this.data)
+            if (data !== null){
+                this.title = data.title
+                this.items = data.items
+                this.homePageStore.setSecondSectionItems(data.items)
+            }
+        }
+    },
     data: () => {
         return {
             itemIndex: null,
+            title: '',
             items: []
         }
+    },
+    setup() {
+        const homePageStore = adminHomePageStore()
+
+        return {homePageStore}
     },
     methods: {
         addInputAndTextarea() {
@@ -83,6 +102,18 @@ export default {
                 this.itemIndex--
             }else{
                 this.itemIndex = null
+            }
+        }
+    },
+    watch: {
+        title(newValue){
+            this.homePageStore.setSecondSectionTitle(newValue)
+        },
+        itemIndex(value){
+            if (value !== null){
+                this.homePageStore.setSecondSectionItems(this.items)
+            }else{
+                this.homePageStore.setSecondSectionItems([])
             }
         }
     }

@@ -31,7 +31,7 @@
             </div><!-- /.container-fluid -->
         </section>
 
-        <new-component></new-component>
+        <new-component :action='@json(route('admin_page_create'))'></new-component>
     </div>
     <!-- /.content-wrapper -->
 @endsection
