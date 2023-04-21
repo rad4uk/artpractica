@@ -5,9 +5,19 @@
                 <h1>ВЫБИРАЙТЕ ПРОФЕССИОНАЛОВ</h1>
             </div>
             <div class="professional__row">
-                <slider :professional_team="professional_team" :title="'Проектирование и реализация крупных коммерческих объектов '"></slider>
-                <slider :professional_team="team" :title="'Собственное мебельное производство'"></slider>
-                <slider :professional_team="professional" :title="'Команда профессионалов, влюбленных в свое дело'"></slider>
+                <slider
+                    v-if="this.sliders_data.firstSliderData"
+                    :data="this.sliders_data.firstSliderData"
+                ></slider>
+                <slider
+                    v-if="this.sliders_data.secondSliderData"
+                    :data="this.sliders_data.secondSliderData"
+                ></slider>
+                <slider
+                    v-if="this.sliders_data.thirdSliderData"
+                    :data="this.sliders_data.thirdSliderData"
+                >
+                </slider>
             </div>
         </div>
 
@@ -20,62 +30,13 @@ import { ref } from 'vue';
 import Slider from "./Slider.vue";
 export default {
     name: "ProfessionalComponent",
+    props: ['sliders_data'],
     components: {
         Slider
     },
     data: () => {
         return {
-            professional_team: [
-                {
-                    'title': 'Проектирование и реализация крупных коммерческих объектов',
-                    'imagePath': '/images/img_11.png',
-                    'slug': '#'
-                },
-                {
-                    'title': 'Проектирование и реализация крупных коммерческих объектов',
-                    'imagePath': '/images/img_12.png',
-                    'slug': '#'
-                },
-                {
-                    'title': 'Проектирование и реализация крупных коммерческих объектов',
-                    'imagePath': '/images/img_13.png',
-                    'slug': '#'
-                }
-            ],
-            team: [
-                {
-                    'title': 'Собственное мебельное производство',
-                    'imagePath': '/images/img_12.png',
-                    'slug': '#'
-                },
-                {
-                    'title': 'Собственное мебельное производство',
-                    'imagePath': '/images/img_13.png',
-                    'slug': '#'
-                },
-                {
-                    'title': 'Собственное мебельное производство',
-                    'imagePath': '/images/img_11.png',
-                    'slug': '#'
-                },
-            ],
-            professional: [
-                {
-                    'title': 'Профессиональная команда дизайнеров',
-                    'imagePath': '/images/img_13.png',
-                    'slug': '#'
-                },
-                {
-                    'title': 'Профессиональная команда дизайнеров',
-                    'imagePath': '/images/img_12.png',
-                    'slug': '#'
-                },
-                {
-                    'title': 'Профессиональная команда дизайнеров',
-                    'imagePath': '/images/img_11.png',
-                    'slug': '#'
-                }
-            ]
+
         }
     },
 }

@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" href="{{asset('favicon.ico')}}">
-    <title>Студия дизайна Artpractica</title>
+    <title>{{$metaTitle ?? 'Студия дизайна Artpractica'}}</title>
+    <meta name="description" content="{{$metaDescription ?? ''}}">
 
     @vite(['resources/js/app.js', 'resources/sass/frontend/app.scss'])
     @stack('styles')
@@ -13,7 +14,7 @@
 <body>
     <div class="wrapper" id="app">
         @include('frontend.partials.__header')
-{{--        <header-component></header-component>--}}
+
         @yield('content')
 
         @include('frontend.partials.__footer')

@@ -1,4 +1,7 @@
-@extends('layouts.main')
+@extends('layouts.main', [
+    'metaTitle' => $homePage->meta_title ?? '',
+    'metaDescription' => $homePage->meta_description ?? ''
+])
 
 @push('styles')
     @vite(['resources/sass/frontend/homepage.scss'])
@@ -9,11 +12,12 @@
         <preview-component
             :preview_image='@json(asset('images/mainImg.webp'))'
         ></preview-component>
+
         <div class="about">
             <div class="container">
                 <div class="about__title">
                     <h1>
-                        CОЗДАЁМ И ВОПЛОЩАЕМ
+                        {{$firstSectionData->title ?? ''}}
                     </h1>
                 </div>
                 <div class="about__row">
@@ -22,24 +26,26 @@
                         <div class="about__column-text">
                             <div class="about__column-item">
                                 <p class="column-item-tile">
-                                    Разрабатываем дизайн-проекты интерьеров жилых домов, квартир и коммерческих объектов с учетом всех  необходимых технических расчетов.                                </p>
+                                    {{$firstSectionData->firstText ?? ''}}
+                                </p>
                             </div>
                             <div class="about__column-item">
                                 <p class="column-item-tile">
-                                    Мы стремимся создавать и воплощать в жизнь эстетический, современный и функциональный дизайн. Команда ArtPractica всегда открыта для новых задач в проектировании и реализации вашей мечты.                                </p>
+                                    {{$firstSectionData->secondText ?? ''}}
+                                </p>
                             </div>
                         </div>
                         <div class="about__column-info">
                             <div class="about__column-item">
-                                <p class="about__column-count">10 +</p>
+                                <p class="about__column-count">{{$firstSectionData->yearQuantity ?? ''}} +</p>
                                 <p class="about__column-subtitle">лет работы студии</p>
                             </div>
                             <div class="about__column-item">
-                                <p class="about__column-count">15 +</p>
+                                <p class="about__column-count">{{$firstSectionData->cityQuantity ?? ''}} +</p>
                                 <p class="about__column-subtitle">городов</p>
                             </div>
                             <div class="about__column-item">
-                                <p class="about__column-count">490 +</p>
+                                <p class="about__column-count">{{$firstSectionData->projectQuantity ?? ''}} +</p>
                                 <p class="about__column-subtitle">реализованных проектов</p>
                             </div>
                         </div>
@@ -199,44 +205,24 @@
             <div class="container">
                 <div class="profit__title">
                     <h1>
-                        Работая с нами вы получаете
+                        {{$secondSectionData->title ?? ''}}
                     </h1>
                 </div>
                 <div class="profit__row">
                     <div class="profit__column"></div>
                     <div class="profit__column">
+                        @foreach($secondSectionData->items as $item)
                         <div class="profit__item">
                             <div class="profit__subtitle">
-                                <p>полный цикл</p>
+                                <p>{{$item->input}}</p>
                             </div>
                             <div class="profit__text">
-                                <p>Реализация проекта любой сложности. Полная комплектация объекта качественными материалами и мебелью премиум-качества. </p>
+                                <p>
+                                    {{$item->textarea}}
+                                </p>
                             </div>
                         </div>
-                        <div class="profit__item">
-                            <div class="profit__subtitle">
-                                <p>Продуманный проект</p>
-                            </div>
-                            <div class="profit__text">
-                                <p>Многолетний опыт позволяет создавать дизайн-проекты, соблюдая баланс пожеланий заказчика и технических требований.</p>
-                            </div>
-                        </div>
-                        <div class="profit__item">
-                            <div class="profit__subtitle">
-                                <p>ТОЧНАЯ СМЕТА</p>
-                            </div>
-                            <div class="profit__text">
-                                <p>«Прозрачная» оценка стоимости материалов и работ на всех этапах.</p>
-                            </div>
-                        </div>
-                        <div class="profit__item">
-                            <div class="profit__subtitle">
-                                <p>экономия бюджета</p>
-                            </div>
-                            <div class="profit__text">
-                                <p>Точные технические расчеты исключают ошибки в процессе реализации проекта, экономя время и деньги заказчика.</p>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
 
                 </div>
@@ -244,7 +230,9 @@
         </div>
         <discuss-component :image_path='@json(asset('images/img_10.png'))'></discuss-component>
 
-        <professional-component></professional-component>
+        <professional-component
+            :sliders_data='@json($slidersData)'
+        ></professional-component>
 
 {{--        <div class="professional">--}}
 {{--            <div class="container">--}}

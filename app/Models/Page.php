@@ -36,6 +36,11 @@ class Page extends Model
         return asset($this->dirPath);
     }
 
+    public function getFilePath(string $fileName): string
+    {
+        return asset($this->dirPath . $fileName);
+    }
+
     public function categories(int $limit = 4)
     {
         return $this->hasMany(Category::class)->orderBy('page_sort', 'ASC')->limit($limit);

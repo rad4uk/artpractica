@@ -34,9 +34,24 @@ class HomeController extends Controller
             $additionalServicesData[$key]['slug'] = route('service', $service->slug);
         }
 
+        $firstSectionData = json_decode($homePage->first_section_data);
+        $secondSectionData = json_decode($homePage->second_section_data);
+        $slidersData = json_decode($homePage->sliders_data);
+        foreach ($slidersData as $slider){
+            if (count($slider->files) > 0){
+                foreach ($slider->files as $key => $file){
+                    $slider->files[$key] = $homePage->getFilePath($file);
+                }
+            }
+        }
+
         return view('frontend/page/homepage', [
             'additionalCategoriesData' => $additionalCategoriesData,
             'additionalServiceData' => $additionalServicesData,
+            'firstSectionData' => $firstSectionData,
+            'secondSectionData' => $secondSectionData,
+            'slidersData' => $slidersData,
+            'homePage' => $homePage
         ]);
     }
 }
