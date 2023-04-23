@@ -231,7 +231,7 @@
                 </div>
             </div>
         </div>
-        <discuss-component :image_path='@json(asset('images/img_10.png'))'></discuss-component>
+        <discuss-component :image_path='@json(asset('images/img_10.webp'))'></discuss-component>
 
         <professional-component
             :sliders_data='@json($slidersData)'

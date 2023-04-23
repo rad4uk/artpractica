@@ -13,7 +13,7 @@
                         <img
                             lazy
                             v-lazy="{
-                              src: '/images/project_form.png',
+                              src: '/images/project_form.webp',
                               error: 'url',
                             }"
                             alt="Проект">
