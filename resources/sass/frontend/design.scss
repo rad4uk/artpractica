@@ -298,6 +298,23 @@
         line-height: 15px;
     }
 }
+.atelier-furniture-text{
+    a{
+        color: $color-white;
+        text-decoration: underline;
+    }
+    p{
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 400;
+        @include adaptiv-font(16, 12);
+        line-height: 20px;
+        color: $color-white;
+        @media (max-width: $tablet-media) {
+            line-height: 15px;
+        }
+    }
+}
 
 .equipment {
     margin-bottom: 130px;
