@@ -1,4 +1,8 @@
-@extends('layouts.main')
+@extends('layouts.main', [
+    'metaTitle' => $service['meta_title'],
+    'metaDescription' => $service['meta_description'],
+    'canonical' => route('service', $service['slug']),
+])
 
 @push('styles')
     @vite(['resources/sass/frontend/design.scss'])

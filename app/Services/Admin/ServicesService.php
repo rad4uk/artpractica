@@ -69,6 +69,8 @@ class ServicesService
         $servicesData['slug'] = $service->slug;
         $servicesData['third_section_title'] = $service->third_section_title;
         $servicesData['third_section_description'] = $service->third_section_description;
+        $servicesData['meta_title'] = $service->meta_title;
+        $servicesData['meta_description'] = $service->meta_description;
         if ($service->third_section_images !== null){
             $thirdSectionImages = json_decode($service->third_section_images);
             if (count($thirdSectionImages) > 0){

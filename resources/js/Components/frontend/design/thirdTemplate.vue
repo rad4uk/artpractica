@@ -93,9 +93,6 @@
 export default {
     name: "thirdTemplate",
     props: ['data'],
-    mounted() {
-        console.log(this.data)
-    }
 }
 </script>
 

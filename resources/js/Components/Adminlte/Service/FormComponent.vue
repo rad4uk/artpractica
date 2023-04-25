@@ -224,6 +224,13 @@ export default {
                 this.errors.push('Вы забыли добавить фото услуги.');
             }
 
+            if (this.servicesStore.getMetaData.title.length < 2) {
+                this.errors.push('Заполните Мета Заголовок')
+            }
+            if (this.servicesStore.getMetaData.description.length < 2) {
+                this.errors.push('Заполните Мета Описание')
+            }
+
 
             if (!this.errors.length) {
                 return true;
@@ -252,6 +259,8 @@ export default {
             formData.append('formData[page_description]', this.pageDescription)
             formData.append('formData[page_id]', this.pageId)
             formData.append('formData[page_sort]', this.pageSort)
+            formData.append('formData[meta_title]', this.servicesStore.getMetaData.title)
+            formData.append('formData[meta_description]', this.servicesStore.getMetaData.description)
 
             const templateFormData = this.getTemplateFormData(templateData, formData)
 

@@ -79,9 +79,6 @@
 export default {
     name: "secondTemplate",
     props: ['data'],
-    mounted() {
-        console.log(this.data)
-    }
 }
 </script>
 

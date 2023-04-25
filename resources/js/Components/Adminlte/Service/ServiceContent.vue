@@ -2,7 +2,7 @@
     <section class="content">
         <div class="row">
             <div class="col-md-6">
-                <div class="card card-success">
+                <div class="card card-primary">
                     <div class="card-header">
                         <h3 class="card-title">Основное</h3>
 
@@ -14,15 +14,19 @@
                     </div>
 
                     <form-component
-                        :action="this.action"
-                        :page="this.page"
-                        :dir_path="this.dir_path"
-                        :is_type_page="this.is_type_page"
+                        :action='this.action'
+                        :is_type_page='this.is_type_page'
+                        :categories='this.categories'
+                        :template_data='this.template_data'
+                        :service='this.service'
+                        :file_dir='this.file_dir'
+                        :pages='this.pages'
                     ></form-component>
 
-                    <!-- /.card-body -->
                 </div>
+
             </div>
+
             <meta-component
                 @setMetaTitle="handleMetaTitle"
                 @setMetaDescription="handleMetaDescription"
@@ -31,53 +35,53 @@
                 :is_type_page="this.is_type_page"
             ></meta-component>
         </div>
-
     </section>
 </template>
 
 <script>
-import FormComponent from './FormComponent.vue'
+import FormComponent from "@/Components/Adminlte/Service/FormComponent.vue";
 import MetaComponent from "@/Components/Adminlte/MetaComponent.vue";
-
-import {adminHomePageStore} from "@/store/adminlte/homePageStore";
+import {adminServicesStore} from "@/store/adminlte/servicesStore";
 export default {
-    name: "New",
-    props: [
-        'action',
-        'is_type_page',
-        'page',
-        'dir_path'
-    ],
-    data: () => {
-        return {
-            meta_title: '',
-            meta_description: '',
-        }
-    },
+    name: "ServiceContent",
     components: {
         FormComponent,
         MetaComponent
     },
+    data: () => {
+      return {
+          meta_title: '',
+          meta_description: '',
+      }
+    },
+    props: [
+        'action',
+        'categories',
+        'is_type_page',
+        'template_data',
+        'service',
+        'file_dir',
+        'pages'
+    ],
     beforeMount() {
         if (this.is_type_page === 'edit'){
-            this.meta_title = this.page.meta_title
-            this.meta_description = this.page.meta_description
+            this.meta_title = this.service.meta_title
+            this.meta_description = this.service.meta_description
         }
     },
     setup() {
-        const homePageStore = adminHomePageStore()
+        const servicesStore = adminServicesStore()
 
-        return {homePageStore}
+        return {servicesStore}
     },
     methods: {
         handleMetaTitle(value) {
-            this.homePageStore.setMetaDataTitle(value)
+            this.servicesStore.setMetaDataTitle(value)
         },
         handleMetaDescription(value){
-            this.homePageStore.setMetaDataDescription(value)
+            this.servicesStore.setMetaDataDescription(value)
         }
     }
-
 }
 </script>
 

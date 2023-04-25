@@ -30,32 +30,12 @@
             </div><!-- /.container-fluid -->
         </section>
 
-        <!-- Main content -->
-        <section class="content">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="card card-primary">
-                        <div class="card-header">
-                            <h3 class="card-title">Основное</h3>
+        <service-content
+            :action='@json(route('admin_services_create'))'
+            :categories='@json($categories)'
+            :pages='@json($pages)'
+        ></service-content>
 
-                            <div class="card-tools">
-                                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                                    <i class="fas fa-minus"></i>
-                                </button>
-                            </div>
-                        </div>
-
-                        <form-component
-                            :action='@json(route('admin_services_create'))'
-                            :categories='@json($categories)'
-                            :pages='@json($pages)'
-                        ></form-component>
-
-                    </div>
-
-                </div>
-            </div>
-        </section>
     </div>
 @endsection
 

@@ -23,11 +23,11 @@
 
         <first-form-partial
             :is_type_page="this.is_type_page"
-            :data="this.page.first_section_data"
+            :data="this.first_section_data"
         ></first-form-partial>
         <second-form-partial
             :is_type_page="this.is_type_page"
-            :data="this.page.second_section_data"
+            :data="this.second_section_data"
         ></second-form-partial>
 
         <files-for-slider-partial
@@ -82,14 +82,34 @@ export default {
         SecondFormPartial,
         FilesForSliderPartial
     },
+    data: () => {
+        return {
+            first_section_data: null,
+            second_section_data: null,
+            firstSliderData: null,
+            secondSliderData: null,
+            thirdSliderData: null,
+            firstSliderName: 'firstSliderData',
+            secondSliderName: 'secondSliderData',
+            thirdSliderName: 'thirdSliderData',
+            errors: [],
+            title: '',
+            description: '',
+            slug: '',
+            status: '',
+        }
+    },
     beforeMount() {
+        this.first_section_data = this.homePageStore.getFirstSectionData
+        this.second_section_data = this.homePageStore.getSecondSectionData
       if (this.is_type_page === 'edit'){
+          this.first_section_data = this.page.first_section_data
+          this.second_section_data = this.page.second_section_data
           this.title = this.page.title
           this.description = this.page.description
           this.slug = this.page.slug
           this.status = this.page.status === 1
 
-          console.log(this.page.status)
 
           if (this.page.sliders_data !== null){
               const sliders_data = JSON.parse(this.page.sliders_data)
@@ -104,21 +124,6 @@ export default {
               }
           }
       }
-    },
-    data: () => {
-        return {
-            firstSliderData: null,
-            secondSliderData: null,
-            thirdSliderData: null,
-            firstSliderName: 'firstSliderData',
-            secondSliderName: 'secondSliderData',
-            thirdSliderName: 'thirdSliderData',
-            errors: [],
-            title: '',
-            description: '',
-            slug: '',
-            status: '',
-        }
     },
     setup() {
         const homePageStore = adminHomePageStore()

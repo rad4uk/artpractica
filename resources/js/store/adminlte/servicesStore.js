@@ -3,6 +3,10 @@ import {defineStore} from 'pinia'
 export const adminServicesStore = defineStore('servicesStore', {
     state: () => ({
         currentTemplate: null,
+        metaData: {
+            title: '',
+            description: ''
+        },
         firstTemplate: {
             name: 'firstTemplate',
             first_section_title: '',
@@ -44,8 +48,17 @@ export const adminServicesStore = defineStore('servicesStore', {
         getThirdTemplate: state => {
             return state.thirdTemplate
         },
+        getMetaData: state => {
+            return state.metaData
+        },
     },
     actions: {
+        setMetaDataTitle(value){
+            this.metaData.title = value
+        },
+        setMetaDataDescription(value){
+            this.metaData.description = value
+        },
         setEditPageTemplate(templateData) {
             this[templateData.name] = templateData
             this.currentTemplate = this[templateData.name]

@@ -10,6 +10,7 @@ use App\Repositories\ServicesRepository;
 use App\Services\Admin\ServicesService;
 use App\ValueObjects\FirstTemplate;
 use App\ValueObjects\SecondTemplate;
+use App\ValueObjects\ThirdTemplate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
@@ -37,8 +38,6 @@ class ServicesController extends Controller
         if ($request->isMethod('POST')){
             $requestData = $request->request->all();
             $filesData = $request->files->all();
-
-
             /**
              * @var FirstTemplate|SecondTemplate $templateInstance
              */
@@ -89,7 +88,7 @@ class ServicesController extends Controller
             $requestData = $request->request->all();
             $filesData = $request->files->all();
             /**
-             * @var FirstTemplate|SecondTemplate $templateInstance
+             * @var FirstTemplate|SecondTemplate|ThirdTemplate $templateInstance
              */
 
             if (isset($filesData['formData']['preview_image'])){
