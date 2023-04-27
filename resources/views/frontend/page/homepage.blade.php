@@ -144,60 +144,11 @@
 {{--                                </li>--}}
 {{--                            </ul>--}}
                             <div class="services__more">
-                                <a href="{{$service['slug']}}">подробнне</a>
+                                <a href="{{$service['slug']}}">подробнее</a>
                             </div>
                         </div>
                     </div>
                     @endforeach
-{{--                    <div class="services__item">--}}
-{{--                        <div class="services__subtitle">--}}
-{{--                            <p>КОМПЛЕКТАЦИЯ ИНТЕРЬЕРА</p>--}}
-{{--                        </div>--}}
-{{--                        <div class="services__image">--}}
-{{--                            <img lazy v-lazy="{ src: '{{ asset('images/img_8.png') }}' }" alt="">--}}
-{{--                        </div>--}}
-{{--                        <div class="services__content">--}}
-{{--                            <ul class="services__list">--}}
-{{--                                <li class="services__list-item">--}}
-{{--                                    Существенная экономия времени заказчика--}}
-{{--                                </li>--}}
-{{--                                <li class="services__list-item">--}}
-{{--                                    Гарантия качества отделочных материалов и мебели--}}
-{{--                                </li>--}}
-{{--                                <li class="services__list-item">--}}
-{{--                                    Возможность тщательного неторопливого выбора--}}
-{{--                                </li>--}}
-{{--                            </ul>--}}
-{{--                            <div class="services__more">--}}
-{{--                                <a href="#">подробнне</a>--}}
-{{--                            </div>--}}
-
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                    <div class="services__item">--}}
-{{--                        <div class="services__subtitle">--}}
-{{--                            <p>АТЕЛЬЕ АВТОРСКОЙ МЕБЕЛИ</p>--}}
-{{--                        </div>--}}
-{{--                        <div class="services__image">--}}
-{{--                            <img lazy v-lazy="{ src: '{{ asset('images/img_9.png') }}' }" alt="">--}}
-{{--                        </div>--}}
-{{--                        <div class="services__content">--}}
-{{--                            <ul class="services__list">--}}
-{{--                                <li class="services__list-item">--}}
-{{--                                    Высокотехнологичное производство полного цикла--}}
-{{--                                </li>--}}
-{{--                                <li class="services__list-item">--}}
-{{--                                    Группа профессиональных конструкторов--}}
-{{--                                </li>--}}
-{{--                                <li class="services__list-item">--}}
-{{--                                    Внимание к деталям--}}
-{{--                                </li>--}}
-{{--                            </ul>--}}
-{{--                            <div class="services__more">--}}
-{{--                                <a href="#">подробнне</a>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
                 </div>
             </div>
         </div>
