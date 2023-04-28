@@ -60,11 +60,11 @@
                         <a href="tel:89202134222" class="footer__list-item-link">8 920 213 4222</a>
                     </li>
                     <li class="footer__list-item">
-                        <a href="{{route('service', 'atelie-avtorskoj-mebeli')}}" class="footer__list-item-link">Ателье авторской мебели</a>
+                        <a href="https://apfurniture.ru" class="footer__list-item-link underline" target="_blank">Ателье авторской мебели</a>
                     </li>
                     <li class="footer__list-item">
-                        <a class="footer__icon-vk"></a>
-                        <a class="footer__icon-mail"></a>
+                        <a href="https://vk.com/art_practica_36" target="_blank" class="footer__icon-vk"></a>
+                        <a href="mailto: artpractica@mail.ru" class="footer__icon-mail"></a>
                     </li>
                 </ul>
             </div>

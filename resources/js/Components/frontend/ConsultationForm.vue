@@ -28,8 +28,8 @@
                     </div>
                 </form>
                 <div class="feedback__form-line">
-                    <a href="https://www.vk.com/" target="_blank" class="feedback__inst">VKONTAKTE</a>
-                    <a href="mailto: architect@gmail.com" class="feedback__email">architect@gmail.com</a>
+                    <a href="https://vk.com/art_practica_36" target="_blank" class="feedback__inst">VKONTAKTE</a>
+                    <a href="mailto: artpractica@mail.ru" class="feedback__email">artpractica@mail.ru</a>
                 </div>
             </div>
         </div>

@@ -56,7 +56,7 @@
         }
         button{
             width: 50%;
-            padding: 15px 0;
+            padding: 22px 0;
             font-family: 'Montserrat';
             font-weight: normal;
             font-size: 18px;
@@ -65,9 +65,13 @@
             color: $color-white;
             text-align: center;
             background: $button-color;
+            transition: all .6s ease;
             @media (max-width: $tablet-media) {
                 width: 100%;
             }
+        }
+        button:hover{
+            transform: scale(1.05);
         }
     }
     &__content {
