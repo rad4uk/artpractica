@@ -52,6 +52,7 @@ class PostController extends Controller
         $additionalPosts = $project->additionalPostsToMany()->get();
         foreach ($additionalPosts as $key => $post){
             $additionalPostsData[$key]['title'] = $post->title;
+            $additionalPostsData[$key]['square'] = $post->square;
             $additionalPostsData[$key]['preview_image'] = $project->getFullImagePath($post->preview_image);
             $additionalPostsData[$key]['slug'] = route('projects', $post->slug);
         }
@@ -79,7 +80,6 @@ class PostController extends Controller
             ->get();
         $posts = $this->postRepository->additionalPostsPublishList()->get();
         if ($request->isMethod('POST')) {
-//            dd($request->request->all());
             $requestData = $request->request->all();
             $allFilesData = $request->files->all();
 
@@ -88,7 +88,6 @@ class PostController extends Controller
 
             $widgetData = $this->postService->matchingRequestData($requestData, $allFilesData);
             $objectsWidgetData = $this->postService->setWidgetsData($widgetData['data']);
-//            dd($objectsWidgetData);
             try {
                 $postData = $this->postService->setPostData(
                     $formData,

@@ -38,28 +38,16 @@
                     :widgets='@json($body)'
                     :file_dir='@json($post->getDirPath())'
                 ></widget-container>
-                <div class="col-md-6">
-                    <div class="card card-primary">
-                        <div class="card-header">
-                            <h3 class="card-title">Основное</h3>
 
-                            <div class="card-tools">
-                                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                                    <i class="fas fa-minus"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <new-form-component
-                            :action='@json(route('admin_post_edit', $post->id))'
-                            :type_admin_page='@json('edit')'
-                            :post='@json($post)'
-                            :all_additional_posts='@json($posts)'
-                            :additional_posts='@json($additionalPosts)'
-                            :categories='@json($categories)'
-                            :file_dir='@json($post->getDirPath())'
-                        ></new-form-component>
-                    </div>
-                </div>
+                <project-content
+                    :action='@json(route('admin_post_edit', $post->id))'
+                    :type_admin_page='@json('edit')'
+                    :post='@json($post)'
+                    :all_additional_posts='@json($posts)'
+                    :additional_posts='@json($additionalPosts)'
+                    :categories='@json($categories)'
+                    :file_dir='@json($post->getDirPath())'
+                ></project-content>
             </div>
 
         </section>

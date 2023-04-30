@@ -4,6 +4,10 @@ export const adminProjectStore = defineStore('projectStore', {
     state: () => ({
         dragItem: null,
         dragItemIndex: null,
+        metaData: {
+            title: '',
+            description: ''
+        },
         emptyWidgets: [],
         widgets: [
             {
@@ -66,9 +70,19 @@ export const adminProjectStore = defineStore('projectStore', {
         },
         getEmptyWidgetByIndex: state => {
             return index => state.emptyWidgets[index]
-        }
+        },
+        getMetaData: state => {
+            return state.metaData
+        },
     },
     actions: {
+        setMetaDataTitle(value){
+            this.metaData.title = value
+        },
+        setMetaDataDescription(value){
+            this.metaData.description = value
+        },
+
         setTitleInEmptyWidgetData(index, title){
           this.emptyWidgets[index].data.title = title
         },

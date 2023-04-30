@@ -22,7 +22,9 @@ class Post extends Model
         'status',
         'preview_image',
         'apartment_images',
-        'body'
+        'body',
+        'meta_title',
+        'meta_description',
     ];
 
     public function additionalPostsToMany()

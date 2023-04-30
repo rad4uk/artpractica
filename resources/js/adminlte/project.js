@@ -3,13 +3,13 @@ import { createPinia } from 'pinia'
 import LogoutComponent from '@/Components/Adminlte/LogoutComponent.vue'
 import Portfolio from '@/Components/Adminlte/Widget/Portfolio.vue'
 import WidgetContainer from '@/Components/Adminlte/Widget/WidgetContainer.vue'
-import CreateFormComponent from '@/Components/Adminlte/Post/CreateFormComponent.vue'
+import ProjectContent from '@/Components/Adminlte/Post/ProjectContent.vue'
 const app = createApp({
     components: {
         'logout-component': LogoutComponent,
         'portfolio-widget': Portfolio,
         'widget-container': WidgetContainer,
-        'new-form-component': CreateFormComponent,
+        'project-content': ProjectContent,
     }
 });
 app.use(createPinia())
