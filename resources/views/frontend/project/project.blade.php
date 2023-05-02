@@ -300,8 +300,7 @@
     </div>
 
     <preview-component
-        :title='@json($post->title)'
-        :description='@json($post->description)'
+        :post='@json($post)'
         :apartment_images='@json($apartmentImages)'
         :preview_image='@json(asset($post->getFullImagePath($post->preview_image)))'
     >

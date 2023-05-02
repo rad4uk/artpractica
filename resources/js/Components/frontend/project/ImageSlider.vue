@@ -13,7 +13,7 @@
         class="apartment__swiper"
     >
         <div class="project-preview__arrow">
-            <div class="project-preview__arrow-text">План участка</div>
+            <div class="project-preview__arrow-text">{{ this.post.id === 4 ? 'План участка' : 'Было / Стало' }}</div>
             <div v-if="this.apartment_images.length > 1" ref="prev" class="project-preview__arrow-prev">
                 <svg width="9" height="16" viewBox="0 0 9 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -46,7 +46,7 @@ import 'swiper/css/pagination';
 import {ref} from "vue";
 export default {
     name: "ImageSlider",
-    props: ['apartment_images'],
+    props: ['apartment_images', 'post'],
     components: {
         Swiper,
         SwiperSlide,
