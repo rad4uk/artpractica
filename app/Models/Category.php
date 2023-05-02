@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Category extends Model
 {
-    public string $dirImagePath = '/storage/images/categories/';
+    public string $dirImagePath;
 
     use HasFactory;
 
@@ -22,7 +24,16 @@ class Category extends Model
         'page_image',
         'page_id',
         'page_sort',
+        'meta_title',
+        'meta_description',
     ];
+
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+
+        $this->dirImagePath = config('files-path.categories.storageImagePath');
+    }
 
     public function getDirPath(): string
     {
@@ -34,7 +45,7 @@ class Category extends Model
         return asset($this->dirImagePath . $fileName);
     }
 
-    public function parent()
+    public function parent(): belongsTo
     {
         return $this->belongsTo(Category::class, 'parent_id');
     }
@@ -44,7 +55,7 @@ class Category extends Model
         return $this->parent()->with('parentRecursive');
     }
 
-    public function children()
+    public function children(): HasMany
     {
         return $this->hasMany(Category::class, 'parent_id');
     }
@@ -61,6 +72,14 @@ class Category extends Model
             ->where(['status' => 1])
             ->limit(20)
             ;
+    }
+
+    public function jsonSerialize(): mixed
+    {
+        return array_merge(
+            $this->toArray(),
+            ['dirImagePath' => $this->getDirPath()]
+        );
     }
 
 }

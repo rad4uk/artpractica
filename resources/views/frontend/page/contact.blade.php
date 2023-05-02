@@ -15,6 +15,7 @@
                             <span>394036, Россия, Воронеж</span>
                             <span>Орджоникидзе, 14/16</span>
                             <a href="tel:+79202134222">Тел.: + 7 (920) 213-42-22</a>
+                            <a href="mailto: artpractica@mail.ru">artpractica@mail.ru</a>
                         </p>
                     </div>
                     <div class="contact__form">

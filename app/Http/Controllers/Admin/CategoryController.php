@@ -22,10 +22,6 @@ class CategoryController extends Controller
 
     public function index()
     {
-//        $data = Category::where('id', 5)->with('children')->get();
-//        $childrens = $this->categoryRepository->getChildren($validated['id']);
-//        dd($data);
-
         return view('adminlte.category.index', [
             'categories' =>  Category::all()
         ]);
@@ -33,10 +29,6 @@ class CategoryController extends Controller
 
     public function new(Request $request)
     {
-//        if ($request->isMethod('POST')){
-//
-//            dd($request->request->all());
-//        }
         return view('adminlte.category.new', [
             'categories' => $this->categoryRepository->getCategoryTree(),
             'pages' => Page::all(),
@@ -50,12 +42,11 @@ class CategoryController extends Controller
         $details['parent_id'] = $parentId;
         $pageId = $request->request->get('page_id') == -1 ? null : $request->request->get('page_id');
         $details['page_id'] = $pageId;
-        $details['status'] = $request->request->get('status') === 'on' ? 1 : 0;
 
         if ($request->files->has('page_image')){
             $file = $request->files->get('page_image');
             Storage::disk('public')->putFileAs(
-                '/images/categories',
+                config('files-path.categories.publicImagePath'),
                 $file,
                 $file->getClientOriginalName()
             );
@@ -63,7 +54,9 @@ class CategoryController extends Controller
         }
         $this->categoryRepository->create($details);
 
-        return redirect(route('admin_category_index'), 303);
+        return response([
+            'route' => route('admin_category_index')
+        ], 201);
     }
 
     public function delete(int $catId)
@@ -96,12 +89,11 @@ class CategoryController extends Controller
         $details['parent_id'] = $parentId;
         $pageId = $request->request->get('page_id') == -1 ? null : $request->request->get('page_id');
         $details['page_id'] = $pageId;
-        $details['status'] = $request->request->get('status') === 'on' ? 1 : 0;
-        unset($details['_token']);
+
         if ($request->files->has('page_image')){
             $file = $request->files->get('page_image');
             Storage::disk('public')->putFileAs(
-                '/images/categories',
+                config('files-path.categories.publicImagePath'),
                 $file,
                 $file->getClientOriginalName()
             );
@@ -110,6 +102,8 @@ class CategoryController extends Controller
 
         $this->categoryRepository->update($id, $details);
 
-        return redirect(route('admin_category_index'), 303);
+        return response([
+            'route' => route('admin_category_index')
+        ], 201);
     }
 }
