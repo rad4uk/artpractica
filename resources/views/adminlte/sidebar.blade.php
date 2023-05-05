@@ -13,12 +13,12 @@
 {{--                </a>--}}
 {{--            </li>--}}
 
-            <li class="nav-item">
-                <a href="{{route('admin_services_index')}}" class="nav-link">
-                    <i class="nav-icon fas fa-book"></i>
-                    <p>Услуги</p>
-                </a>
-            </li>
+{{--            <li class="nav-item">--}}
+{{--                <a href="{{route('admin_services_index')}}" class="nav-link">--}}
+{{--                    <i class="nav-icon fas fa-book"></i>--}}
+{{--                    <p>Услуги</p>--}}
+{{--                </a>--}}
+{{--            </li>--}}
 
             <li class="nav-item">
                 <a href="{{route('admin_post_index')}}" class="nav-link">
@@ -27,19 +27,19 @@
                 </a>
             </li>
 
-            <li class="nav-item">
-                <a href="{{route('admin_category_index')}}" class="nav-link">
-                    <i class="nav-icon fas fa-book"></i>
-                    <p>Категории</p>
-                </a>
-            </li>
+{{--            <li class="nav-item">--}}
+{{--                <a href="{{route('admin_category_index')}}" class="nav-link">--}}
+{{--                    <i class="nav-icon fas fa-book"></i>--}}
+{{--                    <p>Категории</p>--}}
+{{--                </a>--}}
+{{--            </li>--}}
 
-            <li class="nav-item">
-                <a href="{{route('admin_page_index')}}" class="nav-link">
-                    <i class="nav-icon fas fa-book"></i>
-                    <p>Страницы</p>
-                </a>
-            </li>
+{{--            <li class="nav-item">--}}
+{{--                <a href="{{route('admin_page_index')}}" class="nav-link">--}}
+{{--                    <i class="nav-icon fas fa-book"></i>--}}
+{{--                    <p>Страницы</p>--}}
+{{--                </a>--}}
+{{--            </li>--}}
         </ul>
     </nav>
 
