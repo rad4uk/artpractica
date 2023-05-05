@@ -19,17 +19,17 @@
                         @endif
                     </li>
                     @foreach($categories as $cat)
-                        @if($cat['id'] === 1)
+                        @if($cat->id === 1)
                             @continue
                         @else
-                            @if($category->id === $cat['id'])
+                            @if($category->id === $cat->id)
                                 <li class="tabs__item active">
-                                    {{$cat['title']}}
+                                    {{$cat->title}}
                                 </li>
                             @else
                                 <li class="tabs__item">
-                                    <a href="{{$cat['slug']}}">
-                                        {{$cat['title']}}
+                                    <a href="{{route('categories', $cat->slug)}}">
+                                        {{$cat->title}}
                                     </a>
                                 </li>
                             @endif
@@ -40,6 +40,7 @@
             </div>
         </div>
     </div>
+
     <div class="project">
         <div class="container">
             <div class="project__row">

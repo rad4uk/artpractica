@@ -8,9 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
-    public string $previewImagePath = '/storage/images/project/';
+    public string $previewImagePath;
 
     use HasFactory;
+
     use HasThumbnail;
 
     protected $fillable = [
@@ -27,6 +28,13 @@ class Post extends Model
         'meta_description',
     ];
 
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+
+        $this->previewImagePath = config('files-path.project.storageImagePath');
+    }
+
     public function additionalPostsToMany()
     {
         return $this->belongsToMany(Post::class, 'posts_posts', 'post_source', 'post_target');
@@ -42,10 +50,6 @@ class Post extends Model
         return asset($this->previewImagePath);
     }
 
-    public function postImages()
-    {
-        return $this->hasMany(PostImage::class,'post_id','id')->with('image');
-    }
 
 //    public function getCategory()
 //    {
@@ -54,11 +58,28 @@ class Post extends Model
 
     protected function thumbnailDir(): string
     {
-        return 'size';
+        return str_replace('/storage/images/','', rtrim($this->previewImagePath, DIRECTORY_SEPARATOR));
     }
 
     public function thumbnailColumn()
     {
         return 'preview_image';
+    }
+
+    public function jsonSerialize(): mixed
+    {
+        return array_merge(
+            $this->toArray(),
+            [
+                'preview_image' => [
+                    'default' => asset($this->getFullImagePath($this->preview_image)),
+                    'small' => $this->makeThumbnail($this->preview_image, config('thumbnail.project_sizes.small')),
+                    'medium' => $this->makeThumbnail($this->preview_image, config('thumbnail.project_sizes.medium')),
+                    'large' => $this->makeThumbnail($this->preview_image, config('thumbnail.project_sizes.large')),
+                ],
+                'route' => route('projects', $this->slug),
+
+            ]
+        );
     }
 }

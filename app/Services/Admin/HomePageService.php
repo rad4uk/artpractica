@@ -82,11 +82,4 @@ class HomePageService
             $file->getClientOriginalName()
         );
     }
-
-//    private function matchSliderData(string $name)
-//    {
-//        match ($name){
-//            'firstSectionData' => ''
-//        }
-//    }
 }

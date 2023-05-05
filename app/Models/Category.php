@@ -74,11 +74,14 @@ class Category extends Model
             ;
     }
 
-    public function jsonSerialize(): mixed
+    public function jsonSerialize(): array
     {
         return array_merge(
             $this->toArray(),
-            ['dirImagePath' => $this->getDirPath()]
+            [
+                'dirImagePath' => $this->getDirPath(),
+                'slug' => route('categories', $this->slug)
+            ]
         );
     }
 

@@ -78,7 +78,13 @@ Route::prefix('admin')->middleware([
     });
 
 });
-Route::get('/storage/images/{dir}/{size}/{method}/{file}', [ThumbnailController::class, 'index'])
+//Route::get('/storage/images/{dir}/{size}/{method}/{file}', [ThumbnailController::class, 'index'])
+//    ->where('method', 'resize|crop|fit')
+//    ->where('size', '\d+x\d+')
+//    ->where('file', '.+\.(png|jpg|gif|jpeg)')
+//    ->name('thumbnail');
+
+Route::get('/storage/images/{dir}/{size}/{file}', ThumbnailController::class)
     ->where('method', 'resize|crop|fit')
     ->where('size', '\d+x\d+')
     ->where('file', '.+\.(png|jpg|gif|jpeg)')
