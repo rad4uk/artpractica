@@ -85,9 +85,8 @@ Route::prefix('admin')->middleware([
 //    ->name('thumbnail');
 
 Route::get('/storage/images/{dir}/{size}/{file}', ThumbnailController::class)
-    ->where('method', 'resize|crop|fit')
     ->where('size', '\d+x\d+')
-    ->where('file', '.+\.(png|jpg|gif|jpeg)')
+    ->where('file', '.+\.(png|jpg|webp|jpeg)')
     ->name('thumbnail');
 
 //Route::middleware([

@@ -34,7 +34,7 @@ return [
         ],
         'sliders' => [
             'small' => '280x160',
-            'medium' => '480x140',
+            'medium' => '480x200',
             'large' => '728x260',
         ]
     ]

@@ -7,6 +7,7 @@
         <swiper
             slides-per-view="1"
             :space-between="20"
+            :autoHeight="false"
             :navigation="{
                           prevEl: prev,
                           nextEl: next,

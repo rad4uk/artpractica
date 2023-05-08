@@ -683,9 +683,7 @@
         position: absolute;
         width: 100%;
         height: 100%;
-        @media (max-width: $middle-media){
-            justify-content: center;
-        }
+        justify-content: center;
     }
 
     &__content{
@@ -871,9 +869,15 @@
     height: auto;
     @media (max-width: $tablet-media) {
         max-height: 260px;
+        min-height: 260px;
     }
     @media (max-width: $mobile-media) {
+        max-height: 200px;
+        min-height: 200px;
+    }
+    @media (max-width: 330px) {
         max-height: 140px;
+        min-height: 140px;
     }
 }
 
@@ -885,7 +889,7 @@
 }
 
 .swiper-slide {
-    height: auto;
+    height: auto !important;
 }
 
 .professional__slide {
