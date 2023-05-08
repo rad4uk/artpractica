@@ -35,13 +35,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.project__item {
-    max-height: 650px;
-}
-
-.project__image {
-    img {
-        object-fit: cover;
-    }
-}
+//.project__item {
+//    max-height: 650px;
+//}
+//
+//.project__image {
+//    img {
+//        object-fit: cover;
+//    }
+//}
 </style>

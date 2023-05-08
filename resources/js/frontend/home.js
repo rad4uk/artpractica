@@ -7,6 +7,7 @@ import FeedbackComponent from '@/Components/frontend/FeedbackComponent.vue'
 import PreviewComponent from '@/Components/frontend/home/PreviewComponent.vue'
 import DiscussComponent from "@/Components/frontend/home/DiscussComponent.vue";
 import HeaderComponent from "@/Components/frontend/HeaderComponent.vue";
+import ServicesComponent from "@/Components/frontend/home/ServicesComponent.vue";
 
 
 const app = createApp({
@@ -16,6 +17,7 @@ const app = createApp({
         'discuss-component': DiscussComponent,
         'feedback-component': FeedbackComponent,
         'header-component': HeaderComponent,
+        'services-component': ServicesComponent,
     }
 });
 app.use(VueLazyLoad, {

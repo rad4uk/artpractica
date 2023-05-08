@@ -6,7 +6,8 @@
         <div class="discuss__wrapper">
             <div class="discuss__content">
                 <div class="discuss__title">
-                    <h1>Хотите обсудить проект? Давайте начнём</h1>
+                    <p>Хотите обсудить проект?</p>
+                    <p>Давайте начнём</p>
                 </div>
                 <button class="discuss__button" @click="openPopUp()">Оставить заявку</button>
             </div>

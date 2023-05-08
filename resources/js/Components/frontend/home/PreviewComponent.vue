@@ -1,13 +1,8 @@
 <template>
     <div class="screen">
-        <div class="screen__image">
-            <picture>
-                <img :src="this.preview_image" alt="">
-            </picture>
-        </div>
         <div class="screen__wrapper">
             <div class="screen__body">
-                <p class="screen__subtitle">Мы с вами от зарождения проекта до его реализации</p>
+                <p class="screen__subtitle">Мы с вами от зарождения <br> проекта до его реализации</p>
                 <h1 class="screen__title">СТУДИЯ <br>ДИЗАЙнА ИНТЕРЬЕРА ПОЛНОГО ЦИКЛА</h1>
                 <div class="screen__button">
                     <button @click="openPopUp()">
@@ -43,6 +38,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+
 
 </style>

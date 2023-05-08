@@ -10,9 +10,7 @@
 
 @section('content')
     <section class="content">
-        <preview-component
-            :preview_image='@json(asset('images/mainImg.webp'))'
-        ></preview-component>
+        <preview-component></preview-component>
 
         <div class="about">
             <div class="container">
@@ -55,59 +53,109 @@
             </div>
         </div>
         @if(count($additionalCategoriesData) === 4):
+{{--        <div class="interiors">--}}
+{{--            <div class="container">--}}
+{{--                <div class="interiors__title">--}}
+{{--                    <h1>УНИКАЛЬНЫЕ ИНТЕРЬЕРЫ ДЛЯ ЖИЗНИ</h1>--}}
+{{--                </div>--}}
+{{--                <div class="interiors__row">--}}
+{{--                    <div class="interiors__column column-1">--}}
+{{--                        <div class="interiors__item">--}}
+{{--                            <div class="interiors__item-content">--}}
+{{--                                <div class="interiors__item-title">--}}
+{{--                                    <p>{{$additionalCategoriesData[0]['title']}}</p>--}}
+{{--                                </div>--}}
+{{--                                <a href="{{$additionalCategoriesData[0]['slug']}}" class="interiors__item-image">--}}
+
+{{--                                    <img lazy v-lazy="{ src: '{{$additionalCategoriesData[0]['image']}}' }" alt="">--}}
+{{--                                </a>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                    <div class="interiors__column column-2">--}}
+{{--                        <div class="interiors__column-1">--}}
+{{--                            <div class="interiors__item">--}}
+{{--                                <div class="interiors__item-content">--}}
+{{--                                    <div class="interiors__item-title">--}}
+{{--                                        <p>{{$additionalCategoriesData[1]['title']}}</p>--}}
+{{--                                    </div>--}}
+{{--                                    <a href="{{$additionalCategoriesData[1]['slug']}}" class="interiors__item-image">--}}
+{{--                                        <img lazy v-lazy="{ src: '{{$additionalCategoriesData[1]['image']}}' }" alt="">--}}
+{{--                                    </a>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <div class="interiors__column-2">--}}
+{{--                            <div class="interiors__item">--}}
+{{--                                <div class="interiors__item-content">--}}
+{{--                                    <div class="interiors__item-title">--}}
+{{--                                        <p>{{$additionalCategoriesData[2]['title']}}</p>--}}
+{{--                                    </div>--}}
+{{--                                    <a href="{{$additionalCategoriesData[2]['slug']}}" class="interiors__item-image">--}}
+{{--                                        <img lazy v-lazy="{ src: '{{$additionalCategoriesData[2]['image']}}' }" alt="">--}}
+{{--                                    </a>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                            <div class="interiors__item">--}}
+{{--                                <div class="interiors__item-content">--}}
+{{--                                    <div class="interiors__item-title">--}}
+{{--                                        <p>{{$additionalCategoriesData[3]['title']}}</p>--}}
+{{--                                    </div>--}}
+{{--                                    <a href="{{$additionalCategoriesData[3]['slug']}}" class="interiors__item-image">--}}
+{{--                                        <img lazy v-lazy="{ src: '{{$additionalCategoriesData[3]['image']}}' }" alt="">--}}
+{{--                                    </a>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
         <div class="interiors">
             <div class="container">
                 <div class="interiors__title">
                     <h1>УНИКАЛЬНЫЕ ИНТЕРЬЕРЫ ДЛЯ ЖИЗНИ</h1>
                 </div>
                 <div class="interiors__row">
-                    <div class="interiors__column column-1">
-                        <div class="interiors__item">
-                            <div class="interiors__item-content">
-                                <div class="interiors__item-title">
-                                    <p>{{$additionalCategoriesData[0]['title']}}</p>
-                                </div>
-                                <a href="{{$additionalCategoriesData[0]['slug']}}" class="interiors__item-image">
-
-                                    <img lazy v-lazy="{ src: '{{$additionalCategoriesData[0]['image']}}' }" alt="">
-                                </a>
+                    <div class="interiors__item">
+                        <div class="interiors__item-content">
+                            <div class="interiors__item-title">
+                                <p>{{$additionalCategoriesData[0]['title']}}</p>
                             </div>
+                            <a href="{{$additionalCategoriesData[0]['slug']}}" class="interiors__item-image">
+
+                                <img lazy v-lazy="{ src: '{{$additionalCategoriesData[0]['image']}}' }" alt="">
+                            </a>
                         </div>
                     </div>
-                    <div class="interiors__column column-2">
-                        <div class="interiors__column-1">
-                            <div class="interiors__item">
-                                <div class="interiors__item-content">
-                                    <div class="interiors__item-title">
-                                        <p>{{$additionalCategoriesData[1]['title']}}</p>
-                                    </div>
-                                    <a href="{{$additionalCategoriesData[1]['slug']}}" class="interiors__item-image">
-                                        <img lazy v-lazy="{ src: '{{$additionalCategoriesData[1]['image']}}' }" alt="">
-                                    </a>
-                                </div>
+                    <div class="interiors__item">
+                        <div class="interiors__item-content">
+                            <div class="interiors__item-title">
+                                <p>{{$additionalCategoriesData[1]['title']}}</p>
                             </div>
+                            <a href="{{$additionalCategoriesData[1]['slug']}}" class="interiors__item-image">
+                                <img lazy v-lazy="{ src: '{{$additionalCategoriesData[1]['image']}}' }" alt="">
+                            </a>
                         </div>
-                        <div class="interiors__column-2">
-                            <div class="interiors__item">
-                                <div class="interiors__item-content">
-                                    <div class="interiors__item-title">
-                                        <p>{{$additionalCategoriesData[2]['title']}}</p>
-                                    </div>
-                                    <a href="{{$additionalCategoriesData[2]['slug']}}" class="interiors__item-image">
-                                        <img lazy v-lazy="{ src: '{{$additionalCategoriesData[2]['image']}}' }" alt="">
-                                    </a>
-                                </div>
+                    </div>
+                    <div class="interiors__item">
+                        <div class="interiors__item-content">
+                            <div class="interiors__item-title">
+                                <p>{{$additionalCategoriesData[2]['title']}}</p>
                             </div>
-                            <div class="interiors__item">
-                                <div class="interiors__item-content">
-                                    <div class="interiors__item-title">
-                                        <p>{{$additionalCategoriesData[3]['title']}}</p>
-                                    </div>
-                                    <a href="{{$additionalCategoriesData[3]['slug']}}" class="interiors__item-image">
-                                        <img lazy v-lazy="{ src: '{{$additionalCategoriesData[3]['image']}}' }" alt="">
-                                    </a>
-                                </div>
+                            <a href="{{$additionalCategoriesData[2]['slug']}}" class="interiors__item-image">
+                                <img lazy v-lazy="{ src: '{{$additionalCategoriesData[2]['image']}}' }" alt="">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="interiors__item">
+                        <div class="interiors__item-content">
+                            <div class="interiors__item-title">
+                                <p>{{$additionalCategoriesData[3]['title']}}</p>
                             </div>
+                            <a href="{{$additionalCategoriesData[3]['slug']}}" class="interiors__item-image">
+                                <img lazy v-lazy="{ src: '{{$additionalCategoriesData[3]['image']}}' }" alt="">
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -116,42 +164,12 @@
         @endif
 
         @if(count($additionalServiceData) > 0)
-        <div class="services">
-            <div class="container">
-                <div class="services__title">
-                    <h1>ОКАЗЫВАЕМ ПОЛНЫЙ СПЕКТР УСЛУГ</h1>
-                </div>
-                <div class="services__row">
-                    @foreach($additionalServiceData as $service)
-                    <div class="services__item">
-                        <div class="services__subtitle">
-                            <p>{{$service['title']}}</p>
-                        </div>
-                        <div class="services__image">
-                            <img lazy v-lazy="{ src: '{{$service['image']}}' }" alt="">
-                        </div>
-                        <div class="services__content">
-                            {!! $service['description'] !!}
-{{--                            <ul class="services__list">--}}
-{{--                                <li class="services__list-item">--}}
-{{--                                    15-ти летний опыт работы профессионалов--}}
-{{--                                </li>--}}
-{{--                                <li class="services__list-item">--}}
-{{--                                    Системный подход к созданию проектов--}}
-{{--                                </li>--}}
-{{--                                <li class="services__list-item">--}}
-{{--                                    Воплощение в жизнь заказов любой сложности--}}
-{{--                                </li>--}}
-{{--                            </ul>--}}
-                            <div class="services__more">
-                                <a href="{{$service['slug']}}">подробнее</a>
-                            </div>
-                        </div>
-                    </div>
-                    @endforeach
-                </div>
-            </div>
-        </div>
+
+            <services-component
+                :services='@json($additionalServiceData)'
+            >
+
+            </services-component>
         @endif
         <div class="profit">
             <div class="container">
@@ -188,39 +206,6 @@
             :sliders_data='@json($slidersData)'
         ></professional-component>
 
-{{--        <div class="professional">--}}
-{{--            <div class="container">--}}
-{{--                <div class="professional__title">--}}
-{{--                    <h1>ВЫБИРАЙТЕ ПРОФЕССИОНАЛОВ</h1>--}}
-{{--                </div>--}}
-{{--                <div class="professional__row">--}}
-{{--                    <div class="professional__column">--}}
-{{--                        <div class="professional__text">--}}
-{{--                            <p>Проектирование и реализация крупных коммерческих объектов</p>--}}
-{{--                        </div>--}}
-{{--                        <div class="professional__image">--}}
-{{--                            <img src="{{asset('images/img_11.png')}}" alt="">--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                    <div class="professional__column">--}}
-{{--                        <div class="professional__text">--}}
-{{--                            <p>Собственное мебельное производство</p>--}}
-{{--                        </div>--}}
-{{--                        <div class="professional__image">--}}
-{{--                            <img src="{{asset('images/img_12.png')}}" alt="">--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                    <div class="professional__column">--}}
-{{--                        <div class="professional__text">--}}
-{{--                            <p>Профессиональная команда дизайнеров</p>--}}
-{{--                        </div>--}}
-{{--                        <div class="professional__image">--}}
-{{--                            <img src="{{asset('images/img_13.png')}}" alt="">--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
         <feedback-component></feedback-component>
     </section>
 @endsection

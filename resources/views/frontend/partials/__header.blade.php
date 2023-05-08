@@ -35,3 +35,26 @@
     :contact='@json(['slug' => route('contact'), 'class' => Route::currentRouteName() === 'contact'])'
     :images='@json([asset('/images/logo-88-24.png'), asset('/images/logo-172-47.png')])'
 ></header-component>
+
+{{--@push('scripts')--}}
+{{--    <script>--}}
+{{--        const wrapper = document.querySelector('.wrapper');--}}
+{{--        const menu = document.querySelector('.header');--}}
+{{--        let isMenuActive = false;--}}
+
+{{--        wrapper.addEventListener('scroll', function() {--}}
+{{--            console.log('adsasd')--}}
+{{--            const scrollPosition = wrapper.scrollTop;--}}
+
+{{--            if (scrollPosition > 0 && !isMenuActive) {--}}
+{{--                // Если прокрутка больше 0 и меню не активно, то активируем его--}}
+{{--                isMenuActive = true;--}}
+{{--                menu.classList.add('active');--}}
+{{--            } else if (scrollPosition === 0 && isMenuActive) {--}}
+{{--                // Если прокрутка равна 0 и меню активно, то деактивируем его--}}
+{{--                isMenuActive = false;--}}
+{{--                menu.classList.remove('active');--}}
+{{--            }--}}
+{{--        });--}}
+{{--    </script>--}}
+{{--@endpush--}}
