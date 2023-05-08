@@ -80,6 +80,7 @@ input:-webkit-autofill:focus {
             }
             @media (max-width: $mobile-media) {
                 min-width: auto;
+                width: 100%;
             }
         }
         .feedback-image{
@@ -115,6 +116,15 @@ input:-webkit-autofill:focus {
                 text-align: center;
                 background: $button-color;
                 transition: all .6s ease;
+                color: $color-white;
+                @include adaptiv-font(18, 12);
+                @include adaptiv-line-height(22, 15);
+                @media (max-width: $tablet-media) {
+                    padding: 16px 0;
+                }
+                @media (max-width: $mobile-media) {
+                    padding: 12px 0;
+                }
             }
             button:hover{
                 transform: scale(1.05);
@@ -132,21 +142,7 @@ input:-webkit-autofill:focus {
             @media (max-width: $tablet-media) {
                 margin-bottom: 32px;
             }
-            //label{
-            //    font-family: 'Montserrat';
-            //    font-style: normal;
-            //    font-weight: 400;
-            //    @include adaptiv-font(14, 12);
-            //    line-height: 17px;
-            //    color: rgba(255, 255, 255, 0.7);
-            //    position: absolute;
-            //    bottom: 8px;
-            //    text-transform: uppercase;
-            //    @media (max-width: $tablet-media) {
-            //        line-height: 15px;
-            //        bottom: 5px;
-            //    }
-            //}
+
             input, textarea{
                 padding-bottom: 8px;
                 outline: none;
@@ -155,7 +151,7 @@ input:-webkit-autofill:focus {
                 font-style: normal;
                 font-weight: 400;
                 @include adaptiv-font(14, 12);
-                line-height: 17px;
+                @include adaptiv-line-height(17, 15);
                 color: rgba(255, 255, 255, 0.7);
                 text-transform: uppercase;
                 @media (max-width: $tablet-media) {
@@ -177,9 +173,9 @@ input:-webkit-autofill:focus {
                 font-family: 'Montserrat';
                 font-weight: normal;
                 text-transform: uppercase;
-                font-size: 12px;
-                line-height: 12px;
                 color: #FFFFFF;
+                @include adaptiv-font(12, 8);
+                @include adaptiv-line-height(12, 8);
             }
         }
     }
@@ -204,10 +200,6 @@ input:-webkit-autofill:focus {
         }
     }
 }
-
-//.buttonShadow:hover{
-        //box-shadow: 2px 4px 16px 0 rgba(174, 72, 52, 0.7);
-//}
 
 img[lazy=loading] {
     width: 100%;

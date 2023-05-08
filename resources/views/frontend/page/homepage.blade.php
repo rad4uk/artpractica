@@ -52,65 +52,7 @@
                 </div>
             </div>
         </div>
-        @if(count($additionalCategoriesData) === 4):
-{{--        <div class="interiors">--}}
-{{--            <div class="container">--}}
-{{--                <div class="interiors__title">--}}
-{{--                    <h1>УНИКАЛЬНЫЕ ИНТЕРЬЕРЫ ДЛЯ ЖИЗНИ</h1>--}}
-{{--                </div>--}}
-{{--                <div class="interiors__row">--}}
-{{--                    <div class="interiors__column column-1">--}}
-{{--                        <div class="interiors__item">--}}
-{{--                            <div class="interiors__item-content">--}}
-{{--                                <div class="interiors__item-title">--}}
-{{--                                    <p>{{$additionalCategoriesData[0]['title']}}</p>--}}
-{{--                                </div>--}}
-{{--                                <a href="{{$additionalCategoriesData[0]['slug']}}" class="interiors__item-image">--}}
-
-{{--                                    <img lazy v-lazy="{ src: '{{$additionalCategoriesData[0]['image']}}' }" alt="">--}}
-{{--                                </a>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                    <div class="interiors__column column-2">--}}
-{{--                        <div class="interiors__column-1">--}}
-{{--                            <div class="interiors__item">--}}
-{{--                                <div class="interiors__item-content">--}}
-{{--                                    <div class="interiors__item-title">--}}
-{{--                                        <p>{{$additionalCategoriesData[1]['title']}}</p>--}}
-{{--                                    </div>--}}
-{{--                                    <a href="{{$additionalCategoriesData[1]['slug']}}" class="interiors__item-image">--}}
-{{--                                        <img lazy v-lazy="{ src: '{{$additionalCategoriesData[1]['image']}}' }" alt="">--}}
-{{--                                    </a>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                        <div class="interiors__column-2">--}}
-{{--                            <div class="interiors__item">--}}
-{{--                                <div class="interiors__item-content">--}}
-{{--                                    <div class="interiors__item-title">--}}
-{{--                                        <p>{{$additionalCategoriesData[2]['title']}}</p>--}}
-{{--                                    </div>--}}
-{{--                                    <a href="{{$additionalCategoriesData[2]['slug']}}" class="interiors__item-image">--}}
-{{--                                        <img lazy v-lazy="{ src: '{{$additionalCategoriesData[2]['image']}}' }" alt="">--}}
-{{--                                    </a>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                            <div class="interiors__item">--}}
-{{--                                <div class="interiors__item-content">--}}
-{{--                                    <div class="interiors__item-title">--}}
-{{--                                        <p>{{$additionalCategoriesData[3]['title']}}</p>--}}
-{{--                                    </div>--}}
-{{--                                    <a href="{{$additionalCategoriesData[3]['slug']}}" class="interiors__item-image">--}}
-{{--                                        <img lazy v-lazy="{ src: '{{$additionalCategoriesData[3]['image']}}' }" alt="">--}}
-{{--                                    </a>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
+        @if(count($additionalCategoriesData) === 4)
         <div class="interiors">
             <div class="container">
                 <div class="interiors__title">

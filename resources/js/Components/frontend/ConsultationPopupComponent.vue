@@ -35,12 +35,24 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss">
+@import "@root/sass/frontend/variables.scss";
+
 .consultationPopup{
     display: flex;
     align-items: center;
     justify-content: center;
     max-width: 436px;
+    @media (max-width: $mobile-media) {
+        max-width: 80%;
+        width: 80%;
+    }
+
+    .feedback-form {
+        @media (max-width: $mobile-media) {
+            padding: 0;
+        }
+    }
 }
 .feedback__row{
     flex: 0 1 auto;
