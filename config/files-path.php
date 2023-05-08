@@ -11,5 +11,9 @@ return [
     'project' => [
         'publicImagePath' => '/images/project',
         'storageImagePath' => '/storage/images/project/',
+    ],
+    'services' => [
+        'publicImagePath' => '/images/services',
+        'storageImagePath' => '/storage/images/services/',
     ]
 ];

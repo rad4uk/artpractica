@@ -67,13 +67,19 @@ class ThumbnailController extends Controller
 
         [$width, $height] = explode('x', $size);
 
-        $image = Image::cache(function($image) use ($storage, $oldFilePath, $newFilePath, $width, $height){
-            $image->make($storage->path($oldFilePath))
-                ->fit($width, $height)
-                ->save($storage->path($newFilePath));
-        }, 10, true);
+//        $image = Image::cache(function($image) use ($storage, $oldFilePath, $newFilePath, $width, $height){
+//            $image->make($storage->path($oldFilePath))
+//                ->fit($width, $height)
+//                ->save($storage->path($newFilePath));
+//        }, 10, true);
+        Image::make($storage->path($oldFilePath))
+            ->fit($width, $height, function ($constraint) {
+                $constraint->upsize();
+            })
+            ->save($storage->path($newFilePath));
 
-        return $image->response();
+//        return $image->response();
+        return response()->file($storage->path($newFilePath));
     }
 
 

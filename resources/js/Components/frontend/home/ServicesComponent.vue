@@ -32,13 +32,19 @@
                         <p>{{service.title}}</p>
                     </div>
                     <div class="services__image">
-                        <img
-                            lazy
-                            v-lazy="{
-                              src: service.image,
+
+                        <picture>
+                            <source v-if="service.image['small']" :srcset="service.image['small']" media="(max-width: 330px)"/>
+                            <source v-if="service.image['medium']" :srcset="service.image['medium']" media="(max-width: 520px)"/>
+                            <source v-if="service.image['large']" :srcset="service.image['large']" media="(max-width: 768px)"/>
+                            <img
+                                lazy
+                                v-lazy="{
+                              src: service.image['default'],
                               error: 'url',
                             }"
-                            :alt="service.title">
+                                :alt="service.title">
+                        </picture>
                     </div>
                     <div class="services__content">
                         <div v-html="service.description"></div>

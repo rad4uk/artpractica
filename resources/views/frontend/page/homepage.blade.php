@@ -65,8 +65,15 @@
                                 <p>{{$additionalCategoriesData[0]['title']}}</p>
                             </div>
                             <a href="{{$additionalCategoriesData[0]['slug']}}" class="interiors__item-image">
-
-                                <img lazy v-lazy="{ src: '{{$additionalCategoriesData[0]['image']}}' }" alt="">
+                                <picture>
+                                    @if(isset($additionalCategoriesData[0]['image']['small']))
+                                    <source srcset="{{$additionalCategoriesData[0]['image']['small']}}" media="(max-width: 330px)"/>
+                                    <source srcset="{{$additionalCategoriesData[0]['image']['medium']}}" media="(max-width: 520px)"/>
+                                    <source srcset="{{$additionalCategoriesData[0]['image']['large']}}" media="(max-width: 768px)"/>
+                                    @endif
+                                        <source srcset="{{$additionalCategoriesData[0]['image']['default']}}" media="(min-width: 1280px)"/>
+                                        <img lazy v-lazy="{ src: '{{$additionalCategoriesData[0]['image']['default']}}' }" alt="">
+                                </picture>
                             </a>
                         </div>
                     </div>
@@ -76,7 +83,15 @@
                                 <p>{{$additionalCategoriesData[1]['title']}}</p>
                             </div>
                             <a href="{{$additionalCategoriesData[1]['slug']}}" class="interiors__item-image">
-                                <img lazy v-lazy="{ src: '{{$additionalCategoriesData[1]['image']}}' }" alt="">
+                                <picture>
+                                    @if(isset($additionalCategoriesData[1]['image']['small']))
+                                        <source srcset="{{$additionalCategoriesData[1]['image']['small']}}" media="(max-width: 330px)"/>
+                                        <source srcset="{{$additionalCategoriesData[1]['image']['medium']}}" media="(max-width: 520px)"/>
+                                        <source srcset="{{$additionalCategoriesData[1]['image']['large']}}" media="(max-width: 768px)"/>
+                                    @endif
+                                    <source srcset="{{$additionalCategoriesData[1]['image']['default']}}" media="(min-width: 1280px)"/>
+                                    <img lazy v-lazy="{ src: '{{$additionalCategoriesData[1]['image']['default']}}' }" alt="">
+                                </picture>
                             </a>
                         </div>
                     </div>
@@ -86,7 +101,15 @@
                                 <p>{{$additionalCategoriesData[2]['title']}}</p>
                             </div>
                             <a href="{{$additionalCategoriesData[2]['slug']}}" class="interiors__item-image">
-                                <img lazy v-lazy="{ src: '{{$additionalCategoriesData[2]['image']}}' }" alt="">
+                                <picture>
+                                    @if(isset($additionalCategoriesData[2]['image']['small']))
+                                        <source srcset="{{$additionalCategoriesData[2]['image']['small']}}" media="(max-width: 330px)"/>
+                                        <source srcset="{{$additionalCategoriesData[2]['image']['medium']}}" media="(max-width: 520px)"/>
+                                        <source srcset="{{$additionalCategoriesData[2]['image']['large']}}" media="(max-width: 768px)"/>
+                                    @endif
+                                    <source srcset="{{$additionalCategoriesData[2]['image']['default']}}" media="(min-width: 1280px)"/>
+                                    <img lazy v-lazy="{ src: '{{$additionalCategoriesData[2]['image']['default']}}' }" alt="">
+                                </picture>
                             </a>
                         </div>
                     </div>
@@ -96,7 +119,15 @@
                                 <p>{{$additionalCategoriesData[3]['title']}}</p>
                             </div>
                             <a href="{{$additionalCategoriesData[3]['slug']}}" class="interiors__item-image">
-                                <img lazy v-lazy="{ src: '{{$additionalCategoriesData[3]['image']}}' }" alt="">
+                                <picture>
+                                    @if(isset($additionalCategoriesData[3]['image']['small']))
+                                        <source srcset="{{$additionalCategoriesData[3]['image']['small']}}" media="(max-width: 330px)"/>
+                                        <source srcset="{{$additionalCategoriesData[3]['image']['medium']}}" media="(max-width: 520px)"/>
+                                        <source srcset="{{$additionalCategoriesData[3]['image']['large']}}" media="(max-width: 768px)"/>
+                                    @endif
+                                    <source srcset="{{$additionalCategoriesData[3]['image']['default']}}" media="(min-width: 1280px)"/>
+                                    <img lazy v-lazy="{ src: '{{$additionalCategoriesData[3]['image']['default']}}' }" alt="">
+                                </picture>
                             </a>
                         </div>
                     </div>

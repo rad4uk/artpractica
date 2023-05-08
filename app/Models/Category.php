@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\Models\HasThumbnail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -11,7 +12,7 @@ class Category extends Model
 {
     public string $dirImagePath;
 
-    use HasFactory;
+    use HasFactory, HasThumbnail;
 
     protected $table = 'categories';
 
@@ -85,4 +86,8 @@ class Category extends Model
         );
     }
 
+    protected function thumbnailDir(): string
+    {
+        return str_replace('/storage/images/','', rtrim($this->dirImagePath, DIRECTORY_SEPARATOR));
+    }
 }

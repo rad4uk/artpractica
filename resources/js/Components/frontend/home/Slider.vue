@@ -32,7 +32,19 @@
             </div>
             <swiper-slide v-for="(image, idx) in this.data.files" :key="idx">
                 <div class="professional__image">
-                    <img :src="image" alt="">
+                    <picture>
+                        <source v-if="image.small" :srcset="image.small" media="(max-width: 330px)"/>
+                        <source v-if="image.medium" :srcset="image.medium" media="(max-width: 520px)"/>
+                        <source v-if="image.large" :srcset="image.large" media="(max-width: 768px)"/>
+                        <img
+                            lazy
+                            v-lazy="{
+                              src: image.default,
+                              error: 'error',
+                            }"
+                            alt=""
+                        >
+                    </picture>
                 </div>
             </swiper-slide>
         </swiper>

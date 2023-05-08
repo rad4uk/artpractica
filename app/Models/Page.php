@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\Models\HasThumbnail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -9,7 +10,7 @@ class Page extends Model
 {
     public string $dirPath;
 
-    use HasFactory;
+    use HasFactory, HasThumbnail;
 
     protected $fillable = [
         'title',
@@ -49,5 +50,16 @@ class Page extends Model
     public function services(int $limit = 3)
     {
         return $this->hasMany(Service::class)->orderBy('page_sort', 'ASC')->limit($limit);
+    }
+
+
+    protected function thumbnailDir(): string
+    {
+        return str_replace('/storage/images/','', rtrim($this->dirPath, DIRECTORY_SEPARATOR));
+    }
+
+    public function getFullImagePath(string $imageName): string
+    {
+        return asset($this->dirPath . $imageName);
     }
 }
