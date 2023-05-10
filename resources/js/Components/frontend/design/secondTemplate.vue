@@ -83,15 +83,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.equipment__image{
-    min-height: 681px;
-    min-width: 530px;
-    img{
-
-    }
-}
 .supervision__image{
     height: 532px;
-
 }
 </style>
