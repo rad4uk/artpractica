@@ -76,6 +76,7 @@ class Post extends Model
                     'small' => $this->makeThumbnail($this->preview_image, config('thumbnail.project_sizes.small')),
                     'medium' => $this->makeThumbnail($this->preview_image, config('thumbnail.project_sizes.medium')),
                     'large' => $this->makeThumbnail($this->preview_image, config('thumbnail.project_sizes.large')),
+                    'big' => $this->makeThumbnail($this->preview_image, config('thumbnail.project_sizes.big')),
                 ],
                 'route' => route('projects', $this->slug),
 

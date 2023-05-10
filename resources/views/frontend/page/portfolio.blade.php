@@ -5,41 +5,10 @@
 @endpush
 
 @section('content')
-    <div class="tabs">
-        <div class="container">
-            <div class="tabs__row">
-                <ul class="tabs__list">
-                    <li class="tabs__item">
-                        @if($category->id === 1)
-                            Все объекты
-                        @else
-                            <a href="{{route('portfolio')}}">
-                                Все объекты
-                            </a>
-                        @endif
-                    </li>
-                    @foreach($categories as $cat)
-                        @if($cat->id === 1)
-                            @continue
-                        @else
-                            @if($category->id === $cat->id)
-                                <li class="tabs__item active">
-                                    {{$cat->title}}
-                                </li>
-                            @else
-                                <li class="tabs__item">
-                                    <a href="{{route('categories', $cat->slug)}}">
-                                        {{$cat->title}}
-                                    </a>
-                                </li>
-                            @endif
-                        @endif
-
-                    @endforeach
-                </ul>
-            </div>
-        </div>
-    </div>
+    <tabs-component
+        :categories='@json($categories)'
+        :category='@json($category)'
+    ></tabs-component>
 
     <div class="project">
         <div class="container">

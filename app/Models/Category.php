@@ -81,7 +81,7 @@ class Category extends Model
             $this->toArray(),
             [
                 'dirImagePath' => $this->getDirPath(),
-                'slug' => route('categories', $this->slug)
+                'slug' => $this->id === 1 ? route('portfolio') : route('categories', $this->slug)
             ]
         );
     }

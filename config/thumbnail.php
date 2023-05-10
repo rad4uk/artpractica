@@ -15,11 +15,16 @@ return [
         '728x260',
         '480x200',
         '280x160',
+        '280x262',
+        '480x322',
+        '354x384',
+        '429x499'
     ],
     'project_sizes' => [
-        'small' => 576,
-        'medium' => 768,
-        'large' => 992,
+        'small' => '280x262',
+        'medium' => '480x322',
+        'large' => '354x384',
+        'big' => '429x499',
     ],
     'home_page_sizes' => [
         'additional_categories' => [
