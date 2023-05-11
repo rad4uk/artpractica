@@ -81,7 +81,7 @@
         </div>
     </div>
 
-    @include('frontend.partials.feedback')
+    <feedback-component></feedback-component>
 @endsection
 
 @push('scripts')
