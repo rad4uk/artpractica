@@ -1,8 +1,120 @@
 @import "variables";
 
+//.aboutsection {
+//    margin-top: 137px;
+//    margin-bottom: 120px;
+//    @media (max-width: $tablet-media) {
+//        margin-bottom: 80px;
+//    }
+//    &__row {
+//        display: flex;
+//        flex-direction: column;
+//    }
+//
+//    &__title {
+//        margin-bottom: 70px;
+//        @media (max-width: $tablet-media) {
+//            margin-bottom: 40px;
+//        }
+//        h1{
+//            font-family: 'Montserrat';
+//            font-weight: 300;
+//            font-size: 40px;
+//            line-height: 49px;
+//            color: #FFFFFF;
+//            @include adaptiv-font(40, 25);
+//            @include adaptiv-line-height(49, 30);
+//        }
+//    }
+//
+//    &__content {
+//        display: flex;
+//        flex-direction: row;
+//        justify-content: space-between;
+//        gap: 60px;
+//        @media (max-width: $middle-media) {
+//            gap: 20px;
+//        }
+//    }
+//
+//    &__column {
+//        &-title {
+//            padding-left: 32px;
+//            margin-bottom: 10px;
+//            p{
+//                font-family: 'Montserrat';
+//                font-style: normal;
+//                font-weight: 400;
+//                font-size: 40px;
+//                line-height: 49px;
+//                color: $color-white;
+//                @include adaptiv-font(40, 18);
+//                @include adaptiv-line-height(49, 22);
+//            }
+//        }
+//
+//        &-subtitle {
+//            padding-left: 32px;
+//            margin-bottom: 40px;
+//            p{
+//                font-family: 'Montserrat';
+//                font-style: italic;
+//                font-weight: 300;
+//                font-size: 16px;
+//                line-height: 20px;
+//                color: $color-white;
+//                @include adaptiv-font(16, 12);
+//                @include adaptiv-line-height(20, 15);
+//            }
+//        }
+//
+//        &-text {
+//            border-left: 2px solid #AE4834;
+//            padding-left: 30px;
+//            display: flex;
+//            flex-direction: column;
+//            gap: 30px;
+//            p{
+//                font-family: 'Montserrat';
+//                font-weight: 400;
+//                font-size: 18px;
+//                line-height: 22px;
+//                color: $color-white;
+//                @include adaptiv-font(18, 12);
+//                @include adaptiv-line-height(22, 15);
+//            }
+//        }
+//
+//        &-img {
+//            max-height: 508px;
+//            height: 100%;
+//            img{
+//                object-fit: cover;
+//                width: 100%;
+//                height: 100%;
+//            }
+//        }
+//    }
+//
+//    &__column:first-child{
+//        flex: 0 1 49%;
+//        display: flex;
+//        flex-direction: column;
+//        justify-content: center;
+//    }
+//
+//    &__column:last-child{
+//        flex: 0 1 43.5%;
+//    }
+//
+//}
+
 .aboutsection {
     margin-top: 137px;
     margin-bottom: 120px;
+    @media (max-width: $tablet-media) {
+        margin-bottom: 80px;
+    }
     &__row {
         display: flex;
         flex-direction: column;
@@ -10,92 +122,139 @@
 
     &__title {
         margin-bottom: 70px;
+        @media (max-width: $tablet-media) {
+            margin-bottom: 40px;
+        }
         h1{
             font-family: 'Montserrat';
             font-weight: 300;
             font-size: 40px;
             line-height: 49px;
             color: #FFFFFF;
+            @include adaptiv-font(40, 25);
+            @include adaptiv-line-height(49, 30);
+            @media (max-width: 370px) {
+                max-width: 211px;
+            }
         }
     }
 
     &__content {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        gap: 60px;
+        display: grid;
+        grid-template-rows: minmax(60px, 85px) 1fr;
+        grid-template-columns: calc(55% - 45px) calc(45% - 45px);
+        grid-auto-flow: row;
+        column-gap: 90px;
+        row-gap: 40px;
+        grid-template-areas:
+            'title image'
+            'text image';
+        @media (max-width: $middle-media) {
+            grid-template-columns: calc(55% - 20px) calc(45% - 20px);
+            column-gap: 40px;
+        }
+        @media (max-width: $tablet-media) {
+            grid-template-rows: minmax(30px, 50px) 1fr;
+        }
+        @media (max-width: 600px) {
+            grid-template-columns: 100%;
+            row-gap: 20px;
+            grid-template-rows: auto minmax(225px, 425px) auto;
+            grid-template-areas:
+            'title'
+            'image'
+            'text';
+        }
+        @media (max-width: $mobile-media) {
+            grid-template-rows: auto auto auto;
+        }
     }
-
-    &__column {
-        &-title {
-            padding-left: 32px;
-            margin-bottom: 10px;
-            p{
-                font-family: 'Montserrat';
-                font-style: normal;
-                font-weight: 400;
-                font-size: 40px;
-                line-height: 49px;
-                color: $color-white;
-            }
+    &__column:first-child{
+        grid-area: title;
+        @media (max-width: 600px) {
+            //margin-bottom: 20px;
         }
-
-        &-subtitle {
-            padding-left: 32px;
-            margin-bottom: 40px;
-            p{
-                font-family: 'Montserrat';
-                font-style: italic;
-                font-weight: 300;
-                font-size: 16px;
-                line-height: 20px;
-                color: $color-white;
-            }
-        }
-
-        &-text {
-            border-left: 2px solid #AE4834;
+    }
+    &__column:nth-child(2){
+        grid-area: text;
+    }
+    &__column:last-child{
+        grid-area: image;
+    }
+    &__column{
+        &-title{
             padding-left: 30px;
-            display: flex;
-            flex-direction: column;
-            gap: 30px;
-            p{
-                font-family: 'Montserrat';
-                font-weight: 400;
-                font-size: 18px;
-                line-height: 22px;
-                color: $color-white;
-
+            margin-bottom: 10px;
+            font-family: 'Montserrat';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 40px;
+            line-height: 49px;
+            color: $color-white;
+            @include adaptiv-font(40, 18);
+            @include adaptiv-line-height(49, 22);
+            @media (max-width: $tablet-media) {
+                padding-left: 20px;
+            }
+            @media (max-width: 600px) {
+                text-align: right;
+                margin-bottom: 0;
             }
         }
-
-        &-img {
-            max-height: 508px;
+        &-subtitle{
+            padding-left: 30px;
+            font-family: 'Montserrat';
+            font-style: italic;
+            font-weight: 300;
+            font-size: 16px;
+            line-height: 20px;
+            color: $color-white;
+            @include adaptiv-font(16, 12);
+            @include adaptiv-line-height(20, 15);
+            @media (max-width: $tablet-media) {
+                padding-left: 20px;
+            }
+            @media (max-width: 600px) {
+                text-align: right;
+            }
+        }
+        &-text{
+            border-left: 2px solid #AE4834;
+            padding: 25px 0px 25px 30px;
+            font-family: 'Montserrat';
+            font-weight: 400;
+            font-size: 18px;
+            line-height: 22px;
+            color: $color-white;
+            @include adaptiv-font(18, 12);
+            @include adaptiv-line-height(22, 15);
+            @media (max-width: $tablet-media) {
+                padding: 15px 0px 15px 20px;
+            }
+            @media (max-width: 600px) {
+                padding: 0;
+                border: 0;
+            }
+        }
+        &-img{
+            width: 100%;
             height: 100%;
             img{
-                object-fit: cover;
                 width: 100%;
                 height: 100%;
+                object-fit: cover;
             }
         }
     }
 
-    &__column:first-child{
-        flex: 0 1 49%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
-
-    &__column:last-child{
-        flex: 0 1 43.5%;
-    }
 
 }
 
-
 .command {
     margin-bottom: 120px;
+    @media (max-width: $tablet-media) {
+        margin-bottom: 80px;
+    }
     &__row {
         display: flex;
         flex-direction: column;
@@ -109,17 +268,24 @@
             font-size: 40px;
             line-height: 49px;
             color: $color-white;
+            @include adaptiv-font(40, 25);
+            @include adaptiv-line-height(49, 30);
         }
     }
 
     &__text {
         margin-bottom: 40px;
+        @media (max-width: $tablet-media) {
+            margin-bottom: 20px;
+        }
         p{
             font-family: 'Montserrat';
             font-weight: 400;
             font-size: 16px;
             line-height: 20px;
             color: $color-white;
+            @include adaptiv-font(16, 12);
+            @include adaptiv-line-height(20, 15);
         }
     }
 
@@ -135,6 +301,9 @@
 
 .mission {
     margin-bottom: 120px;
+    @media (max-width: $tablet-media) {
+        margin-bottom: 80px;
+    }
     &__row {
         display: flex;
         flex-direction: column;
@@ -145,12 +314,21 @@
         padding-bottom: 20px;
         border-bottom: 2px solid #AE4834;
         margin-bottom: 40px;
+        @media (max-width: $tablet-media) {
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        @media (max-width: $mobile-media) {
+            width: 100%;
+        }
         h3{
             font-family: 'Montserrat';
             font-weight: 400;
             font-size: 40px;
             line-height: 49px;
             color: $color-white;
+            @include adaptiv-font(40, 25);
+            @include adaptiv-line-height(49, 30);
         }
     }
 
@@ -162,6 +340,8 @@
             font-size: 16px;
             line-height: 20px;
             color: $color-white;
+            @include adaptiv-font(16, 12);
+            @include adaptiv-line-height(20, 15);
         }
     }
 }

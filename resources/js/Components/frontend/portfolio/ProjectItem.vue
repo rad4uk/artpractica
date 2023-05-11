@@ -29,9 +29,6 @@
 export default {
     name: "ProjectItem",
     props: ['item'],
-    mounted() {
-        console.log(this.item)
-    }
 }
 </script>
 

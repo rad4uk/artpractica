@@ -13,16 +13,16 @@
                 </div>
                 <div class="aboutsection__content">
                     <div class="aboutsection__column">
-                        <div class="aboutsection__column-title">
-                            <p>
-                                Людмила Балашова
-                            </p>
-                        </div>
-                        <div class="aboutsection__column-subtitle">
-                            <p>
-                                создатель и руководитель студии
-                            </p>
-                        </div>
+                        <p class="aboutsection__column-title">
+                            Людмила Балашова
+                        </p>
+
+                        <p class="aboutsection__column-subtitle">
+                            создатель и руководитель студии
+                        </p>
+                    </div>
+                    <div class="aboutsection__column">
+
                         <div class="aboutsection__column-text">
                             <p>
                                 "Студия дизайна ArtPractica - дело всей моей жизни! Это моё хобби и мой бизнес одновременно. Моя главная мотивация видеть счастливые глаза заказчиков, довольных результатом нашей работы! Именно это помогает двигаться вперед, расширять свои возможности и осваивать новые направления"
@@ -34,7 +34,10 @@
                     </div>
                     <div class="aboutsection__column">
                         <div class="aboutsection__column-img">
-                            <img src="{{asset('images/about/img.png')}}" alt="Людмила Балашова">
+                            <picture>
+                                <source srcset="{{asset('images/about/img_2.png')}}" media="(max-width: 520px)"/>
+                                <img src="{{asset('images/about/img.png')}}" alt="Людмила Балашова">
+                            </picture>
                         </div>
                     </div>
                 </div>

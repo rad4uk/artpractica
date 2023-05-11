@@ -2,8 +2,11 @@
 .contact {
     margin-top: 197px;
     margin-bottom: 120px;
+    @media (max-width: $middle-media) {
+        margin-bottom: 35px;
+    }
     @media (max-width: $tablet-media) {
-        margin-top: 147px;
+        margin-top: 112px;
     }
     .row{
         display: flex;
@@ -18,9 +21,15 @@
         @media (max-width: $tablet-media) {
             flex-direction: column;
         }
+        @media (max-width: $mobile-media) {
+            gap: 57px;
+        }
     }
     &__column:last-child {
         flex: 0 1 66.666%;
+        @media (max-width: $mobile-media) {
+            max-height: 250px;
+        }
     }
     &__column {
     }
@@ -59,13 +68,16 @@
             padding: 22px 0;
             font-family: 'Montserrat';
             font-weight: normal;
-            font-size: 18px;
-            line-height: 22px;
             text-transform: uppercase;
             color: $color-white;
             text-align: center;
             background: $button-color;
             transition: all .6s ease;
+            @include adaptiv-font(18, 12);
+            @include adaptiv-line-height(22, 15);
+            @media (max-width: $middle-media) {
+                padding: 16px 0;
+            }
             @media (max-width: $tablet-media) {
                 width: 100%;
             }
@@ -82,13 +94,15 @@
             font-family: 'Montserrat';
             font-style: normal;
             font-weight: 400;
-            @include adaptiv-font(25, 14);
+            //@include adaptiv-font(25, 14);
+            font-size: 25px;
             line-height: 30px;
             text-transform: uppercase;
             color: $color-white;
             margin-bottom: 25px;
             @media (max-width: $tablet-media) {
                 line-height: 15px;
+                margin-bottom: 20px;
             }
         }
 
@@ -105,10 +119,16 @@
 
             @media (max-width: $tablet-media) {
                 line-height: 14px;
+                gap: 6px;
                 color: rgba(255, 255, 255, 0.7);
             }
+            @media (max-width: $mobile-media) {
+                gap: 3px;
+            }
+
             a{
                 color: $color-white;
+                text-decoration: underline;
                 @media (max-width: $tablet-media) {
                     color: rgba(255, 255, 255, 0.7);
                 }

@@ -11,12 +11,12 @@
                 <div class="contact__column">
                     <div class="contact__content">
                         <p class="contact__content-title">адрес</p>
-                        <p class="contact__content-text">
-                            <span>394036, Россия, Воронеж</span>
-                            <span>Орджоникидзе, 14/16</span>
+                        <div class="contact__content-text">
+                            <p>394036, Россия, Воронеж</p>
+                            <p>Орджоникидзе, 14/16</p>
                             <a href="tel:+79202134222">Тел.: + 7 (920) 213-42-22</a>
                             <a href="mailto: artpractica@mail.ru">artpractica@mail.ru</a>
-                        </p>
+                        </div>
                     </div>
                     <div class="contact__form">
                         <p class="contact__form-title">мы на связи</p>
