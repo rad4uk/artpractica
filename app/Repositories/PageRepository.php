@@ -16,7 +16,7 @@ class PageRepository implements PageRepositoryInterface
 
     public function findById(int $pageId)
     {
-        return Page::where('id', $pageId)->first();
+        return Page::where('id', $pageId)->firstOrFail();
     }
 
     public function create(array $details)

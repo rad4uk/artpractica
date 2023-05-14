@@ -18,7 +18,8 @@ return [
         '280x262',
         '480x322',
         '354x384',
-        '429x499'
+        '429x499',
+        '280x284'
     ],
     'project_sizes' => [
         'small' => '280x262',
@@ -42,5 +43,10 @@ return [
             'medium' => '480x200',
             'large' => '728x260',
         ]
+    ],
+    'about_page_sizes' => [
+        'first_section' => [
+            'small' => '280x284',
+        ],
     ]
 ];

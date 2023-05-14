@@ -17,15 +17,6 @@ class Image extends Model
     ];
 
 
-//    public function page()
-//    {
-//        return $this->belongsTo(Page::class);
-//    }
-
-    public function pageImages(){
-        return $this->hasMany(PageImage::class,'id','image_id');
-    }
-
     protected function thumbnailDir(): string
     {
         return 'size';

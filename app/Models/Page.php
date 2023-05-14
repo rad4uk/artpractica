@@ -64,6 +64,7 @@ class Page extends Model
         return asset($this->dirPath . $imageName);
     }
 
+
     public function jsonSerialize(): array
     {
         return array_merge(

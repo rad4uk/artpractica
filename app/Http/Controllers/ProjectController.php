@@ -22,14 +22,7 @@ class ProjectController extends Controller
         foreach (json_decode($project->apartment_images) as $imageName){
             $apartmentImages[] = $project->getFullImagePath($imageName);
         }
-        $additionalPostsData = [];
         $additionalPosts = $project->additionalPostsToMany()->get();
-        foreach ($additionalPosts as $key => $post){
-            $additionalPostsData[$key]['title'] = $post->title;
-            $additionalPostsData[$key]['square'] = $post->square;
-            $additionalPostsData[$key]['preview_image'] = $project->getFullImagePath($post->preview_image);
-            $additionalPostsData[$key]['slug'] = route('projects', $post->slug);
-        }
 
         $categoriesData = [];
         foreach ($categories as $key => $categoryItem){
@@ -41,7 +34,7 @@ class ProjectController extends Controller
         return view('frontend/project/project', [
             'post' => $project,
             'apartmentImages' => $apartmentImages,
-            'additionalPostsData' => $additionalPostsData,
+            'additionalPostsData' => $additionalPosts,
             'categories' => $categoriesData,
             'body' => json_decode($project->body)->frontend
         ]);

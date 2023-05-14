@@ -47,6 +47,7 @@ class ThumbnailController extends Controller
     public function __invoke(
         string $dir,
         string $size,
+        string $method,
         string $fileName
     )
     {
@@ -58,7 +59,7 @@ class ThumbnailController extends Controller
 
         $storage = Storage::disk('images');
 
-        $newDirectoryPath = $dir . DIRECTORY_SEPARATOR . $size;
+        $newDirectoryPath = $dir . DIRECTORY_SEPARATOR . $size . DIRECTORY_SEPARATOR . $method;
         if (!$storage->exists($newDirectoryPath)) {
             $storage->makeDirectory($newDirectoryPath);
         }
@@ -73,7 +74,7 @@ class ThumbnailController extends Controller
 //                ->save($storage->path($newFilePath));
 //        }, 10, true);
         Image::make($storage->path($oldFilePath))
-            ->fit($width, $height, function ($constraint) {
+            ->{$method}($width, $height, function ($constraint) {
                 $constraint->upsize();
             })
             ->save($storage->path($newFilePath));

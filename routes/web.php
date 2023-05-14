@@ -1,12 +1,12 @@
 <?php
 
-use App\Http\Controllers\AboutController;
 use App\Http\Controllers\Admin\AboutPageController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\HomePageController;
 use App\Http\Controllers\Admin\ImageController;
 use App\Http\Controllers\Admin\PageController;
+use App\Http\Controllers\PageController as FrontendPageController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\ConsultationController;
 use App\Http\Controllers\ContactController;
@@ -90,7 +90,8 @@ Route::prefix('admin')->middleware([
 //    ->where('file', '.+\.(png|jpg|gif|jpeg)')
 //    ->name('thumbnail');
 
-Route::get('/storage/images/{dir}/{size}/{file}', ThumbnailController::class)
+Route::get('/storage/images/{dir}/{size}/{method}/{file}', ThumbnailController::class)
+    ->where('method', 'resize|crop|fit')
     ->where('size', '\d+x\d+')
     ->where('file', '.+\.(png|jpg|webp|jpeg)')
     ->name('thumbnail');
@@ -108,7 +109,7 @@ Route::get('/portfolio', [PortfolioController::class, 'index'])->name('portfolio
 Route::get('/portfolio/{categorySlug}/', [PortfolioController::class, 'categories'])->name('categories');
 Route::get('/portfolio/project/{slug}/', [ProjectController::class, 'index'])->name('projects');
 
-Route::get('/about/', [AboutController::class, 'index'])->name('about');
+Route::get('/about/', [FrontendPageController::class, 'about'])->name('about');
 Route::get('/contact-us/', ContactController::class)->name('contact');
 
 Route::post('/consultation/send', ConsultationController::class);

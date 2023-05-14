@@ -44,6 +44,9 @@ export default {
         Swiper,
         SwiperSlide,
     },
+    mounted() {
+      console.log(this.posts)
+    },
     setup() {
         const onSwiper = (swiper) => {
         };
@@ -58,8 +61,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.project__item{
-    padding: 0;
-    height: 100%;
-}
+
 </style>
