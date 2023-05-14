@@ -5,20 +5,13 @@ namespace App\Http\Controllers;
 use App\Interfaces\PostRepositoryInterface;
 use App\Models\Category;
 use App\Models\Post;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
-    public function __construct(
-        private readonly PostRepositoryInterface $postRepository
-    )
-    {
-    }
-
-
-
-
-    public function index(string $slug)
+    public function index(string $slug): View|Factory
     {
         $project = Post::where('slug', $slug)->firstOrFail();
         $categories = Category::where(['parent_id' => 1, 'status' => 1])
@@ -52,17 +45,5 @@ class ProjectController extends Controller
             'categories' => $categoriesData,
             'body' => json_decode($project->body)->frontend
         ]);
-    }
-    public function index2()
-    {
-        return view('frontend/page/project2');
-    }
-    public function index3()
-    {
-        return view('frontend/page/project3');
-    }
-    public function index4()
-    {
-        return view('frontend/page/project4');
     }
 }

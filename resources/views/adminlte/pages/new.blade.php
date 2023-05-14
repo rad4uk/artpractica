@@ -30,8 +30,10 @@
                 </div>
             </div><!-- /.container-fluid -->
         </section>
-
-        <new-component :action='@json(route('admin_page_create'))'></new-component>
+        <default-component
+            :action='@json(route('admin_page_create'))'
+        ></default-component>
+{{--        <new-component :action='@json(route('admin_page_create'))'></new-component>--}}
     </div>
     <!-- /.content-wrapper -->
 @endsection

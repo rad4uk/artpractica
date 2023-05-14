@@ -16,7 +16,7 @@
                         :class="[{'active': this.category.id === cat.id}, 'tabs__item']">
                             <a
                                 v-if="cat.id !== this.category.id"
-                                :href="cat.slug"
+                                :href="cat.fullSlug"
                             >
                                 {{cat.id === 1 ?  this.portfolioTitle : cat.title}}
                             </a>

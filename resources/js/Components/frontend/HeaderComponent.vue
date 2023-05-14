@@ -1,13 +1,14 @@
 <template>
-    <header class="header">
+    <header class="header" :class="{ active: headerScrollActive }">
         <div class="container">
             <div class="header__row">
 
                 <div class="header__logo">
                     <a href="/">
                         <picture>
-                            <source :srcset="this.images[0]" media="(max-width: 768px)">
-                            <img :src="this.images[1]" alt="">
+                            <source :srcset="this.images[0]" media="(max-width: 520px)">
+                            <source :srcset="this.images[1]" media="(max-width: 768px)">
+                            <img :src="this.images[2]" alt="">
                         </picture>
                     </a>
                 </div>
@@ -56,20 +57,42 @@ export default {
     props: ['portfolio', 'services', 'about', 'contact', 'images'],
     data: () => {
         return {
+            headerScrollActive: false,
             menuIsActive: false
         }
+    },
+    mounted() {
+        window.addEventListener('scroll', this.handleScroll);
     },
     methods: {
         openMenu(){
             this.menuIsActive = !this.menuIsActive
-        }
-    }
+        },
+        handleScroll() {
+            if (window.scrollY > 0) {
+                this.headerScrollActive = true;
+            } else {
+                this.headerScrollActive = false;
+            }
+        },
+    },
+
 }
 </script>
 
 <style lang="scss" scoped>
-//#app{
-//    position: relative;
-//}
+@import "@root/sass/frontend/variables.scss";
+@media (max-width: $tablet-media) {
+    .header.active{
+        background-color: rgba(33, 33, 33, 0.4);
+        transition: background-color 0.5s ease-in-out;
+    }
+
+    .header.active .header__nav-mobile-nav .header__nav-mobile-line{
+        background-color: #AE4834;
+        transition: background-color 0.5s ease-in-out;
+    }
+}
+
 
 </style>

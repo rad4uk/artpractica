@@ -96,11 +96,20 @@
                                     </i>
                                     View
                                 </a>
-                                <a class="btn btn-info btn-sm" href={{route('admin_page_edit', $page->id)}}>
+                                @if($page->id === 1)
+                                <a class="btn btn-info btn-sm" href={{route('admin_home_page_edit')}}>
                                     <i class="fas fa-pencil-alt">
                                     </i>
                                     Изменить
                                 </a>
+                                @endif
+                                @if($page->id === 2)
+                                    <a class="btn btn-info btn-sm" href={{route('admin_about_page_edit')}}>
+                                        <i class="fas fa-pencil-alt">
+                                        </i>
+                                        Изменить
+                                    </a>
+                                @endif
                                 <a class="btn btn-danger btn-sm" href="#">
                                     <i class="fas fa-trash">
                                     </i>

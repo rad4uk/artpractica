@@ -4,7 +4,17 @@
 
 
 .header{
-    background: rgba(33, 33, 33, 0.4);
+    background-color: rgba(33, 33, 33, 0.4);
+    @media (max-width: $tablet-media) {
+        background: transparent;
+    }
+
+}
+.header__nav-mobile-nav .header__nav-mobile-line{
+    @media (max-width: $tablet-media) {
+        background-color: $color-white
+    }
+
 }
 
 .screen {
@@ -16,8 +26,10 @@
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
-    min-height: 100vh;
     margin-bottom: 130px;
+    @media (min-width: $desktop-media) {
+        min-height: 100vh;
+    }
     @media (max-width: $tablet-media) {
         margin-bottom: 80px;
     }
@@ -32,6 +44,9 @@
         @media (max-width: $tablet-media) {
             padding-top: 167px;
             padding-bottom: 100px;
+        }
+        @media (max-width: $mobile-media) {
+            padding-top: 146px;
         }
     }
 

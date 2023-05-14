@@ -99,7 +99,7 @@ class CategoryController extends Controller
             );
             $details['page_image'] = $file->getClientOriginalName();
         }
-
+//        dd($details);
         $this->categoryRepository->update($id, $details);
 
         return response([

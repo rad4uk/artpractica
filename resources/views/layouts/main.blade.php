@@ -21,26 +21,17 @@
 
     </div>
 
-    <script>
-        const wrapper = document.querySelector('body');
-        const menu = document.querySelector('.header');
-        let isMenuActive = false;
-
-        wrapper.addEventListener('scroll', function() {
-            console.log('adsasd')
-            const scrollPosition = wrapper.scrollTop;
-
-            if (scrollPosition > 0 && !isMenuActive) {
-                // Если прокрутка больше 0 и меню не активно, то активируем его
-                isMenuActive = true;
-                menu.classList.add('active');
-            } else if (scrollPosition === 0 && isMenuActive) {
-                // Если прокрутка равна 0 и меню активно, то деактивируем его
-                isMenuActive = false;
-                menu.classList.remove('active');
-            }
-        });
-    </script>
+{{--    <script>--}}
+{{--        const header = document.querySelector('.header');--}}
+{{--        console.log(header)--}}
+{{--        window.addEventListener('scroll', () => {--}}
+{{--            if (window.scrollY > 0) {--}}
+{{--                header.classList.add('active');--}}
+{{--            } else {--}}
+{{--                header.classList.remove('active');--}}
+{{--            }--}}
+{{--        });--}}
+{{--    </script>--}}
     @stack('scripts')
 </body>
 </html>

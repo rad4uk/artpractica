@@ -1,5 +1,5 @@
 <template>
-    <form :action="this.action" method="POST" enctype="multipart/form-data">
+    <form method="POST" enctype="multipart/form-data">
         <div class="card-body">
             <div class="form-group">
                 <label for="inputName">Название</label>

@@ -12,7 +12,7 @@ class HomePageService
 
     public function __construct()
     {
-        $this->filePath = config('files-path.homePage.publicImagePath');
+        $this->filePath = config('files-path.pages.publicImagePath');
     }
 
     public function setSliderData(array $request, array $files): array

@@ -18,6 +18,7 @@ class Page extends Model
         'slug',
         'first_section_data',
         'second_section_data',
+        'third_section_data',
         'sliders_data',
         'meta_title',
         'meta_description',
@@ -29,7 +30,7 @@ class Page extends Model
     {
         parent::__construct($attributes);
 
-        $this->dirPath = config('files-path.homePage.storageImagePath');
+        $this->dirPath = config('files-path.pages.storageImagePath');
     }
 
     public function getDirPath(): string
@@ -61,5 +62,15 @@ class Page extends Model
     public function getFullImagePath(string $imageName): string
     {
         return asset($this->dirPath . $imageName);
+    }
+
+    public function jsonSerialize(): array
+    {
+        return array_merge(
+          $this->toArray(),
+          [
+              'dirPath' => $this->getDirPath()
+          ]
+        );
     }
 }

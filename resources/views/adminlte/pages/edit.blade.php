@@ -31,7 +31,13 @@
         </section>
         @if($page->id === 1)
             @include('adminlte.pages.forms.1', [
-                'action' => route('admin_page_edit', $page->id),
+                'action' => route('admin_home_page_edit'),
+                'page' => $page,
+                'is_type_page' => 'edit'
+            ])
+        @elseif($page->id === 2)
+            @include('adminlte.pages.forms.2', [
+                'action' => route('admin_about_page_update'),
                 'page' => $page,
                 'is_type_page' => 'edit'
             ])

@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\Admin\AboutPageController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\HomePageController;
 use App\Http\Controllers\Admin\ImageController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\PostController;
@@ -41,8 +43,12 @@ Route::prefix('admin')->middleware([
         Route::get('/', [PageController::class, 'index'])->name('admin_page_index');
         Route::get('/new', [PageController::class, 'new'])->name('admin_page_new');
         Route::post('/create', [PageController::class, 'create'])->name('admin_page_create');
-        Route::any('/{id}/edit', [PageController::class, 'update'])->name('admin_page_edit');
+//        Route::any('/{id}/edit', [PageController::class, 'update'])->name('admin_page_edit');
         Route::post('/{id}/delete', [PageController::class, 'update'])->name('admin_page_delete');
+
+        Route::any('/1/edit', [HomePageController::class, 'update'])->name('admin_home_page_edit');
+        Route::get('/2/edit', [AboutPageController::class, 'edit'])->name('admin_about_page_edit');
+        Route::post('/2/edit', [AboutPageController::class, 'update'])->name('admin_about_page_update');
     });
 
     Route::prefix('post')->group(function (){
@@ -101,10 +107,6 @@ Route::get('/storage/images/{dir}/{size}/{file}', ThumbnailController::class)
 Route::get('/portfolio', [PortfolioController::class, 'index'])->name('portfolio');
 Route::get('/portfolio/{categorySlug}/', [PortfolioController::class, 'categories'])->name('categories');
 Route::get('/portfolio/project/{slug}/', [ProjectController::class, 'index'])->name('projects');
-Route::get('/portfolio/project-715/', [ProjectController::class, 'index'])->name('project5');
-Route::get('/portfolio/project-716/', [ProjectController::class, 'index2'])->name('project2');
-Route::get('/portfolio/project-562/', [ProjectController::class, 'index3'])->name('project3');
-Route::get('/portfolio/project-788/', [ProjectController::class, 'index4'])->name('project4');
 
 Route::get('/about/', [AboutController::class, 'index'])->name('about');
 Route::get('/contact-us/', ContactController::class)->name('contact');
