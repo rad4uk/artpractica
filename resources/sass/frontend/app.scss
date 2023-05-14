@@ -126,8 +126,10 @@ input:-webkit-autofill:focus {
                     padding: 12px 0;
                 }
             }
-            button:hover{
-                transform: scale(1.05);
+            @media (min-width: $middle-media) {
+                button:hover{
+                    transform: scale(1.05);
+                }
             }
         }
         &-item:first-child{

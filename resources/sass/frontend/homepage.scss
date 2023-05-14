@@ -120,9 +120,12 @@
                 padding: 18px 34px;
             }
         }
-        button:hover{
-            transform: scale(1.1);
+        @media (min-width: $middle-media) {
+            button:hover{
+                transform: scale(1.1);
+            }
         }
+
     }
 }
 
@@ -768,8 +771,10 @@
             padding: 10px 17px;
         }
     }
-    &__button:hover{
-        transform: scale(1.1);
+    @media (min-width: $middle-media) {
+        button:hover{
+            transform: scale(1.1);
+        }
     }
 }
 

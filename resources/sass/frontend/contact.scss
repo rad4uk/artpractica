@@ -79,9 +79,12 @@
                 width: 100%;
             }
         }
-        button:hover{
-            transform: scale(1.05);
+        @media (min-width: $middle-media) {
+            button:hover{
+                transform: scale(1.05);
+            }
         }
+
     }
     &__content {
         display: flex;
