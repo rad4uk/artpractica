@@ -8,7 +8,11 @@ use App\Interfaces\CategoryRepositoryInterface;
 use App\Models\Category;
 use App\Models\Page;
 use App\Services\CategoryService;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
@@ -23,7 +27,7 @@ class CategoryController extends Controller
     public function index()
     {
         return view('adminlte.category.index', [
-            'categories' =>  Category::all()
+            'categories' => Category::all()
         ]);
     }
 
@@ -43,7 +47,7 @@ class CategoryController extends Controller
         $pageId = $request->request->get('page_id') == -1 ? null : $request->request->get('page_id');
         $details['page_id'] = $pageId;
 
-        if ($request->files->has('page_image')){
+        if ($request->files->has('page_image')) {
             $file = $request->files->get('page_image');
             Storage::disk('public')->putFileAs(
                 config('files-path.categories.publicImagePath'),
@@ -59,12 +63,6 @@ class CategoryController extends Controller
         ], 201);
     }
 
-    public function delete(int $catId)
-    {
-        $this->categoryRepository->delete($catId);
-        return view('adminlte.category.index');
-    }
-
     public function edit(int $id)
     {
         $category = Category::where('id', $id)->firstOrFail();
@@ -77,10 +75,6 @@ class CategoryController extends Controller
         ]);
     }
 
-    public function preview()
-    {
-
-    }
 
     public function update(Request $request, int $id)
     {
@@ -90,7 +84,7 @@ class CategoryController extends Controller
         $pageId = $request->request->get('page_id') == -1 ? null : $request->request->get('page_id');
         $details['page_id'] = $pageId;
 
-        if ($request->files->has('page_image')){
+        if ($request->files->has('page_image')) {
             $file = $request->files->get('page_image');
             Storage::disk('public')->putFileAs(
                 config('files-path.categories.publicImagePath'),
@@ -99,11 +93,17 @@ class CategoryController extends Controller
             );
             $details['page_image'] = $file->getClientOriginalName();
         }
-//        dd($details);
         $this->categoryRepository->update($id, $details);
 
         return response([
             'route' => route('admin_category_index')
         ], 201);
+    }
+
+    public function delete(int $catId): Redirector|RedirectResponse
+    {
+        $this->categoryRepository->delete($catId);
+
+        return redirect()->back();
     }
 }

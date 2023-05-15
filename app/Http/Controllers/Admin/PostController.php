@@ -2,42 +2,39 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Exceptions\WidgetNotFoundException;
+
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\PostCreateRequest;
-use App\Http\Requests\Admin\PostNewRequest;
 use App\Interfaces\PostRepositoryInterface;
 use App\Models\Category;
 use App\Models\Post;
-use App\Repositories\PostRepository;
 use App\Services\Admin\PostService;
-use Carbon\Carbon;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Storage;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Illuminate\Routing\Redirector;
+
 
 class PostController extends Controller
 {
     public function __construct(
         private readonly PostRepositoryInterface $postRepository,
-        private readonly PostService             $postService
+        private readonly PostService             $postService,
     )
     {
 
     }
 
-    public function index()
+    public function index(): View|Factory
     {
         return view('adminlte.post.index', [
             'posts' => $this->postRepository->list()
         ]);
     }
 
-    public function preview(int $postId)
+    public function preview(int $postId): Response|ResponseFactory|View|Factory
     {
         $project = Post::where('id', $postId)->firstOrFail();
         $categories = Category::where(['parent_id' => 1, 'status' => 1])
@@ -45,12 +42,12 @@ class PostController extends Controller
             ->get();
 
         $apartmentImages = [];
-        foreach (json_decode($project->apartment_images) as $imageName){
+        foreach (json_decode($project->apartment_images) as $imageName) {
             $apartmentImages[] = $project->getFullImagePath($imageName);
         }
         $additionalPostsData = [];
         $additionalPosts = $project->additionalPostsToMany()->get();
-        foreach ($additionalPosts as $key => $post){
+        foreach ($additionalPosts as $key => $post) {
             $additionalPostsData[$key]['title'] = $post->title;
             $additionalPostsData[$key]['square'] = $post->square;
             $additionalPostsData[$key]['preview_image'] = $project->getFullImagePath($post->preview_image);
@@ -58,7 +55,7 @@ class PostController extends Controller
         }
 
         $categoriesData = [];
-        foreach ($categories as $key => $categoryItem){
+        foreach ($categories as $key => $categoryItem) {
             $categoriesData[$key]['id'] = $categoryItem->id;
             $categoriesData[$key]['title'] = $categoryItem->title;
             $categoriesData[$key]['slug'] = route('categories', $categoryItem->slug);
@@ -162,8 +159,10 @@ class PostController extends Controller
         ]);
     }
 
-    public function delete()
+    public function delete(int $postId): Redirector|RedirectResponse
     {
+        $this->postRepository->delete($postId);
 
+        return redirect()->back();
     }
 }

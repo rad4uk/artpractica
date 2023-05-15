@@ -56,15 +56,14 @@ Route::prefix('admin')->middleware([
         Route::get('/{id}/preview', [PostController::class, 'preview'])->name('admin_post_preview');
         Route::any('/create', [PostController::class, 'create'])->name('admin_post_create');
         Route::any('/{id}/edit', [PostController::class, 'update'])->name('admin_post_edit');
-        Route::post('/{id}/delete', [PostController::class, 'delete'])->name('admin_post_delete');
+        Route::delete('/{id}/delete', [PostController::class, 'delete'])->name('admin_post_delete');
     });
 
     Route::prefix('services')->group(function (){
         Route::get('/', [AdminServicesController::class, 'index'])->name('admin_services_index');
-        Route::get('/{id}/preview', [AdminServicesController::class, 'preview'])->name('admin_services_preview');
         Route::any('/create', [AdminServicesController::class, 'create'])->name('admin_services_create');
         Route::any('/{id}/edit', [AdminServicesController::class, 'update'])->name('admin_services_edit');
-//        Route::post('/{id}/delete', [PostController::class, 'delete'])->name('admin_services_delete');
+        Route::delete('/{id}/delete', [AdminServicesController::class, 'delete'])->name('admin_services_delete');
     });
 
     Route::prefix('images')->group(function (){
@@ -81,6 +80,7 @@ Route::prefix('admin')->middleware([
         Route::post('/create', [CategoryController::class, 'create'])->name('admin_category_create');
         Route::get('/{id}/edit', [CategoryController::class, 'edit'])->name('admin_category_edit');
         Route::post('/{id}/update', [CategoryController::class, 'update'])->name('admin_category_update');
+        Route::delete('/{id}/delete', [CategoryController::class, 'delete'])->name('admin_category_delete');
     });
 
 });

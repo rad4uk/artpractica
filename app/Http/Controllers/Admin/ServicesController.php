@@ -8,17 +8,20 @@ use App\Models\Page;
 use App\Models\Service;
 use App\Repositories\ServicesRepository;
 use App\Services\Admin\ServicesService;
+use App\Services\FullSlugHelper;
 use App\ValueObjects\FirstTemplate;
 use App\ValueObjects\SecondTemplate;
 use App\ValueObjects\ThirdTemplate;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class ServicesController extends Controller
 {
     public function __construct(
         public readonly ServicesRepository $servicesRepository,
-        private readonly ServicesService   $servicesService
+        private readonly ServicesService   $servicesService,
     )
     {
     }
@@ -35,7 +38,7 @@ class ServicesController extends Controller
         $categories = Category::with('childrenRecursive')
             ->whereNull('parent_id')
             ->get();
-        if ($request->isMethod('POST')){
+        if ($request->isMethod('POST')) {
             $requestData = $request->request->all();
             $filesData = $request->files->all();
             /**
@@ -47,7 +50,7 @@ class ServicesController extends Controller
 
             $requestData['formData']['page_id'] = $requestData['formData']['page_id'] == '-1' ? null : $requestData['formData']['page_id'];
             if (isset($filesData['formData']['page_image'])
-                && $filesData['formData']['page_image'] instanceof UploadedFile){
+                && $filesData['formData']['page_image'] instanceof UploadedFile) {
                 $pageImageName = $this->servicesService->saveFile($filesData['formData']['page_image']);
                 $requestData['formData']['page_image'] = $pageImageName;
             }
@@ -84,21 +87,21 @@ class ServicesController extends Controller
             ->get();
 
         $service = Service::where('id', $serviceId)->firstOrFail();
-        if ($request->isMethod('POST')){
+        if ($request->isMethod('POST')) {
             $requestData = $request->request->all();
             $filesData = $request->files->all();
             /**
              * @var FirstTemplate|SecondTemplate|ThirdTemplate $templateInstance
              */
 
-            if (isset($filesData['formData']['preview_image'])){
+            if (isset($filesData['formData']['preview_image'])) {
                 $previewImageName = $this->servicesService->saveFile($filesData['formData']['preview_image']);
                 $requestData['formData']['preview_image'] = $previewImageName;
             }
 
             $requestData['formData']['page_id'] = $requestData['formData']['page_id'] == '-1' ? null : $requestData['formData']['page_id'];
             if (isset($filesData['formData']['page_image'])
-                && $filesData['formData']['page_image'] instanceof UploadedFile){
+                && $filesData['formData']['page_image'] instanceof UploadedFile) {
                 $pageImageName = $this->servicesService->saveFile($filesData['formData']['page_image']);
                 $requestData['formData']['page_image'] = $pageImageName;
             }
@@ -130,8 +133,11 @@ class ServicesController extends Controller
         ]);
     }
 
-    public function preview(int $postId)
+    public function delete(int $serviceId): Redirector|RedirectResponse
     {
+        $this->servicesRepository->delete($serviceId);
 
+        return redirect()->back();
     }
+
 }

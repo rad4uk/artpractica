@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Traits\Models\HasThumbnail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Service extends Model
 {
@@ -26,6 +27,11 @@ class Service extends Model
         return asset($this->dirImagePath);
     }
 
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class);
+    }
+
     public function getFilePath(string $fileName): string
     {
         return asset($this->dirImagePath . $fileName);
@@ -33,6 +39,6 @@ class Service extends Model
 
     protected function thumbnailDir(): string
     {
-        return str_replace('/storage/images/','', rtrim($this->dirImagePath, DIRECTORY_SEPARATOR));
+        return str_replace('/storage/images/', '', rtrim($this->dirImagePath, DIRECTORY_SEPARATOR));
     }
 }

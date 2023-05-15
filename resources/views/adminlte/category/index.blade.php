@@ -28,16 +28,6 @@
             </div><!-- /.container-fluid -->
         </section>
 
-        <section>
-            <div class="container-fluid">
-                <div class="row mb-3">
-                    <div class="col-12" style="display: flex;justify-content: right">
-                        <a href="{{route('admin_category_new')}}" class="btn btn-success">Добавить категорию</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <!-- Main content -->
         <section class="content">
 
@@ -91,20 +81,10 @@
                                     <a href="{{$category->slug}}">{{$category->slug}}</a>
                                 </td>
                                 <td class="project-actions text-right">
-                                    <a class="btn btn-primary btn-sm" target="_blank" href="{{route('admin_category_preview', $category->id)}}">
-                                        <i class="fas fa-folder">
-                                        </i>
-                                        View
-                                    </a>
                                     <a class="btn btn-info btn-sm" href={{route('admin_category_edit', $category->id)}}>
                                         <i class="fas fa-pencil-alt">
                                         </i>
                                         Изменить
-                                    </a>
-                                    <a class="btn btn-danger btn-sm" href="#">
-                                        <i class="fas fa-trash">
-                                        </i>
-                                        Удалить
                                     </a>
                                 </td>
                             </tr>

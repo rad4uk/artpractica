@@ -5,14 +5,13 @@ namespace App\Models;
 use App\Traits\Models\HasThumbnail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Post extends Model
 {
     public string $previewImagePath;
 
-    use HasFactory;
-
-    use HasThumbnail;
+    use HasFactory, HasThumbnail;
 
     protected $fillable = [
         'title',
@@ -33,6 +32,11 @@ class Post extends Model
         parent::__construct($attributes);
 
         $this->previewImagePath = config('files-path.project.storageImagePath');
+    }
+
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class);
     }
 
     public function additionalPostsToMany()

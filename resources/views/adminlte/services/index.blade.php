@@ -64,12 +64,9 @@
                                 Заголовок
                             </th>
                             <th style="width: 30%">
-                                Описание
+                                Родительская категория
                             </th>
 
-                            <th style="width: 8%" class="text-center">
-                                Ссылка
-                            </th>
                             <th style="width: 20%">
                             </th>
                         </tr>
@@ -84,27 +81,25 @@
                                     {{$post->title}}
                                 </td>
                                 <td>
-                                    {!! $post->description !!}
+                                    {{$post->category->title}}
                                 </td>
 
-                                <td>
-                                    <a href="{{$post->slug}}">{{$post->slug}}</a>
-                                </td>
                                 <td class="project-actions text-right">
-                                    <a class="btn btn-primary btn-sm" target="_blank" href="{{route('admin_services_preview', $post->id)}}">
-                                        <i class="fas fa-folder">
-                                        </i>
-                                        View
-                                    </a>
                                     <a class="btn btn-info btn-sm" href={{route('admin_services_edit', $post->id)}}>
                                         <i class="fas fa-pencil-alt">
                                         </i>
                                         Изменить
                                     </a>
-                                    <a class="btn btn-danger btn-sm" href="#">
-                                        <i class="fas fa-trash">
-                                        </i>
-                                        Удалить
+                                    {!! Form::open(['route' => ['admin_services_delete', $post->id], 'method' => 'delete', 'style' => 'display: none;', 'id' => 'delete-form']) !!}
+                                    {!! Form::close() !!}
+
+                                    <a class="btn btn-danger btn-sm" href="#" onclick="
+                                        event.preventDefault();
+                                        if(confirm('Вы уверены, что хотите удалить запись?')) {
+                                            document.getElementById('delete-form').submit();
+                                        }"
+                                    >
+                                        <i class="fas fa-trash"></i> Удалить
                                     </a>
                                 </td>
                             </tr>
