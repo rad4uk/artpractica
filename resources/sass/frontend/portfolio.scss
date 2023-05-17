@@ -1,46 +1,8 @@
 @import "variables";
 @import "project-item";
+@import "tabs";
 
 
-.tabs {
-    margin-top: 137px;
-    margin-bottom: 60px;
-    @media (max-width: $middle-media) {
-        margin-top: 112px;
-        margin-bottom: 30px;
-    }
-    @media (max-width: $tablet-media) {
-        margin-top: 92px;
-        margin-bottom: 20px;
-    }
-    @media (max-width: $mobile-media) {
-        margin-bottom: 15px;
-    }
-    &__list{
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-    }
-    &__item{
-        font-family: 'Montserrat';
-        font-weight: 300;
-        @include adaptiv-font(18, 14);
-        //font-size: 18px;
-        line-height: 22px;
-        color: $color-white;
-        padding: 5px 0 7px 0;
-        a{
-            color: $color-white;
-        }
-    }
-    .active{
-        font-family: 'Montserrat';
-        font-weight: 500;
-    }
-    &__item:hover{
-        cursor: pointer;
-    }
-}
+
 
 

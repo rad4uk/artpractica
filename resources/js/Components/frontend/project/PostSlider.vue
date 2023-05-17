@@ -9,10 +9,14 @@
                 <swiper
                     slides-per-view="2"
                     :space-between="30"
+                    :breakpoints="{
+                        320: { slidesPerView: 1},
+                        520: { slidesPerView: 2},
+                    }"
                     :loop="true"
                     @swiper="onSwiper"
                     @slideChange="onSlideChange"
-                    class="professional__slide"
+                    :class="'project__swiper'"
                 >
                     <swiper-slide
                         v-for="(post, idx) in this.posts"
@@ -20,6 +24,7 @@
                     >
                         <project-item
                             :item="post"
+                            :key="idx"
                         >
                         </project-item>
                     </swiper-slide>
@@ -32,9 +37,11 @@
 
 <script>
 import ProjectItem from "../portfolio/ProjectItem.vue";
-import { Swiper, SwiperSlide } from 'swiper/vue';
+import {Swiper, SwiperSlide} from 'swiper/vue';
+import {Navigation, Pagination} from 'swiper';
 import 'swiper/css';
 import 'swiper/css/pagination';
+import {ref} from "vue";
 
 export default {
     name: "PostSlider",
@@ -52,14 +59,24 @@ export default {
         };
         const onSlideChange = () => {
         };
+
+        const prev = ref(null);
+        const next = ref(null);
         return {
             onSwiper,
             onSlideChange,
+            modules: [Navigation, Pagination],
+            prev,
+            next,
         };
     },
 }
 </script>
 
 <style lang="scss" scoped>
-
+.project__row{
+    @media (max-width: 520px) {
+        flex-direction: row;
+    }
+}
 </style>

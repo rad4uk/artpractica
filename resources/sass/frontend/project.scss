@@ -1,5 +1,6 @@
 @import "variables";
 @import "project-item";
+@import "tabs";
 
 .project {
     &-title {
@@ -7,37 +8,40 @@
         font-family: 'Montserrat';
         font-style: normal;
         font-weight: 400;
-        font-size: 40px;
-        line-height: 49px;
         color: $color-white;
+        @include adaptiv-font(40, 25);
+        @include adaptiv-line-height(49, 30);
+        @media (max-width: $tablet-media) {
+            margin-bottom: 20px;
+        }
+    }
+}
+.apartment__swiper{
+    margin-bottom: 30px;
+    @media (max-width: $tablet-media) {
+        margin-bottom: 20px;
     }
 }
 
-
 .tabs {
-    margin-top: 142px;
-    margin-bottom: 90px;
-    &__list {
-        display: flex;
-        justify-content: space-between;
-        &-item {
-            font-family: 'Montserrat';
-            font-style: normal;
-            font-weight: 300;
-            font-size: 14px;
-            line-height: 17px;
+    &__item{
+        font-family: 'Montserrat';
+        font-weight: 300;
+        font-size: 14px;
+        line-height: 17px;
+        color: $color-white;
+        padding: 5px 0 7px 0;
+        a{
             color: $color-white;
-            padding-bottom: 9px;
+        }
+        @media (min-width: $middle-media) {
             border-bottom: 1px solid #403432;
-            a{
-                color: $color-white;
-            }
         }
-        .active{
-            border-bottom: 3px solid #403432;
-        }
-        &-item:hover{
-            cursor: pointer;
+    }
+
+    .active{
+        @media (min-width: $middle-media) {
+            border-bottom: 1px solid #403432;
         }
     }
 }
@@ -49,23 +53,37 @@
     }
     .row:first-child{
         margin-bottom: 40px;
+        @media (max-width: $tablet-media) {
+            margin-bottom: 30px;
+        }
     }
     &__title {
         display: inline-block;
         font-family: 'Montserrat';
         font-style: normal;
         font-weight: 400;
-        font-size: 100px;
-        line-height: 122px;
         color: $color-white;
         border-bottom: 1px solid #403432;
         margin-bottom: 20px;
+        @include adaptiv-font(100, 30);
+        @include adaptiv-line-height(122, 37);
+        @media (max-width: $tablet-media) {
+            margin-bottom: 15px;
+        }
     }
 
     &__container {
         width: 100%;
-        max-height: 642px;
         height: 642px;
+        @media (max-width: $desktop-media) {
+            height: calc((100vw - 120px) / 1.8);
+        }
+        @media (max-width: $tablet-media) {
+            height: calc((100vw - 40px) / 1.8);
+        }
+        @media (max-width: 370px) {
+            height: 160px;
+        }
         &-img {
             width: 100%;
             height: 100%;
@@ -76,25 +94,52 @@
     &__arrow {
         display: flex;
         align-items: center;
+        margin-bottom: 30px;
+        @media (max-width: $tablet-media) {
+            margin-bottom: 15px;
+        }
         &-text {
             font-family: 'Montserrat';
             font-style: normal;
             font-weight: 400;
-            font-size: 16px;
-            line-height: 20px;
             color: $color-white;
             margin-right: 17px;
+
+            @include adaptiv-font(16, 14);
+            @include adaptiv-line-height(20, 17);
         }
 
         &-prev {
             margin-right: 26px;
+            @media (max-width: $tablet-media) {
+                margin-right: 35px;
+                svg{
+                    width: 7px;
+                    height: 11px;
+                }
+            }
+            @media (max-width: $mobile-media) {
+                svg{
+                    width: 5px;
+                    height: 8px;
+                }
+            }
         }
 
         &-next {
+            @media (max-width: $tablet-media) {
+                svg{
+                    width: 7px;
+                    height: 11px;
+                }
+            }
+            @media (max-width: $mobile-media) {
+                svg{
+                    width: 5px;
+                    height: 8px;
+                }
+            }
         }
-    }
-    .project-scheme{
-        margin-bottom: 30px;
     }
 
     &__text {
@@ -104,11 +149,19 @@
         font-size: 16px;
         line-height: 20px;
         color: $color-white;
+        @include adaptiv-font(16, 12);
+        @include adaptiv-line-height(20, 15);
     }
 }
 
 .project-wrapper{
     margin-bottom: 120px;
+    @media (max-width: $middle-media) {
+        margin-bottom: 90px;
+    }
+    @media (max-width: $tablet-media) {
+        margin-bottom: 50px;
+    }
     div:last-child{
         margin-bottom: 0;
     }
@@ -116,15 +169,18 @@
 
 .project-widget1 {
     margin-bottom: 30px;
+    @media (max-width: $tablet-media) {
+        margin-bottom: 15px;
+    }
     &-title{
         font-family: 'Montserrat';
         font-style: normal;
         font-weight: 400;
-        font-size: 35px;
-        line-height: 43px;
         color: $color-white;
         margin-bottom: 40px;
         text-transform: uppercase;
+        @include adaptiv-font(40, 25);
+        @include adaptiv-line-height(49, 30);
     }
     .row{
         display: flex;
@@ -138,12 +194,25 @@
         line-height: 20px;
         color: $color-white;
         margin-top: 40px;
+        @include adaptiv-font(16, 12);
+        @include adaptiv-line-height(20, 15);
+        @media (max-width: $middle-media) {
+            margin-top: 20px;
+        }
     }
     &__container {
         display: flex;
         width: 100%;
         height: 650px;
-        max-height: 650px;
+        @media (max-width: $desktop-media) {
+            height: calc((100vw - 120px) / 1.78);
+        }
+        @media (max-width: $tablet-media) {
+            height: calc((100vw - 40px) / 1.78);
+        }
+        @media (max-width: 370px) {
+            height: 160px;
+        }
         &-img {
             object-fit: cover;
             width: 100%;
@@ -154,9 +223,23 @@
 
 .project-widget2 {
     margin-bottom: 30px;
+    @media (max-width: $tablet-media) {
+        margin-bottom: 15px;
+    }
     &__container {
         display: flex;
         gap: 30px;
+        height: 431px;
+        @media (max-width: $desktop-media) {
+            height: calc((100vw - 120px) / 1.78);
+        }
+        @media (max-width: $tablet-media) {
+            height: calc((100vw - 40px) / 1.78);
+            gap: 10px;
+        }
+        @media (max-width: 370px) {
+            height: 176px;
+        }
         &-img {
             height: 100%;
             width: 100%;
@@ -164,14 +247,19 @@
         }
     }
     &-item{
-        max-height: 431px;
-        height: 431px;
+        height: 100%;
     }
     &-item:first-child{
         flex: 0 1 33.333%;
+        @media (max-width: $middle-media) {
+            flex: 0 1 50%;
+        }
     }
     &-item:last-child{
         flex: 0 1 66.666%;
+        @media (max-width: $middle-media) {
+            flex: 0 1 50%;
+        }
     }
 
     &-text{
@@ -180,16 +268,20 @@
         font-family: 'Montserrat';
         font-style: normal;
         font-weight: 400;
-        font-size: 16px;
-        line-height: 20px;
         color: $color-white;
+        @media (max-width: $middle-media) {
+            margin-top: 20px;
+        }
+        @include adaptiv-font(16, 12);
+        @include adaptiv-line-height(20, 15);
     }
 }
 
 .project-widget3 {
     margin-bottom: 30px;
-
-
+    @media (max-width: $middle-media) {
+        margin-bottom: 20px;
+    }
     .row {
         display: flex;
         flex-direction: column;
@@ -198,11 +290,21 @@
     &-container{
         display: flex;
         gap: 30px;
+        height: 715px;
+        @media (max-width: $desktop-media) {
+            height: calc((100vw - 120px) / 1.63);
+        }
+        @media (max-width: $tablet-media) {
+            height: calc((100vw - 40px) / 1.63);
+        }
+        @media (max-width: 370px) {
+            height: 176px;
+        }
     }
     &__column {
         flex: 0 1 50%;
-        max-height: 715px;
-        height: 715px;
+        //max-height: 715px;
+        height: 100%;
         &-image {
             width: 100%;
             height: 100%;
@@ -215,28 +317,37 @@
         font-family: 'Montserrat';
         font-style: normal;
         font-weight: 400;
-        font-size: 16px;
-        line-height: 20px;
         color: $color-white;
+        @media (max-width: $middle-media) {
+            margin-top: 20px;
+        }
+        @include adaptiv-font(16, 12);
+        @include adaptiv-line-height(20, 15);
     }
 }
 
 .project-widget4 {
     margin-top: 50px;
     margin-bottom: 40px;
+    @media (max-width: $middle-media) {
+        margin-bottom: 20px;
+    }
     &-title {
         font-family: 'Montserrat';
         font-style: normal;
         font-weight: 400;
-        font-size: 40px;
-        line-height: 49px;
         color: $color-white;
         text-transform: uppercase;
+        @include adaptiv-font(40, 25);
+        @include adaptiv-line-height(49, 30);
     }
 }
 
 .project-widget5 {
     margin-bottom: 30px;
+    @media (max-width: $middle-media) {
+        margin-bottom: 20px;
+    }
     .row{
         display: flex;
         flex-direction: column;
@@ -244,7 +355,16 @@
     }
     &__container {
         width: 100%;
-        max-height: 1000px;
+        height: 1000px;
+        @media (max-width: $desktop-media) {
+            height: calc((100vw - 120px) / 1.16);
+        }
+        @media (max-width: $tablet-media) {
+            height: calc((100vw - 40px) / 1.16);
+        }
+        //@media (max-width: 370px) {
+        //    height: 280px;
+        //}
         &-img {
             object-fit: cover;
             width: 100%;
@@ -255,9 +375,13 @@
         font-family: 'Montserrat';
         font-style: normal;
         font-weight: 400;
-        font-size: 16px;
-        line-height: 20px;
         color: $color-white;
         margin-bottom: 10px;
+        margin-top: 40px;
+        @media (max-width: $middle-media) {
+            margin-top: 20px;
+        }
+        @include adaptiv-font(16, 12);
+        @include adaptiv-line-height(20, 15);
     }
 }

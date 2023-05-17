@@ -43,6 +43,8 @@ export default {
       }
     },
     mounted() {
+        console.log(this.categories)
+        console.log(this.category)
         this.activeTitle = this.category.title
         this.activeTitle = this.category.id === 1 ?  this.portfolioTitle : this.category.title
     },
@@ -57,17 +59,6 @@ export default {
 <style lang="scss" scoped>
 @import "@root/sass/frontend/variables.scss";
 
-.tabs__item{
-    @media (min-width: $middle-media) {
-        border-bottom: 1px solid #AE4834;
-    }
-
-}
-.tabs__item.active{
-    @media (min-width: $middle-media) {
-        border-bottom: 3px solid #AE4834;
-    }
-}
 .arrow-down{
     display: none;
     @media (max-width: $middle-media) {

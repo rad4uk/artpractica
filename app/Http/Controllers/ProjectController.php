@@ -24,18 +24,11 @@ class ProjectController extends Controller
         }
         $additionalPosts = $project->additionalPostsToMany()->get();
 
-        $categoriesData = [];
-        foreach ($categories as $key => $categoryItem){
-            $categoriesData[$key]['id'] = $categoryItem->id;
-            $categoriesData[$key]['title'] = $categoryItem->title;
-            $categoriesData[$key]['slug'] = route('categories', $categoryItem->slug);
-        }
-
         return view('frontend/project/project', [
             'post' => $project,
             'apartmentImages' => $apartmentImages,
             'additionalPostsData' => $additionalPosts,
-            'categories' => $categoriesData,
+            'categories' => $categories,
             'body' => json_decode($project->body)->frontend
         ]);
     }

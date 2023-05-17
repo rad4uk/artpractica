@@ -34,4 +34,19 @@ export default {
 }
 </script>
 
+<style lang="scss">
+.swiper{
+    .project-preview__container{
+        @media (max-width: 1280px) {
+            height: calc((100vw - 120px) / 2.11);
+        }
+        @media (max-width: 768px) {
+            height: calc((100vw - 40px) / 2.11);
+        }
+        @media (max-width: 370px) {
+            height: 132px;
+        }
+    }
+}
+</style>
 
