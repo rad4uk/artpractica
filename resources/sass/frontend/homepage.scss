@@ -20,7 +20,7 @@
 .screen {
     background-image: url("../../../public/images/screen.webp");
     @media (max-width: $mobile-media) {
-        background-image: url("../../../public/images/screen_320x560.png");
+        background-image: url("../../../public/images/screen_320x560.webp");
     }
     background-position: center center;
     background-repeat: no-repeat;
