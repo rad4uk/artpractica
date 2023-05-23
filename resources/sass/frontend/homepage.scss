@@ -26,28 +26,26 @@
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
+    height: 100vh;
+    min-height: 540px;
     margin-bottom: 130px;
-    @media (min-width: $desktop-media) {
-        min-height: 100vh;
+    @media (min-width: $mobile-media) {
+        padding-top: 191px;
+        padding-bottom: 210px;
     }
     @media (max-width: $tablet-media) {
         margin-bottom: 80px;
     }
+    @media (max-width: $mobile-media) {
+        height: 90vh;
+        padding-top: 146px;
+        padding-bottom: 100px;
+    }
     &__wrapper {
-        height: calc(100% - 77px);
         width: 100%;
-        top: 77px;
+        height: 100%;
         display: flex;
         justify-content: center;
-        padding-top: 190px;
-        padding-bottom: 210px;
-        @media (max-width: $tablet-media) {
-            padding-top: 167px;
-            padding-bottom: 100px;
-        }
-        @media (max-width: $mobile-media) {
-            padding-top: 146px;
-        }
     }
 
     &__body {
@@ -56,7 +54,6 @@
         justify-content: space-between;
         margin-left: 28.5%;
         max-width: 850px;
-        max-height: 428px;
         padding: 0 60px;
         @media (min-width: $desktop-media) {
             margin-left: 365px;
@@ -90,8 +87,8 @@
         text-transform: uppercase;
         color: #FFFFFF;
         margin-bottom: 70px;
-        @include adaptiv-font(60, 25);
-        @include adaptiv-line-height(73, 30);
+        @include adaptiv-font(60, 23);
+        @include adaptiv-line-height(73, 28);
         @media (max-width: $tablet-media) {
             width: 90%;
             margin-bottom: 100px;
@@ -695,13 +692,16 @@
 
     &__wrapper {
         padding: 0 60px;
-        top: 0;
         display: flex;
         align-items: center;
         position: absolute;
+        justify-content: center;
+        top: 0;
         width: 100%;
         height: 100%;
-        justify-content: center;
+        @media (max-width: $mobile-media) {
+            padding: 0 20px 0 40px;
+        }
     }
 
     &__content{

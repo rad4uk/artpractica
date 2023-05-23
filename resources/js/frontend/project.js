@@ -8,6 +8,7 @@ import PostSlider from '@/Components/frontend/project/PostSlider.vue'
 import PreviewComponent from '@/Components/frontend/project/PreviewComponent.vue'
 import HeaderComponent from "@/Components/frontend/HeaderComponent.vue";
 import Tabs from "@/Components/frontend/portfolio/Tabs.vue";
+import BodyComponent from "@/Components/frontend/project/BodyComponent.vue";
 
 const app = createApp({
     components: {
@@ -17,6 +18,7 @@ const app = createApp({
         'preview-component': PreviewComponent,
         'header-component': HeaderComponent,
         'tabs-component': Tabs,
+        'body-component': BodyComponent,
     }
 });
 app.use(VueLazyLoad, {

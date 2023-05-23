@@ -2,6 +2,15 @@
 @import "project-item";
 @import "tabs";
 
+.project {
+    &__item {
+        //height: calc((100vw - 120px) / 1.8);
+        @media (max-width: $desktop-media) {
+            //height: calc(((100vw - 120px - 20px) / 2) * 1.14);
+        }
+    }
+}
+
 
 
 

@@ -127,6 +127,8 @@ export default {
         }
     },
     async beforeMount() {
+        console.log(this.file_dir)
+        console.log(this.post)
         if (this.type_admin_page === 'edit') {
             this.titleValue = this.post.title
             this.descriptionValue = this.post.description
@@ -134,7 +136,7 @@ export default {
             this.urlValue = this.post.slug
             this.categoryValue = this.post.category_id
             this.statusValue = this.post.status === 1
-            this.preview_file = await this.fetchFile(this.file_dir, this.post.preview_image)
+            this.preview_file = await this.fetchFile(this.file_dir, this.post.preview_image.default)
             const apartment_images = JSON.parse(this.post.apartment_images)
             if (apartment_images.length > 0){
                 await this.setApartmentImages(apartment_images)

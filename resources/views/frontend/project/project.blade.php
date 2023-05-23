@@ -11,17 +11,23 @@
     ></tabs-component>
 
     <preview-component
+
         :post='@json($post)'
         :apartment_images='@json($apartmentImages)'
         :preview_image='@json(asset($post->getFullImagePath($post->preview_image)))'
     >
     </preview-component>
+    <body-component
+        :data='@json($body)'
+        :slider_images_data='@json($sliderImagesData)'
+    >
+    </body-component>
 
-    <div class="project-wrapper">
-        @foreach($body as $widget)
-            @include('frontend.project.widgets.' . $widget->name, ['widget' => $widget])
-        @endforeach
-    </div>
+{{--    <div class="project-wrapper">--}}
+{{--        @foreach($body as $widget)--}}
+{{--            @include('frontend.project.widgets.' . $widget->name, ['widget' => $widget])--}}
+{{--        @endforeach--}}
+{{--    </div>--}}
     @if(count($additionalPostsData) > 0)
         <post-slider-component
             :posts='@json($additionalPostsData)'

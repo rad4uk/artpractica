@@ -8,9 +8,9 @@ class Files implements \JsonSerializable
 {
     private array $files;
 
-    public function setFile(UploadedFile $file): self
+    public function setFile(string $fileName): self
     {
-        $this->files[] = $file;
+        $this->files[] = $fileName;
 
         return $this;
     }
@@ -23,8 +23,6 @@ class Files implements \JsonSerializable
 
     public function jsonSerialize(): array
     {
-        return array_map(static function (UploadedFile $file) {
-            return $file->getClientOriginalName();
-        }, $this->files);
+        return $this->files;
     }
 }

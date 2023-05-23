@@ -15,6 +15,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 
 class PostController extends Controller
@@ -85,6 +86,7 @@ class PostController extends Controller
 
             $widgetData = $this->postService->matchingRequestData($requestData, $allFilesData);
             $objectsWidgetData = $this->postService->setWidgetsData($widgetData['data']);
+
             try {
                 $postData = $this->postService->setPostData(
                     $formData,
@@ -133,9 +135,7 @@ class PostController extends Controller
                 $postData = $this->postService->setPostData(
                     $formData,
                     $filesData,
-                    json_encode(
-                        array_merge($objectsWidgetData)
-                    )
+                    json_encode($objectsWidgetData)
                 );
             } catch (\RuntimeException $exception) {
                 return response($exception->getMessage(), 422);

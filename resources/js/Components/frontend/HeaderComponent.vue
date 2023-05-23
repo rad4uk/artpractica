@@ -5,11 +5,11 @@
 
                 <div class="header__logo">
                     <a href="/">
-                        <picture>
-                            <source :srcset="this.images[0]" media="(max-width: 520px)">
-                            <source :srcset="this.images[1]" media="(max-width: 768px)">
-                            <img :src="this.images[2]" alt="">
-                        </picture>
+<!--                        <picture>-->
+<!--                            <source :srcset="this.images[0]" media="(max-width: 520px)">-->
+<!--                            <source :srcset="this.images[1]" media="(max-width: 768px)">-->
+<!--                            <img :src="this.images[2]" alt="">-->
+<!--                        </picture>-->
                     </a>
                 </div>
                 <div class="header__nav-mobile-nav" :class="{'burger-active': menuIsActive}" @click="this.openMenu()">

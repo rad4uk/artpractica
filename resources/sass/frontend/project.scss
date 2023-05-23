@@ -380,7 +380,6 @@
         font-style: normal;
         font-weight: 400;
         color: $color-white;
-        margin-bottom: 10px;
         @include adaptiv-font(16, 12);
         @include adaptiv-line-height(20, 15);
     }

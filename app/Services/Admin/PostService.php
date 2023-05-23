@@ -5,13 +5,20 @@ namespace App\Services\Admin;
 use App\Enums\ProjectAdminWidgetEnum;
 use App\Enums\ProjectFrontendWidgetEnum;
 use App\Exceptions\WidgetNotFoundException;
+use App\Services\FileService;
 use App\ValueObjects\Files;
-use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class PostService
 {
-    private const FILE_PATH = '/images/project';
+    private string $filePath;
+
+    public function __construct(
+        private readonly FileService $fileService
+    )
+    {
+        $this->filePath = config('files-path.project.publicImagePath');
+    }
 
     public function matchingRequestData(array $requestData, array $widgetAllFiles): array
     {
@@ -29,11 +36,7 @@ class PostService
         if (isset($widgetAllFiles['widgets'])) {
             foreach ($widgetAllFiles['widgets'] as $widgetKey => $widgetItem) {
                 foreach ($widgetItem['data']['files'] as $file) {
-                    /**
-                     * @var UploadedFile $file
-                     */
-                    $this->saveFile($file);
-                    $data['data'][$widgetKey]['data']['files'][] = $file->getClientOriginalName();
+                    $data['data'][$widgetKey]['data']['files'][] = $this->fileService->saveFile($file, $this->filePath);
                 }
             }
         }
@@ -57,31 +60,17 @@ class PostService
 
     public function setPostData(array $formData, array $filesData, string $body): array
     {
-        /**
-         * @var UploadedFile $previewImage
-         */
-        $previewImage = $filesData['preview_file'];
-        $this->saveFile($filesData['preview_file']);
+        $previewImageName = $this->fileService->saveFile($filesData['preview_file'], $this->filePath);
         $files = new Files();
         foreach ($filesData['apartment_images'] as $image){
-            $this->saveFile($image);
-            $files->setFile($image);
+            $fileName = $this->fileService->saveFile($image, $this->filePath);
+            $files->setFile($fileName);
         }
         unset($formData['additionalPosts']);
         return array_merge($formData, [
-            'preview_image' => $previewImage->getClientOriginalName(),
+            'preview_image' => $previewImageName,
             'apartment_images' => json_encode($files),
             'body' => $body
         ]);
-    }
-
-
-    public function saveFile(UploadedFile $file): void
-    {
-        Storage::disk('public')->putFileAs(
-            self::FILE_PATH,
-            $file,
-            $file->getClientOriginalName()
-        );
     }
 }
