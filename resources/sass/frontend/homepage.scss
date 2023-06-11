@@ -445,6 +445,9 @@
         display: flex;
         flex-direction: column;
         flex: 0 1 33.333%;
+        @media (max-width: $tablet-media) {
+            flex: 0 1 100%;
+        }
     }
 
     &__subtitle {
