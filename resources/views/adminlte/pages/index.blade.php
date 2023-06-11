@@ -2,7 +2,8 @@
 
 @push('styles')
     <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{asset('adminlte/plugins/fontawesome-free/css/all.min.css')}}">
     <!-- Theme style -->
@@ -28,15 +29,15 @@
             </div><!-- /.container-fluid -->
         </section>
 
-        <section>
-            <div class="container-fluid">
-                <div class="row mb-3">
-                    <div class="col-12" style="display: flex;justify-content: right">
-                        <a href="{{route('admin_page_new')}}" class="btn btn-success">Добавить страницу</a>
-                    </div>
-                </div>
-            </div>
-        </section>
+{{--        <section>--}}
+{{--            <div class="container-fluid">--}}
+{{--                <div class="row mb-3">--}}
+{{--                    <div class="col-12" style="display: flex;justify-content: right">--}}
+{{--                        <a href="{{route('admin_page_new')}}" class="btn btn-success">Добавить страницу</a>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </section>--}}
 
         <!-- Main content -->
         <section class="content">
@@ -75,48 +76,45 @@
                         </thead>
                         <tbody>
                         @foreach($pages as $page)
-                        <tr>
-                            <td>
-                                #
-                            </td>
-                            <td>
-                                {{$page->title}}
-                            </td>
-                            <td>
-                                {{$page->description}}
-                            </td>
-
-
-                            <td>
-                                <a href="{{$page->slug}}">{{$page->slug}}</a>
-                            </td>
-                            <td class="project-actions text-right">
-                                <a class="btn btn-primary btn-sm" href="#">
-                                    <i class="fas fa-folder">
-                                    </i>
-                                    View
-                                </a>
-                                @if($page->id === 1)
-                                <a class="btn btn-info btn-sm" href={{route('admin_home_page_edit')}}>
-                                    <i class="fas fa-pencil-alt">
-                                    </i>
-                                    Изменить
-                                </a>
-                                @endif
-                                @if($page->id === 2)
-                                    <a class="btn btn-info btn-sm" href={{route('admin_about_page_edit')}}>
-                                        <i class="fas fa-pencil-alt">
-                                        </i>
-                                        Изменить
-                                    </a>
-                                @endif
-                                <a class="btn btn-danger btn-sm" href="#">
-                                    <i class="fas fa-trash">
-                                    </i>
-                                    Удалить
-                                </a>
-                            </td>
-                        </tr>
+                            <tr>
+                                <td>
+                                    #
+                                </td>
+                                <td>
+                                    {{$page->title}}
+                                </td>
+                                <td>
+                                    {{$page->description}}
+                                </td>
+                                <td>
+                                    <a href="{{$page->slug}}">{{$page->slug}}</a>
+                                </td>
+                                <td class="project-actions text-right">
+                                    @if($page->id === 1)
+                                        <a class="btn btn-info btn-sm" href={{route('admin_home_page_edit')}}>
+                                            <i class="fas fa-pencil-alt">
+                                            </i>
+                                            Изменить
+                                        </a>
+                                    @endif
+                                    @if($page->id === 2)
+                                        <a class="btn btn-info btn-sm"
+                                           href={{route('admin_about_page_edit')}}>
+                                            <i class="fas fa-pencil-alt">
+                                            </i>
+                                            Изменить
+                                        </a>
+                                    @endif
+                                    @if($page->id === 3)
+                                        <a class="btn btn-info btn-sm"
+                                           href={{route('admin_contact_page_edit')}}>
+                                            <i class="fas fa-pencil-alt">
+                                            </i>
+                                            Изменить
+                                        </a>
+                                    @endif
+                                </td>
+                            </tr>
                         @endforeach
                         </tbody>
                     </table>

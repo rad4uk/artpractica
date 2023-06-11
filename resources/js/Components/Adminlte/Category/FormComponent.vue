@@ -145,7 +145,7 @@ export default {
             this.slug = this.category.slug
             this.status = this.category.status === 1
             this.sort = this.category.page_sort
-            this.categoryId = this.category.parent_id
+            this.categoryId = this.category.parent_id === null ? -1 : this.category.parent_id
             this.pageId = this.category.page_id
 
             if (this.category.page_sort !== null) {

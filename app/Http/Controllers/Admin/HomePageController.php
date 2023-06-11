@@ -28,7 +28,7 @@ class HomePageController extends Controller
             $this->pageRepository->create($details);
             return response('', 201);
         }
-        return view('adminlte/pages/new');
+        return view('adminlte.pages.home.new');
     }
 
     public function update(Request $request)
@@ -47,7 +47,7 @@ class HomePageController extends Controller
             $this->pageRepository->update(1, $details);
             return response('', 201);
         }
-        return view('adminlte.pages.edit', [
+        return view('adminlte.pages.home.edit', [
             'page' => $page
         ]);
     }

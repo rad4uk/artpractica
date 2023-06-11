@@ -2,7 +2,8 @@
 
 @push('styles')
     <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{asset('adminlte/plugins/fontawesome-free/css/all.min.css')}}">
     <!-- Theme style -->
@@ -29,21 +30,13 @@
                 </div>
             </div><!-- /.container-fluid -->
         </section>
-        @if($page->id === 1)
-            @include('adminlte.pages.forms.1', [
-                'action' => route('admin_home_page_edit'),
-                'page' => $page,
-                'is_type_page' => 'edit'
-            ])
-        @elseif($page->id === 2)
-            @include('adminlte.pages.forms.2', [
-                'action' => route('admin_about_page_update'),
-                'page' => $page,
-                'is_type_page' => 'edit'
-            ])
-        @else
 
-        @endif
+        @include('adminlte.pages.contact.forms.edit', [
+            'action' => route('admin_contact_page_update'),
+            'page' => $page,
+            'is_type_page' => 'edit'
+        ])
+
     </div>
     <!-- /.content-wrapper -->
 @endsection

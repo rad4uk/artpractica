@@ -1,4 +1,8 @@
-@extends('layouts.main')
+@extends('layouts.main', [
+    'metaTitle' => $post->meta_title ?? '',
+    'metaDescription' => $post->meta_description ?? '',
+    'canonical' => route('projects', $post->slug),
+])
 
 @push('styles')
     @vite(['resources/sass/frontend/project.scss'])

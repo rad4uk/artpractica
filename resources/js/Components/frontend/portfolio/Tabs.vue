@@ -136,10 +136,11 @@ export default {
         position: absolute;
         left: 0;
         right: 0;
-        z-index: 3;
+        z-index: 1;
         background-color: #100E0C;
     }
     .tabs-active {
+        z-index: 3;
         display: flex;
         animation: fadeInUp .3s;
     }

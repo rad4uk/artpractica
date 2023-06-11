@@ -29,7 +29,7 @@ class AboutPageController extends Controller
     public function edit(): View|Factory
     {
         $aboutPageData = $this->pageRepository->findById(2);
-        return view('adminlte.pages.edit', [
+        return view('adminlte.pages.about.edit', [
             'page' => $aboutPageData
         ]);
     }

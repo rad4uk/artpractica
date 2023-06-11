@@ -8,6 +8,7 @@ use App\Interfaces\PostRepositoryInterface;
 use App\Models\Category;
 use App\Models\Post;
 use App\Services\Admin\PostService;
+use App\Services\ProjectService;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -23,6 +24,7 @@ class PostController extends Controller
     public function __construct(
         private readonly PostRepositoryInterface $postRepository,
         private readonly PostService             $postService,
+        private readonly ProjectService          $projectService
     )
     {
 
@@ -43,31 +45,21 @@ class PostController extends Controller
             ->get();
 
         $apartmentImages = [];
-        foreach (json_decode($project->apartment_images) as $imageName) {
+        foreach (json_decode($project->apartment_images) as $imageName){
             $apartmentImages[] = $project->getFullImagePath($imageName);
         }
-        $additionalPostsData = [];
         $additionalPosts = $project->additionalPostsToMany()->get();
-        foreach ($additionalPosts as $key => $post) {
-            $additionalPostsData[$key]['title'] = $post->title;
-            $additionalPostsData[$key]['square'] = $post->square;
-            $additionalPostsData[$key]['preview_image'] = $project->getFullImagePath($post->preview_image);
-            $additionalPostsData[$key]['slug'] = route('projects', $post->slug);
-        }
 
-        $categoriesData = [];
-        foreach ($categories as $key => $categoryItem) {
-            $categoriesData[$key]['id'] = $categoryItem->id;
-            $categoriesData[$key]['title'] = $categoryItem->title;
-            $categoriesData[$key]['slug'] = route('categories', $categoryItem->slug);
-        }
+        $body = $this->projectService->setFullImagePathForBody($project);
+        $sliderImagesData = $this->projectService->setSliderImagesData($project);
 
         return view('frontend/project/project', [
             'post' => $project,
             'apartmentImages' => $apartmentImages,
-            'additionalPostsData' => $additionalPostsData,
-            'categories' => $categoriesData,
-            'body' => json_decode($project->body)->frontend
+            'additionalPostsData' => $additionalPosts,
+            'categories' => $categories,
+            'body' => $body,
+            'sliderImagesData' => $sliderImagesData
         ]);
     }
 

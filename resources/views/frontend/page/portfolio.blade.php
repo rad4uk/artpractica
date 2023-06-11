@@ -1,4 +1,8 @@
-@extends('layouts.main')
+@extends('layouts.main', [
+    'metaTitle' => $category->meta_title ?? '',
+    'metaDescription' => $category->meta_description ?? '',
+    'canonical' => route('portfolio'),
+])
 
 @push('styles')
     @vite(['resources/sass/frontend/portfolio.scss'])

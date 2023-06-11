@@ -444,6 +444,7 @@
     &__item {
         display: flex;
         flex-direction: column;
+        flex: 0 1 33.333%;
     }
 
     &__subtitle {

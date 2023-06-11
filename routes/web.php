@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AboutPageController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ContactPageController;
 use App\Http\Controllers\Admin\HomePageController;
 use App\Http\Controllers\Admin\ImageController;
 use App\Http\Controllers\Admin\PageController;
@@ -47,8 +48,12 @@ Route::prefix('admin')->middleware([
         Route::post('/{id}/delete', [PageController::class, 'update'])->name('admin_page_delete');
 
         Route::any('/1/edit', [HomePageController::class, 'update'])->name('admin_home_page_edit');
+
         Route::get('/2/edit', [AboutPageController::class, 'edit'])->name('admin_about_page_edit');
         Route::post('/2/edit', [AboutPageController::class, 'update'])->name('admin_about_page_update');
+
+        Route::get('/3/edit', [ContactPageController::class, 'edit'])->name('admin_contact_page_edit');
+        Route::post('/3/edit', [ContactPageController::class, 'update'])->name('admin_contact_page_update');
     });
 
     Route::prefix('post')->group(function (){
@@ -110,7 +115,7 @@ Route::get('/portfolio/{categorySlug}/', [PortfolioController::class, 'categorie
 Route::get('/portfolio/project/{slug}/', [ProjectController::class, 'index'])->name('projects');
 
 Route::get('/about/', [FrontendPageController::class, 'about'])->name('about');
-Route::get('/contact-us/', ContactController::class)->name('contact');
+Route::get('/contact-us/', [FrontendPageController::class, 'contact'])->name('contact');
 
 Route::post('/consultation/send', ConsultationController::class);
 

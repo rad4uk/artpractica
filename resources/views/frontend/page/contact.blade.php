@@ -1,4 +1,8 @@
-@extends('layouts.main')
+@extends('layouts.main', [
+    'metaTitle' => $page->meta_title ?? '',
+    'metaDescription' => $page->meta_description ?? '',
+    'canonical' => route('contact'),
+])
 
 @push('styles')
     @vite(['resources/sass/frontend/contact.scss'])
@@ -12,10 +16,9 @@
                     <div class="contact__content">
                         <p class="contact__content-title">адрес</p>
                         <div class="contact__content-text">
-                            <p>394036, Россия, Воронеж</p>
-                            <p>Орджоникидзе, 14/16</p>
-                            <a href="tel:+79202134222">Тел.: + 7 (920) 213-42-22</a>
-                            <a href="mailto: artpractica@mail.ru">artpractica@mail.ru</a>
+                            <p>{{$contactData->address}}</p>
+                            <a href="{{'tel:+' . str_replace(['+', '(', ')', '-', ' '], '', $contactData->phone)}}">Тел.: {{$contactData->phone}}</a>
+                            <a href="{{'mailto: ' . $contactData->email}}">{{$contactData->email}}</a>
                         </div>
                     </div>
                     <div class="contact__form">
