@@ -29,15 +29,15 @@
             </div><!-- /.container-fluid -->
         </section>
 
-{{--        <section>--}}
-{{--            <div class="container-fluid">--}}
-{{--                <div class="row mb-3">--}}
-{{--                    <div class="col-12" style="display: flex;justify-content: right">--}}
-{{--                        <a href="{{route('admin_page_new')}}" class="btn btn-success">Добавить страницу</a>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </section>--}}
+        <section>
+            <div class="container-fluid">
+                <div class="row mb-3">
+                    <div class="col-12" style="display: flex;justify-content: right">
+                        <a href="{{route('admin_page_new')}}" class="btn btn-success">Добавить страницу</a>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <!-- Main content -->
         <section class="content">
