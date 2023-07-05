@@ -63,7 +63,9 @@
                     <input type="file" name="apartment_images"
                            @change="this.addFile"
                            class="custom-file-input" id="validatedCustomFile" required>
-                    <label class="custom-file-label" for="validatedCustomFile">Выберите файл</label>
+                    <label class="custom-file-label" for="validatedCustomFile">
+                        {{ this.getImageName }}
+                    </label>
                 </div>
             </div>
 
@@ -73,12 +75,12 @@
             </div>
 
             <div class="form-group">
-                <label for="inputName">Загаловок к третей секции</label>
+                <label for="inputName">Загаловок к третьей секции</label>
                 <input type="text" id="inputName" name="subtitle" class="form-control" v-model="third_section_title">
             </div>
 
             <div class="form-group">
-                <label for="inputDescription">Описание ко третей секции (используйте нумерованный список)</label>
+                <label for="inputDescription">Описание к третьей секции (используйте нумерованный список)</label>
                 <ckeditor :editor="editor" v-model="third_section_description" :config="editorConfig"></ckeditor>
             </div>
 
@@ -187,6 +189,12 @@ export default {
             }else{
                 this.servicesStore.setSecondTemplateFirstSectionDescription([])
             }
+        }
+    },
+    computed: {
+        getImageName: function (){
+            const file = this.servicesStore.getSecondTemplate.second_section_image
+            return file instanceof File ? file.name.slice(-15) : 'Выберите файл'
         }
     }
 }

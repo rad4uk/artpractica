@@ -27,16 +27,21 @@
                 <div class="custom-file">
                     <input type="file" name="preview_image" class="custom-file-input" id="validatedCustomFile"
                            @change="addPreviewFile" required>
-                    <label class="custom-file-label" for="validatedCustomFile">Выберите файл...</label>
+                    <label class="custom-file-label" for="validatedCustomFile">
+                        {{ this.getPreviewFileName }}
+                    </label>
                 </div>
             </div>
             <div class="form-group">
                 <label for="inputDescription">Фотографии планировки</label>
                 <div class="custom-file">
-                    <input type="file" name="apartment_images" multiple class="custom-file-input" id="validatedCustomFile"
+                    <input type="file" name="apartment_images" multiple class="custom-file-input"
+                           id="validatedCustomFile"
                            @change="addedApartmentsImages"
                            required>
-                    <label class="custom-file-label" for="validatedCustomFile">Выберите файлы...</label>
+                    <label class="custom-file-label" for="validatedCustomFile">
+                        {{ this.getApartamentFilesName }}
+                    </label>
                 </div>
             </div>
             <div class="form-group">
@@ -45,7 +50,8 @@
                     <option v-for="(post, idx) in this.all_additional_posts"
                             :key="idx"
                             :value="post.id"
-                    >{{post.title}}</option>
+                    >{{ post.title }}
+                    </option>
                 </select>
             </div>
             <div class="form-group">
@@ -105,8 +111,8 @@ export default {
         return {projectStore}
     },
     mounted() {
-        if (this.type_admin_page === 'edit'){
-            this.additional_posts.forEach( item => {
+        if (this.type_admin_page === 'edit') {
+            this.additional_posts.forEach(item => {
                 this.additionalPostsValue.push(item.id)
             })
         }
@@ -138,7 +144,7 @@ export default {
             this.statusValue = this.post.status === 1
             this.preview_file = await this.fetchFile(this.file_dir, this.post.preview_image.default)
             const apartment_images = JSON.parse(this.post.apartment_images)
-            if (apartment_images.length > 0){
+            if (apartment_images.length > 0) {
                 await this.setApartmentImages(apartment_images)
             }
             // this.additional_posts.forEach((item) => {
@@ -147,15 +153,15 @@ export default {
         }
     },
     methods: {
-        async setApartmentImages(images){
+        async setApartmentImages(images) {
             await Promise.all(
-                images.map( async (fileName) => {
+                images.map(async (fileName) => {
                     let file = await this.fetchFile(this.file_dir, fileName)
                     this.apartment_images.push(file)
                 })
             )
         },
-        addedApartmentsImages(event){
+        addedApartmentsImages(event) {
             this.apartment_images = [];
             const files = event.target.files;
             for (let i = 0; i < files.length; i++) {
@@ -190,15 +196,15 @@ export default {
             if (this.file === null) {
                 this.errors.push('Вы забыли добавить фото проекта.');
             }
-            if (this.apartment_images.length === 0){
+            if (this.apartment_images.length === 0) {
                 this.errors.push('Вы забыли добавить фотографии планировки');
             }
 
-            if (this.squareValue === null || this.squareValue.length === 0){
+            if (this.squareValue === null || this.squareValue.length === 0) {
                 this.errors.push('Вы забыли указать площадь');
             }
 
-            if (this.additionalPostsValue.length === 1){
+            if (this.additionalPostsValue.length === 1) {
                 this.errors.push('Количество дополнительных проектов должно быть больше одного');
             }
 
@@ -233,14 +239,14 @@ export default {
                 formData.append('formData[meta_title]', this.projectStore.getMetaData.title)
                 formData.append('formData[meta_description]', this.projectStore.getMetaData.description)
 
-                if (this.apartment_images.length > 0){
-                    this.apartment_images.forEach( (file) => {
+                if (this.apartment_images.length > 0) {
+                    this.apartment_images.forEach((file) => {
                         formData.append('formData[apartment_images][]', file)
                     })
                 }
 
                 if (this.additionalPostsValue.length > 0) {
-                    this.additionalPostsValue.forEach( (postId) => {
+                    this.additionalPostsValue.forEach((postId) => {
                         formData.append('formData[additionalPosts][]', postId)
                     })
                 }
@@ -278,19 +284,33 @@ export default {
                             'Content-Type': 'multipart/form-data'
                         }
                     })
-                    if (response.status === 201){
+                    if (response.status === 201) {
                         window.location.href = "/admin/post";
                     }
                 } catch (error) {
-                    if (error.response.data.message){
+                    if (error.response.data.message) {
                         this.errors.push(error.response.data.message)
-                    }else{
+                    } else {
                         this.errors.push(error.response.data)
                     }
-                }finally {
+                } finally {
                     this.spinnerActive = false
                 }
             }
+        },
+    },
+    computed: {
+        getPreviewFileName: function () {
+            return this.preview_file instanceof File ? this.preview_file.name.slice(-15) : 'Выберите файл...'
+        },
+        getApartamentFilesName: function () {
+            let fileName = '';
+            this.apartment_images.forEach(function (file) {
+                if (file instanceof File) {
+                    fileName += file.name.slice(-15) + ', '
+                }
+            })
+            return fileName.length > 0 ? fileName.replace(/, $/mg, '') : 'Выберите файлы...'
         },
     }
 }

@@ -31,7 +31,9 @@
                     <input type="file" name="preview_image" class="custom-file-input"
                            @change="this.addedPreviewImage"
                            id="validatedCustomFile" required>
-                    <label class="custom-file-label" for="validatedCustomFile">Выберите файл...</label>
+                    <label class="custom-file-label" for="validatedCustomFile">
+                        {{ this.getPreviewImageName }}
+                    </label>
                     <div class="invalid-feedback">Example invalid custom file feedback</div>
                 </div>
             </div>
@@ -76,7 +78,9 @@
                                     <input type="file" name="page_image" class="custom-file-input" id="validatedCustomFile"
                                            @change="this.addedPageImage"
                                     >
-                                    <label class="custom-file-label" for="validatedCustomFile">Выберите файл</label>
+                                    <label class="custom-file-label" for="validatedCustomFile">
+                                        {{ this.getHomePageImageName }}
+                                    </label>
                                 </div>
                             </div>
                             <div class="form-group" style="width: 100%">
@@ -318,6 +322,14 @@ export default {
             this.page_image = event.target.files[0];
         }
     },
+    computed: {
+        getPreviewImageName: function (){
+            return this.preview_image instanceof File ? this.preview_image.name.slice(-10) : 'Выберите файл'
+        },
+        getHomePageImageName: function (){
+            return this.page_image instanceof File ? this.page_image.name.slice(-10) : 'Выберите файл'
+        }
+    }
 }
 </script>
 

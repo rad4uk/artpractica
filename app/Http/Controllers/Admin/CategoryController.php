@@ -8,6 +8,7 @@ use App\Interfaces\CategoryRepositoryInterface;
 use App\Models\Category;
 use App\Models\Page;
 use App\Services\CategoryService;
+use App\Services\FileService;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -19,6 +20,7 @@ class CategoryController extends Controller
 {
     public function __construct(
         private readonly CategoryRepositoryInterface $categoryRepository,
+        private readonly FileService                 $fileService
     )
     {
 
@@ -49,12 +51,11 @@ class CategoryController extends Controller
 
         if ($request->files->has('page_image')) {
             $file = $request->files->get('page_image');
-            Storage::disk('public')->putFileAs(
-                config('files-path.categories.publicImagePath'),
+
+            $details['page_image'] = $this->fileService->saveFile(
                 $file,
-                $file->getClientOriginalName()
+                config('files-path.categories.publicImagePath')
             );
-            $details['page_image'] = $file->getClientOriginalName();
         }
         $this->categoryRepository->create($details);
 
@@ -86,12 +87,10 @@ class CategoryController extends Controller
 
         if ($request->files->has('page_image')) {
             $file = $request->files->get('page_image');
-            Storage::disk('public')->putFileAs(
-                config('files-path.categories.publicImagePath'),
+            $details['page_image'] = $this->fileService->saveFile(
                 $file,
-                $file->getClientOriginalName()
+                config('files-path.categories.publicImagePath')
             );
-            $details['page_image'] = $file->getClientOriginalName();
         }
 
         $this->categoryRepository->update($id, $details);

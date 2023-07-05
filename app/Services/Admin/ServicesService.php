@@ -4,6 +4,7 @@ namespace App\Services\Admin;
 
 use App\Enums\ServicesTemplateEnum;
 use App\Models\Service;
+use App\Services\FileService;
 use App\ValueObjects\Files;
 use App\ValueObjects\FirstTemplate;
 use App\ValueObjects\SecondTemplate;
@@ -14,7 +15,14 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class ServicesService
 {
-    private const FILE_PATH = '/images/services';
+    private string $filePath;
+    private FileService $fileService;
+
+    public function __construct()
+    {
+        $this->filePath = config('files-path.services.publicImagePath');
+        $this->fileService = new FileService();
+    }
 
     public function getTemplateInstance(array $templateData): FirstTemplate|SecondTemplate|ThirdTemplate
     {
@@ -22,21 +30,15 @@ class ServicesService
         return new $templateClass($templateData);
     }
 
-    public function saveFile(UploadedFile $file): string
-    {
-        Storage::disk('public')->putFileAs(
-            self::FILE_PATH,
-            $file,
-            $file->getClientOriginalName()
-        );
-        return $file->getClientOriginalName();
-    }
 
     public function getTemplateData(array $templateData, array $filesData): array
     {
         if (isset($filesData['second_section_image'])
             && $filesData['second_section_image'] instanceof UploadedFile){
-            $templateData['second_section_image'] = $this->saveFile($filesData['second_section_image']);
+            $templateData['second_section_image'] = $this->fileService->saveFile(
+                $filesData['second_section_image'],
+                $this->filePath
+            );
         }
         if (isset($filesData['third_section_images']) && count($filesData['third_section_images']) > 0){
             /**
@@ -44,7 +46,7 @@ class ServicesService
              */
             $fileInstance = new Files();
             foreach ($filesData['third_section_images'] as $file){
-                $this->saveFile($file);
+                $this->fileService->saveFile($file, $this->filePath);
                 $fileInstance->setFile($file);
             }
             $templateData['third_section_images'] = json_encode($fileInstance);

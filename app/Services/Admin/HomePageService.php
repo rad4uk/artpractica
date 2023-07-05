@@ -2,17 +2,18 @@
 
 namespace App\Services\Admin;
 
+use App\Services\FileService;
 use App\ValueObjects\HomePageSlider;
-use Illuminate\Support\Facades\Storage;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class HomePageService
 {
     private string $filePath;
+    private FileService $fileService;
 
     public function __construct()
     {
         $this->filePath = config('files-path.pages.publicImagePath');
+        $this->fileService = new FileService();
     }
 
     public function setSliderData(array $request, array $files): array
@@ -67,19 +68,12 @@ class HomePageService
         $sliderInstance->setTitle($title);
 
         foreach ($sliderFilesData as $file){
-            $this->saveFile($file);
+            $this->fileService->saveFile($file, $this->filePath);
             $sliderInstance->setFile($file);
         }
 
         return $sliderInstance;
     }
 
-    public function saveFile(UploadedFile $file): void
-    {
-        Storage::disk('public')->putFileAs(
-            $this->filePath,
-            $file,
-            $file->getClientOriginalName()
-        );
-    }
+
 }

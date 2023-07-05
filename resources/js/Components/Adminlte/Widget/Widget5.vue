@@ -5,8 +5,8 @@
         <div class="widget1__item widget1-container" v-if="this.is_type === 'section1'">
             <label class="input-file">
                 <input class="widget1__item-input" type="file" @change="addFile">
-                <span v-if="this.file !== null">{{ this.file.name }}</span>
-                <span v-else>Выберите файл</span>
+                <span v-if="this.file !== null">{{ this.getSliceFileName(this.file.name) }}</span>
+                <span v-else>Выберите изображение</span>
             </label>
             <img class="widget1__item-img" v-if="this.file !== null" :src="this.getFileUrl(this.file)"  alt="">
         </div>
@@ -14,7 +14,7 @@
         <div class="widget1__item widget1-container" v-else>
             <label class="input-file">
                 <input class="widget1__item-input" type="file" disabled>
-                <span>Выберите файл</span>
+                <span>Выберите изображение</span>
             </label>
         </div>
 
@@ -50,6 +50,9 @@ export default {
         }
     },
     methods: {
+        getSliceFileName(fileName) {
+            return fileName.slice(-10)
+        },
         getFileUrl(file) {
             if (typeof window !== 'undefined') {
                 return URL.createObjectURL(file)

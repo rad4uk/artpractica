@@ -4,6 +4,7 @@ namespace App\Services;
 
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Spatie\LaravelImageOptimizer\Facades\ImageOptimizer;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class FileService
@@ -12,15 +13,23 @@ class FileService
     {
         $storage = Storage::disk('public');
         $fullFilePath = $filePath . DIRECTORY_SEPARATOR . $file->getClientOriginalName();
+
         if ($storage->exists($fullFilePath)){
+            ImageOptimizer::optimize(
+                $storage->path($filePath . DIRECTORY_SEPARATOR . $file->getClientOriginalName())
+            );
             return $file->getClientOriginalName();
         }
         $uuid = Str::uuid()->toString();
         $fileName = $uuid . '.' . $file->getClientOriginalExtension();
-        Storage::disk('public')->putFileAs(
+        $storage->putFileAs(
             $filePath,
             $file,
             $fileName
+        );
+
+        ImageOptimizer::optimize(
+            $storage->path($filePath . DIRECTORY_SEPARATOR . $fileName)
         );
         return $fileName;
     }

@@ -5,8 +5,8 @@
             <div class="widget2__container-item">
                 <label class="input-file">
                     <input type="file" @change="addFile($event, 0)">
-                    <span v-if="this.file1 !== null">{{ this.file1.name }}</span>
-                    <span v-else>Выберите файл</span>
+                    <span v-if="this.file1 !== null">{{ this.getSliceFileName(this.file1.name) }}</span>
+                    <span v-else>Выберите изображение</span>
                 </label>
                 <img class="widget2__container-item-img" v-if="this.file1 !== null" :src="this.getFileUrl(this.file1)"  alt="">
             </div>
@@ -14,8 +14,8 @@
             <div class="widget2__container-item">
                 <label class="input-file">
                     <input type="file" @change="addFile($event, 1)">
-                    <span v-if="this.file2 !== null">{{ this.file2.name }}</span>
-                    <span v-else>Выберите файл</span>
+                    <span v-if="this.file2 !== null">{{ this.getSliceFileName(this.file2.name) }}</span>
+                    <span v-else>Выберите изображение</span>
                 </label>
                 <img class="widget2__container-item-img" v-if="this.file2 !== null" :src="this.getFileUrl(this.file2)"  alt="">
 
@@ -26,14 +26,14 @@
             <div class="widget2__container-item">
                 <label class="input-file">
                     <input type="file" disabled>
-                    <span>Выберите файл</span>
+                    <span>Выберите изображение</span>
                 </label>
             </div>
 
             <div class="widget2__container-item">
                 <label class="input-file">
                     <input type="file" disabled>
-                    <span>Выберите файл</span>
+                    <span>Выберите изображение</span>
                 </label>
             </div>
         </div>
@@ -82,6 +82,9 @@ export default {
         }
     },
     methods: {
+        getSliceFileName(fileName) {
+            return fileName.slice(-10)
+        },
         getDataInStore(){
             const widget =  this.projectStore.getEmptyWidgetByIndex(this.index);
             return widget.data;

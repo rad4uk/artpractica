@@ -1,5 +1,6 @@
 <template>
-    <div class="tab-pane fade" id="custom-tabs-three-messages" role="tabpanel" aria-labelledby="custom-tabs-three-messages-tab">
+    <div class="tab-pane fade" id="custom-tabs-three-messages" role="tabpanel"
+         aria-labelledby="custom-tabs-three-messages-tab">
         <form action="">
             <div class="form-group">
                 <label for="inputName">Загаловок к первой секции</label>
@@ -19,7 +20,9 @@
                     <input type="file" name="apartment_images"
                            @change="this.addedSecondSectionImage"
                            class="custom-file-input" id="validatedCustomFile" required>
-                    <label class="custom-file-label" for="validatedCustomFile">Выберите файл</label>
+                    <label class="custom-file-label" for="validatedCustomFile">
+                        {{ this.getSecondSectionFileName }}
+                    </label>
                 </div>
             </div>
 
@@ -39,21 +42,23 @@
                                  style="border-bottom: 1px solid #007bff; margin-bottom: 10px"
                                  v-for="(item, index) in items" :key="index"
                             >
-                                <div class="form-group col-11" >
+                                <div class="form-group col-11">
                                     <div class="form-group">
                                         <label>Заголовок</label>
                                         <input type="text" class="form-control" v-model="item.input" placeholder="">
                                     </div>
                                     <div class="form-group">
                                         <label>Описание</label>
-                                        <textarea class="form-control" rows="3" v-model="item.textarea" placeholder="" data-dl-input-translation="true"></textarea>
+                                        <textarea class="form-control" rows="3" v-model="item.textarea" placeholder=""
+                                                  data-dl-input-translation="true"></textarea>
                                     </div>
                                 </div>
 
                                 <div class="form-group col-1 col-sm-1 table-trash"
                                      @click="this.removeInputAndTextarea(index)"
                                      style="display: flex; align-items: center">
-                                    <a class="btn btn-danger btn-sm remove-collection-item"><i class="fas fa-trash-alt"></i></a>
+                                    <a class="btn btn-danger btn-sm remove-collection-item"><i
+                                        class="fas fa-trash-alt"></i></a>
                                 </div>
                             </div>
 
@@ -87,13 +92,16 @@
                     <input type="file" name="apartment_images" multiple
                            @change="this.addedThirdSectionFiles"
                            class="custom-file-input" id="validatedCustomFile" required>
-                    <label class="custom-file-label" for="validatedCustomFile">Выберите файлы</label>
+                    <label class="custom-file-label" for="validatedCustomFile">
+                        {{ this.getSecondSectionFilesName }}
+                    </label>
                 </div>
             </div>
 
             <div class="form-group form-check-inline">
                 <label class="form-check-label">
-                    <input type="checkbox" name="status" class="form-check-input" v-model="on" @change="this.setTemplate(this.on)">Выбрать текущий шаблон
+                    <input type="checkbox" name="status" class="form-check-input" v-model="on"
+                           @change="this.setTemplate(this.on)">Выбрать текущий шаблон
                 </label>
             </div>
         </form>
@@ -103,6 +111,7 @@
 
 <script>
 import {adminServicesStore} from "@/store/adminlte/servicesStore";
+
 export default {
     name: "ThirdTemplateComponent",
     props: ['template_data', 'service', 'file_dir'],
@@ -129,11 +138,16 @@ export default {
 
             const file = await this.fetchFile(this.file_dir, this.template_data.second_section_image)
             this.servicesStore.setThirdTemplateSecondSectionImage(file)
+
             let images = []
-            this.template_data.third_section_images.map(async (imageName) => {
-                let image = await this.fetchFile(this.file_dir, imageName)
-                images.push(image)
-            })
+            const thirdSectionImages = this.template_data.third_section_images
+            if (thirdSectionImages.length > 0){
+                for (let i = 0; i < thirdSectionImages.length; i++) {
+                    let imageName = thirdSectionImages[i]
+                    let image = await this.fetchFile(this.file_dir, imageName)
+                    images.push(image)
+                }
+            }
             this.servicesStore.setThirdTemplateThirdSectionImages(images)
 
             this.items = this.template_data.first_section_description
@@ -150,12 +164,12 @@ export default {
         async fetchFile(dirPath, fileName) {
             return await fetch(`${dirPath}/${fileName}`)
                 .then(response => response.blob())
-                .then(blob => new File([blob], fileName, { type: blob.type }));
+                .then(blob => new File([blob], fileName, {type: blob.type}));
         },
-        addedSecondSectionImage(event){
+        addedSecondSectionImage(event) {
             this.servicesStore.setThirdTemplateSecondSectionImage(event.target.files[0])
         },
-        addedThirdSectionFiles(event){
+        addedThirdSectionFiles(event) {
             let newFiles = []
             const files = event.target.files
             for (let i = 0; i < files.length; i++) {
@@ -163,48 +177,64 @@ export default {
             }
             this.servicesStore.setThirdTemplateThirdSectionImages(newFiles)
         },
-        setTemplate(isActive){
-            if (isActive){
+        setTemplate(isActive) {
+            if (isActive) {
                 const template = this.servicesStore.getThirdTemplate
                 this.servicesStore.setCurrentTemplate(template)
-            }else{
+            } else {
                 this.servicesStore.setCurrentTemplate(null)
             }
         },
         addInputAndTextarea() {
-            this.items.push({ input: "", textarea: "" });
-            if (this.itemIndex !== null || this.items.length > 0){
+            this.items.push({input: "", textarea: ""});
+            if (this.itemIndex !== null || this.items.length > 0) {
                 this.itemIndex++
             }
         },
-        removeInputAndTextarea(index){
-            this.items.splice(index,1);
-            if (this.itemIndex !== null && this.items.length > 0){
+        removeInputAndTextarea(index) {
+            this.items.splice(index, 1);
+            if (this.itemIndex !== null && this.items.length > 0) {
                 this.itemIndex--
-            }else{
+            } else {
                 this.itemIndex = null
             }
         }
     },
     watch: {
-        itemIndex(value){
-            if (value !== null){
+        itemIndex(value) {
+            if (value !== null) {
                 this.servicesStore.setThirdTemplateFirstSectionDescription(this.items)
-            }else{
+            } else {
                 this.servicesStore.setThirdTemplateFirstSectionDescription([])
             }
         },
-        second_section_title(value){
+        second_section_title(value) {
             this.servicesStore.setThirdTemplateSecondSectionTitle(value)
         },
-        second_section_description(value){
+        second_section_description(value) {
             this.servicesStore.setThirdTemplateSecondSectionDescription(value)
         },
-        third_section_title(value){
+        third_section_title(value) {
             this.servicesStore.setThirdTemplateThirdSectionTitle(value)
         },
-        third_section_description(value){
+        third_section_description(value) {
             this.servicesStore.setThirdTemplateThirdSectionDescription(value)
+        },
+    },
+    computed: {
+        getSecondSectionFileName: function () {
+            const file = this.servicesStore.getThirdTemplate.second_section_image
+            return file instanceof File ? file.name.slice(-15) : 'Выберите файл'
+        },
+        getSecondSectionFilesName: function () {
+            let fileName = '';
+            const files = this.servicesStore.getThirdTemplate.third_section_images;
+            files.forEach(function (file) {
+                if (file instanceof File) {
+                    fileName += file.name.slice(-15) + ', '
+                }
+            });
+            return fileName.length > 0 ? fileName.replace(/, $/mg, '') : 'Выберите файлы...'
         },
     }
 }

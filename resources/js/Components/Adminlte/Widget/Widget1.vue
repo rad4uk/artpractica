@@ -1,20 +1,20 @@
 <template>
     <div class="widget1 widgets">
-        <h3>{{ this.title + ' (' + this.name + ')'}}</h3>
+        <h3>{{ this.title + ' (' + this.name + ')' }}</h3>
 
         <div class="widget1__item widget1-container" v-if="this.is_type === 'section1'">
             <label class="input-file">
                 <input class="widget1__item-input" type="file" ref="fileInput" @change="addFile">
-                <span v-if="this.file !== null">{{ this.file.name }}</span>
-                <span v-else>Выберите файл</span>
+                <span v-if="this.file !== null">{{ this.getSliceFileName(this.file.name) }}</span>
+                <span v-else>Выберите изображение</span>
             </label>
-            <img class="widget1__item-img" v-if="this.file !== null" :src="this.getFileUrl(this.file)"  alt="">
+            <img class="widget1__item-img" v-if="this.file !== null" :src="this.getFileUrl(this.file)" alt="">
         </div>
 
         <div class="widget1__item widget1-container" v-else>
             <label class="input-file">
                 <input class="widget1__item-input" type="file" disabled>
-                <span>Выберите файл</span>
+                <span>Выберите изображение</span>
             </label>
         </div>
 
@@ -41,9 +41,9 @@ export default {
         return {projectStore};
     },
     mounted() {
-        if(this.is_type === 'section1'){
+        if (this.is_type === 'section1') {
             let widgetData = this.getDataInStore()
-            if (widgetData.files.length > 0){
+            if (widgetData.files.length > 0) {
                 this.file = widgetData.files[0]
             }
 
@@ -51,6 +51,9 @@ export default {
         }
     },
     methods: {
+        getSliceFileName(fileName) {
+            return fileName.slice(-10)
+        },
         getFileUrl(file) {
             if (typeof window !== 'undefined') {
                 return URL.createObjectURL(file)
@@ -58,8 +61,8 @@ export default {
             return ''
         },
 
-        getDataInStore(){
-            const widget =  this.projectStore.getEmptyWidgetByIndex(this.index);
+        getDataInStore() {
+            const widget = this.projectStore.getEmptyWidgetByIndex(this.index);
             return widget.data;
         },
         addFile(evt) {
@@ -69,7 +72,7 @@ export default {
         },
     },
     watch: {
-        textareaValue(newValue){
+        textareaValue(newValue) {
             this.projectStore.setTextInEmptyWidgetData(this.index, newValue)
         }
     }
@@ -77,26 +80,30 @@ export default {
 
 </script>
 <style lang="scss" scoped>
-.widget1{
+.widget1 {
     padding: 10px;
     display: flex;
     flex-direction: column;
     gap: 10px;
-    &__item{
-        &-textarea{
+
+    &__item {
+        &-textarea {
             width: 100%;
         }
-        &-input{
+
+        &-input {
             position: absolute;
         }
-        &-img{
+
+        &-img {
             height: 100%;
             width: 100%;
             object-fit: cover;
         }
     }
 }
-.widget1-container{
+
+.widget1-container {
     min-width: 100%;
     min-height: 50px;
     max-height: 200px;
@@ -107,11 +114,13 @@ export default {
     justify-content: center;
     border: 1px dashed black;
 }
+
 .input-file {
     position: absolute;
     display: inline-block;
     margin-bottom: 0;
 }
+
 .input-file span {
     position: relative;
     display: inline-block;
@@ -132,6 +141,7 @@ export default {
     margin: 0;
     transition: background-color 0.2s;
 }
+
 .input-file input[type=file] {
     position: absolute;
     z-index: -1;
@@ -143,13 +153,14 @@ export default {
 
 /* Focus */
 .input-file input[type=file]:focus + span {
-    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, .25);
 }
 
 /* Hover/active */
 .input-file:hover span {
     background-color: #59be6e;
 }
+
 .input-file:active span {
     background-color: #2E703A;
 }

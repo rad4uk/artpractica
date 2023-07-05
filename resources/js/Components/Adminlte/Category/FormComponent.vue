@@ -52,9 +52,12 @@
                                         <label for="inputDescription">Изображение</label>
                                         <div class="custom-file">
                                             <input type="file" name="page_image" class="custom-file-input"
-                                                   id="validatedCustomFile">
-                                            <label class="custom-file-label" for="validatedCustomFile">Выберите
-                                                файл</label>
+                                                   id="validatedCustomFile"
+                                                   @change="addFile"
+                                            >
+                                            <label class="custom-file-label" for="validatedCustomFile">
+                                                {{ this.getFileInputTitle }}
+                                            </label>
                                         </div>
                                     </div>
                                     <div class="form-group" style="width: 100%">
@@ -161,6 +164,10 @@ export default {
         }
     },
     methods: {
+        addFile(evt) {
+            const file = evt.target.files[0];
+            this.page_image = file
+        },
         closeAlert(errorIndex) {
             this.errors.splice(errorIndex, 1);
         },
@@ -238,6 +245,11 @@ export default {
                 .then(response => response.blob())
                 .then(blob => new File([blob], fileName, {type: blob.type}));
         },
+    },
+    computed: {
+        getFileInputTitle: function (){
+            return this.page_image instanceof File ? this.page_image.name.slice(-10) : 'Выберите файл'
+        }
     }
 }
 </script>

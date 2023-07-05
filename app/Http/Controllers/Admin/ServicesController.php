@@ -8,7 +8,7 @@ use App\Models\Page;
 use App\Models\Service;
 use App\Repositories\ServicesRepository;
 use App\Services\Admin\ServicesService;
-use App\Services\FullSlugHelper;
+use App\Services\FileService;
 use App\ValueObjects\FirstTemplate;
 use App\ValueObjects\SecondTemplate;
 use App\ValueObjects\ThirdTemplate;
@@ -22,6 +22,7 @@ class ServicesController extends Controller
     public function __construct(
         public readonly ServicesRepository $servicesRepository,
         private readonly ServicesService   $servicesService,
+        private readonly FileService       $fileService
     )
     {
     }
@@ -45,13 +46,19 @@ class ServicesController extends Controller
              * @var FirstTemplate|SecondTemplate $templateInstance
              */
             $previewImageName = $this
-                ->servicesService
-                ->saveFile($filesData['formData']['preview_image']);
+                ->fileService
+                ->saveFile(
+                    $filesData['formData']['preview_image'],
+                    config('files-path.services.publicImagePath')
+                );
 
             $requestData['formData']['page_id'] = $requestData['formData']['page_id'] == '-1' ? null : $requestData['formData']['page_id'];
             if (isset($filesData['formData']['page_image'])
                 && $filesData['formData']['page_image'] instanceof UploadedFile) {
-                $pageImageName = $this->servicesService->saveFile($filesData['formData']['page_image']);
+                $pageImageName = $this->fileService->saveFile(
+                    $filesData['formData']['page_image'],
+                    config('files-path.services.publicImagePath')
+                );
                 $requestData['formData']['page_image'] = $pageImageName;
             }
 
@@ -95,14 +102,20 @@ class ServicesController extends Controller
              */
 
             if (isset($filesData['formData']['preview_image'])) {
-                $previewImageName = $this->servicesService->saveFile($filesData['formData']['preview_image']);
+                $previewImageName = $this->fileService->saveFile(
+                    $filesData['formData']['preview_image'],
+                    config('files-path.services.publicImagePath')
+                );
                 $requestData['formData']['preview_image'] = $previewImageName;
             }
 
             $requestData['formData']['page_id'] = $requestData['formData']['page_id'] == '-1' ? null : $requestData['formData']['page_id'];
             if (isset($filesData['formData']['page_image'])
                 && $filesData['formData']['page_image'] instanceof UploadedFile) {
-                $pageImageName = $this->servicesService->saveFile($filesData['formData']['page_image']);
+                $pageImageName = $this->fileService->saveFile(
+                    $filesData['formData']['page_image'],
+                    config('files-path.services.publicImagePath')
+                );
                 $requestData['formData']['page_image'] = $pageImageName;
             }
 
