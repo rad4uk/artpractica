@@ -23,7 +23,10 @@ class PostRepository implements PostRepositoryInterface
         return $post;
     }
 
-
+    public function findBy(array $condition)
+    {
+        return Post::where($condition)->get();
+    }
 
     public function findById(int $postId)
     {
@@ -48,6 +51,11 @@ class PostRepository implements PostRepositoryInterface
     public function getCategory()
     {
         return Post::belongsTo(Category::class);
+    }
+
+    public function getPortfolioOffsetPosts(int $offset, int $limit)
+    {
+        return Post::where(['status' => 1])->offset($offset)->limit($limit)->get();
     }
 
     public function getOffsetPosts(int $offset, int $limit, int $catId)

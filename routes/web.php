@@ -113,6 +113,8 @@ Route::get('/storage/images/{dir}/{size}/{method}/{file}', ThumbnailController::
 Route::get('/portfolio', [PortfolioController::class, 'index'])->name('portfolio');
 Route::get('/portfolio/{categorySlug}/', [PortfolioController::class, 'categories'])->name('categories');
 Route::get('/portfolio/project/{slug}/', [ProjectController::class, 'index'])->name('projects');
+Route::get('/{categoryId}/next/posts/{offset}', [PortfolioController::class, 'getNextPosts']);
+
 
 Route::get('/about/', [FrontendPageController::class, 'about'])->name('about');
 Route::get('/contact-us/', [FrontendPageController::class, 'contact'])->name('contact');

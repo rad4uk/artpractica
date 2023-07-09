@@ -19,7 +19,7 @@
 import ProjectItem from "./ProjectItem.vue";
 export default {
     name: "Project",
-    props: ['posts'],
+    props: ['posts', 'category'],
     components: {
         ProjectItem
     },
@@ -37,7 +37,7 @@ export default {
     },
     methods: {
         async getNextItems(){
-            await axios.get('/api/portfolio/next/posts/' + this.posts.length)
+            await axios.get('/' + this.category.id + '/next/posts/' + this.items.length)
                 .then( res => {
                     if (res.status === 200 && res.data.length > 0){
                         res.data.forEach( item => {

@@ -13,16 +13,11 @@
         :categories='@json($categories)'
         :category='@json($category)'
     ></tabs-component>
-
-    <div class="project">
-        <div class="container">
-            <div class="project__row">
-                @foreach($posts as $post)
-                    <project-item-component :item='@json($post)'></project-item-component>
-                @endforeach
-            </div>
-        </div>
-    </div>
+    <project-component
+        :posts='@json($posts)'
+        :category='@json($category)'
+    >
+    </project-component>
 
     <feedback-component></feedback-component>
 @endsection
