@@ -10,6 +10,13 @@
             >
         </component>
 
+<!--        <div class="gallery-slider">-->
+<!--            <div class="gallery-slider__row">-->
+<!--                <div class="gallery-slider__item">-->
+<!--                    <img src="http://127.0.0.1/storage/images/project/9c6cfdb1-530d-4bb9-bdd2-be39e8358d47.webp" alt="" class="gallery-slider__image">-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
 <!--        <swiper-->
 <!--            slides-per-view="1"-->
 <!--            :navigation="{-->
@@ -135,4 +142,16 @@ export default {
     }
 }
 
+
+
+.gallery-slider{
+    position: fixed;
+    width: 80%;
+    min-height: 50%;
+    max-height: 70%;
+    &__row{
+        display: flex;
+        flex-direction: row;
+    }
+}
 </style>

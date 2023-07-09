@@ -1,7 +1,7 @@
 <template>
     <option :value="category.id">{{'&nbsp'.repeat(this.repeat_count) + category.title}}</option>
     <OptionComponent
-        v-if="this.category.children_recursive.length > 0"
+        v-if="this.category.children_recursive && this.category.children_recursive.length > 0"
         v-for="(cat, index) in this.category.children_recursive"
         :category="cat"
         :key="index"

@@ -50,11 +50,12 @@
     .container {
         display: flex;
         flex-direction: column;
-    }
-    .row:first-child{
-        margin-bottom: 40px;
+        gap: 40px;
         @media (max-width: $tablet-media) {
-            margin-bottom: 30px;
+            gap: 30px;
+        }
+        @media (max-width: $mobile-media) {
+            gap: 20px;
         }
     }
     &__title {
@@ -151,6 +152,10 @@
         color: $color-white;
         @include adaptiv-font(16, 12);
         @include adaptiv-line-height(20, 15);
+
+        @media (max-width: $mobile-media) {
+            display: none;
+        }
     }
 }
 
@@ -172,6 +177,9 @@
     @media (max-width: $tablet-media) {
         margin-bottom: 15px;
     }
+    @media (max-width: $mobile-media) {
+        margin-bottom: 5px;
+    }
     &-title{
         font-family: 'Montserrat';
         font-style: normal;
@@ -181,6 +189,9 @@
         text-transform: uppercase;
         @include adaptiv-font(40, 25);
         @include adaptiv-line-height(49, 30);
+        @media (max-width: $mobile-media) {
+            display: none;
+        }
     }
     .row{
         display: flex;
@@ -198,6 +209,9 @@
         @include adaptiv-line-height(20, 15);
         @media (max-width: $middle-media) {
             margin-top: 20px;
+        }
+        @media (max-width: $mobile-media) {
+            display: none;
         }
     }
     &__container {
@@ -226,6 +240,9 @@
     @media (max-width: $tablet-media) {
         margin-bottom: 15px;
     }
+    @media (max-width: $mobile-media) {
+        margin-bottom: 5px;
+    }
     &__container {
         display: flex;
         gap: 30px;
@@ -236,6 +253,9 @@
         @media (max-width: $tablet-media) {
             height: calc((100vw - 40px) / 1.78);
             gap: 10px;
+        }
+        @media (max-width: $mobile-media) {
+            gap: 5px;
         }
         @media (max-width: 370px) {
             height: 176px;
@@ -274,6 +294,10 @@
         }
         @include adaptiv-font(16, 12);
         @include adaptiv-line-height(20, 15);
+
+        @media (max-width: $mobile-media) {
+            display: none;
+        }
     }
 }
 
@@ -282,10 +306,12 @@
     @media (max-width: $middle-media) {
         margin-bottom: 20px;
     }
+    @media (max-width: $mobile-media) {
+        margin-bottom: 5px;
+    }
     .row {
         display: flex;
         flex-direction: column;
-        //gap: 30px;
     }
     &-container{
         display: flex;
@@ -297,6 +323,9 @@
         @media (max-width: $tablet-media) {
             gap: 10px;
             height: calc((100vw - 40px) / 1.63);
+        }
+        @media (max-width: $mobile-media) {
+            gap: 5px;
         }
         @media (max-width: 370px) {
             height: 176px;
@@ -324,6 +353,10 @@
         }
         @include adaptiv-font(16, 12);
         @include adaptiv-line-height(20, 15);
+
+        @media (max-width: $mobile-media) {
+            display: none;
+        }
     }
 }
 
@@ -333,6 +366,9 @@
     @media (max-width: $middle-media) {
         margin-bottom: 20px;
     }
+    @media (max-width: $mobile-media) {
+        margin: 0;
+    }
     &-title {
         font-family: 'Montserrat';
         font-style: normal;
@@ -341,6 +377,10 @@
         text-transform: uppercase;
         @include adaptiv-font(40, 25);
         @include adaptiv-line-height(49, 30);
+
+        @media (max-width: $mobile-media) {
+            display: none;
+        }
     }
 }
 
@@ -348,6 +388,9 @@
     margin-bottom: 30px;
     @media (max-width: $middle-media) {
         margin-bottom: 20px;
+    }
+    @media (max-width: $mobile-media) {
+        margin-bottom: 5px;
     }
     .row{
         display: flex;
@@ -366,9 +409,6 @@
         @media (max-width: $tablet-media) {
             height: calc((100vw - 40px) / 1.16);
         }
-        //@media (max-width: 370px) {
-        //    height: 280px;
-        //}
         &-img {
             object-fit: cover;
             width: 100%;
@@ -382,5 +422,9 @@
         color: $color-white;
         @include adaptiv-font(16, 12);
         @include adaptiv-line-height(20, 15);
+
+        @media (max-width: $mobile-media) {
+            display: none;
+        }
     }
 }

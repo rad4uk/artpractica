@@ -4,7 +4,6 @@
             <div class="form-group">
                 <label for="inputStatus">Родительская категория</label>
                 <select id="inputStatus" name='parent' v-model="categoryValue" class="form-control custom-select">
-                    <option value="-1">Нет</option>
                     <option-component
                         v-for="(category, idx) in this.categories"
                         :category="category"

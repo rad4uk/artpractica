@@ -65,9 +65,8 @@ class PostController extends Controller
 
     public function create(Request $request): Response|ResponseFactory|View|Factory
     {
-        $categories = Category::with('childrenRecursive')
-            ->whereNull('parent_id')
-            ->get();
+        $categories = Category::where('parent_id', '=', 1)->get();
+
         $posts = $this->postRepository->additionalPostsPublishList()->get();
         if ($request->isMethod('POST')) {
             $requestData = $request->request->all();
@@ -105,10 +104,8 @@ class PostController extends Controller
 
     public function update(Request $request, int $postId): Response|ResponseFactory|View|Factory
     {
+        $categories = Category::where('parent_id', '=', 1)->get();
 
-        $categories = Category::with('childrenRecursive')
-            ->whereNull('parent_id')
-            ->get();
         $post = $this->postRepository->findById($postId);
 
         $posts = $this->postRepository->additionalPostsPublishList($postId)->get();
