@@ -22,11 +22,17 @@
     }
     &__item{
         font-family: 'Montserrat';
-        font-weight: 300;
-        @include adaptiv-font(18, 14);
-        line-height: 22px;
+        //font-weight: 300;
+        //@include adaptiv-font(18, 14);
+        //line-height: 22px;
+        //color: $color-white;
+        //padding: 5px 0 7px 0;
+        font-style: normal;
+        font-weight: 200;
+        font-size: 12px;
+        line-height: 15px;
+        text-transform: uppercase;
         color: $color-white;
-        padding: 5px 0 7px 0;
         a{
             color: $color-white;
         }

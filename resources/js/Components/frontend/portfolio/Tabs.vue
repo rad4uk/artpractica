@@ -100,8 +100,8 @@ export default {
             font-style: normal;
             font-weight: 400;
             color: $color-white;
-            @include adaptiv-font(18, 12);
-            @include adaptiv-line-height(22, 15);
+            //@include adaptiv-font(18, 12);
+            //@include adaptiv-line-height(22, 15);
         }
     }
 }
@@ -120,8 +120,8 @@ export default {
         }
         .tabs__item{
             padding: 0;
-            @include adaptiv-font(18, 12);
-            @include adaptiv-line-height(22, 15);
+            //@include adaptiv-font(18, 12);
+            //@include adaptiv-line-height(22, 15);
         }
     }
 }
