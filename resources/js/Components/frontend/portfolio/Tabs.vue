@@ -43,8 +43,6 @@ export default {
       }
     },
     mounted() {
-        console.log(this.categories)
-        console.log(this.category)
         this.activeTitle = this.category.title
         this.activeTitle = this.category.id === 1 ?  this.portfolioTitle : this.category.title
     },
