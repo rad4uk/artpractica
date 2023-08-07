@@ -17,6 +17,10 @@
                 <input type="text" id="inputName" name="title" v-model="titleValue" class="form-control">
             </div>
             <div class="form-group">
+                <label for="inputName">Подзаголовок</label>
+                <input type="text" id="inputName" name="subTitle" v-model="subTitleValue" class="form-control">
+            </div>
+            <div class="form-group">
                 <label for="inputDescription">Описание</label>
                 <textarea id="inputDescription" name="description" class="form-control" rows="4"
                           v-model="descriptionValue" placeholder="начните вводить текст"></textarea>
@@ -122,6 +126,7 @@ export default {
             errors: [],
             additionalPostsValue: [],
             titleValue: '',
+            subTitleValue: '',
             descriptionValue: '',
             squareValue: null,
             urlValue: '',
@@ -132,10 +137,9 @@ export default {
         }
     },
     async beforeMount() {
-        console.log(this.file_dir)
-        console.log(this.post)
         if (this.type_admin_page === 'edit') {
             this.titleValue = this.post.title
+            this.subTitleValue = this.post.sub_title
             this.descriptionValue = this.post.description
             this.squareValue = this.post.square
             this.urlValue = this.post.slug
@@ -186,6 +190,9 @@ export default {
             if (this.titleValue.length === 0) {
                 this.errors.push('Укажите Заголовок');
             }
+            if (this.subTitleValue.length === 0) {
+                this.errors.push('Укажите Подзаголовок');
+            }
             if (this.descriptionValue.length === 0) {
                 this.errors.push('Укажите Описание.');
             }
@@ -230,6 +237,7 @@ export default {
                 let formData = new FormData()
                 formData.append('formData[category_id]', this.categoryValue)
                 formData.append('formData[title]', this.titleValue)
+                formData.append('formData[sub_title]', this.subTitleValue)
                 formData.append('formData[description]', this.descriptionValue)
                 formData.append('formData[square]', this.squareValue)
                 formData.append('formData[slug]', this.urlValue)

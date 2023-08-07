@@ -3,6 +3,12 @@
         <div class="container">
             <div class="row">
                 <h1 class="project-preview__title">{{ this.post.title }}</h1>
+
+                <p class="project-preview__subtitle"
+                    v-if="this.post.sub_title && this.post.sub_title.length > 0"
+                >
+                    {{ this.post.sub_title }}
+                </p>
                 <div class="project-preview__container">
                     <img :src="preview_image" alt="" class="project-preview__container-img">
                 </div>

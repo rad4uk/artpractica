@@ -52,9 +52,9 @@ class PortfolioController extends Controller
     public function getNextPosts(int $categoryId, int $offset): \Illuminate\Http\JsonResponse
     {
         if ($categoryId === 1){
-            $posts = $this->postRepository->getPortfolioOffsetPosts($offset, 2);
+            $posts = $this->postRepository->getPortfolioOffsetPosts($offset, 10);
         }else{
-            $posts = $this->postRepository->getOffsetPosts($offset, 2, $categoryId);
+            $posts = $this->postRepository->getOffsetPosts($offset, 10, $categoryId);
         }
         return response()->json($posts);
     }

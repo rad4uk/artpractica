@@ -33,7 +33,7 @@ class ProjectController extends Controller
 
         $body = $this->projectService->setFullImagePathForBody($project);
         $sliderImagesData = $this->projectService->setSliderImagesData($project);
-//        dd($sliderImagesData);
+
         return view('frontend/project/project', [
             'post' => $project,
             'apartmentImages' => $apartmentImages,

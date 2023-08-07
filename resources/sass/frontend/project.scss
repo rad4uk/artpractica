@@ -58,6 +58,9 @@
             gap: 20px;
         }
     }
+    &__wrapper{
+
+    }
     &__title {
         display: inline-block;
         font-family: 'Montserrat';
@@ -71,6 +74,15 @@
         @media (max-width: $tablet-media) {
             margin-bottom: 15px;
         }
+    }
+    &__subtitle{
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 400;
+        color: $color-white;
+        @include adaptiv-font(16, 14);
+        @include adaptiv-line-height(20, 17);
+        margin-bottom: 20px;
     }
 
     &__container {

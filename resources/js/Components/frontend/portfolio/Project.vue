@@ -97,7 +97,6 @@ export default {
     updated() {
         this.setPostsObserver()
     }
-
 }
 </script>
 
