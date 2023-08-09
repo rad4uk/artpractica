@@ -8,7 +8,14 @@
                          class="project-widget2-item"
                          @click="openSlider(file)"
                     >
-                        <img :src="file" alt="" class="project-widget2__container-img">
+                        <img class="project-widget2__container-img"
+                            alt=""
+                            lazy
+                            v-lazy="{
+                              src: file,
+                              error: 'url',
+                            }"
+                        >
                     </div>
                 </div>
                 <p v-if="this.data.text && this.data.text.length > 0" class="project-widget2-text">

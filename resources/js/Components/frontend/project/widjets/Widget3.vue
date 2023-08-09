@@ -7,12 +7,17 @@
                          :key="index"
                          class="project-widget3__column"
                     >
-                        <img :src="file" alt=""
-                             class="project-widget3__column-image">
+                        <img class="project-widget3__column-image"
+                             alt=""
+                             v-lazy="{
+                              src: file,
+                              error: 'url',
+                            }"
+                        >
                     </div>
                 </div>
                 <p v-if="this.data.text && this.data.text.length > 0" class="project-widget3-text">
-                    {{this.data.text}}
+                    {{ this.data.text }}
                 </p>
             </div>
         </div>

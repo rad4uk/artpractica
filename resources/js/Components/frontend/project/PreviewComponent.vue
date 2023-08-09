@@ -19,7 +19,9 @@
                     :apartment_images="this.apartment_images"
                     :post="this.post"
                 ></image-slider>
-                <p class="project-preview__text">
+                <p class="project-preview__text"
+                    v-if="this.post.description !== null"
+                >
                     {{this.post.description }}
                 </p>
             </div>

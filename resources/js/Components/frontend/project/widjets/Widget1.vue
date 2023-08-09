@@ -3,7 +3,14 @@
         <div class="container">
             <div class="row">
                 <div class="project-widget1__container">
-                    <img :src="this.data.file" alt="" class="project-widget1__container-img">
+                    <img class="project-widget1__container-img"
+                         alt=""
+                         lazy
+                         v-lazy="{
+                          src: this.data.file,
+                          error: 'url',
+                        }"
+                    >
                 </div>
                 <p v-if="this.data.text && this.data.text.length > 0" class="project-widget1-text">
                     {{this.data.text}}
