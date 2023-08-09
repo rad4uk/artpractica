@@ -140,7 +140,7 @@ export default {
         if (this.type_admin_page === 'edit') {
             this.titleValue = this.post.title
             this.subTitleValue = this.post.sub_title
-            this.descriptionValue = this.post.description
+            this.descriptionValue = this.post.description !== null ? this.post.description : ''
             this.squareValue = this.post.square
             this.urlValue = this.post.slug
             this.categoryValue = this.post.category_id
@@ -193,9 +193,6 @@ export default {
             if (this.subTitleValue.length === 0) {
                 this.errors.push('Укажите Подзаголовок');
             }
-            if (this.descriptionValue.length === 0) {
-                this.errors.push('Укажите Описание.');
-            }
             if (this.urlValue.length === 0) {
                 this.errors.push('Укажите Ссылку.');
             }
@@ -238,7 +235,9 @@ export default {
                 formData.append('formData[category_id]', this.categoryValue)
                 formData.append('formData[title]', this.titleValue)
                 formData.append('formData[sub_title]', this.subTitleValue)
-                formData.append('formData[description]', this.descriptionValue)
+                if (this.descriptionValue.length > 0){
+                    formData.append('formData[description]', this.descriptionValue)
+                }
                 formData.append('formData[square]', this.squareValue)
                 formData.append('formData[slug]', this.urlValue)
                 formData.append('formData[preview_file]', this.preview_file)
