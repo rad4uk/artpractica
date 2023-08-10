@@ -235,9 +235,7 @@ export default {
                 formData.append('formData[category_id]', this.categoryValue)
                 formData.append('formData[title]', this.titleValue)
                 formData.append('formData[sub_title]', this.subTitleValue)
-                if (this.descriptionValue.length > 0){
-                    formData.append('formData[description]', this.descriptionValue)
-                }
+                formData.append('formData[description]', this.descriptionValue)
                 formData.append('formData[square]', this.squareValue)
                 formData.append('formData[slug]', this.urlValue)
                 formData.append('formData[preview_file]', this.preview_file)
