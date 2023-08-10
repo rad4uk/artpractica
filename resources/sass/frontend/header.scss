@@ -26,6 +26,10 @@
             width: 132px;
             height: 36px;
         }
+        @media (max-width: 370px) {
+            width: 88px;
+            height: 24px;
+        }
         a{
             display: block;
             background-image: url("../../../public/images/logo.png");
@@ -36,6 +40,10 @@
             @media (max-width: $mobile-media) {
                 background-image: url("../../../public/images/mobile-logo.png");
                 background-size: 132px 36px;
+            }
+            @media (max-width: 370px) {
+                background-image: url("../../../public/images/mobile-logo.png");
+                background-size: 88px 24px;
             }
             picture{
                 display: block;
