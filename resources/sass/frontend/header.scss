@@ -20,17 +20,22 @@
         }
     }
     &__logo{
-        flex: 0 1 33.333%;
+        width: 172px;
+        height: 47px;
+        @media (max-width: $mobile-media) {
+            width: 132px;
+            height: 36px;
+        }
         a{
             display: block;
-            background-image: url("../../../public/images/logo.svg");
+            background-image: url("../../../public/images/logo.png");
             background-repeat: no-repeat;
-            width: 172px;
-            height: 47px;
+            background-position: 0 center;
+            background-size: 172px 47px;
+            height: 100%;
             @media (max-width: $mobile-media) {
-                background-image: url("../../../public/images/logo1.png");
-                width: 113px;
-                height: 31px;
+                background-image: url("../../../public/images/mobile-logo.png");
+                background-size: 132px 36px;
             }
             picture{
                 display: block;
