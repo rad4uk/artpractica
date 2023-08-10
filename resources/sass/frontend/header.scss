@@ -22,11 +22,11 @@
     &__logo{
         width: 172px;
         height: 47px;
+        //@media (max-width: $mobile-media) {
+        //    width: 132px;
+        //    height: 36px;
+        //}
         @media (max-width: $mobile-media) {
-            width: 132px;
-            height: 36px;
-        }
-        @media (max-width: 370px) {
             width: 88px;
             height: 24px;
         }
@@ -37,11 +37,11 @@
             background-position: 0 center;
             background-size: 172px 47px;
             height: 100%;
+            //@media (max-width: $mobile-media) {
+            //    background-image: url("../../../public/images/mobile-logo.png");
+            //    background-size: 132px 36px;
+            //}
             @media (max-width: $mobile-media) {
-                background-image: url("../../../public/images/mobile-logo.png");
-                background-size: 132px 36px;
-            }
-            @media (max-width: 370px) {
                 background-image: url("../../../public/images/mobile-logo.png");
                 background-size: 88px 24px;
             }
