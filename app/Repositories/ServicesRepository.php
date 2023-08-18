@@ -33,4 +33,18 @@ class ServicesRepository implements PostRepositoryInterface
         return Service::query()->where('id', $postId)->delete();
     }
 
+    public function findBy(array $condition)
+    {
+        // TODO: Implement findBy() method.
+    }
+
+    public function getOffsetPosts(int $offset, int $limit, int $catId)
+    {
+        // TODO: Implement getOffsetPosts() method.
+    }
+
+    public function getPortfolioOffsetPosts(int $offset, int $limit)
+    {
+        // TODO: Implement getPortfolioOffsetPosts() method.
+    }
 }

@@ -44,7 +44,6 @@ Route::prefix('admin')->middleware([
         Route::get('/', [PageController::class, 'index'])->name('admin_page_index');
         Route::get('/new', [PageController::class, 'new'])->name('admin_page_new');
         Route::post('/create', [PageController::class, 'create'])->name('admin_page_create');
-//        Route::any('/{id}/edit', [PageController::class, 'update'])->name('admin_page_edit');
         Route::post('/{id}/delete', [PageController::class, 'update'])->name('admin_page_delete');
 
         Route::any('/1/edit', [HomePageController::class, 'update'])->name('admin_home_page_edit');
