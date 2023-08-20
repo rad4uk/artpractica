@@ -9,6 +9,7 @@ import PreviewComponent from '@/Components/frontend/project/PreviewComponent.vue
 import HeaderComponent from "@/Components/frontend/HeaderComponent.vue";
 import Tabs from "@/Components/frontend/portfolio/Tabs.vue";
 import BodyComponent from "@/Components/frontend/project/BodyComponent.vue";
+import ContentImageSlider from "@/Components/frontend/project/ContentImageSlider.vue";
 
 const app = createApp({
     components: {
@@ -19,6 +20,7 @@ const app = createApp({
         'header-component': HeaderComponent,
         'tabs-component': Tabs,
         'body-component': BodyComponent,
+        'content-image-slider': ContentImageSlider,
     }
 });
 app.use(VueLazyLoad, {

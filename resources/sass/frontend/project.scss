@@ -47,6 +47,13 @@
 }
 
 .project-preview {
+    margin-bottom: 50px;
+    @media (max-width: $middle-media) {
+        margin-bottom: 20px;
+    }
+    @media (max-width: $mobile-media) {
+        margin-bottom: 5px;
+    }
     .container {
         display: flex;
         flex-direction: column;
@@ -373,7 +380,7 @@
 }
 
 .project-widget4 {
-    margin-top: 50px;
+    //margin-top: 50px;
     margin-bottom: 40px;
     @media (max-width: $middle-media) {
         margin-bottom: 20px;

@@ -31,7 +31,9 @@
         </div>
 
         <swiper-slide v-for="(image, idx) in this.apartment_images" :key="idx">
-            <div class="project-preview__container project-scheme">
+            <div class="project-preview__container project-scheme"
+                @click="openSlider(image)"
+            >
                 <img :src="image" alt="" class="project-preview__container-img">
             </div>
         </swiper-slide>
@@ -69,6 +71,11 @@ export default {
             next,
         };
     },
+    methods: {
+        openSlider(file){
+            this.$emit('openSlider', file);
+        }
+    }
 }
 </script>
 

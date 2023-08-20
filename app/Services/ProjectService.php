@@ -8,14 +8,14 @@ class ProjectService
 {
     public function setSliderImagesData(Post $post): array
     {
-        $data = [];
         $body = json_decode($post->body)->frontend;
-        foreach ($body as $key => $item){
+        $data[] = $post->getFullImagePath($post->preview_image);
+        foreach ($body as $item){
             if (isset($item->file)){
                 $data[] = $post->getFullImagePath($item->file);
             }
             if (isset($item->files) && count($item->files) > 0){
-                foreach ($item->files as $filesKey => $file){
+                foreach ($item->files as $file){
                     $data[] = $post->getFullImagePath($file);
                 }
             }

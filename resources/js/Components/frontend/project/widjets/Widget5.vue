@@ -2,7 +2,9 @@
     <div v-if="this.data.file" class="project-widget5">
         <div class="container">
             <div class="row">
-                <div class="project-widget5__container">
+                <div class="project-widget5__container"
+                     @click="openSlider(this.data.file)"
+                >
                     <img class="project-widget5__container-img"
                          alt=""
                          v-lazy="{
@@ -22,7 +24,12 @@
 <script>
 export default {
     name: "Widget5",
-    props: ['data']
+    props: ['data'],
+    methods: {
+        openSlider(file){
+            this.$emit('openSlider', file);
+        }
+    }
 }
 </script>
 

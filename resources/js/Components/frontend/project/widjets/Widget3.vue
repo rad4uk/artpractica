@@ -3,9 +3,10 @@
         <div class="container">
             <div class="row">
                 <div class="project-widget3-container">
-                    <div v-for="(file, index) in this.data.files"
+                    <div class="project-widget3__column"
+                         v-for="(file, index) in this.data.files"
                          :key="index"
-                         class="project-widget3__column"
+                         @click="openSlider(file)"
                     >
                         <img class="project-widget3__column-image"
                              alt=""
@@ -28,7 +29,12 @@
 <script>
 export default {
     name: "Widget3",
-    props: ['data']
+    props: ['data'],
+    methods: {
+        openSlider(file) {
+            this.$emit('openSlider', file);
+        }
+    }
 }
 </script>
 

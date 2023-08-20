@@ -9,7 +9,9 @@
                 >
                     {{ this.post.sub_title }}
                 </p>
-                <div class="project-preview__container">
+                <div class="project-preview__container"
+                    @click="openSlider(this.preview_image)"
+                >
                     <img :src="preview_image" alt="" class="project-preview__container-img">
                 </div>
             </div>
@@ -20,6 +22,7 @@
                 <image-slider
                     :apartment_images="this.apartment_images"
                     :post="this.post"
+                    @openSlider="openSlider"
                 ></image-slider>
                 <p class="project-preview__text"
                     v-if="this.post.description !== null"
@@ -35,12 +38,26 @@
 
 <script>
 import ImageSlider from "./ImageSlider.vue";
+import {useProjectStore} from "@/store/frontend/projectStore";
+import {ref} from "vue";
+import {Navigation, Pagination, Zoom} from "swiper";
 export default {
     name: "PreviewComponent",
     props: ['post', 'preview_image', 'apartment_images'],
     components: {
         ImageSlider,
     },
+    setup() {
+        const store = useProjectStore()
+        return {
+            store,
+        }
+    },
+    methods: {
+        openSlider(file){
+            this.$emit('openSlider', file);
+        }
+    }
 }
 </script>
 
