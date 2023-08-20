@@ -18,15 +18,11 @@
             flex-direction: column;
             gap: 5px;
         }
-
-
     }
     &__item {
         @media (max-width: $tablet-media) {
             padding: 7px 10px;
         }
-
-
         &-text {
             font-family: 'Montserrat';
             font-weight: 300;

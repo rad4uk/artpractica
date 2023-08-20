@@ -6,7 +6,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class Files implements \JsonSerializable
 {
-    private array $files;
+    private array $files = [];
 
     public function setFile(string $fileName): self
     {

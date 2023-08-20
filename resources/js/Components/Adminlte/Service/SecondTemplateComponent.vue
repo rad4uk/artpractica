@@ -24,7 +24,7 @@
                             >
                                 <div class="form-group col-11" >
                                     <div class="form-group">
-                                        <label>Заголово</label>
+                                        <label>Заголовок</label>
                                         <input type="text" class="form-control" v-model="item.input" placeholder="">
                                     </div>
                                     <div class="form-group">

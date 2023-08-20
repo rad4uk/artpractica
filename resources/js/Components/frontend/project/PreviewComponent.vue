@@ -14,7 +14,9 @@
                 </div>
             </div>
 
-            <div class="row">
+            <div class="row"
+                v-if="this.apartment_images.length > 0"
+            >
                 <image-slider
                     :apartment_images="this.apartment_images"
                     :post="this.post"

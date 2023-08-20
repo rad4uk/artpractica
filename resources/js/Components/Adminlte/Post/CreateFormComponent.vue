@@ -46,6 +46,22 @@
                         {{ this.getApartamentFilesName }}
                     </label>
                 </div>
+                <div class="apartament-images"
+                     v-if="this.apartment_images.length > 0"
+                >
+                    <div class="apartament-images__item"
+                         v-for="(image, key) in this.apartment_images"
+                         :key="key"
+                    >
+                        <img
+                            class="apartament-images__image"
+                            :src="this.getFileUrl(image)"
+                        >
+                        <button class="apartament-images__btn btn btn-danger"
+                            @click="removeApartamentFile(image)"
+                        >Удалить</button>
+                    </div>
+                </div>
             </div>
             <div class="form-group">
                 <label>Дополнительные проекты</label>
@@ -150,12 +166,22 @@ export default {
             if (apartment_images.length > 0) {
                 await this.setApartmentImages(apartment_images)
             }
-            // this.additional_posts.forEach((item) => {
-            //     this.additionalPostsValue.push(item.id)
-            // })
         }
     },
     methods: {
+        removeApartamentFile(file){
+            for (let i = this.apartment_images.length - 1; i >= 0; i--) {
+                if (file === this.apartment_images[i]) {
+                    this.apartment_images.splice(i, 1);
+                }
+            }
+        },
+        getFileUrl(file) {
+            if (typeof window !== 'undefined') {
+                return URL.createObjectURL(file)
+            }
+            return ''
+        },
         async setApartmentImages(images) {
             await Promise.all(
                 images.map(async (fileName) => {
@@ -198,9 +224,6 @@ export default {
             }
             if (this.file === null) {
                 this.errors.push('Вы забыли добавить фото проекта.');
-            }
-            if (this.apartment_images.length === 0) {
-                this.errors.push('Вы забыли добавить фотографии планировки');
             }
 
             if (this.squareValue === null || this.squareValue.length === 0) {
@@ -339,6 +362,25 @@ export default {
             cursor: pointer;
             padding: 5px;
         }
+    }
+}
+.apartament-images{
+    padding-top: 10px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    flex-wrap: wrap;
+    &__item{
+        flex: 0 1 calc(25% - 10px);
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+    }
+    &__image{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
     }
 }
 </style>

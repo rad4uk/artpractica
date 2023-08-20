@@ -62,10 +62,13 @@ class PostService
     {
         $previewImageName = $this->fileService->saveFile($filesData['preview_file'], $this->filePath);
         $files = new Files();
-        foreach ($filesData['apartment_images'] as $image){
-            $fileName = $this->fileService->saveFile($image, $this->filePath);
-            $files->setFile($fileName);
+        if (isset($filesData['apartment_images'])){
+            foreach ($filesData['apartment_images'] as $image){
+                $fileName = $this->fileService->saveFile($image, $this->filePath);
+                $files->setFile($fileName);
+            }
         }
+
         unset($formData['additionalPosts']);
         return array_merge($formData, [
             'preview_image' => $previewImageName,

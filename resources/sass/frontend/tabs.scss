@@ -22,31 +22,19 @@
     }
     &__item{
         font-family: 'Montserrat';
-        //font-weight: 300;
-        //@include adaptiv-font(18, 14);
-        //line-height: 22px;
-        //color: $color-white;
-        //padding: 5px 0 7px 0;
         font-style: normal;
-        font-weight: 200;
-        font-size: 12px;
-        line-height: 15px;
-        text-transform: uppercase;
         color: $color-white;
+        font-weight: 300;
+        font-size: 14px;
+        line-height: 17px;
+        opacity: 0.6;
         a{
             color: $color-white;
-        }
-        @media (min-width: $middle-media) {
-            border-bottom: 1px solid #AE4834;
         }
     }
 
     .active{
-        font-family: 'Montserrat';
-        font-weight: 500;
-        @media (min-width: $middle-media) {
-            border-bottom: 3px solid #AE4834;
-        }
+        opacity: 1;
     }
     &__item:hover{
         cursor: pointer;
