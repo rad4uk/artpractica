@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import { homeStore } from "../../../store/frontemd/homeStore.js";
+import { homeStore } from "../../../store/frontend/homeStore.js";
 import ConsultationPopupComponent from "../ConsultationPopupComponent.vue";
 export default {
     name: "DiscussComponent",
