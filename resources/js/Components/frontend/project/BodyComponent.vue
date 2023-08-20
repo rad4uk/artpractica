@@ -5,8 +5,8 @@
         :preview_image="this.preview_image"
         @openSlider="handleOpenSlider"
     >
-
     </PreviewComponent>
+
     <div class="project-wrapper">
         <component
             v-for="(widget, idx) in this.data"
@@ -17,8 +17,8 @@
             @openSlider="handleOpenSlider"
         >
         </component>
-
     </div>
+
     <ContentImageSlider
         v-if="this.showSlider"
         :sliderIndex="this.sliderIndex"

@@ -10,7 +10,7 @@
                     {{ this.post.sub_title }}
                 </p>
                 <div class="project-preview__container"
-                    @click="openSlider(this.preview_image)"
+                     @click="openSlider(this.preview_image)"
                 >
                     <img :src="preview_image" alt="" class="project-preview__container-img">
                 </div>
@@ -39,8 +39,7 @@
 <script>
 import ImageSlider from "./ImageSlider.vue";
 import {useProjectStore} from "@/store/frontend/projectStore";
-import {ref} from "vue";
-import {Navigation, Pagination, Zoom} from "swiper";
+
 export default {
     name: "PreviewComponent",
     props: ['post', 'preview_image', 'apartment_images'],

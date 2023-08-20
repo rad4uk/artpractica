@@ -10,6 +10,12 @@ class ProjectService
     {
         $body = json_decode($post->body)->frontend;
         $data[] = $post->getFullImagePath($post->preview_image);
+        if ($post->apartment_images !== null) {
+            $apartmentImages = json_decode($post->apartment_images);
+            foreach ($apartmentImages as $image){
+                $data[] = $post->getFullImagePath($image);
+            }
+        }
         foreach ($body as $item){
             if (isset($item->file)){
                 $data[] = $post->getFullImagePath($item->file);
