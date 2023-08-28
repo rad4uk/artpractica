@@ -90,13 +90,16 @@
                                         </i>
                                         Изменить
                                     </a>
-                                    {!! Form::open(['route' => ['admin_services_delete', $post->id], 'method' => 'delete', 'style' => 'display: none;', 'id' => 'delete-form']) !!}
+                                    @php
+                                        $formId = 'delete-form-' . $post->id
+                                    @endphp
+                                    {!! Form::open(['route' => ['admin_services_delete', $post->id], 'method' => 'delete', 'style' => 'display: none;', 'id' => $formId]) !!}
                                     {!! Form::close() !!}
 
                                     <a class="btn btn-danger btn-sm" href="#" onclick="
                                         event.preventDefault();
                                         if(confirm('Вы уверены, что хотите удалить запись?')) {
-                                            document.getElementById('delete-form').submit();
+                                            document.getElementById('{{ $formId }}').submit();
                                         }"
                                     >
                                         <i class="fas fa-trash"></i> Удалить

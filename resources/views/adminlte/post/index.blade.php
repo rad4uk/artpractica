@@ -2,7 +2,8 @@
 
 @push('styles')
     <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{asset('adminlte/plugins/fontawesome-free/css/all.min.css')}}">
     <!-- Theme style -->
@@ -86,7 +87,8 @@
                                 </td>
 
                                 <td class="project-actions text-right">
-                                    <a class="btn btn-primary btn-sm" target="_blank" href="{{route('admin_post_preview', $post->id)}}">
+                                    <a class="btn btn-primary btn-sm" target="_blank"
+                                       href="{{route('admin_post_preview', $post->id)}}">
                                         <i class="fas fa-folder">
                                         </i>
                                         View
@@ -96,13 +98,16 @@
                                         </i>
                                         Изменить
                                     </a>
-                                    {!! Form::open(['route' => ['admin_post_delete', $post->id], 'method' => 'delete', 'style' => 'display: none;', 'id' => 'delete-form']) !!}
+                                    @php
+                                        $formId = 'delete-form-' . $post->id
+                                    @endphp
+                                    {!! Form::open(['route' => ['admin_post_delete', $post->id], 'method' => 'delete', 'style' => 'display: none;', 'id' => $formId]) !!}
                                     {!! Form::close() !!}
 
                                     <a class="btn btn-danger btn-sm" href="#" onclick="
                                         event.preventDefault();
                                         if(confirm('Вы уверены, что хотите удалить запись?')) {
-                                            document.getElementById('delete-form').submit();
+                                            document.getElementById('{{ $formId }}').submit();
                                         }"
                                     >
                                         <i class="fas fa-trash"></i> Удалить

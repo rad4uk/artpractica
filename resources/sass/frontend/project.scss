@@ -23,28 +23,7 @@
     }
 }
 
-.tabs {
-    &__item{
-        font-family: 'Montserrat';
-        font-weight: 300;
-        font-size: 14px;
-        line-height: 17px;
-        color: $color-white;
-        padding: 5px 0 7px 0;
-        a{
-            color: $color-white;
-        }
-        @media (min-width: $middle-media) {
-            border-bottom: 1px solid #403432;
-        }
-    }
 
-    .active{
-        @media (min-width: $middle-media) {
-            border-bottom: 1px solid #403432;
-        }
-    }
-}
 
 .project-preview {
     margin-bottom: 50px;
