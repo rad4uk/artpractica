@@ -30,7 +30,7 @@ class PostSortableCommand extends Command
     {
         $posts = Post::orderBy('created_at', 'DESC')->get();
         $posts->each(function ($post, $key){
-            Post::where('id', $post->id)->update(['sort' => $key]);
+            Post::where('id', $post->id)->update(['sort' => $key, 'category_sort' => $key]);
         });
 
         return Command::SUCCESS;

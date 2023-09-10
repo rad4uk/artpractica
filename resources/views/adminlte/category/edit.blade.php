@@ -33,6 +33,7 @@
         <category-content
             :action='@json(route('admin_category_update', $category->id))'
             :category='@json($category)'
+            :posts='@json($posts)'
             :categories='@json($categories)'
             :pages='@json($pages)'
             :is_type_page='@json('edit')'

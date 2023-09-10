@@ -166,4 +166,15 @@ class PostController extends Controller
 
         return response('', 204);
     }
+
+    public function updateCategorySort(Request $request): Response|ResponseFactory
+    {
+        $posts = $request->request->all();
+
+        foreach ($posts as $post){
+            Post::where('id', $post['id'])->update(['category_sort' => $post['category_sort']]);
+        }
+
+        return response('', 204);
+    }
 }

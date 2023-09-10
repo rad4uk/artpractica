@@ -62,6 +62,7 @@ Route::prefix('admin')->middleware([
         Route::any('/{id}/edit', [PostController::class, 'update'])->name('admin_post_edit');
         Route::delete('/{id}/delete', [PostController::class, 'delete'])->name('admin_post_delete');
         Route::put('/sort/update', [PostController::class, 'updateSort'])->name('admin_post_sort_update');
+        Route::put('/category-sort/update', [PostController::class, 'updateCategorySort'])->name('admin_post_category_sort_update');
     });
 
     Route::prefix('services')->group(function (){

@@ -35,22 +35,12 @@ export default {
     },
     methods: {
         async sortUpdate(event) {
-            let oldIndex = event.moved.oldIndex
-            let newIndex = event.moved.newIndex
-
-            let oldPost = this.list[oldIndex]
-            let newPost = this.list[newIndex]
-
-            let data = [
-                {
-                    "id": oldPost.id,
-                    "sort": oldIndex
-                },
-                {
-                    "id": newPost.id,
-                    "sort": newIndex
+            let data = this.list.map(function (post, index) {
+                return {
+                    "id": post.id,
+                    "sort": index
                 }
-            ]
+            })
             axios.put('/admin/post/sort/update', data)
                 .then(response => {
                     console.log(response)

@@ -32,6 +32,37 @@
                 @setMetaDescription="handleMetaDescription"
             ></meta-component>
         </div>
+        <div class="row"
+            v-if="this.category.id !== 1"
+        >
+            <div class="col-md-6">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Проекты</h3>
+
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <draggable class="dragArea"
+                               :list="this.list"
+                               @change="this.sortUpdate"
+                    >
+                        <ul class="dragArea__list"
+                            v-for="post in this.list"
+                            :key="post.id"
+                        >
+                            <li>
+                                {{ post.title }}
+                            </li>
+
+                        </ul>
+                    </draggable>
+                </div>
+            </div>
+        </div>
     </section>
 </template>
 
@@ -39,11 +70,14 @@
 import FormComponent from "./FormComponent.vue";
 import MetaComponent from "../MetaComponent.vue";
 import {adminCategoryStore} from "@/store/adminlte/categoryStore";
+import {VueDraggableNext} from 'vue-draggable-next'
+import axios from "axios";
 
 export default {
     name: "CategoryContent",
     data: () => {
         return {
+            list: [],
             meta_title: '',
             meta_description: ''
         }
@@ -51,6 +85,7 @@ export default {
     props: [
         'action',
         'category',
+        'posts',
         'categories',
         'pages',
         'is_type_page'
@@ -60,13 +95,15 @@ export default {
 
         return {categoryStore}
     },
-    beforeMount() {
-      if (this.is_type_page === 'edit' && this.category){
-          this.meta_title = this.category.meta_title
-          this.meta_description = this.category.meta_description
-      }
+    mounted() {
+        if (this.is_type_page === 'edit' && this.category) {
+            this.list = this.posts
+            this.meta_title = this.category.meta_title
+            this.meta_description = this.category.meta_description
+        }
     },
     components: {
+        draggable: VueDraggableNext,
         FormComponent,
         MetaComponent
     },
@@ -76,11 +113,62 @@ export default {
         },
         handleMetaDescription(value) {
             this.categoryStore.setMetaDataDescription(value)
-        }
+        },
+        async sortUpdate(event) {
+            let data = this.list.map(function (post, index) {
+                return {
+                    "id": post.id,
+                    "category_sort": index
+                }
+            })
+            axios.put('/admin/post/category-sort/update', data)
+                .then(response => {
+                    console.log(response)
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+        },
     }
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+.dragArea {
+    display: flex;
+    flex-direction: column;
 
+
+    &__list {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 0;
+        margin: 0;
+
+        li {
+            padding: 0.75em;
+            flex: 0 1 25%;
+            list-style: none;
+        }
+
+    }
+
+    &__list.header {
+        justify-content: start;
+        border-bottom: 2px solid #dee2e6;
+
+        li {
+            font-weight: bold;
+        }
+    }
+
+    ul:hover {
+        cursor: pointer;
+    }
+
+    ul:nth-of-type(odd) {
+        background-color: rgba(0, 0, 0, .05);
+    }
+}
 </style>

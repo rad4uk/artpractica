@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\CategoryRequest;
 use App\Interfaces\CategoryRepositoryInterface;
 use App\Models\Category;
 use App\Models\Page;
+use App\Models\Post;
 use App\Services\CategoryService;
 use App\Services\FileService;
 use Illuminate\Contracts\View\Factory;
@@ -72,7 +73,8 @@ class CategoryController extends Controller
             'categories' => $this->categoryRepository->getCategoryTree(),
             'category' => $category,
             'pages' => Page::all(),
-            'slug' => CategoryService::getFullSlug($category)
+            'slug' => CategoryService::getFullSlug($category),
+            'posts' => Post::where(['category_id' => $id])->orderBy('category_sort')->get()
         ]);
     }
 
