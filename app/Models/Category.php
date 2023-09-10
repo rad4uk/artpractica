@@ -71,6 +71,7 @@ class Category extends Model
         return $this
             ->hasMany(Post::class, 'category_id')
             ->where(['status' => 1])
+            ->orderBy('sort', 'ASC')
             ->limit(20)
             ;
     }

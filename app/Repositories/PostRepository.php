@@ -11,7 +11,7 @@ class PostRepository implements PostRepositoryInterface
 
     public function list()
     {
-        return Post::orderBy('updated_at', 'DESC')->get();
+        return Post::orderBy('sort', 'ASC')->get();
     }
 
     public function additionalPostsPublishList(int $excludedPostId = 0)

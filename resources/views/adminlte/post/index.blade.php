@@ -55,68 +55,9 @@
                     </div>
                 </div>
                 <div class="card-body p-0">
-                    <table class="table table-striped projects">
-                        <thead>
-                        <tr>
-                            <th style="width: 1%">
-                                #
-                            </th>
-                            <th style="width: 20%">
-                                Заголовок
-                            </th>
-                            <th style="width: 30%">
-                                Родительская категория
-                            </th>
-                            <th style="width: 20%">
-                            </th>
-                        </tr>
-                        </thead>
-                        <tbody>
-
-
-                        @foreach($posts as $post)
-                            <tr>
-                                <td>
-                                    #
-                                </td>
-                                <td>
-                                    {{$post->title}}
-                                </td>
-                                <td>
-                                    {{$post->category->title}}
-                                </td>
-
-                                <td class="project-actions text-right">
-                                    <a class="btn btn-primary btn-sm" target="_blank"
-                                       href="{{route('admin_post_preview', $post->id)}}">
-                                        <i class="fas fa-folder">
-                                        </i>
-                                        View
-                                    </a>
-                                    <a class="btn btn-info btn-sm" href={{route('admin_post_edit', $post->id)}}>
-                                        <i class="fas fa-pencil-alt">
-                                        </i>
-                                        Изменить
-                                    </a>
-                                    @php
-                                        $formId = 'delete-form-' . $post->id
-                                    @endphp
-                                    {!! Form::open(['route' => ['admin_post_delete', $post->id], 'method' => 'delete', 'style' => 'display: none;', 'id' => $formId]) !!}
-                                    {!! Form::close() !!}
-
-                                    <a class="btn btn-danger btn-sm" href="#" onclick="
-                                        event.preventDefault();
-                                        if(confirm('Вы уверены, что хотите удалить запись?')) {
-                                            document.getElementById('{{ $formId }}').submit();
-                                        }"
-                                    >
-                                        <i class="fas fa-trash"></i> Удалить
-                                    </a>
-                                </td>
-                            </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
+                    <draggable-component
+                        :posts='@json($posts)'
+                    ></draggable-component>
                 </div>
                 <!-- /.card-body -->
             </div>

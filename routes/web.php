@@ -61,6 +61,7 @@ Route::prefix('admin')->middleware([
         Route::any('/create', [PostController::class, 'create'])->name('admin_post_create');
         Route::any('/{id}/edit', [PostController::class, 'update'])->name('admin_post_edit');
         Route::delete('/{id}/delete', [PostController::class, 'delete'])->name('admin_post_delete');
+        Route::put('/sort/update', [PostController::class, 'updateSort'])->name('admin_post_sort_update');
     });
 
     Route::prefix('services')->group(function (){

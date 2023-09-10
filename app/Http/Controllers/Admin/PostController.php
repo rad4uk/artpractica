@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\Post;
 use App\Services\Admin\PostService;
 use App\Services\ProjectService;
+use http\Exception\RuntimeException;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -148,10 +149,21 @@ class PostController extends Controller
         ]);
     }
 
-    public function delete(int $postId): Redirector|RedirectResponse
+    public function delete(int $postId): Response|ResponseFactory
     {
         $this->postRepository->delete($postId);
 
-        return redirect()->back();
+        return response('', 204);
+    }
+
+    public function updateSort(Request $request): Response|ResponseFactory
+    {
+        $posts = $request->request->all();
+
+        foreach ($posts as $post){
+            Post::where('id', $post['id'])->update(['sort' => $post['sort']]);
+        }
+
+        return response('', 204);
     }
 }

@@ -19,6 +19,20 @@ class PortfolioController extends Controller
 
     }
 
+    public function index(): View|Factory
+    {
+        $category = $this->categoryRepository->firstOrFail(1);
+        $categories = Category::where(['parent_id' => 1, 'status' => 1])
+            ->orWhere('id', 1)
+            ->get();
+
+        return view('frontend/page/portfolio', [
+            'category' => $category,
+            'categories' => $categories,
+            'posts' => Post::where('status', 1)->orderBy('sort', 'ASC')->limit(10)->get(),
+        ]);
+    }
+
     public function categories(string $categorySlug)
     {
         $category = Category::where(['slug' => $categorySlug, 'status' => 1])
@@ -32,20 +46,6 @@ class PortfolioController extends Controller
             'category' => $category,
             'categories' => $categories,
             'posts' => $category->posts,
-        ]);
-    }
-
-    public function index(): View|Factory
-    {
-        $category = $this->categoryRepository->firstOrFail(1);
-        $categories = Category::where(['parent_id' => 1, 'status' => 1])
-            ->orWhere('id', 1)
-            ->get();
-
-        return view('frontend/page/portfolio', [
-            'category' => $category,
-            'categories' => $categories,
-            'posts' => Post::where('status', 1)->limit(2)->get(),
         ]);
     }
 

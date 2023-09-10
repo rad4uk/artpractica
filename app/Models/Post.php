@@ -71,21 +71,24 @@ class Post extends Model
         return 'preview_image';
     }
 
-    public function jsonSerialize(): mixed
+    public function jsonSerialize(): array
     {
-        return array_merge(
-            $this->toArray(),
-            [
-                'preview_image' => [
-                    'default' => asset($this->getFullImagePath($this->preview_image)),
-                    'small' => $this->makeThumbnail($this->preview_image, config('thumbnail.project_sizes.small')),
-                    'medium' => $this->makeThumbnail($this->preview_image, config('thumbnail.project_sizes.medium')),
-                    'large' => $this->makeThumbnail($this->preview_image, config('thumbnail.project_sizes.large')),
-                    'big' => $this->makeThumbnail($this->preview_image, config('thumbnail.project_sizes.big')),
-                ],
-                'route' => route('projects', $this->slug),
-
-            ]
-        );
+        $data = [
+            'route' => route('projects', $this->slug),
+        ];
+        $category = $this->category()->first();
+        if ($category instanceof Category){
+            $data['category']['title'] = $category->title;
+        }
+        if ($this->preview_image){
+            $data['preview_image'] = [
+                'default' => asset($this->getFullImagePath($this->preview_image)),
+                'small' => $this->makeThumbnail($this->preview_image, config('thumbnail.project_sizes.small')),
+                'medium' => $this->makeThumbnail($this->preview_image, config('thumbnail.project_sizes.medium')),
+                'large' => $this->makeThumbnail($this->preview_image, config('thumbnail.project_sizes.large')),
+                'big' => $this->makeThumbnail($this->preview_image, config('thumbnail.project_sizes.big')),
+            ];
+        }
+        return array_merge($this->toArray(), $data);
     }
 }
