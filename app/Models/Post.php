@@ -81,6 +81,7 @@ class Post extends Model
             $data['category']['title'] = $category->title;
         }
         if ($this->preview_image){
+            $data['preview_image_name'] = $this->preview_image;
             $data['preview_image'] = [
                 'default' => asset($this->getFullImagePath($this->preview_image)),
                 'small' => $this->makeThumbnail($this->preview_image, config('thumbnail.project_sizes.small')),

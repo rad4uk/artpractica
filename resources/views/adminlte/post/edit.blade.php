@@ -40,7 +40,7 @@
                 ></widget-container>
 
                 <project-content
-                    :action='@json(route('admin_post_edit', $post->id))'
+                    :action='@json(route('admin_post_update', $post->id))'
                     :type_admin_page='@json('edit')'
                     :post='@json($post)'
                     :all_additional_posts='@json($posts)'

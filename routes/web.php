@@ -58,8 +58,10 @@ Route::prefix('admin')->middleware([
     Route::prefix('post')->group(function (){
         Route::get('/', [PostController::class, 'index'])->name('admin_post_index');
         Route::get('/{id}/preview', [PostController::class, 'preview'])->name('admin_post_preview');
-        Route::any('/create', [PostController::class, 'create'])->name('admin_post_create');
-        Route::any('/{id}/edit', [PostController::class, 'update'])->name('admin_post_edit');
+        Route::get('/create', [PostController::class, 'create'])->name('admin_post_create');
+        Route::post('/create', [PostController::class, 'store'])->name('admin_post_store');
+        Route::get('/{id}/edit', [PostController::class, 'edit'])->name('admin_post_edit');
+        Route::post('/{id}/edit', [PostController::class, 'update'])->name('admin_post_update');
         Route::delete('/{id}/delete', [PostController::class, 'delete'])->name('admin_post_delete');
         Route::put('/sort/update', [PostController::class, 'updateSort'])->name('admin_post_sort_update');
         Route::put('/category-sort/update', [PostController::class, 'updateCategorySort'])->name('admin_post_category_sort_update');

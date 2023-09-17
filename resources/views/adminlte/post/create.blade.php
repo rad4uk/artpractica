@@ -35,7 +35,7 @@
                 ></widget-container>
 
                 <project-content
-                    :action='@json(route('admin_post_create'))'
+                    :action='@json(route('admin_post_store'))'
                     :categories='@json($categories)'
                     :type_admin_page='@json('new')'
                     :all_additional_posts='@json($posts)'

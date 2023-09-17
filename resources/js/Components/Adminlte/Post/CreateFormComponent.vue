@@ -161,7 +161,7 @@ export default {
             this.urlValue = this.post.slug
             this.categoryValue = this.post.category_id
             this.statusValue = this.post.status === 1
-            this.preview_file = await this.fetchFile(this.file_dir, this.post.preview_image.default)
+            this.preview_file = await this.fetchFile(this.file_dir, this.post.preview_image_name)
             const apartment_images = JSON.parse(this.post.apartment_images)
             if (apartment_images.length > 0) {
                 await this.setApartmentImages(apartment_images)
