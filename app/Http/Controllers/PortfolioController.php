@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
 
 class PortfolioController extends Controller
 {
@@ -49,7 +50,7 @@ class PortfolioController extends Controller
         ]);
     }
 
-    public function getNextPosts(int $categoryId, int $offset): \Illuminate\Http\JsonResponse
+    public function getNextPosts(int $categoryId, int $offset): JsonResponse
     {
         if ($categoryId === 1){
             $posts = $this->postRepository->getPortfolioOffsetPosts($offset, 10);

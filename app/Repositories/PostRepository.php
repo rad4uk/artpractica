@@ -55,13 +55,20 @@ class PostRepository implements PostRepositoryInterface
 
     public function getPortfolioOffsetPosts(int $offset, int $limit)
     {
-        return Post::where(['status' => 1])->offset($offset)->limit($limit)->get();
+        return Post::where(['status' => 1])
+            ->offset($offset)
+            ->orderBy('sort', 'ASC')
+            ->limit($limit)
+            ->get();
     }
 
     public function getOffsetPosts(int $offset, int $limit, int $catId)
     {
         return Post::where(['status' => 1, 'category_id' => $catId])
-            ->offset($offset)->limit($limit)->get();
+            ->offset($offset)
+            ->orderBy('sort', 'ASC')
+            ->limit($limit)
+            ->get();
     }
 
     public function updateOrCreate(string $slug, array $details)
