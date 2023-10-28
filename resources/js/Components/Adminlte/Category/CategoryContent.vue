@@ -64,6 +64,7 @@
             </div>
         </div>
     </section>
+    <spinner :class="{'active': this.spinnerActive}"></spinner>
 </template>
 
 <script>
@@ -72,6 +73,7 @@ import MetaComponent from "../MetaComponent.vue";
 import {adminCategoryStore} from "@/store/adminlte/categoryStore";
 import {VueDraggableNext} from 'vue-draggable-next'
 import axios from "axios";
+import Spinner from "@/Components/Adminlte/Spinner.vue";
 
 export default {
     name: "CategoryContent",
@@ -79,7 +81,8 @@ export default {
         return {
             list: [],
             meta_title: '',
-            meta_description: ''
+            meta_description: '',
+            spinnerActive: false
         }
     },
     props: [
@@ -105,7 +108,8 @@ export default {
     components: {
         draggable: VueDraggableNext,
         FormComponent,
-        MetaComponent
+        MetaComponent,
+        Spinner
     },
     methods: {
         handleMetaTitle(value) {
@@ -115,18 +119,22 @@ export default {
             this.categoryStore.setMetaDataDescription(value)
         },
         async sortUpdate(event) {
+            this.spinnerActive = true
             let data = this.list.map(function (post, index) {
                 return {
                     "id": post.id,
                     "category_sort": index
                 }
             })
-            axios.put('/admin/post/category-sort/update', data)
+            await axios.put('/admin/post/category-sort/update', data)
                 .then(response => {
                     console.log(response)
                 })
                 .catch(error => {
                     console.log(error)
+                })
+                .finally(() => {
+                    this.spinnerActive = false
                 })
         },
     }

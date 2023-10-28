@@ -5,11 +5,13 @@ export default {
     props: {
         removeLink: {
             type: String,
-            required: true
+            required: true,
+            default: ''
         },
         post: {
             type: Object,
-            required: true
+            required: true,
+            default: {}
         },
         message: {
             type: String,
@@ -47,6 +49,7 @@ export default {
     right: 0;
     bottom: 0;
     left: 0;
+    background: #0000004d;
 }
 .alert-popup{
     position: absolute;

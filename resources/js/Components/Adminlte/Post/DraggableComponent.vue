@@ -1,7 +1,8 @@
 <script>
 import {VueDraggableNext} from 'vue-draggable-next'
 import axios from "axios";
-import AlertPopup from "./AlertPopup.vue";
+import AlertPopup from "@/Components/Adminlte/Post/AlertPopup.vue";
+import Spinner from "@/Components/Adminlte/Spinner.vue";
 
 export default {
     name: "DraggableComponent",
@@ -10,15 +11,12 @@ export default {
             type: Array,
             required: true,
             default: []
-        },
-        editLink: {
-            type: String,
-            required: true,
         }
     },
     components: {
         draggable: VueDraggableNext,
-        AlertPopup
+        AlertPopup,
+        Spinner
     },
     mounted() {
         this.list = this.posts
@@ -31,22 +29,27 @@ export default {
             enabled: true,
             list: [],
             dragging: false,
+            spinnerIsActive: false
         }
     },
     methods: {
         async sortUpdate(event) {
+            this.spinnerIsActive = true
             let data = this.list.map(function (post, index) {
                 return {
                     "id": post.id,
                     "sort": index
                 }
             })
-            axios.put('/admin/post/sort/update', data)
+            await axios.put('/admin/post/sort/update', data)
                 .then(response => {
                     console.log(response)
                 })
                 .catch(error => {
                     console.log(error)
+                })
+                .finally(() => {
+                    this.spinnerIsActive = false
                 })
         },
         openRemovePopup(post) {
@@ -127,7 +130,7 @@ export default {
     </draggable>
 
     <AlertPopup
-        v-show="this.isShowAlert"
+        v-if="this.isShowAlert"
         :remove-link="'remove-link'"
         @removePost="handleRemovePost"
         @closePopup="handleClosePopup"
@@ -138,6 +141,7 @@ export default {
             Вы действительно хотите удалить запись {{ this.removePost ? '(' + this.removePost.title + ')' : '' }}?
         </template>
     </AlertPopup>
+    <spinner :class="{'active': spinnerIsActive}"></spinner>
 </template>
 
 <style lang="scss" scoped>
