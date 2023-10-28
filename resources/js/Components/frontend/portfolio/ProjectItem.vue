@@ -6,10 +6,10 @@
         </div>
         <div class="project__image">
             <picture>
-                <source v-if="this.item.preview_image.small" :srcset="this.item.preview_image.small" media="(max-width: 370px)"/>
-                <source v-if="this.item.preview_image.medium" :srcset="this.item.preview_image.medium" media="(max-width: 520px)"/>
-                <source v-if="this.item.preview_image.large" :srcset="this.item.preview_image.large" media="(max-width: 768px)"/>
-                <source v-if="this.item.preview_image.big" :srcset="this.item.preview_image.big" media="(max-width: 992px)"/>
+<!--                <source v-if="this.item.preview_image.small" :srcset="this.item.preview_image.small" media="(max-width: 370px)"/>-->
+<!--                <source v-if="this.item.preview_image.medium" :srcset="this.item.preview_image.medium" media="(max-width: 520px)"/>-->
+<!--                <source v-if="this.item.preview_image.large" :srcset="this.item.preview_image.large" media="(max-width: 768px)"/>-->
+<!--                <source v-if="this.item.preview_image.big" :srcset="this.item.preview_image.big" media="(max-width: 992px)"/>-->
                 <img
                     lazy
                     v-lazy="{

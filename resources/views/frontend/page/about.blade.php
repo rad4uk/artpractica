@@ -34,7 +34,6 @@
                     <div class="aboutsection__column">
                         <div class="aboutsection__column-img">
                             <picture>
-                                <source srcset="{{$page->makeThumbnail($firstSectionData->image, config('thumbnail.about_page_sizes.first_section.small'), 'resize')}}" media="(max-width: 520px)"/>
                                 <img src="{{$page->getFullImagePath($firstSectionData->image)}}" alt="{{$firstSectionData->authorName}}">
                             </picture>
                         </div>

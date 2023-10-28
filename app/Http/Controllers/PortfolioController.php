@@ -34,7 +34,7 @@ class PortfolioController extends Controller
         ]);
     }
 
-    public function categories(string $categorySlug)
+    public function categories(string $categorySlug): View|Factory
     {
         $category = Category::where(['slug' => $categorySlug, 'status' => 1])
             ->where('id','!=', 1)

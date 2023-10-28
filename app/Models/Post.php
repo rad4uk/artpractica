@@ -84,10 +84,10 @@ class Post extends Model
             $data['preview_image_name'] = $this->preview_image;
             $data['preview_image'] = [
                 'default' => asset($this->getFullImagePath($this->preview_image)),
-                'small' => $this->makeThumbnail($this->preview_image, config('thumbnail.project_sizes.small')),
-                'medium' => $this->makeThumbnail($this->preview_image, config('thumbnail.project_sizes.medium')),
-                'large' => $this->makeThumbnail($this->preview_image, config('thumbnail.project_sizes.large')),
-                'big' => $this->makeThumbnail($this->preview_image, config('thumbnail.project_sizes.big')),
+//                'small' => $this->makeThumbnail($this->preview_image, config('thumbnail.project_sizes.small')),
+//                'medium' => $this->makeThumbnail($this->preview_image, config('thumbnail.project_sizes.medium')),
+//                'large' => $this->makeThumbnail($this->preview_image, config('thumbnail.project_sizes.large')),
+//                'big' => $this->makeThumbnail($this->preview_image, config('thumbnail.project_sizes.big')),
             ];
         }
         return array_merge($this->toArray(), $data);
