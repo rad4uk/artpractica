@@ -31,6 +31,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/register', fn() => abort(404));
 
 Route::prefix('admin')->middleware([
     'auth:sanctum',
