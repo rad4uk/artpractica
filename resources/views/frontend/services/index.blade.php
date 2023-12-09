@@ -1,7 +1,7 @@
 @extends('layouts.main', [
-    'metaTitle' => $service['meta_title'],
-    'metaDescription' => $service['meta_description'],
-    'canonical' => route('service', $service['slug']),
+    'metaTitle' => $page->meta_title,
+    'metaDescription' => $page->meta_description,
+    'canonical' => route('service', $page->slug),
 ])
 
 @push('styles')

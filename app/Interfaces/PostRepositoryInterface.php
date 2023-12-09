@@ -14,7 +14,7 @@ interface PostRepositoryInterface
 
     public function delete(int $postId);
 
-    public function findBy(array $condition);
+    public function findBy(array $condition, array $orderBy = null, int $limit = null, int $offset = null);
 
     public function getOffsetPosts(int $offset, int $limit, int $catId);
 

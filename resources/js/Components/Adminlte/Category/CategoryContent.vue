@@ -33,7 +33,7 @@
             ></meta-component>
         </div>
         <div class="row"
-            v-if="this.category.id !== 1"
+            v-if="!this.projectExcludedCatIds.includes(this.category.id)"
         >
             <div class="col-md-6">
                 <div class="card card-primary">
@@ -79,6 +79,7 @@ export default {
     name: "CategoryContent",
     data: () => {
         return {
+            projectExcludedCatIds: [1, 6],
             list: [],
             meta_title: '',
             meta_description: '',
@@ -98,7 +99,8 @@ export default {
 
         return {categoryStore}
     },
-    mounted() {
+    beforeMount() {
+        console.log(this.category)
         if (this.is_type_page === 'edit' && this.category) {
             this.list = this.posts
             this.meta_title = this.category.meta_title

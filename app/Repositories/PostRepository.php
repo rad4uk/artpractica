@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Interfaces\PostRepositoryInterface;
 use App\Models\Category;
 use App\Models\Post;
+use Illuminate\Database\Eloquent\Collection;
 
 class PostRepository implements PostRepositoryInterface
 {
@@ -23,9 +24,22 @@ class PostRepository implements PostRepositoryInterface
         return $post;
     }
 
-    public function findBy(array $condition)
+    public function findBy(array $condition, array $orderBy = null, int $limit = null, int $offset = null): Collection
     {
-        return Post::where($condition)->get();
+        $qb = Post::query()->where($condition);
+        if (!is_null($orderBy)) {
+            foreach ($orderBy as $field => $order) {
+                $qb->orderBy($field, $order);
+            }
+        }
+        if (!is_null($limit)) {
+            $qb->limit($limit);
+        }
+        if (!is_null($offset)) {
+            $qb->offset($offset);
+        }
+
+        return $qb->get();
     }
 
     public function findById(int $postId)

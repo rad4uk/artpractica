@@ -5,44 +5,46 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\CategoryRequest;
 use App\Interfaces\CategoryRepositoryInterface;
-use App\Models\Category;
-use App\Models\Page;
-use App\Models\Post;
+use App\Interfaces\PageRepositoryInterface;
+use App\Interfaces\PostRepositoryInterface;
 use App\Services\CategoryService;
 use App\Services\FileService;
+use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
-use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
     public function __construct(
         private readonly CategoryRepositoryInterface $categoryRepository,
+        private readonly PageRepositoryInterface     $pageRepository,
+        private readonly PostRepositoryInterface     $postRepository,
         private readonly FileService                 $fileService
     )
     {
 
     }
 
-    public function index()
+    public function index(): View|Factory
     {
         return view('adminlte.category.index', [
-            'categories' => Category::all()
+            'categories' => $this->categoryRepository->list()
         ]);
     }
 
-    public function new(Request $request)
+    public function new(): View|Factory
     {
         return view('adminlte.category.new', [
             'categories' => $this->categoryRepository->getCategoryTree(),
-            'pages' => Page::all(),
+            'pages' => $this->pageRepository->list(),
         ]);
     }
 
-    public function create(CategoryRequest $request)
+    public function create(CategoryRequest $request): Response|ResponseFactory
     {
         $details = $request->request->all();
         $parentId = $request->request->get('parent_id') == -1 ? null : $request->request->get('parent_id');
@@ -65,21 +67,23 @@ class CategoryController extends Controller
         ], 201);
     }
 
-    public function edit(int $id)
+    public function edit(int $id): View|Factory
     {
-        $category = Category::where('id', $id)->firstOrFail();
+        $category = $this->categoryRepository->findById($id);
+        $pages = $this->pageRepository->list();
+        $posts = $this->postRepository->findBy(['category_id' => $id], ['category_sort' => 'ASC']);
 
         return view('adminlte.category.edit', [
             'categories' => $this->categoryRepository->getCategoryTree(),
             'category' => $category,
-            'pages' => Page::all(),
+            'pages' => $pages,
             'slug' => CategoryService::getFullSlug($category),
-            'posts' => Post::where(['category_id' => $id])->orderBy('category_sort')->get()
+            'posts' => $posts
         ]);
     }
 
 
-    public function update(Request $request, int $id)
+    public function update(Request $request, int $id): Response|ResponseFactory
     {
         $details = $request->request->all();
         $parentId = $request->request->get('parent_id') == -1 ? null : $request->request->get('parent_id');
