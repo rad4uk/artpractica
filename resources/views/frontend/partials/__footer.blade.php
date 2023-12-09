@@ -71,7 +71,7 @@
         </div>
         <div class="footer__bottom">
             <a href="#" class="footer__bottom-policy" target="_blank">Политика конфиденциальности</a>
-            <a href="#" class="footer__bottom-developer" target="_blank">Сайт разработан</a>
+            <a href="https://t.me/kseniya_but" class="footer__bottom-developer" target="_blank">Сайт разработан</a>
         </div>
     </div>
 </footer>

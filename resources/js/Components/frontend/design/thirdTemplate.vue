@@ -3,7 +3,7 @@
         <div class="atelier-furniture">
             <div class="container">
                 <div class="atelier-furniture-title service-title">
-                   {{this.data.title}}
+                    {{this.data.title}}
                 </div>
                 <div class="atelier-furniture-text" v-html="this.data.description">
 
@@ -61,7 +61,7 @@
         <div class="atelier-apfurniture">
             <div class="container">
                 <div class="atelier-apfurniture-title service-title">
-                    {{this.data.third_section_title}}
+                    <a href="https://apfurniture.ru/" class="atelier-furniture-link">{{this.data.third_section_title}}</a>
                 </div>
                 <div class="atelier-apfurniture-text">
                     <p class="service-text">
