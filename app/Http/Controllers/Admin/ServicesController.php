@@ -12,15 +12,17 @@ use App\Services\FileService;
 use App\ValueObjects\FirstTemplate;
 use App\ValueObjects\SecondTemplate;
 use App\ValueObjects\ThirdTemplate;
+use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class ServicesController extends Controller
 {
     public function __construct(
-        public readonly ServicesRepository $servicesRepository,
+        private readonly ServicesRepository $servicesRepository,
         private readonly ServicesService   $servicesService,
         private readonly FileService       $fileService
     )
@@ -87,7 +89,7 @@ class ServicesController extends Controller
         ]);
     }
 
-    public function update(Request $request, int $serviceId)
+    public function update(Request $request, int $serviceId): Response|ResponseFactory
     {
         $categories = Category::with('childrenRecursive')
             ->whereNull('parent_id')

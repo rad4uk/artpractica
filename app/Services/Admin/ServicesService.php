@@ -45,9 +45,10 @@ class ServicesService
              * @var UploadedFile $file
              */
             $fileInstance = new Files();
+
             foreach ($filesData['third_section_images'] as $file){
-                $this->fileService->saveFile($file, $this->filePath);
-                $fileInstance->setFile($file);
+                $fileName = $this->fileService->saveFile($file, $this->filePath);
+                $fileInstance->setFile($fileName);
             }
             $templateData['third_section_images'] = json_encode($fileInstance);
         }
