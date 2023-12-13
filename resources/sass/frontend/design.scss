@@ -280,7 +280,7 @@
     margin-bottom: 30px;
     color: $color-white;
     @media (max-width: $tablet-media) {
-        line-height: 30px;
+        line-height: 35px;
     }
 }
 .service-text{
@@ -608,7 +608,16 @@
 
     &-furniture-link {
         color: $color-white;
+        //text-decoration: none;
+        background-image: linear-gradient(currentColor, currentColor);
+        background-position: 0% 100%;
+        background-repeat: no-repeat;
+        background-size: 100% 2px;
+        transition: background-size .3s;
     }
+    //&-furniture-link:hover {
+    //    background-size: 100% 2px;
+    //}
 
     &-furniture-image {
         max-height: 481px;

@@ -3,7 +3,9 @@
         <div class="atelier-furniture">
             <div class="container">
                 <div class="atelier-furniture-title service-title">
-                    {{this.data.title}}
+                    <a href="https://apfurniture.ru/" class="atelier-furniture-link">
+                        {{this.data.title}}
+                    </a>
                 </div>
                 <div class="atelier-furniture-text" v-html="this.data.description">
 
