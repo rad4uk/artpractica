@@ -13,6 +13,8 @@ use App\ValueObjects\FirstTemplate;
 use App\ValueObjects\SecondTemplate;
 use App\ValueObjects\ThirdTemplate;
 use Illuminate\Contracts\Routing\ResponseFactory;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -89,7 +91,7 @@ class ServicesController extends Controller
         ]);
     }
 
-    public function update(Request $request, int $serviceId): Response|ResponseFactory
+    public function update(Request $request, int $serviceId): Response|ResponseFactory|View|Factory
     {
         $categories = Category::with('childrenRecursive')
             ->whereNull('parent_id')
